@@ -53,9 +53,10 @@ cat > .repo/local_manifests/imx6openrex.xml << EOF
 	  </project>
 	  </manifest>
 	  EOF
-	  ```
+```
 
 ## 3) Download all repositories needed
+
 ```
 repo sync
 ```
