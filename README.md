@@ -1,75 +1,106 @@
-# Openrexpicam
+## meta-openrexpicam for IMX6 Openrex Basic (Solo):
 
-One Paragraph of project description goes here
+Creation of an Openrex Basic meta to use the Raspberry PI Camera v2.
 
-## Getting Started
+# How to create an image for Yocto Project 2.0
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+First we need to get the command repo
 
 ```
-Give the example
+sudo aptitude install repo
+sudo aptitude update
+sudo aptitude upgrade
 ```
 
-And repeat
+Then create our work directory
 
 ```
-until finished
+mkdir fsl-community-bsp && cd fsl-community-bsp
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+## 1) Get YOCTO project from Freescale
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Download Yocto project using this command
 
 ```
-Give an example
+repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b jethro
 ```
 
-### And coding style tests
+## 2) Create the manifest file
 
-Explain what these tests test and why
+
+Create manifest directory
 
 ```
-Give an example
+mkdir -p .repo/local_manifests/
 ```
 
-## Deployment
+Create the manifest file
 
-Add additional notes about how to deploy this on a live system
+```
+cat > .repo/local_manifests/imx6openrex.xml << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
 
-## Built With
+  <remote fetch="git://github.com/FEDEVEL" name="fedevel"/>
 
-* [Yocto Project](http://www.dropwizard.io/1.0.2/docs/) - Tools used to build an image
-* [IMX Openrex](http://www.imx6rex.com/open-rex/) - Development Board
+    <project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex">
+        <copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/>
+	  </project>
+	  </manifest>
+	  EOF
+	  ```
+
+## 3) Download all repositories needed
+```
+repo sync
+```
+
+## 4) Add OpenRex meta layer
+
+```
+source openrex-setup.sh
+```
+
+## 5) Setup and build console image
+
+```
+MACHINE=imx6s-openrex source setup-environment build-openrex
+MACHINE=imx6s-openrex bitbake core-image-base
+```
+
+## 6) Mount to the SD card
+
+```
+umount /dev/YourSDCard
+gunzip -c build-openrex/tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard.gz > build-openrex/tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard
+sudo dd if=build-openrex/tmp/deploy/images/imx6s-openrex/core-image-base-imx6q-openrex.sdcard of=/dev/sdb
+umount /dev/YourSDCard
+```
+
+## 7) Boot the OpenRex
+
+Now your SD card in the OpenRex and it will boot on your Yocto image.
+
+## Built with
+
+* [Yocto 2.0](https://www.yoctoproject.org/downloads/core/jethro20) - The tool used to create our image
+
+## Built for
+
+* [OpenRex](http://www.imx6rex.com/open-rex/) - Development board used
 
 ## Authors
 
-* **Alan Ait-Ali** - *Collaborator* - [PurpleBooth](https://github.com/Alanaitali)
-* **Martin Laport** - *Collaborator* - [PurpleBooth](https://github.com/zoyolin)
-* **Clément Ailloud** - *Collaborator* - [PurpleBooth](https://github.com/clement-ailloud)
-* **Romain Petit** - *Collaborator* - [PurpleBooth](https://github.com/peti-romain)
+* **Alan Ait-Ali** - *Contributor* - [His Github](https://github.com/Alanaitali)
+* **Martin Laporte** - *Contributor* - [His Github](https://github.com/Zoyolin)
+* **Clément Ailloud** - *Contributor* - [His Github](https://github.com/clement-ailloud)
+* **Romain Petit** - *Contributor* - [His Github](https://github.com/petit-romain)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+## Acknowledgments
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* ** FEDEVEL ** * (https://github.com/FEDEVEL/meta-openrex/) - * For their Yocto 2.0 image tutorial *
