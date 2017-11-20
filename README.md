@@ -1,10 +1,10 @@
 ## meta-openrexpicam for IMX6 Openrex Basic (Solo):
 
-Creation of an Openrex Basic meta to use the Raspberry PI Camera v2.
+Creation of an Openrex Basic meta to use the Raspberry PI Camera v2
 
 # How to create an image for Yocto Project 2.0
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Follow the instruction below to create an Yocto Projet Jethro image
 
 ## Prerequisites
 
@@ -14,6 +14,15 @@ First we need to get the command repo
 sudo aptitude install repo
 sudo aptitude update
 sudo aptitude upgrade
+```
+
+or by downloading it
+
+```
+mkdir bin
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
+chmod a+x bin/repo
+PATH=${PATH}:bin
 ```
 
 Then create our work directory
@@ -85,16 +94,25 @@ umount /dev/YourSDCard
 
 # How to create an image for Yocto Project 2.1
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Follow the instruction below to create an Yocto Projet Krogoth image
 
 ## Prerequisites
 
-First we need to get the command repo
+First we need to get the command repo with package
 
 ```
 sudo aptitude install repo
 sudo aptitude update
 sudo aptitude upgrade
+```
+
+or by downloading it
+
+```
+mkdir bin
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
+chmod a+x bin/repo
+PATH=${PATH}:bin
 ```
 
 Then create our work directory
@@ -159,11 +177,18 @@ MACHINE=imx6-openrexbasic bitbake core-image-base
 
 ```
 umount /dev/YourSDCard
-gunzip -c build-dir/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic-20171114124349.sdcard.gz > build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic-20171114124349.sdcard
-sudo dd if=build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic-20171114124349.sdcard of=/dev/YourSDCard
+gunzip -c build-dir/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard.gz > build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard
+sudo dd if=build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard of=/dev/YourSDCard
 umount /dev/YourSDCard
 ```
 
+## 7) Set Bootmmc
+
+You will get an error like : Error "bootmmc" not defined, to fix this issue use the command below
+
+```
+setenv bootmmc "run findfdt; mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi;\0"; saveenv: reset;
+```
 
 ## Boot the OpenRex
 
@@ -173,6 +198,7 @@ Now plug your SD card in the OpenRex and it will boot on your Yocto image.
 
 * [Yocto 2.0](https://www.yoctoproject.org/downloads/core/jethro20) - Yocto 2.0 Jethro
 * [Yocto 2.1](https://www.yoctoproject.org/downloads/core/krogoth21) - Yocto 2.1 Krogoth
+* [Ubuntu 16.04](https://www.ubuntu.com/) - Ubuntu 16.04
 
 ## Built for
 
