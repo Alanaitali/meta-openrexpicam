@@ -39,7 +39,7 @@ Create manifest directory
 mkdir -p .repo/local_manifests/
 ```
 
-Create the manifest file
+Create the manifest filee
 
 ```
 cat > .repo/local_manifests/imx6openrex.xml << EOF
