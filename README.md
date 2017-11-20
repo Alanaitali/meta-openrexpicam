@@ -104,4 +104,4 @@ Now your SD card in the OpenRex and it will boot on your Yocto image.
 
 ## Acknowledgments
 
-* ** [FEDEVEL](https://github.com/FEDEVEL/meta-openrex/) ** * - * For their Yocto 2.0 image tutorial *
+* **[FEDEVEL](https://github.com/FEDEVEL/meta-openrex/)** * - * For their Yocto 2.0 image tutorial *
