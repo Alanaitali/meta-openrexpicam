@@ -85,7 +85,7 @@ umount /dev/YourSDCard
 
 ## 7) Boot the OpenRex
 
-Now your SD card in the OpenRex and it will boot on your Yocto image.
+Now plug your SD card in the OpenRex and it will boot on your Yocto image.
 
 ## Built with
 
