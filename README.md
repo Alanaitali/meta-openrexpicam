@@ -4,7 +4,7 @@ Creation of an Openrex Basic meta to use the Raspberry PI Camera v2
 
 # How to create an image for Yocto Project 2.0
 
-Follow the instruction below to create an Yocto Projet Jethro image
+Follow instructions below to create an Yocto Projet Jethro image
 
 ## Prerequisites
 
@@ -48,20 +48,18 @@ Create manifest directory
 mkdir -p .repo/local_manifests/
 ```
 
-Create the manifest filee
+Create the manifest file
 
 ```
 cat > .repo/local_manifests/imx6openrex.xml << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-
-  <remote fetch="git://github.com/FEDEVEL" name="fedevel"/>
-
+    <remote fetch="git://github.com/FEDEVEL" name="fedevel"/>
     <project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex">
         <copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/>
-	  </project>
-	  </manifest>
-	  EOF
+	</project>
+</manifest>
+EOF
 ```
 
 ## 3) Download all repositories needed
@@ -138,18 +136,16 @@ Create manifest directory
 mkdir -p .repo/local_manifests/
 ```
 
-Create the manifest filee
+Create the manifest file
 
 ```
 cat > .repo/local_manifests/imx6rex.xml << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-
-  <remote fetch="git://github.com/Voipac" name="voipac"/>
-
-  <project remote="voipac" revision="master" name="meta-fsl-arm-voipac" path="sources/meta-fsl-arm-voipac">
-    <copyfile src="voipac-setup.sh" dest="voipac-setup.sh"/>
-  </project>
+    <remote fetch="git://github.com/Voipac" name="voipac"/>
+    <project remote="voipac" revision="master" name="meta-fsl-arm-voipac" path="sources/meta-fsl-arm-voipac">
+        <copyfile src="voipac-setup.sh" dest="voipac-setup.sh"/>
+    </project>
 </manifest>
 EOF
 ```
@@ -196,9 +192,9 @@ Now plug your SD card in the OpenRex and it will boot on your Yocto image.
 
 ## Built with
 
-* [Yocto 2.0](https://www.yoctoproject.org/downloads/core/jethro20) - Yocto 2.0 Jethro
-* [Yocto 2.1](https://www.yoctoproject.org/downloads/core/krogoth21) - Yocto 2.1 Krogoth
-* [Ubuntu 16.04](https://www.ubuntu.com/) - Ubuntu 16.04
+* [Yocto 2.0 Jethro](https://www.yoctoproject.org/downloads/core/jethro20) - Tool used to create our image
+* [Yocto 2.1 Krogoth](https://www.yoctoproject.org/downloads/core/krogoth21) - Tool used to create our image
+* [Ubuntu 16.04](https://www.ubuntu.com/) - OS of our host and build machine 
 
 ## Built for
 
