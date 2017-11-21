@@ -183,7 +183,7 @@ umount /dev/YourSDCard
 You will get an error like : Error "bootmmc" not defined, to fix this issue use the command below
 
 ```
-setenv bootmmc "run findfdt; mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi;\0"; saveenv: reset;
+setenv bootmmc "run findfdt; mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi;\0"; saveenv; reset;
 ```
 
 ## Boot the OpenRex
