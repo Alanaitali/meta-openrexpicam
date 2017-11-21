@@ -194,7 +194,7 @@ Now plug your SD card in the OpenRex and it will boot on your Yocto image.
 
 * [Yocto 2.0 Jethro](https://www.yoctoproject.org/downloads/core/jethro20) - Tool used to create our image
 * [Yocto 2.1 Krogoth](https://www.yoctoproject.org/downloads/core/krogoth21) - Tool used to create our image
-* [Ubuntu 16.04](https://www.ubuntu.com/) - OS of our host and build machine 
+* [Ubuntu 16.04](https://www.ubuntu.com/) - Host and build machine OS
 
 ## Built for
 
