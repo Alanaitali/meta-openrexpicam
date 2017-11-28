@@ -20,6 +20,7 @@ SRC_URI = ""
 do_configure () {
 	# Specify any needed configure commands here
 	:
+	#config perso
 }
 
 do_compile () {
