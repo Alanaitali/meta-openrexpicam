@@ -1,0 +1,3108 @@
+From e3f847cd37b007d55b76282414bfcf13abb8fc9a Mon Sep 17 00:00:00 2001
+From: Russell King <rmk+kernel@armlinux.org.uk>
+Date: Sat, 21 Jan 2017 11:55:38 +0000
+Subject: media: i2c: imx219 camera driver
+
+Add support for the Sony IMX219 camera, which is an almost-but-not-quite
+SMI compliant camera.  Some registers are similar, but others are quite
+different, and the PLL setup is radically different.
+
+Signed-off-by: Russell King <rmk+kernel@armlinux.org.uk>
+---
+ drivers/media/i2c/Kconfig  |   10 +
+ drivers/media/i2c/Makefile |    1 +
+ drivers/media/i2c/imx219.c | 3049 ++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 3060 insertions(+)
+ create mode 100644 drivers/media/i2c/imx219.c
+
+diff --git a/drivers/media/i2c/Kconfig b/drivers/media/i2c/Kconfig
+index 9415389..0ed865c 100644
+--- a/drivers/media/i2c/Kconfig
++++ b/drivers/media/i2c/Kconfig
+@@ -547,6 +547,16 @@ config VIDEO_APTINA_PLL
+ config VIDEO_SMIAPP_PLL
+ 	tristate
+ 
++config VIDEO_IMX219
++	tristate "Sony IMX219 sensor support"
++	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
++	---help---
++	  This is a Video4Linux2 sensor-level driver for the Sony IMX219
++	  camera.
++
++	  To compile this driver as a module, choose M here: the
++	  module will be called ov2659.
++
+ config VIDEO_OV2640
+ 	tristate "OmniVision OV2640 sensor support"
+ 	depends on VIDEO_V4L2 && I2C
+diff --git a/drivers/media/i2c/Makefile b/drivers/media/i2c/Makefile
+index c843c18..c99e716 100644
+--- a/drivers/media/i2c/Makefile
++++ b/drivers/media/i2c/Makefile
+@@ -90,6 +90,7 @@ obj-$(CONFIG_VIDEO_SMIAPP_PLL)	+= smiapp-pll.o
+ obj-$(CONFIG_VIDEO_AK881X)		+= ak881x.o
+ obj-$(CONFIG_VIDEO_IR_I2C)  += ir-kbd-i2c.o
+ obj-$(CONFIG_VIDEO_ML86V7667)	+= ml86v7667.o
++obj-$(CONFIG_VIDEO_IMX219)	+= imx219.o
+ obj-$(CONFIG_VIDEO_OV2659)	+= ov2659.o
+ obj-$(CONFIG_VIDEO_TC358743)	+= tc358743.o
+ 
+diff --git a/drivers/media/i2c/imx219.c b/drivers/media/i2c/imx219.c
+new file mode 100644
+index 0000000..26c3704
+--- /dev/null
++++ b/drivers/media/i2c/imx219.c
+@@ -0,0 +1,3049 @@
++/*
++ * Sony IMX219 sensor driver
++ *
++ * This is almost SMIA compliant, but most of the identifying locations
++ * are used for different purposes, which makes reuse of SMIA particularly
++ * difficult.  The sensor has two separate PLLs, one for video timing and
++ * one for the output stage.  Also, the registers used to program the
++ * output format are located in a completely different place.
++ *
++ * Notes:
++ * 1. With iMX6, use of the CSI compander results in severe horizontal
++ *    pixelation of the image, resulting in an unusable image.
++ * 2. 3200x2200 doesn't work in 2-lane mode as we run out of time to
++ *    transmit a line of pixels.  Increasing LINE_LENGTH doesn't appear
++ *    to solve this, despite there being ample bus idle time per frame.
++ *
++ * INCK -+-> PREDIV ------> PLL ---------+-> DIV ---> CONTROL
++ * 12A   |   VT:304(1/2/3)  VT:306[10:0] |   SY:303(1)
++ *       |                               `-> DIV ---> PIPELINE
++ *       |                                   PX:301(4,5,8,10)
++ *       `-> PREDIV ------> PLL ---------+----------> MIPI output
++ *           OP:305 (1/2/3) OP:30C[10:0] |
++ *                                       +-> DIV ---> FIFO
++ *                                       |   SY:30B(1=1/2)
++ *                                       `-> DIV --->
++ *                                           PX:309(8/10)
++ *
++ *     2 lane					4 lane
++ * VT: 304=3 306=57 303=1 301=5			304=3 306=87 303=1 301=5
++ *     vt     = input / 3 * 57	= 456MHz	= input / 3 * 87 = 696MHz
++ *     vt_sys = vt / 1		=> 456MHz	= vt / 1	=> 696MHz
++ *     vt_pix = vt / 5		=> 91.2MHz	= vt / 5	=> 139.2MHz
++ * OP: 305=3 30C=114 30b=1 309=10		305=3 30C=90 30B=1 309=10
++ *     op     = input / 3 * 114	= 912MHz	= input / 3 * 90 = 720MHz
++ *     op_sys = op / 1		=> 912MHz	= op / 1	=> 720MHz
++ *     op_pix = op / 10		=> 91.2MHz	= op / 10	=> 72.0MHz
++ *
++ * frame_length = max(coarse_integration_time + 4, frame_length_lines)
++ * line_length_pck = max(3448, ...)
++ *
++ * frame_rate = line_rate / frame_length
++ * line_rate = 2 * vt_pix / line_length_pck
++ *===
++ * line_rate = frame_rate * frame_length
++ * vt_pix    = line_rate * line_length_pck
++ */
++#include <linux/clk.h>
++#include <linux/err.h>
++#include <linux/gpio/consumer.h>
++#include <linux/i2c.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/of_graph.h>
++#include <linux/pm_runtime.h>
++#include <linux/delay.h>
++
++#include <media/v4l2-ctrls.h>
++#include <media/v4l2-device.h>
++#include <media/v4l2-fwnode.h>
++#include <media/v4l2-subdev.h>
++
++enum {
++#define REG(addr, size) (addr)
++	R_MODEL_ID		= REG(0x0000, 2),
++	R_LOT_ID		= REG(0x0002, 3),
++	R_WAFER_NUM		= REG(0x0006, 1),
++	R_CHIP_NUM		= REG(0x0007, 2),
++	R_FRM_CNT		= REG(0x0018, 1),
++	R_PX_ORDER		= REG(0x0019, 1),
++	R_DT_PEDESTAL		= REG(0x001a, 2),
++	R_FRM_FMT_TYPE		= REG(0x0040, 1),
++	FMT_TYPE_2BYTE		= 1,
++	R_FRM_FMT_SUBTYPE	= REG(0x0041, 1),
++#define FRM_FMT_COLS(x)		((x) >> 4)
++#define FRM_FMT_ROWS(x)		((x) & 0x0f)
++	R_FRM_FMT_DESC		= REG(0x0042, 2),
++#define R_FRM_FMT_DESC(x)	(R_FRM_FMT_DESC + 2 * (x))
++#define FRM_FMT_DESC_CODE(x)	((x) >> 12)
++	FRM_FMT_DESC_EMBEDDED	= 1,
++	FRM_FMT_DESC_VISIBLE	= 5,
++#define FRM_FMT_DESC_VAL(x)	((x) & 0x0fff)
++	R_ANA_GAIN_CAP		= REG(0x0081, 1),
++	R_ANA_GAIN_MIN		= REG(0x0085, 1),
++	R_ANA_GAIN_MAX		= REG(0x0086, 2),
++	R_ANA_GAIN_STEP		= REG(0x0088, 2),
++	R_ANA_GAIN_M0		= REG(0x008c, 2),
++	R_ANA_GAIN_C0		= REG(0x008e, 2),
++	R_ANA_GAIN_M1		= REG(0x0090, 2),
++	R_ANA_GAIN_C1		= REG(0x0092, 2),
++	R_DT_FMT_TYPE		= REG(0x00c0, 1),
++	R_DT_FMT_SUBTYPE	= REG(0x00c1, 1),
++	R_DT_FMT_DESC		= REG(0x00c2, 2),
++#define R_DT_FMT_DESC(x)	(R_DT_FMT_DESC + 2 * (x))
++	R_MODE_SELECT		= REG(0x0100, 1),
++	R_SW_RESET		= REG(0x0103, 1),
++	R_CORRUPT_STATUS	= REG(0x0104, 1),
++	R_MASK_CORRUPT_FRAMES	= REG(0x0105, 1),
++	R_FAST_STANDBY		= REG(0x0106, 1),
++	R_CSI_CH_ID		= REG(0x0110, 1),
++	R_CSI_SIG_MODE		= REG(0x0111, 1),
++	R_CSI_LANE_MODE		= REG(0x0114, 1),
++	R_TCLK_POST		= REG(0x0118, 2),
++	R_THS_PREPARE		= REG(0x011a, 2),
++	R_THS_ZERO_MIN		= REG(0x011c, 2),
++	R_THS_TRAIL		= REG(0x011e, 2),
++	R_TCLK_TRAIL_MIN	= REG(0x0120, 2),
++	R_TCLK_PREPARE		= REG(0x0122, 2),
++	R_TCLK_ZERO		= REG(0x0124, 2),
++	R_TLPX			= REG(0x0126, 2),
++	R_DPHY_CTRL		= REG(0x0128, 1),
++	R_EXCK_FREQ		= REG(0x012a, 2),
++	R_TEMPERATURE		= REG(0x0140, 1),
++	R_READOUT_V_CNT		= REG(0x0142, 2),
++	R_VSYNC_POL		= REG(0x0144, 1),
++	R_FLASH_POL		= REG(0x0146, 1),
++	R_VSYNC_TYPE		= REG(0x0147, 1),
++	R_FRAME_BANK_CTRL	= REG(0x0150, 1),
++	R_FRAME_BANK_FRM_CNT	= REG(0x0151, 1),
++	R_FRAME_BANK_FAST_TRACKING = REG(0x0152, 1),
++	R_FRAME_DURATION_A	= REG(0x0154, 1),
++	R_COMP_ENABLE_A		= REG(0x0155, 1),
++	R_ANA_GAIN_GLOBAL_A	= REG(0x0157, 1),
++	R_DIG_GAIN_GLOBAL_A	= REG(0x0158, 2),
++	R_COARSE_INTEGRATION_A	= REG(0x015a, 2),
++	R_SENSOR_MODE_A		= REG(0x015d, 1),
++	R_FRM_LENGTH_A		= REG(0x0160, 2),
++	R_LINE_LENGTH_A		= REG(0x0162, 2),
++	R_X_ADD_STA_A		= REG(0x0164, 2),
++	R_X_ADD_END_A		= REG(0x0166, 2),
++	R_Y_ADD_STA_A		= REG(0x0168, 2),
++	R_Y_ADD_END_A		= REG(0x016a, 2),
++	R_X_OUTPUT_SIZE		= REG(0x016c, 2),
++	R_Y_OUTPUT_SIZE		= REG(0x016e, 2),
++	R_X_ODD_INC_A		= REG(0x0170, 1),
++	R_Y_ODD_INC_A		= REG(0x0171, 1),
++	R_IMG_ORIENTATION_A	= REG(0x0172, 1),
++	R_BINNING_MODE_H_A	= REG(0x0174, 1),
++	R_BINNING_MODE_V_A	= REG(0x0175, 1),
++	R_BINNING_CAL_MODE_H_A	= REG(0x0176, 1),
++	R_BINNING_CAL_MODE_V_A	= REG(0x0177, 1),
++	R_ANA_GAIN_GLOBAL_SHORT_A = REG(0x0189, 1),
++	R_COARSE_INTEG_TIME_SHORT_A = REG(0x018a, 2),
++	R_CSI_DATA_FORMAT_A	= REG(0x018c, 2),
++	R_VTPXCK_DIV		= REG(0x0301, 1),
++	R_VTSYCK_DIV		= REG(0x0303, 1),
++	R_PREPLLCK_VT_DIV	= REG(0x0304, 1),
++	R_PREPLLCK_OP_DIV	= REG(0x0305, 1),
++	R_PLL_VT_MPY		= REG(0x0306, 2),
++	R_OPPXCK_DIV		= REG(0x0309, 1),
++	R_OPSYCK_DIV		= REG(0x030b, 1),
++	R_PLL_OP_MPY		= REG(0x030c, 2),
++	R_X_EVN_INC		= REG(0x0381, 1),
++	R_Y_EVN_INC		= REG(0x0383, 1),
++	R_FINE_INTEG_TIME	= REG(0x0388, 2),
++	R_TEST_PATTERN_MODE	= REG(0x0600, 2),
++	R_TD_R			= REG(0x0602, 2),
++	R_TD_GR			= REG(0x0604, 2),
++	R_TD_B			= REG(0x0606, 2),
++	R_TD_GB			= REG(0x0608, 2),
++	R_H_CUR_WIDTH		= REG(0x060a, 2),
++	R_H_CUR_POS		= REG(0x060c, 2),
++	R_V_CUR_WIDTH		= REG(0x060e, 2),
++	R_V_CUR_POS		= REG(0x0610, 2),
++	R_TP_WINDOW_X_OFFSET	= REG(0x0620, 2),
++	R_TP_WINDOW_Y_OFFSET	= REG(0x0622, 2),
++	R_TP_WINDOW_WIDTH	= REG(0x0624, 2),
++	R_TP_WINDOW_HEIGHT	= REG(0x0626, 2),
++	R_LIMIT_INTEG		= REG(0x1000, 0),
++	R_LIMIT_DIG_GAIN	= REG(0x1080, 0),
++	R_LIMIT_PLL		= REG(0x1100, 0),
++	R_LIMIT_VTCLK		= REG(0x1120, 0),
++	R_LIMIT_FRAME		= REG(0x1140, 0),
++	R_LIMIT_OPCLK		= REG(0x1160, 0),
++	R_LIMIT_IMAGE		= REG(0x1180, 0),
++#undef REG
++};
++
++/* These represent the register layouts above */
++struct imx219_image_params {	/* R_FRM_LENGTH_A to R_BINNING_CAL_MODE_V_A */
++	__be16	frame_length;
++	__be16	line_length;
++	__be16	x_add_sta;
++	__be16	x_add_end;
++	__be16	y_add_sta;
++	__be16	y_add_end;
++	__be16	x_output_size;
++	__be16	y_output_size;
++	u8	x_odd_inc;
++	u8	y_odd_inc;
++	u8	image_orientation;
++	u8	zero;
++	u8	binning_mode_h;
++	u8	binning_mode_v;
++	u8	binning_cal_mode_h;
++	u8	binning_cal_mode_v;
++} __packed __aligned(2);
++
++struct imx219_limit_integration_time {	/* R_LIMIT_INTEG */
++	__be16 integration_time_capability;
++	__be16 reserved;
++	__be16 coarse_integration_time_min;
++	__be16 coarse_integration_time_max_margin;
++} __packed __aligned(2);
++
++struct imx219_limit_dig_gain {		/* R_LIMIT_DIG_GAIN */
++	__be16 digital_gain_capability;
++	u8 reserved2;
++	u8 reserved3;
++	__be16 digital_gain_min;
++	__be16 digital_gain_max;
++	__be16 digital_gain_step_size;
++} __packed __aligned(2);
++
++struct imx219_limit_pll {		/* R_LIMIT_PLL */
++	__be32 min_ext_clk_freq_mhz; /* float */
++	__be32 max_ext_clk_freq_mhz; /* float */
++	__be16 min_pre_pll_clk_div;
++	__be16 max_pre_pll_clk_div;
++	__be32 min_pll_ip_freq_mhz; /* float */
++	__be32 max_pll_ip_freq_mhz; /* float */
++	__be16 min_pll_multiplier;
++	__be16 max_pll_multiplier;
++	__be32 min_pll_op_freq_mhz; /* float */
++	__be32 max_pll_op_freq_mhz; /* float */
++};
++
++struct imx219_limit_clk {		/* R_LIMIT_OPCLK or R_LIMIT_VTCLK */
++	__be16 min_sys_clk_div;
++	__be16 max_sys_clk_div;
++	__be32 min_sys_clk_freq_mhz; /* float */
++	__be32 max_sys_clk_freq_mhz; /* float */
++	__be32 min_pix_clk_freq_mhz; /* float */
++	__be32 max_pix_clk_freq_mhz; /* float */
++	__be16 min_pix_clk_div;
++	__be16 max_pix_clk_div;
++} __packed __aligned(4);
++
++struct imx219_limit_frame {		/* R_LIMIT_FRAME */
++	__be16 min_frame_length_lines;
++	__be16 max_frame_length_lines;
++	__be16 min_line_length_pck;
++	__be16 max_line_length_pck;
++	__be16 min_link_blank_pck;
++	__be16 min_frame_blank_lines;
++} __packed __aligned(2);
++
++struct imx219_limit_image {		/* R_LIMIT_IMAGE */
++	__be16 x_addr_min;
++	__be16 y_addr_min;
++	__be16 x_addr_max;
++	__be16 y_addr_max;
++	__be16 min_x_output_size;
++	__be16 min_y_output_size;
++	__be16 max_x_output_size;
++	__be16 max_y_output_size;
++} __packed __aligned(2);
++
++enum {
++	CTRL_R_R = 0,
++	CTRL_R_GR,
++	CTRL_R_B,
++	CTRL_R_GB,
++	N_R_CTRLS,
++
++	CTRL_P_PIXEL_RATE = 0,
++	CTRL_P_HBLANK,
++	CTRL_P_VBLANK,
++	CTRL_P_EXPOSURE,
++	N_P_CTRLS = N_R_CTRLS,
++	N_CTRLS = N_R_CTRLS > N_P_CTRLS ? N_R_CTRLS : N_P_CTRLS,
++
++	PLL_VT = 0,
++	PLL_OP,
++	N_PLLS,
++
++	CLK_SYS = 0,
++	CLK_PIX,
++	N_CLKS,
++
++	PAD_SRC = 0,
++	PAD_SINK,
++	N_PADS,
++};
++
++struct imx219_private;
++struct imx219_sub;
++
++struct imx219_pad_ops {
++	void (*init_pad)(struct imx219_private *priv, unsigned int pad,
++			 struct v4l2_mbus_framefmt *mf,
++			 struct v4l2_rect *crop);
++	void (*adj_format)(struct imx219_private *priv,
++			   struct v4l2_subdev_format *fmt,
++			   const struct v4l2_mbus_framefmt *sink_fmt,
++			   const struct v4l2_rect *sink_compose);
++	int (*set_fmt)(struct imx219_private *priv, struct imx219_sub *sub,
++		       unsigned int pad, const struct v4l2_rect *r,
++		       const struct v4l2_mbus_framefmt *fmt);
++	int (*adj_selection)(struct imx219_private *priv, unsigned int target,
++			     unsigned int flags, struct v4l2_rect *rect,
++			     struct v4l2_rect * const this[]);
++	int (*set_selection)(struct imx219_private *priv,
++			     struct imx219_sub *sub, unsigned int pad,
++			     unsigned int target, const struct v4l2_rect *rect,
++			     const struct v4l2_rect *upstream);
++};
++
++struct imx219_sub {
++	struct v4l2_subdev sd;
++	struct v4l2_ctrl_handler ctrl_handler;
++	struct media_pad pad[N_PADS];
++	const struct imx219_pad_ops *pad_ops;
++	struct v4l2_ctrl *ctrls[N_CTRLS];
++
++	/* mutex-protected data */
++	struct v4l2_mbus_framefmt format[N_PADS];
++	struct v4l2_rect sink_crop;
++	struct v4l2_rect sink_compose;
++};
++
++struct imx219_private {
++	/* v4l2 data */
++	struct imx219_sub root;
++	struct imx219_sub pixel;
++
++	/* hardware resources */
++	struct clk *inck;
++	struct gpio_desc *xclr_gpio;
++
++	/* static settings */
++	struct v4l2_rect visible;
++	struct v4l2_rect pixarray;
++	u8 mipi_vc;
++	u8 mipi_lanes;
++	u8 pixel_order;
++
++	u32 pixel_format;
++
++	/* parameters / limits */
++	s16 ana_gain_m0;
++	s16 ana_gain_c0;
++	s16 ana_gain_m1;
++	s16 ana_gain_c1;
++	u16 coarse_integration_time_min;
++	u16 coarse_integration_time_max_margin;
++	u16 min_frame_lines;
++	u16 max_frame_lines;
++	u16 min_line_length_pck;
++	u16 max_line_length_pck;
++	u16 min_line_blank_pck;
++	u16 min_frame_blank_lines;
++	u16 min_output_width;
++	u16 min_output_height;
++	u16 max_output_width;
++	u16 max_output_height;
++
++	/* not really a limit, but static on imx219 */
++	u16 fine_integ_time;
++
++	/* calculated limits */
++	u32 inck_freq;
++	u32 pll_ip_freq;
++	u32 pll_min_freq;
++	u32 pll_max_freq;
++	u16 pll_min_mpy;
++	u16 pll_max_mpy;
++	u8 pll_pre_div;
++
++	struct imx219_pll_limit {
++		u32	min_freq;
++		u32	max_freq;
++		u16	min_mpy;
++		u16	max_mpy;
++		struct imx219_clk_limit {
++			u32	min_freq;
++			u32	max_freq;
++			u16	min_div;
++			u16	max_div;
++		} clk[N_CLKS];
++	} pll[N_PLLS];
++
++	struct mutex mutex;
++	/* mutex-protected data */
++	struct v4l2_fract frame_interval;
++	bool streaming;
++
++	struct imx219_image_params params;
++
++	u16 vt_mpy;
++	u16 op_mpy;
++	u8 op_sys_div;
++	u8 bits_per_pixel;
++};
++
++static const u32 imx219_formats[][4] = {
++	/* IMX216 can produce either RAW10 or RAW8 MIPI CSI2 format */
++#define FMT_S(o,b) MEDIA_BUS_FMT_S##o##b##_1X##b
++#define FMT(b) FMT_S(GRBG, b), FMT_S(RGGB, b), FMT_S(BGGR, b), FMT_S(GBRG, b)
++	{ FMT(10) },
++	{ FMT(8) },
++#undef FMT
++#undef FMT_S
++};
++
++static const char *imx219_test_pattern_menu[] = {
++	"Disabled",
++	"Solid Color",
++	"100% Color Bars",
++	"Fade to Grey Color Bar",
++	"PN9",
++	"16 Split Color Bar",
++	"16 Split Inverted Color Bar",
++	"Column Counter",
++	"Inverted Column Counter",
++	"PN31",
++};
++
++struct imx219_reg {
++	u16 offset;
++	u8 val;
++};
++
++static const struct imx219_reg misc_regs[] = {
++	{ 0x30eb, 0x05 }, { 0x30eb, 0x0c },
++	{ 0x300a, 0xff }, { 0x300b, 0xff },
++	{ 0x30eb, 0x05 }, { 0x30eb, 0x09 },
++	{ 0x455e, 0x00 }, { 0x471e, 0x4b },
++	{ 0x4767, 0x0f }, { 0x4750, 0x14 },
++	{ 0x4540, 0x00 }, { 0x47b4, 0x14 },
++	{ 0x4713, 0x30 }, { 0x478b, 0x10 },
++	{ 0x478f, 0x10 }, { 0x4793, 0x10 },
++	{ 0x4797, 0x0e }, { 0x479b, 0x0e }
++};
++
++static struct imx219_private *imx219_get_root_priv(struct v4l2_subdev *sd)
++{
++	return container_of(sd, struct imx219_private, root.sd);
++}
++
++static struct imx219_sub *imx219_get_sub(struct v4l2_subdev *sd)
++{
++	return container_of(sd, struct imx219_sub, sd);
++}
++
++static struct imx219_private *imx219_get_priv(struct v4l2_subdev *sd)
++{
++	return imx219_get_root_priv(dev_get_drvdata(sd->dev));
++}
++
++static struct imx219_private *imx219_get_clientdata(struct i2c_client *client)
++{
++	return imx219_get_root_priv(i2c_get_clientdata(client));
++}
++
++static int imx219_read(struct imx219_private *priv, unsigned int reg,
++		       void *val, size_t n)
++{
++	struct i2c_client *client = v4l2_get_subdevdata(&priv->root.sd);
++	__be16 addr = cpu_to_be16(reg);
++	int ret;
++	struct i2c_msg msg[] = {
++		{
++			.addr = client->addr,
++			.len = 2,
++			.buf = (u8 *)&addr,
++		}, {
++			.addr = client->addr,
++			.flags = I2C_M_RD,
++			.len = n,
++			.buf = val,
++		}
++	};
++
++	ret = i2c_transfer(client->adapter, msg, 2);
++	if (ret != 2)
++		v4l_err(client, "read reg 0x%04x failed: %d\n", reg, ret);
++
++	return ret == 2 ? 0 : ret < 0 ? ret : -EINVAL;
++}
++
++static int imx219_readb(struct imx219_private *priv, unsigned int reg)
++{
++	u8 val;
++	int ret = imx219_read(priv, reg, &val, sizeof(val));
++
++	return ret < 0 ? ret : val;
++}
++
++static int imx219_readw(struct imx219_private *priv, unsigned int reg)
++{
++	__be16 val;
++	int ret = imx219_read(priv, reg, &val, sizeof(val));
++
++	return ret < 0 ? ret : be16_to_cpu(val);
++}
++
++static int imx219_write(struct imx219_private *priv, unsigned int reg,
++		        const void *v, size_t n)
++{
++	struct i2c_client *client = v4l2_get_subdevdata(&priv->root.sd);
++	u8 buf[32];
++	int ret;
++	struct i2c_msg msg[] = {
++		{
++			.addr = client->addr,
++			.len = 2 + n,
++			.buf = buf,
++		}
++	};
++
++	if (n > sizeof(buf) - 2)
++		return -EIO;
++
++	buf[0] = reg >> 8;
++	buf[1] = reg;
++	memcpy(buf + 2, v, n);
++
++	ret = i2c_transfer(client->adapter, msg, ARRAY_SIZE(msg));
++	if (ret != ARRAY_SIZE(msg))
++		v4l_err(client, "write reg 0x%04x failed: %d\n", reg, ret);
++
++	return ret < 0 ? ret : ret != 1 ? -EINVAL : 0;
++}
++
++static int imx219_writeb(struct imx219_private *priv, unsigned int reg, u8 val)
++{
++	return imx219_write(priv, reg, &val, sizeof(val));
++}
++
++static int imx219_writeb_pm(struct imx219_private *priv, unsigned int reg,
++			    u16 val)
++{
++	struct device *dev = priv->root.sd.dev;
++	int pm = pm_runtime_get_if_in_use(dev);
++	int ret = 0;
++
++	if (pm)
++		ret = imx219_writeb(priv, reg, val);
++
++	if (pm > 0) {
++		pm_runtime_mark_last_busy(dev);
++		pm_runtime_put_autosuspend(dev);
++	}
++	return ret;
++}
++
++static int imx219_writew(struct imx219_private *priv, unsigned int reg, u16 val)
++{
++	__be16 v = cpu_to_be16(val);
++	return imx219_write(priv, reg, &v, sizeof(v));
++}
++
++static int imx219_writew_pm(struct imx219_private *priv, unsigned int reg,
++			    u16 val)
++{
++	struct device *dev = priv->root.sd.dev;
++	int pm = pm_runtime_get_if_in_use(dev);
++	int ret = 0;
++
++	if (pm)
++		ret = imx219_writew(priv, reg, val);
++
++	if (pm > 0) {
++		pm_runtime_mark_last_busy(dev);
++		pm_runtime_put_autosuspend(dev);
++	}
++	return ret;
++}
++
++static int imx219_write_array(struct imx219_private *priv,
++			      const struct imx219_reg *regs, size_t num)
++{
++	int ret = 0;
++
++	while (num--) {
++		ret = imx219_writeb(priv, regs->offset, regs->val);
++		if (ret < 0)
++			break;
++		regs++;
++	}
++
++	return ret;
++}
++
++static u32 imx219_lookup_format(u32 code, unsigned int order)
++{
++	int i, j;
++
++	for (i = ARRAY_SIZE(imx219_formats); --i; )
++		for (j = 0; j < ARRAY_SIZE(imx219_formats[i]); j++)
++			if (code == imx219_formats[i][j])
++				goto out;
++out:
++	return imx219_formats[i][order];
++}
++
++/* Convert a big-endian 32-bit float to a u32 scaled by 1M */
++static u32 be32f_to_u32m(__be32 v_float)
++{
++	u32 v = be32_to_cpu(v_float);
++	int exponent;
++	u64 mantissa;
++
++	if (v & BIT(31) || v == 0) /* -ve or 0 */
++		return 0;
++	if (v == 0x7f800000) /* inf */
++		return ~0;
++	if ((v & 0x7f800000) == 0x7f800000) /* nan */
++		return 0;
++	if (v > 0x458637bd) /* maximum - limits shift */
++		return ~0;
++	if (v < 0x358637bd) /* minimum - limits shift */
++		return 0;
++	exponent = (v >> 23) - 127;
++	mantissa = 1000000ull * ((v & 0x7fffff) | 0x800000);
++	if (exponent < 0)
++		mantissa >>= -exponent;
++	else
++		mantissa <<= exponent;
++	return mantissa >> 23;
++}
++
++static int imx219_check_limit(struct device *dev, unsigned long v,
++			      u32 min_v, u32 max_v, const char *what,
++			      const char *unit)
++{
++	if (min_v >= max_v) {
++		dev_err(dev, "%s range %u-%u%s invalid\n",
++			what, min_v, max_v, unit);
++		return -EINVAL;
++	}
++	if (v < min_v || v > max_v) {
++		dev_err(dev, "%s %lu%s outside range %u-%u%s\n",
++			what, v, unit, min_v, max_v, unit);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++#define MHZ(x) ((x) / 1000000), (((x) / 100000) % 10)
++static int imx219_calculate_clk_limits(struct imx219_private *priv,
++				       const struct imx219_limit_clk *cl,
++				       struct imx219_pll_limit *pl,
++				       const char *what, bool op)
++{
++	struct device *dev = priv->root.sd.dev;
++	struct {
++		u32 min_freq, max_freq;
++		u16 min_div, max_div;
++		int dep_clk;
++	} limits[N_CLKS];
++	u32 min_v, max_v;
++	u64 v;
++	int i;
++
++	limits[CLK_SYS].min_freq = be32f_to_u32m(cl->min_sys_clk_freq_mhz);
++	limits[CLK_SYS].max_freq = be32f_to_u32m(cl->max_sys_clk_freq_mhz);
++	limits[CLK_SYS].min_div = be16_to_cpu(cl->min_sys_clk_div);
++	limits[CLK_SYS].max_div = be16_to_cpu(cl->max_sys_clk_div);
++	limits[CLK_PIX].min_freq = be32f_to_u32m(cl->min_pix_clk_freq_mhz);
++	limits[CLK_PIX].max_freq = be32f_to_u32m(cl->max_pix_clk_freq_mhz);
++	limits[CLK_PIX].min_div = be16_to_cpu(cl->min_pix_clk_div);
++	limits[CLK_PIX].max_div = be16_to_cpu(cl->max_pix_clk_div);
++
++	limits[CLK_SYS].dep_clk = -1;
++	limits[CLK_PIX].dep_clk = op - 1;
++
++	for (i = 0; i < N_CLKS; i++)
++		dev_dbg(dev, "%s_%s_clk limits %u.%u-%u.%uMHz div %04x-%04x\n",
++			what, i ? "pix" : "sys",
++			MHZ(limits[i].min_freq), MHZ(limits[i].max_freq),
++			limits[i].min_div, limits[i].max_div);
++
++	/*
++	 * Calculate the resulting minimum and maximum divisor input
++	 * frequencies that can be generated to satisfy the divisor
++	 * input and output limits.
++	 *
++	 * The VT setup appears to be:
++	 *   PLL -> sys divider -> sysclk output
++	 *      `-> pix divider -> pixclk output
++	 *
++	 * and OP setup appears to be:
++	 *   PLL -> sys divider -> sysclk output
++	 *                     `-> pix divider -> pixclk output
++	 */
++	pl->min_freq = priv->pll_min_freq;
++	pl->max_freq = priv->pll_max_freq;
++	for (i = N_CLKS; i--; ) {
++		u32 *min_f, *max_f;
++
++		if (limits[i].dep_clk == -1) {
++			min_f = &pl->min_freq;
++			max_f = &pl->max_freq;
++		} else {
++			min_f = &limits[limits[i].dep_clk].min_freq;
++			max_f = &limits[limits[i].dep_clk].max_freq;
++		}
++		v = limits[i].min_freq * limits[i].min_div;
++		if (v > *min_f)
++			*min_f = v;
++		v = limits[i].max_freq * limits[i].max_div;
++		if (v < *max_f)
++			*max_f = v;
++	}
++
++	if (pl->max_freq < pl->min_freq) {
++		dev_err(dev, "inconsistent %s PLL parameters: %u.%u-%u.%uMHz\n",
++			what, MHZ(pl->min_freq), MHZ(pl->max_freq));
++		return -EINVAL;
++	}
++
++	/*
++	 * Update the PLL frequency range according to the resolution of the
++	 * PLL itself.  The minimum will always be larger than the PLL's
++	 * minimum multiplier, and the maximum will always be smaller than
++	 * the PLL's maximum multiplier.
++	 */
++	pl->min_mpy = DIV_ROUND_UP(pl->min_freq, priv->pll_ip_freq);
++	pl->max_mpy = pl->max_freq / priv->pll_ip_freq;
++
++	/* Re-calculate the exact PLL frequencies for these multipliers */
++	pl->min_freq = priv->pll_ip_freq * pl->min_mpy;
++	pl->max_freq = priv->pll_ip_freq * pl->max_mpy;
++
++	dev_info(dev, "%s PLL %u.%u-%u.%uMHz for mpy %04x-%04x\n",
++		 what, MHZ(pl->min_freq), MHZ(pl->max_freq),
++		 pl->min_mpy, pl->max_mpy);
++
++	/* Now calculate the resulting min/max output clocks and divisors. */
++	for (i = 0; i < N_CLKS; i++) {
++		u32 *min_f, *max_f;
++
++		if (limits[i].dep_clk == -1) {
++			min_f = &pl->min_freq;
++			max_f = &pl->max_freq;
++		} else {
++			min_f = &pl->clk[limits[i].dep_clk].min_freq;
++			max_f = &pl->clk[limits[i].dep_clk].max_freq;
++		}
++
++		min_v = *min_f / limits[i].max_div;
++		if (min_v >= limits[i].min_freq) {
++			pl->clk[i].min_freq = min_v;
++			pl->clk[i].max_div = limits[i].max_div;
++		} else {
++			pl->clk[i].max_div = DIV_ROUND_UP(pl->min_freq,
++							  limits[i].min_freq);
++			pl->clk[i].min_freq = pl->min_freq / pl->clk[i].max_div;
++		}
++
++		max_v = *max_f / limits[i].min_div;
++		if (max_v <= limits[i].max_freq) {
++			pl->clk[i].max_freq = max_v;
++			pl->clk[i].min_div = limits[i].min_div;
++		} else {
++			pl->clk[i].min_div = pl->max_freq / limits[i].max_freq;
++			pl->clk[i].max_freq = pl->max_freq / pl->clk[i].min_div;
++		}
++
++		dev_info(dev, "%s_%s_clk %u.%u-%u.%uMHz for div %04x-%04x\n",
++			what, i ? "pix" : "sys",
++			MHZ(pl->clk[i].min_freq), MHZ(pl->clk[i].max_freq),
++			pl->clk[i].max_div, pl->clk[i].min_div);
++	}
++	return 0;
++}
++
++static int imx219_calculate_clks_limits(struct imx219_private *priv)
++{
++	struct imx219_limit_clk lc;
++	struct imx219_pll_limit *pll;
++	int ret;
++
++	ret = imx219_read(priv, R_LIMIT_VTCLK, &lc, sizeof(lc));
++	if (ret < 0)
++		return ret;
++
++	pll = &priv->pll[PLL_VT];
++
++	imx219_calculate_clk_limits(priv, &lc, pll, "vt", false);
++
++	if (priv->pixel.ctrls[CTRL_P_PIXEL_RATE])
++		v4l2_ctrl_modify_range(priv->pixel.ctrls[CTRL_P_PIXEL_RATE],
++				       2 * pll->clk[CLK_PIX].min_freq,
++				       2 * pll->clk[CLK_PIX].max_freq,
++				       1, 2 * pll->clk[CLK_PIX].max_freq);
++
++	ret = imx219_read(priv, R_LIMIT_OPCLK, &lc, sizeof(lc));
++	if (ret < 0)
++		return ret;
++
++	imx219_calculate_clk_limits(priv, &lc, &priv->pll[PLL_OP], "op", true);
++
++	/* Set defaults.  FIXME: we should recalculate these parameters */
++	priv->vt_mpy = priv->pll[PLL_VT].max_mpy;
++
++	/*
++	 * Configure the PLL multipliers according to the number of lanes.
++	 * Documented maximum lane Mbps is 912 for 2-lane, 755 for 4-lane.
++	 */
++	if (priv->mipi_lanes == 2)
++		priv->op_mpy = priv->pll[PLL_OP].max_mpy;
++	else
++		priv->op_mpy = 0x005a;
++
++	priv->op_sys_div = priv->pll[PLL_OP].clk[CLK_SYS].min_div;
++
++	return 0;
++}
++
++static int imx219_calculate_pll_limits(struct imx219_private *priv,
++				       unsigned long inck)
++{
++	struct device *dev = priv->root.sd.dev;
++	struct imx219_limit_pll limit_pll;
++	u16 min_pll_mpy, max_pll_mpy, pre_div;
++	u32 pll_ip_freq, min_v, max_v;
++	u64 v;
++	int ret;
++
++	if (priv->inck_freq == inck)
++		return 0;
++
++	ret = imx219_read(priv, R_LIMIT_PLL, &limit_pll, sizeof(limit_pll));
++	if (ret < 0)
++		return ret;
++
++	min_v = be32f_to_u32m(limit_pll.min_ext_clk_freq_mhz);
++	max_v = be32f_to_u32m(limit_pll.max_ext_clk_freq_mhz);
++	ret = imx219_check_limit(dev, inck, min_v, max_v,
++				 "external frequency", "Hz");
++	if (ret < 0)
++		return ret;
++
++	min_v = __be16_to_cpu(limit_pll.min_pre_pll_clk_div);
++	max_v = __be16_to_cpu(limit_pll.max_pre_pll_clk_div);
++	ret = imx219_check_limit(dev, min_v, min_v, max_v,
++				 "pre-pll divider", "");
++
++	/*
++	 * Set the PLL pre-divider to give 6-12MHz input to the PLLs.
++	 */
++	pre_div = clamp((u32)(1 + inck / 12000000), min_v, max_v);
++	pll_ip_freq = inck / pre_div;
++
++	min_v = be32f_to_u32m(limit_pll.min_pll_ip_freq_mhz);
++	max_v = be32f_to_u32m(limit_pll.max_pll_ip_freq_mhz);
++	ret = imx219_check_limit(dev, pll_ip_freq, min_v, max_v,
++				 "pll input frequency", "Hz");
++	if (ret < 0)
++		return ret;
++
++	min_pll_mpy = be16_to_cpu(limit_pll.min_pll_multiplier);
++	max_pll_mpy = be16_to_cpu(limit_pll.max_pll_multiplier);
++	ret = imx219_check_limit(dev, min_pll_mpy, min_pll_mpy, max_pll_mpy,
++				 "pll multiplier", "");
++	if (ret < 0)
++		return ret;
++
++	min_v = be32f_to_u32m(limit_pll.min_pll_op_freq_mhz);
++	max_v = be32f_to_u32m(limit_pll.max_pll_op_freq_mhz);
++	ret = imx219_check_limit(dev, min_v, min_v, max_v,
++				 "pll output frequency", "Hz");
++	if (ret < 0)
++		return ret;
++
++	/* Everything looks good */
++	priv->inck_freq = inck;
++	priv->pll_ip_freq = pll_ip_freq;
++	priv->pll_pre_div = pre_div;
++
++	/* Calculate the real PLL limits given the input clock */
++	v = (u64)pll_ip_freq * min_pll_mpy;
++	if (v < min_v) {
++		priv->pll_min_mpy = DIV_ROUND_UP(min_v, pll_ip_freq);
++		priv->pll_min_freq = pll_ip_freq * priv->pll_min_mpy;
++	} else {
++		priv->pll_min_mpy = min_pll_mpy;
++		priv->pll_min_freq = v;
++	}
++
++	v = (u64)pll_ip_freq * max_pll_mpy;
++	if (v > max_v) {
++		priv->pll_max_mpy = max_v / pll_ip_freq;
++		priv->pll_max_freq = pll_ip_freq * priv->pll_max_mpy;
++	} else {
++		priv->pll_max_mpy = max_pll_mpy;
++		priv->pll_max_freq = v;
++	}
++
++	dev_info(dev, "Inck %u.%uMHz PLL in %u.%uMHz out %u.%u-%u.%uMHz mpy %04x-%04x\n",
++		 MHZ(priv->inck_freq), MHZ(priv->pll_ip_freq),
++		 MHZ(priv->pll_min_freq), MHZ(priv->pll_max_freq),
++		 priv->pll_min_mpy, priv->pll_max_mpy);
++
++	return imx219_calculate_clks_limits(priv);
++}
++#undef MHZ
++
++/*
++ * Calculate the number of lines output on the MIPI bus.  Allow 2 lines
++ * for start frame and end frame, plus some blanking.  Observation and
++ * experimentation shows that 22 blanking lines are required.  (With
++ * 720 output lines, reducing frame length from 746 to 744 results in
++ * no change in output timing.  746 to 748 adds two lines to the timing.)
++ * Limit the minimum number of lines to "min_frame_lines", although this
++ * will never apply on the iMX219.
++ */
++static unsigned int imx219_calc_total_lines(struct imx219_private *priv)
++{
++	unsigned int lines = be16_to_cpu(priv->params.y_output_size) +
++			     priv->visible.top + 2 + 22;
++
++	if (lines < priv->min_frame_lines)
++		lines = priv->min_frame_lines;
++
++	return lines;
++}
++
++/*
++ * Calculate the number of bits per lane for each line packet sent.
++ * This is the number of active bits output, plus the 32-bit header
++ * and 16-bit footer.  The lanes always send a whole number of bytes,
++ * so round up to a whole number of 8 bits.
++ */
++static unsigned int imx219_calc_lane_active_line_bits(struct imx219_private *priv)
++{
++	unsigned int line_bits;
++
++	line_bits = priv->bits_per_pixel *
++		    be16_to_cpu(priv->params.x_output_size) + 32 + 16;
++
++	return 8 * DIV_ROUND_UP(line_bits, 8 * priv->mipi_lanes);
++}
++
++/*
++ * Calculate the number of bit periods for a full line, including the
++ * "blanking" period on the bus (which allows it to go into LP-11 state.)
++ * Allow a minimum 488 bits for blanking - this seems to be what's required,
++ * found via measurement and experimentation.  This appears to no parameter
++ * for this, and being very different from the min_line_blank_pck parameter.
++ */
++static unsigned int imx219_calc_lane_line_bits(struct imx219_private *priv)
++{
++	return imx219_calc_lane_active_line_bits(priv) + 488;
++}
++
++/*
++ * Analogue gain.  The values given in the capability registers scale
++ * the analogue gain to a linear scale between 1x and 8x.  Give the
++ * user the linear scale, but with a value scaled by 1000 so the full
++ * range is available, and the value is at least meaningful.
++ *
++ *  gain = (m0 * reg + c0) / (m1 * reg + c1)
++ *  reg = (c0 - gain * c1) / (gain * m1 - m0)
++ */
++#define GAIN_SCALE	1000
++static s32 imx219_reg_to_gain(struct imx219_private *priv, u16 reg)
++{
++	long num, div;
++
++	/*
++	 * Although reg is a 16-bit number, it's for a register whose
++	 * maximum value is limited to 8-bit.  So limit it to 8-bit.
++	 */
++	if (reg > 255)
++		reg = 255;
++
++	num = priv->ana_gain_m0 * reg + priv->ana_gain_c0;
++	div = priv->ana_gain_m1 * reg + priv->ana_gain_c1;
++
++	if (WARN_ON(div == 0))
++		div = 1;
++
++	return num * GAIN_SCALE / div;
++}
++
++static u16 imx219_gain_to_reg(struct imx219_private *priv, s32 val)
++{
++	long num = priv->ana_gain_c0 * GAIN_SCALE - priv->ana_gain_c1 * val;
++	long div = val * priv->ana_gain_m1 - priv->ana_gain_m0 * GAIN_SCALE;
++
++	/* If div does end up being zero, then we've gone wrong */
++	if (WARN_ON(div == 0))
++		div = 1;
++
++	/* signed div-round-closest */
++	if ((num < 0) ^ (div < 0))
++		num -= div / 2;
++	else
++		num += div / 2;
++
++	return num / div;
++}
++#undef GAIN_SCALE
++
++static unsigned long imx219_get_vt_pixclk(struct imx219_private *priv)
++{
++	return priv->pll_ip_freq * priv->vt_mpy / 5;
++}
++
++/*
++ * Calculate the exposure register setting given a pixel clock, line
++ * length and exposure time in units of 100us, rounded to nearest.
++ *
++ * tsh = (coarse_integ_time * line_length + fine_integ_time) /
++ *          (2 * pixclk_freq)
++ *
++ * With a fixed fine time:
++ *  coarse = (tsh * 2 * pixclk_freq - fine) / line_length
++ */
++#define EXP_UNITS_US	100
++#define TSH_SCALE	(1000000 / EXP_UNITS_US)
++static u16 imx219_exposure_to_reg(struct imx219_private *priv, s32 val)
++{
++	unsigned int line_length = be16_to_cpu(priv->params.line_length);
++	unsigned long vt_pixclk = imx219_get_vt_pixclk(priv);
++	u64 tsh;
++
++	tsh = (u64)2 * vt_pixclk * val - priv->fine_integ_time * TSH_SCALE;
++
++	return (u16)DIV_ROUND_CLOSEST_ULL(tsh, line_length * TSH_SCALE);
++}
++
++static void imx219_set_exposure_limits(struct imx219_private *priv)
++{
++	unsigned int line_length = be16_to_cpu(priv->params.line_length);
++	unsigned int frame_length = be16_to_cpu(priv->params.frame_length);
++	unsigned int fine_integ_time = priv->fine_integ_time;
++	unsigned long vt_pixclk = imx219_get_vt_pixclk(priv);
++	unsigned int min_exp, max_exp;
++	bool at_init;
++	u64 tsh;
++
++	/* Scale tsh up so we end up with microseconds rather than seconds */
++	tsh = (u64)(priv->coarse_integration_time_min * line_length +
++		    fine_integ_time) * 1000000;
++	/* and ensure that the division rounds up */
++	tsh += 2 * vt_pixclk - 1;
++	tsh = div_u64(tsh, 2 * vt_pixclk);
++	min_exp = DIV_ROUND_UP((u32)tsh, EXP_UNITS_US);
++
++	frame_length -= priv->coarse_integration_time_max_margin;
++	tsh = (u64)(frame_length * line_length + fine_integ_time) * 1000000;
++	/* round down */
++	tsh = div_u64(tsh, 2 * vt_pixclk);
++	max_exp = (u32)tsh / EXP_UNITS_US;
++
++	/*
++	 * The normal behaviour is to "round the existing value to closest"
++	 * but that results in an initial value of min_exp for this control,
++	 * which is silly.  Since the minimum will never be 0 except on
++	 * initialisation, override it here.
++	 */
++	at_init = priv->pixel.ctrls[CTRL_P_EXPOSURE]->cur.val == 0;
++	v4l2_ctrl_modify_range(priv->pixel.ctrls[CTRL_P_EXPOSURE], min_exp,
++			       max_exp, 1, max_exp);
++	if (at_init)
++		v4l2_ctrl_s_ctrl(priv->pixel.ctrls[CTRL_P_EXPOSURE], max_exp);
++}
++#undef EXP_UNITS_US
++#undef TSH_SCALE
++
++static void imx219_update_output_bpp(struct imx219_private *priv,
++				     const struct v4l2_mbus_framefmt *fmt)
++{
++	switch (fmt->code) {
++	case MEDIA_BUS_FMT_SGRBG10_1X10:
++	case MEDIA_BUS_FMT_SRGGB10_1X10:
++	case MEDIA_BUS_FMT_SBGGR10_1X10:
++	case MEDIA_BUS_FMT_SGBRG10_1X10:
++		priv->bits_per_pixel = 10;
++		break;
++	default:
++		WARN_ON(1);
++	case MEDIA_BUS_FMT_SGRBG8_1X8:
++	case MEDIA_BUS_FMT_SRGGB8_1X8:
++	case MEDIA_BUS_FMT_SBGGR8_1X8:
++	case MEDIA_BUS_FMT_SGBRG8_1X8:
++		priv->bits_per_pixel = 8;
++		break;
++	}
++}
++
++/*
++ * The line length in conjunction with the VT clock determines the
++ * start of transmission of each line on the CSI bus.
++ *
++ * The frame length in conjunction with the line length and VT clock
++ * determines the start of transmission of each frame on the CSI bus.
++ *
++ * Note: these two parameters have nothing to do with the pixel array
++ * addressing parameters.
++ */
++static void imx219_update_frame_size(struct imx219_private *priv)
++{
++	unsigned long vt_pixclk = imx219_get_vt_pixclk(priv);
++	unsigned long op_sysclk;
++	unsigned int div, lane_line_bits;
++	unsigned int line_clk, line_length, line_blank;
++	unsigned int min_frame_length, frame_length, frame_blank;
++
++	/* see comments above, this is definitely wrong */
++	unsigned int width = be16_to_cpu(priv->params.x_output_size);
++	unsigned int height = be16_to_cpu(priv->params.y_output_size);
++
++	dev_info(priv->root.sd.dev, "%s() for %ux%u %ubpp fi=%u/%u:\n", __func__,
++		width, height, priv->bits_per_pixel,
++		priv->frame_interval.numerator,
++		priv->frame_interval.denominator);
++
++	/*
++	 * This works for calculating a working line length, but is
++	 * less than ideal, as we always run the VT block at maximum,
++	 * and wind the output block up to maximum for large widths.
++	 */
++	lane_line_bits = imx219_calc_lane_line_bits(priv);
++
++	line_clk = 2 * vt_pixclk / priv->min_line_length_pck;
++
++	dev_info(priv->root.sd.dev, "VT: pixclk=%luHz line=%uHz\n",
++		vt_pixclk, line_clk);
++
++	/* Calculate the required output sysclk */
++	op_sysclk = line_clk * lane_line_bits;
++
++	/*
++	 * Try to find a sysclk divisor that gives us the highest PLL
++	 * speed - otherwise errors seem to occur at the CSI2 receiver:
++	 * i.MX6 CS2 error 2/1 registers = 0x00000120/0x11000113
++	 *  - header ecc contains 2 errors
++	 *  - crc error on vc0
++	 *  - incorrect frame sequence on vc0
++	 *  - error matching frame start with frame end on vc0
++	 *  - sot sync failed on lane 1
++	 *  - sot sync failed on lane 0
++	 *  - sot error on lane 1
++	 *  - header error detected and corrected on vc0
++	 * Note: docs say 432MHz as the PLL low bound, hardware says 400MHz,
++	 * experimentation with my imx219 is stable at 464MHz but not 456MHz.
++	 */
++	for (div = priv->pll[PLL_OP].clk[CLK_SYS].max_div;
++	     div > priv->pll[PLL_OP].clk[CLK_SYS].min_div; div--)
++		if (op_sysclk * div <= priv->pll[PLL_OP].clk[CLK_SYS].max_freq)
++			break;
++
++	priv->op_sys_div = div;
++	op_sysclk *= div;
++
++	dev_info(priv->root.sd.dev, "OP: sysclk=%luHz/%u for %u bits/line/lane\n",
++		op_sysclk, div, lane_line_bits);
++
++	priv->op_mpy = clamp_val(DIV_ROUND_UP(op_sysclk,
++					      priv->pll_ip_freq),
++				 priv->pll[PLL_OP].min_mpy,
++				 priv->pll[PLL_OP].max_mpy);
++
++	/* Now calculate the real output sysclk */
++	op_sysclk = priv->pll_ip_freq * priv->op_mpy / div;
++
++	/* ... and the resulting line clock for the output */
++	line_clk = op_sysclk / lane_line_bits;
++
++	dev_info(priv->root.sd.dev, "OP: real sysclk %luHz line %uHz\n",
++		 op_sysclk, line_clk);
++
++	/* ... and the final line length */
++	line_length = clamp_val(DIV_ROUND_UP(2 * vt_pixclk, line_clk),
++				priv->min_line_length_pck,
++				priv->max_line_length_pck);
++
++	priv->params.line_length = cpu_to_be16(line_length);
++
++	/* ... and the final line rate */
++	line_clk = 2 * vt_pixclk / line_length;
++
++	/*
++	 * Calculate the frame length required to give the requested
++	 * frame interval.
++	 */
++	min_frame_length = imx219_calc_total_lines(priv);
++	frame_length = div_u64((u64)line_clk * priv->frame_interval.numerator,
++			       priv->frame_interval.denominator);
++
++	frame_length = clamp_val(frame_length, min_frame_length,
++				 priv->max_frame_lines);
++
++	priv->params.frame_length = be16_to_cpu(frame_length);
++
++	dev_info(priv->root.sd.dev, "VT: line length %u frame length %u line %uHz\n",
++		 line_length, frame_length, line_clk);
++
++
++
++	/* See comments above, this is definitely wrong. */
++	line_blank = line_length - width;
++	frame_blank = frame_length - height;
++
++	v4l2_ctrl_s_ctrl_int64(priv->pixel.ctrls[CTRL_P_PIXEL_RATE],
++				2 * vt_pixclk);
++
++	v4l2_ctrl_modify_range(priv->pixel.ctrls[CTRL_P_HBLANK],
++			       max_t(s32, priv->min_line_length_pck - width,
++				     priv->min_line_blank_pck),
++			       priv->max_line_length_pck - width, 1,
++			       line_blank);
++	v4l2_ctrl_s_ctrl(priv->pixel.ctrls[CTRL_P_HBLANK], line_blank);
++
++	v4l2_ctrl_modify_range(priv->pixel.ctrls[CTRL_P_VBLANK],
++			max_t(s32, priv->min_frame_lines - height,
++			      priv->min_frame_blank_lines),
++			priv->max_frame_lines - height, 1, frame_blank);
++	v4l2_ctrl_s_ctrl(priv->pixel.ctrls[CTRL_P_VBLANK], frame_blank);
++
++	imx219_set_exposure_limits(priv);
++}
++
++/* Core ops */
++
++static int imx219_s_power(struct v4l2_subdev *sd, int on)
++{
++	int ret = 0;
++
++	if (on) {
++		ret = pm_runtime_get_sync(sd->dev);
++		if (ret > 0)
++			ret = 0;
++	} else {
++		pm_runtime_mark_last_busy(sd->dev);
++		pm_runtime_put_autosuspend(sd->dev);
++
++	}
++	return ret;
++}
++
++static int __maybe_unused imx219_g_register(struct v4l2_subdev *sd,
++					    struct v4l2_dbg_register *reg)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	int ret;
++
++	if (reg->reg > 0xffff)
++		return -EINVAL;
++
++	ret = pm_runtime_get_sync(sd->dev);
++	if (ret < 0)
++		return ret;
++
++	ret = imx219_readb(priv, reg->reg);
++
++	pm_runtime_mark_last_busy(sd->dev);
++	pm_runtime_put_autosuspend(sd->dev);
++
++	if (ret < 0)
++		return ret;
++
++	reg->size = 1;
++	reg->val = ret;
++
++	return 0;
++}
++
++static int __maybe_unused imx219_s_register(struct v4l2_subdev *sd,
++					    const struct v4l2_dbg_register *reg)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	int ret;
++
++	if (reg->reg > 0xffff)
++		return -EINVAL;
++
++	ret = pm_runtime_get_sync(sd->dev);
++	if (ret < 0)
++		return ret;
++
++	ret = imx219_writeb(priv, reg->reg, reg->val);
++
++	pm_runtime_mark_last_busy(sd->dev);
++	pm_runtime_put_autosuspend(sd->dev);
++
++	return ret < 0 ? ret : 0;
++}
++
++static const struct v4l2_subdev_core_ops imx219_root_core_ops = {
++#ifdef CONFIG_VIDEO_ADV_DEBUG
++	.g_register = imx219_g_register,
++	.s_register = imx219_s_register,
++#endif
++	.s_power = imx219_s_power,
++};
++
++/* Video ops */
++
++static int imx219_g_frame_interval(struct v4l2_subdev *sd,
++				   struct v4l2_subdev_frame_interval *fiv)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	if (fiv->pad != PAD_SRC)
++		return -EINVAL;
++
++	mutex_lock(&priv->mutex);
++	fiv->interval = priv->frame_interval;
++	mutex_unlock(&priv->mutex);
++
++	return 0;
++}
++
++static int imx219_s_frame_interval(struct v4l2_subdev *sd,
++				   struct v4l2_subdev_frame_interval *fiv)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	if (fiv->pad != PAD_SRC)
++		return -EINVAL;
++
++	mutex_lock(&priv->mutex);
++	if (fiv->interval.denominator == 0) {
++		unsigned long vt_pixclk = imx219_get_vt_pixclk(priv);
++		unsigned int line_length = be16_to_cpu(priv->params.line_length);
++		unsigned int line_clk = 2 * vt_pixclk / line_length;
++
++		fiv->interval.numerator = priv->max_frame_lines;
++		fiv->interval.denominator = line_clk;
++	} else {
++		unsigned int max_vt_line_clk, max_op_line_clk, max_line_clk;
++		unsigned int min_frame_lines;
++		u64 v;
++
++		/*
++		 * This could be buggy for large resolutions: we should be
++		 * calculting the max_vt_line_clk based on what we think is
++		 * the real line length.  However, in this case, the output
++		 * line clock is the limiting factor.
++		 */
++		max_vt_line_clk = priv->pll[PLL_VT].clk[CLK_PIX].max_freq * 2 /
++				  priv->min_line_length_pck;
++
++		max_op_line_clk = priv->pll[PLL_OP].clk[CLK_SYS].max_freq /
++				  imx219_calc_lane_line_bits(priv);
++
++		/* The maximum line clock is the minimum of the above two. */
++		max_line_clk = min(max_vt_line_clk, max_op_line_clk);
++
++		/* The minimum frame lines that we could output */
++		min_frame_lines = imx219_calc_total_lines(priv);
++
++		v = max_line_clk * fiv->interval.numerator;
++		v = div_u64(v, fiv->interval.denominator);
++		if (v > priv->max_frame_lines) {
++			/*
++			 * FIXME: this can do with improvement, it's the
++			 * slowest frame rate based on the fastest clock!
++			 */
++			fiv->interval.numerator = priv->max_frame_lines;
++			fiv->interval.denominator = max_line_clk;
++		} else if (v < min_frame_lines) {
++			fiv->interval.numerator = min_frame_lines;
++			fiv->interval.denominator = max_line_clk;
++		}
++	}
++
++	priv->frame_interval = fiv->interval;
++
++	imx219_update_frame_size(priv);
++	mutex_unlock(&priv->mutex);
++
++	return 0;
++}
++
++static void debug(struct imx219_private *priv)
++{
++	struct device *dev = priv->root.sd.dev;
++	unsigned long vt_pixclk = imx219_get_vt_pixclk(priv);
++	unsigned int op_sysclk;
++	unsigned int vt_line_clk, vt_line_period_ns, frame_clk;
++	unsigned int coarse_integration_time, line_length, frame_length;
++	unsigned int lane_bits, lane_bits_ns;
++
++	coarse_integration_time = priv->pixel.ctrls[CTRL_P_EXPOSURE]->cur.val;
++	line_length = be16_to_cpu(priv->params.line_length);
++	frame_length = be16_to_cpu(priv->params.frame_length);
++	frame_length = max(frame_length, coarse_integration_time +
++				priv->coarse_integration_time_max_margin);
++
++	vt_line_clk = 2 * vt_pixclk / line_length;
++	frame_clk = vt_line_clk * 10 / frame_length;
++
++	vt_line_period_ns = DIV_ROUND_CLOSEST(1000000000, vt_line_clk);
++
++	dev_info(dev, "VT: pixclk %luHz line %uHz frame %u.%uHz\n",
++		 vt_pixclk, vt_line_clk,
++		 frame_clk / 10, frame_clk % 10);
++	dev_info(dev, "VT: line period %uns\n", vt_line_period_ns);
++
++	op_sysclk = priv->pll_ip_freq * priv->op_mpy / priv->op_sys_div;
++
++	lane_bits = imx219_calc_lane_active_line_bits(priv);
++	lane_bits_ns = div_u64(1000000000ULL * lane_bits, op_sysclk);
++
++	dev_info(dev, "OP: pixclk %uHz, %u lanes, %uMbps peak each\n",
++		 op_sysclk / priv->bits_per_pixel,
++		 priv->mipi_lanes, DIV_ROUND_CLOSEST(op_sysclk, 1000000));
++	dev_info(dev, "OP: %u bits/line/lane act=%uns lp/idle=%dns\n",
++		 lane_bits, lane_bits_ns, vt_line_period_ns - lane_bits_ns);
++}
++
++static int imx219_prepare_stream(struct v4l2_subdev *sd)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	int ret;
++
++	mutex_lock(&priv->mutex);
++
++	debug(priv);
++
++	/* Initialise the sensor to place the outputs in LP-11 state. */
++
++	/* Select MIPI virtual channel */
++	imx219_writeb(priv, R_CSI_CH_ID, priv->mipi_vc);
++
++	/* Select number of lanes */
++	imx219_writeb(priv, R_CSI_LANE_MODE, priv->mipi_lanes - 1);
++
++	/* Select output format */
++	imx219_writew(priv, R_CSI_DATA_FORMAT_A,
++		      priv->bits_per_pixel << 8 | priv->bits_per_pixel);
++
++	/* Set the output clock divisor */
++	imx219_writeb(priv, R_OPPXCK_DIV, priv->bits_per_pixel);
++
++	/* Set PLL multipliers */
++	imx219_writew(priv, R_PLL_VT_MPY, priv->vt_mpy);
++	imx219_writew(priv, R_PLL_OP_MPY, priv->op_mpy);
++	imx219_writeb(priv, R_OPSYCK_DIV, priv->op_sys_div);
++
++	/* Set the start/end and output size */
++	imx219_write(priv, R_FRM_LENGTH_A, &priv->params, sizeof(priv->params));
++
++	/* Set the miscellaneous vendor registers */
++	imx219_write_array(priv, misc_regs, ARRAY_SIZE(misc_regs));
++
++	/* Enable fast standby, and enable the sensor to initialise */
++	imx219_writeb(priv, R_FAST_STANDBY, 1);
++	imx219_writeb(priv, R_MODE_SELECT, 1);
++	/* Allow D-PHY power up (t7 = 1.1ms) and initialisation (t8 = 110us) */
++	msleep(2);
++	imx219_writeb(priv, R_MODE_SELECT, 0);
++	/* Allow sensor to stop (1 line) */
++	msleep(2);
++	/* Disable fast standby */
++	imx219_writeb(priv, R_FAST_STANDBY, 0);
++
++	/* Set the test pattern window to the output size */
++	imx219_writew(priv, R_TP_WINDOW_WIDTH, priv->root.format[PAD_SRC].width);
++	imx219_writew(priv, R_TP_WINDOW_HEIGHT, priv->root.format[PAD_SRC].height);
++
++	mutex_unlock(&priv->mutex);
++
++	/* Finally, set the current user control settings */
++	ret = v4l2_ctrl_handler_setup(&priv->root.ctrl_handler);
++	if (ret == 0)
++		ret = v4l2_ctrl_handler_setup(&priv->pixel.ctrl_handler);
++
++	return ret;
++}
++
++static int imx219_s_stream(struct v4l2_subdev *sd, int on)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	int ret;
++
++	if (on) {
++		ret = imx219_prepare_stream(sd);
++		if (ret)
++			return ret;
++	}
++
++	mutex_lock(&priv->mutex);
++	if (priv->streaming != !!on) {
++		imx219_writeb(priv, R_MODE_SELECT, !!on);
++		priv->streaming = !!on;
++	}
++	mutex_unlock(&priv->mutex);
++
++	return 0;
++}
++
++static int imx219_g_mbus_config(struct v4l2_subdev *sd,
++				struct v4l2_mbus_config *cfg)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	cfg->type = V4L2_MBUS_CSI2;
++	cfg->flags = V4L2_MBUS_CSI2_NONCONTINUOUS_CLOCK;
++	if (priv->mipi_lanes == 2)
++		cfg->flags |= V4L2_MBUS_CSI2_2_LANE;
++	else
++		cfg->flags |= V4L2_MBUS_CSI2_4_LANE;
++
++	return 0;
++}
++
++static const struct v4l2_subdev_video_ops imx219_root_video_ops = {
++	.g_frame_interval = imx219_g_frame_interval,
++	.s_frame_interval = imx219_s_frame_interval,
++	.s_stream = imx219_s_stream,
++	.g_mbus_config = imx219_g_mbus_config,
++};
++
++/* Pad operations */
++
++static int imx219_root_enum_mbus_code(struct v4l2_subdev *sd,
++				      struct v4l2_subdev_pad_config *cfg,
++				      struct v4l2_subdev_mbus_code_enum *code)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	if (code->index >= ARRAY_SIZE(imx219_formats))
++		return -EINVAL;
++
++	code->code = imx219_formats[code->index][priv->pixel_order];
++
++	return 0;
++}
++
++static struct v4l2_mbus_framefmt *imx219_get_pad_fmt(struct v4l2_subdev *sd,
++				struct v4l2_subdev_pad_config *cfg,
++				u32 which, u32 pad)
++{
++	struct imx219_sub *sub = imx219_get_sub(sd);
++
++	switch (which) {
++	case V4L2_SUBDEV_FORMAT_TRY:
++		return v4l2_subdev_get_try_format(sd, cfg, pad);
++	case V4L2_SUBDEV_FORMAT_ACTIVE:
++		return &sub->format[pad];
++	default:
++		return NULL;
++	}
++}
++
++static struct v4l2_rect *imx219_get_pad_crop(struct v4l2_subdev *sd,
++				struct v4l2_subdev_pad_config *cfg,
++				u32 which, u32 pad)
++{
++	struct imx219_sub *sub = imx219_get_sub(sd);
++
++	switch (which) {
++	case V4L2_SUBDEV_FORMAT_TRY:
++		return v4l2_subdev_get_try_crop(sd, cfg, pad);
++	case V4L2_SUBDEV_FORMAT_ACTIVE:
++		return pad ? &sub->sink_crop : NULL;
++	default:
++		return NULL;
++	}
++}
++
++static struct v4l2_rect *imx219_get_pad_compose(struct v4l2_subdev *sd,
++				struct v4l2_subdev_pad_config *cfg,
++				u32 which, u32 pad)
++{
++	struct imx219_sub *sub = imx219_get_sub(sd);
++
++	switch (which) {
++	case V4L2_SUBDEV_FORMAT_TRY:
++		return v4l2_subdev_get_try_compose(sd, cfg, pad);
++	case V4L2_SUBDEV_FORMAT_ACTIVE:
++		return pad ? &sub->sink_compose : NULL;
++	default:
++		return NULL;
++	}
++}
++
++static void imx219_framefmt_to_rect(struct v4l2_rect *r,
++				    const struct v4l2_mbus_framefmt *mf)
++{
++	r->left = r->top = 0;
++	r->width = mf->width;
++	r->height = mf->height;
++}
++
++static void imx219_pix_init_pad(struct imx219_private *priv, unsigned int pad,
++				struct v4l2_mbus_framefmt *mf,
++				struct v4l2_rect *crop)
++{
++	mf->width = priv->pixarray.width;
++	mf->height = priv->pixarray.height;
++	mf->code = priv->pixel_format;
++	mf->field = V4L2_FIELD_NONE;
++	mf->colorspace = V4L2_COLORSPACE_SRGB;
++	mf->ycbcr_enc = V4L2_YCBCR_ENC_601;
++	mf->xfer_func = V4L2_XFER_FUNC_SRGB;
++}
++
++static void imx219_pix_adj_format(struct imx219_private *priv,
++				  struct v4l2_subdev_format *fmt,
++				  const struct v4l2_mbus_framefmt *sink_fmt,
++				  const struct v4l2_rect *sink_compose)
++{
++	/* The pixel subdev is fixed at the pixel array size and format */
++	fmt->format.width = priv->pixarray.width;
++	fmt->format.height = priv->pixarray.height;
++	fmt->format.code = priv->pixel_format;
++	fmt->format.field = V4L2_FIELD_NONE;
++	fmt->format.colorspace = V4L2_COLORSPACE_SRGB;
++	fmt->format.xfer_func = V4L2_XFER_FUNC_SRGB;
++}
++
++static int imx219_pix_set_fmt(struct imx219_private *priv,
++			      struct imx219_sub *sub, unsigned int pad,
++			      const struct v4l2_rect *crop,
++			      const struct v4l2_mbus_framefmt *fmt)
++{
++	/* Nothing to set */
++	return 0;
++}
++
++static const struct imx219_pad_ops imx219_pix_pad_ops = {
++	.init_pad = imx219_pix_init_pad,
++	.adj_format = imx219_pix_adj_format,
++	.set_fmt = imx219_pix_set_fmt,
++};
++
++static void imx219_root_init_pad(struct imx219_private *priv, unsigned int pad,
++				 struct v4l2_mbus_framefmt *mf,
++				 struct v4l2_rect *crop)
++{
++	if (pad == PAD_SINK) {
++		mf->width = priv->pixarray.width;
++		mf->height = priv->pixarray.height;
++	} else {
++		mf->width = priv->max_output_width;
++		mf->height = priv->max_output_height;
++	}
++
++	mf->code = priv->pixel_format;
++	mf->field = V4L2_FIELD_NONE;
++	mf->colorspace = V4L2_COLORSPACE_SRGB;
++	mf->xfer_func = V4L2_XFER_FUNC_SRGB;
++
++	imx219_framefmt_to_rect(crop, mf);
++}
++
++static void imx219_root_adj_format(struct imx219_private *priv,
++				   struct v4l2_subdev_format *fmt,
++				   const struct v4l2_mbus_framefmt *sink_fmt,
++				   const struct v4l2_rect *sink_compose)
++{
++	/* The sink pad format is the same as the pixel's source pad. */
++	if (fmt->pad == PAD_SINK) {
++		imx219_pix_adj_format(priv, fmt, NULL, NULL);
++		return;
++	}
++
++	/*
++	 * We don't allow cropping the output after scaling, so
++	 * mirror the sink's compose rectangle.
++	 */
++	fmt->format.width = sink_compose->width;
++	fmt->format.height = sink_compose->height;
++
++	/* The format code can be different (10bit to 8bit conversion) */
++	fmt->format.code = imx219_lookup_format(fmt->format.code,
++						priv->pixel_order);
++
++	/*
++	 * Field, colorspace, etc all come from the sink pad and
++	 * can't be changed.
++	 */
++	fmt->format.field = sink_fmt->field;
++	fmt->format.colorspace = sink_fmt->colorspace;
++	fmt->format.ycbcr_enc = sink_fmt->ycbcr_enc;
++	fmt->format.xfer_func = sink_fmt->xfer_func;
++}
++
++static int imx219_root_set_fmt(struct imx219_private *priv,
++			       struct imx219_sub *sub, unsigned int pad,
++			       const struct v4l2_rect *crop,
++			       const struct v4l2_mbus_framefmt *fmt)
++{
++	if (pad == PAD_SRC) {
++		imx219_update_output_bpp(priv, fmt);
++	} else if (pad == PAD_SINK) {
++		/* Setting the sink format re-sets the crop and compose */
++		sub->pad_ops->set_selection(priv, sub, PAD_SINK,
++					    V4L2_SEL_TGT_CROP,
++					    crop + 1, crop);
++		sub->pad_ops->set_selection(priv, sub, PAD_SINK,
++					    V4L2_SEL_TGT_COMPOSE,
++					    crop + 2, crop + 1);
++	}
++
++	return 0;
++}
++
++/*
++ * V4L2 documentation says:
++ *
++ * The closest possible values of horizontal and vertical offset and sizes
++ * are chosen according to following priority:
++ *
++ * 1. Satisfy constraints from struct v4l2_selection flags.
++ * 2. Adjust width, height, left, and top to hardware limits and alignments.
++ * 3. Keep center of adjusted rectangle as close as possible to the original
++ *    one.
++ * 4. Keep width and height as close as possible to original ones.
++ * 5. Keep horizontal and vertical offset as close as possible to original
++ *    ones.
++ *
++ * This brings up at least the following questions:
++ * - if we adjust to the hardware limits and alignments as priority 2,
++ *   what's the point of doing further adjustments in 3..5?
++ * - ignoring that, if we give (3) a higher priority than (4), this has
++ *   the effect that a rectangle who's centre is close but not outside
++ *   of the bounds will have it's width/height shrunk _and_ position
++ *   moved in order to keep the centre the same, meaning we violate (4)
++ *   and (5).
++ *
++ * the "this" rectangle points to the existing parameters of the rectangle
++ * being modified.  this[-1] is the upstream rectangle, guaranteed to always
++ * be valid.  this[1] is the downstream rectangle, also guaranteed.
++ */
++static int imx219_root_adj_selection(struct imx219_private *priv,
++				     unsigned int target, unsigned int flags,
++				     struct v4l2_rect *r,
++				     struct v4l2_rect * const this[])
++{
++	unsigned int adj_flags = flags & (V4L2_SEL_FLAG_GE | V4L2_SEL_FLAG_LE);
++	struct v4l2_rect rect;
++
++	if (target == V4L2_SEL_TGT_COMPOSE) {
++		unsigned int ratio_w, ratio_h;
++		u32 min_w, max_w, min_h, max_h;
++
++		/*
++		 * For the compose rectangle size and source pad format
++		 * size must be identical.  Since KEEP_CONFIG means we
++		 * are not permitted to propagate to the source pad, we
++		 * must keep the current configuration.
++		 */
++		if (flags & V4L2_SEL_FLAG_KEEP_CONFIG) {
++			*r = *this[0];
++			return 0;
++		}
++
++		min_w = max_t(u32, this[-1]->width / 4, priv->min_output_width);
++		min_h = max_t(u32, this[-1]->height / 4, priv->min_output_height);
++		max_w = min_t(u32, this[-1]->width, priv->max_output_width);
++		max_h = min_t(u32, this[-1]->height, priv->max_output_height);
++
++		/*
++		 * The hardware binning can reduce the cropped rectangle
++		 * by /2 or /4.  However, the output image size does not
++		 * have to be strictly /2 or /4, but should be equal or
++		 * smaller.
++		 */
++		if (adj_flags == V4L2_SEL_FLAG_LE) {
++			/* We are allowed to decrease rectangle size */
++			rect.width = clamp_val(r->width, 1, max_w);
++			rect.height = clamp_val(r->height, 1, max_h);
++
++			ratio_w = DIV_ROUND_UP(this[-1]->width, rect.width);
++			if (ratio_w >= 3)
++				ratio_w = 4;
++			rect.width = this[-1]->width / ratio_w;
++			rect.width &= ~1;
++
++			ratio_h = DIV_ROUND_UP(this[-1]->height, rect.height);
++			if (ratio_h >= 3)
++				ratio_h = 4;
++			rect.height = this[-1]->height / ratio_h;
++			rect.height &= ~1;
++		} else {
++			/*
++			 * We are allowed to increase rectangle size.
++			 * However, the resulting rectangle must lie
++			 * within the hardware bounds.  The crop window
++			 * will be limited to the hardware maximum output
++			 * size, and min_w/min_h will be limited by the
++			 * hardware minimum output size.
++			 *
++			 * One issue not handled well: if the crop window
++			 * is even, but the compose window width/height is
++			 * odd, is it correct (hardware wise) to round up?
++			 */
++			rect.width = max(r->width, min_w);
++			rect.height = max(r->height, min_h);
++
++			ratio_w = fls(this[-1]->width / rect.width);
++			ratio_w = clamp_val(ratio_w, 1, 3) - 1;
++			rect.width = ALIGN(this[-1]->width >> ratio_w, 2);
++
++			ratio_h = fls(this[-1]->height / rect.height);
++			ratio_h = clamp_val(ratio_h, 1, 3) - 1;
++			rect.height = ALIGN(this[-1]->height >> ratio_h, 2);
++		}
++
++		/*
++		 * Validate that we ended up with something suitable
++		 * for the hardware.  Complain and error out if not.
++		 */
++		if (rect.width < priv->min_output_width ||
++		    rect.width > priv->max_output_width ||
++		    rect.height < priv->min_output_height ||
++		    rect.height > priv->max_output_height) {
++			v4l2_err(&priv->root.sd,
++				 "BUG: compose rectangle (%ux%u) outside hardware bounds (%u,%u)-(%u,%u)\n",
++				 rect.width, rect.height,
++				 priv->min_output_width, priv->min_output_height,
++				 priv->max_output_width, priv->max_output_height);
++			return -ERANGE;
++		}
++
++		/*
++		 * Documentation/media/uapi/v4l/dev-subdev.rst:
++		 * "If the subdev supports scaling but not composing,
++		 *  the top and left values are not used and must
++		 *  always be set to zero."
++		 */
++		rect.left = rect.top = 0;
++	} else {
++		s32 centre_x, centre_y;
++		int delta;
++
++		/*
++		 * FIXME: we don't (yet) support this flag - need to work
++		 * out how to rework the code below to achieve _all_ the
++		 * requirements of v4l uapi documentation.
++		 */
++		if (flags & V4L2_SEL_FLAG_KEEP_CONFIG)
++			return -ERANGE;
++
++		centre_x = r->width / 2;
++		centre_y = r->height / 2;
++
++		/* Reject outright values that cause math overflow */
++		if (0x7fffffff - centre_x < r->left ||
++		    0x7fffffff - centre_y < r->top)
++			return -ERANGE;
++
++		/* The centre coordinate of the rectangle */
++		centre_x += r->left;
++		centre_y += r->top;
++
++		/* Clamp size to the hardware output limits */
++		rect.width = clamp_val(r->width, priv->min_output_width,
++				       this[-1]->width);
++		rect.height = clamp_val(r->height, priv->min_output_height,
++					this[-1]->height);
++
++		/* Ensure that the centre is within the pixel area */
++		centre_x = clamp_val(centre_x, rect.width / 2,
++				     this[-1]->width - rect.width / 2);
++		centre_y = clamp_val(centre_y, rect.height / 2,
++				     this[-1]->height - rect.height / 2);
++
++		/* Calculate the new top and left coordinates */
++		rect.left = centre_x - rect.width / 2;
++		rect.top = centre_y - rect.height / 2;
++
++		/*
++		 * Adjust size and origin to the alignment according to
++		 * constraints
++		 */
++		if (adj_flags == V4L2_SEL_FLAG_LE) {
++			rect.left += delta = rect.left & 1;
++			rect.width -= delta;
++			rect.width -= rect.width & 1;
++			rect.top += delta = rect.top & 1;
++			rect.height -= delta;
++			rect.height -= rect.height & 1;
++		} else {
++			/* If we're reducing a coordinate, increase the size */
++			rect.left -= delta = rect.left & 1;
++			rect.width += delta;
++			rect.width += rect.width & 1;
++			rect.top -= delta = rect.top & 1;
++			rect.height += delta;
++			rect.height += rect.height & 1;
++		}
++	}
++
++	/*
++	 * Documentation/media/uapi/v4l/vidioc-g-selection.rst:
++	 * - V4L2_SEL_FLAG_GE - The driver is not allowed to shrink the
++	 *   rectangle.
++	 * - V4L2_SEL_FLAG_LE - The driver is not allowed to enlarge the
++	 *   rectangle.
++	 * - V4L2_SEL_FLAG_GE | V4L2_SEL_FLAG_LE - The driver must choose
++	 * the size exactly the same as in the requested rectangle.
++	 *
++	 * Doesn't say we have to check the location of the rectangle.
++	 */
++	switch (adj_flags) {
++	case V4L2_SEL_FLAG_GE:
++		if (rect.width < r->width || rect.height < r->height)
++			return -ERANGE;
++		break;
++
++	case V4L2_SEL_FLAG_LE:
++		if (rect.width > r->width || rect.height > r->height)
++			return -ERANGE;
++		break;
++
++	case V4L2_SEL_FLAG_GE | V4L2_SEL_FLAG_LE:
++		if (rect.width != r->width || rect.height != r->height)
++			return -ERANGE;
++		break;
++	}
++
++	*r = rect;
++
++	return 0;
++}
++
++static int imx219_root_set_selection(struct imx219_private *priv,
++				     struct imx219_sub *sub, unsigned int pad,
++				     unsigned int target,
++				     const struct v4l2_rect *rect,
++				     const struct v4l2_rect *upstream)
++{
++	if (target == V4L2_SEL_TGT_CROP) {
++		unsigned int left, top;
++
++		/*
++		 * We hide the pixel array offset (if any) from the user,
++		 * adding it in here, as otherwise we would violate the
++		 * ->set_format requirement to set the left,top of the
++		 * crop region to 0,0.
++		 */
++		left = priv->pixarray.left + rect->left;
++		top = priv->pixarray.top + rect->top;
++
++		priv->params.x_add_sta = cpu_to_be16(left);
++		priv->params.x_add_end = cpu_to_be16(left + rect->width - 1);
++		priv->params.y_add_sta = cpu_to_be16(top);
++		priv->params.y_add_end = cpu_to_be16(top + rect->height - 1);
++	} else {
++		unsigned int scale_x, scale_y;
++
++		/* Set the output size */
++		priv->params.x_output_size = cpu_to_be16(rect->width);
++		priv->params.y_output_size = cpu_to_be16(rect->height);
++
++		scale_x = fls(upstream->width / rect->width) - 1;
++		scale_y = fls(upstream->height / rect->height) - 1;
++
++#if 0
++		/*
++		 * If scale_x and scale_y are both 1, we can use analog
++		 * binning.  (but we need to modify the frame length).
++		 */
++		if (scale_x == 1 && scale_y == 1)
++			scale_x = scale_y = 3;
++#endif
++
++		priv->params.binning_mode_h = scale_x;
++		priv->params.binning_mode_v = scale_y;
++
++		imx219_update_frame_size(priv);
++	}
++	return 0;
++}
++
++static const struct imx219_pad_ops imx219_int_root_pad_ops = {
++	.init_pad = imx219_root_init_pad,
++	.adj_format = imx219_root_adj_format,
++	.set_fmt = imx219_root_set_fmt,
++	.adj_selection = imx219_root_adj_selection,
++	.set_selection = imx219_root_set_selection,
++};
++
++static int imx219_init_cfg(struct v4l2_subdev *sd,
++			   struct v4l2_subdev_pad_config *cfg)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	struct imx219_sub *sub = imx219_get_sub(sd);
++	unsigned int pad;
++
++	for (pad = 0; pad < sd->entity.num_pads; pad++) {
++		struct v4l2_mbus_framefmt *mf;
++		struct v4l2_rect *crop, *compose, rect;
++
++		memset(&rect, 0, sizeof(rect));
++
++		mf = v4l2_subdev_get_try_format(sd, cfg, pad);
++		crop = v4l2_subdev_get_try_crop(sd, cfg, pad);
++		compose = v4l2_subdev_get_try_compose(sd, cfg, pad);
++
++		sub->pad_ops->init_pad(priv, pad, mf, &rect);
++
++		*crop = rect;
++		*compose = rect;
++	}
++
++	return 0;
++}
++
++static int imx219_get_fmt(struct v4l2_subdev *sd,
++			  struct v4l2_subdev_pad_config *cfg,
++			  struct v4l2_subdev_format *fmt)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	struct v4l2_mbus_framefmt *pad_fmt;
++
++	pad_fmt = imx219_get_pad_fmt(sd, cfg, fmt->which, fmt->pad);
++	if (!pad_fmt)
++		return -EINVAL;
++
++	mutex_lock(&priv->mutex);
++	fmt->format = *pad_fmt;
++	mutex_unlock(&priv->mutex);
++
++	return 0;
++}
++
++static int imx219_set_fmt(struct v4l2_subdev *sd,
++			  struct v4l2_subdev_pad_config *cfg,
++			  struct v4l2_subdev_format *fmt)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	struct imx219_sub *sub = imx219_get_sub(sd);
++	struct v4l2_mbus_framefmt *pad_fmt, *other_fmt;
++	struct v4l2_rect *pad_crop, *other_rect, fmtr, crop, compose;
++	struct v4l2_rect *rect[4] = {
++		&fmtr,
++		&crop,
++		&compose,
++		&compose,
++	};
++	struct v4l2_rect *pad_compose;
++	int ret;
++
++	if (!sub->pad_ops->adj_format)
++		return -ENOTTY;
++
++	pad_compose = imx219_get_pad_compose(sd, cfg, fmt->which, fmt->pad);
++	pad_crop = imx219_get_pad_crop(sd, cfg, fmt->which, fmt->pad);
++	pad_fmt = imx219_get_pad_fmt(sd, cfg, fmt->which, fmt->pad);
++	if (!pad_fmt)
++		return -EINVAL;
++
++	if (!fmt->pad < sd->entity.num_pads) {
++		other_fmt = imx219_get_pad_fmt(sd, cfg, fmt->which, !fmt->pad);
++		other_rect = imx219_get_pad_compose(sd, cfg, fmt->which, !fmt->pad);
++	} else {
++		other_fmt = NULL;
++		other_rect = NULL;
++	}
++
++	mutex_lock(&priv->mutex);
++
++	/* Sink pads never have to consider their sources, enforce that. */
++	if (fmt->pad == PAD_SINK)
++		sub->pad_ops->adj_format(priv, fmt, NULL, NULL);
++	else
++		sub->pad_ops->adj_format(priv, fmt, other_fmt, other_rect);
++
++	/* Setting the format sets the crop to the same size, located at 0,0 */
++	imx219_framefmt_to_rect(&fmtr, &fmt->format);
++	compose = crop = fmtr;
++	if (sub->pad_ops->adj_selection) {
++		sub->pad_ops->adj_selection(priv, V4L2_SEL_TGT_CROP, 0,
++					    &crop, rect + 1);
++		sub->pad_ops->adj_selection(priv, V4L2_SEL_TGT_COMPOSE, 0,
++					    &compose, rect + 2);
++	}
++
++	if (fmt->which == V4L2_SUBDEV_FORMAT_ACTIVE) {
++		ret = sub->pad_ops->set_fmt(priv, sub, fmt->pad, &crop,
++					    &fmt->format);
++
++		/* Propagate to source pad if setting sink pad */
++		if (ret == 0 && fmt->pad == PAD_SINK)
++			ret = sub->pad_ops->set_fmt(priv, sub, PAD_SRC, NULL,
++						    &fmt->format);
++	}
++
++	if (ret == 0) {
++		*pad_fmt = fmt->format;
++
++		/*
++		 * Setting the sink pad sets the sink crop and compose
++		 * rectangles, and propagates the format to the source pad
++		 */
++		if (fmt->pad == PAD_SINK) {
++			if (pad_crop)
++				*pad_crop = crop;
++			if (pad_compose)
++				*pad_compose = compose;
++			if (other_fmt) {
++				*other_fmt = fmt->format;
++				other_fmt->width = compose.width;
++				other_fmt->height = compose.height;
++			}
++		}
++	}
++	mutex_unlock(&priv->mutex);
++
++	return ret;
++}
++
++static int imx219_get_selection(struct v4l2_subdev *sd,
++				struct v4l2_subdev_pad_config *cfg,
++				struct v4l2_subdev_selection *sel)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	struct imx219_sub *sub = imx219_get_sub(sd);
++	struct v4l2_mbus_framefmt *pad_fmt;
++	struct v4l2_rect *pad_crop;
++	struct v4l2_rect *pad_compose;
++	int ret;
++
++	if (!sub->pad_ops->adj_selection)
++		return -ENOTTY;
++
++	pad_fmt = imx219_get_pad_fmt(sd, cfg, sel->which, sel->pad);
++	pad_crop = imx219_get_pad_crop(sd, cfg, sel->which, sel->pad);
++	pad_compose = imx219_get_pad_compose(sd, cfg, sel->which, sel->pad);
++	if (!pad_fmt || !pad_crop || !pad_compose)
++		return -EINVAL;
++
++	mutex_lock(&priv->mutex);
++	ret = -EINVAL;
++
++	switch (sel->target) {
++	case V4L2_SEL_TGT_CROP_BOUNDS:
++		/* can't be larger than the sink format size */
++	case V4L2_SEL_TGT_NATIVE_SIZE:
++		imx219_framefmt_to_rect(&sel->r, pad_fmt);
++		ret = 0;
++		break;
++
++//	case V4L2_SEL_TGT_COMPOSE_BOUNDS:
++		/* can't scale up */
++	case V4L2_SEL_TGT_CROP:
++		sel->r = *pad_crop;
++		if (sel->r.width > priv->max_output_width)
++			sel->r.width = priv->max_output_width;
++		if (sel->r.height > priv->max_output_height)
++			sel->r.height = priv->max_output_height;
++		ret = 0;
++		break;
++
++	case V4L2_SEL_TGT_COMPOSE:
++		sel->r = *pad_compose;
++		ret = 0;
++		break;
++
++	default:
++		break;
++	}
++	mutex_unlock(&priv->mutex);
++
++	return ret;
++}
++
++/*
++ * Hardware limitations:
++ * The sink crop rectangle must always fit within the sink pad format size.
++ * The sink compose rectangle must always fit within the sink crop rectangle.
++ * The source pad format size must always match the compose rectangle size.
++ *
++ * Even if V4L2_SEL_FLAG_KEEP_CONFIG is set, we _must_ propagate a change
++ * in the compose rectangle size to the source pad format, because the
++ * difference is a pure software fallacy.
++ */
++static int imx219_set_selection(struct v4l2_subdev *sd,
++				struct v4l2_subdev_pad_config *cfg,
++				struct v4l2_subdev_selection *sel)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	struct imx219_sub *sub = imx219_get_sub(sd);
++	struct v4l2_mbus_framefmt *pad_fmt, *src_fmt;
++	struct v4l2_rect *pad_crop, *pad_compose;
++	struct v4l2_rect *rects[4], sink_fmt_rect, src_fmt_rect;
++	int ret, idx;
++
++	if (!sub->pad_ops->adj_selection)
++		return -ENOTTY;
++
++	switch (sel->target) {
++	case V4L2_SEL_TGT_CROP:
++		idx = 1;
++		break;
++	case V4L2_SEL_TGT_COMPOSE:
++		idx = 2;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	pad_fmt = imx219_get_pad_fmt(sd, cfg, sel->which, sel->pad);
++	pad_crop = imx219_get_pad_crop(sd, cfg, sel->which, sel->pad);
++	pad_compose = imx219_get_pad_compose(sd, cfg, sel->which, sel->pad);
++	if (!pad_fmt || !pad_compose || !pad_crop)
++		return -EINVAL;
++
++	src_fmt = imx219_get_pad_fmt(sd, cfg, sel->which, PAD_SRC);
++
++	mutex_lock(&priv->mutex);
++	imx219_framefmt_to_rect(&sink_fmt_rect, pad_fmt);
++	imx219_framefmt_to_rect(&src_fmt_rect, src_fmt);
++
++	rects[0] = &sink_fmt_rect;
++	rects[1] = pad_crop;
++	rects[2] = pad_compose;
++	rects[3] = &src_fmt_rect;
++
++	ret = sub->pad_ops->adj_selection(priv, sel->target, sel->flags,
++					  &sel->r, rects + idx);
++	if (ret)
++		return ret;
++
++	if (sel->which == V4L2_SUBDEV_FORMAT_ACTIVE) {
++		ret = sub->pad_ops->set_selection(priv, sub, sel->pad,
++						  sel->target,
++						  &sel->r, rects[idx - 1]);
++
++		/* Setting the crop also propagates to the compose */
++		if (sel->target == V4L2_SEL_TGT_CROP && ret == 0)
++			ret = sub->pad_ops->set_selection(priv, sub, sel->pad,
++							  V4L2_SEL_TGT_COMPOSE,
++							  &sel->r, &sel->r);
++	}
++
++	if (ret == 0) {
++		*rects[idx] = sel->r;
++
++		if (!(sel->flags & V4L2_SEL_FLAG_KEEP_CONFIG)) {
++			while (++idx < ARRAY_SIZE(rects))
++				*rects[idx] = sel->r;
++
++			src_fmt->width = src_fmt_rect.width;
++			src_fmt->height = src_fmt_rect.height;
++		}
++	}
++	mutex_unlock(&priv->mutex);
++
++	return ret;
++}
++
++static int imx219_pix_enum_mbus_code(struct v4l2_subdev *sd,
++				     struct v4l2_subdev_pad_config *cfg,
++				     struct v4l2_subdev_mbus_code_enum *code)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	if (code->index)
++		return -EINVAL;
++
++	code->code = priv->pixel_format;
++
++	return 0;
++}
++
++static int imx219_pix_enum_frame_size(struct v4l2_subdev *sd,
++				      struct v4l2_subdev_pad_config *cfg,
++				      struct v4l2_subdev_frame_size_enum *fse)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	if (fse->index)
++		return -EINVAL;
++
++	fse->min_width = priv->min_output_width;
++	fse->max_width = priv->pixarray.width;
++	fse->min_height = priv->min_output_height;
++	fse->max_height = priv->pixarray.height;
++	fse->code = priv->pixel_format;
++
++	return 0;
++}
++
++static const struct v4l2_subdev_pad_ops imx219_sub_pad_ops = {
++	.init_cfg = imx219_init_cfg,
++	.enum_mbus_code = imx219_pix_enum_mbus_code,
++	.enum_frame_size = imx219_pix_enum_frame_size,
++	.get_fmt = imx219_get_fmt,
++	.set_fmt = imx219_set_fmt,
++	.get_selection = imx219_get_selection,
++	.set_selection = imx219_set_selection,
++};
++
++static int imx219_root_enum_frame_size(struct v4l2_subdev *sd,
++				       struct v4l2_subdev_pad_config *cfg,
++				       struct v4l2_subdev_frame_size_enum *fse)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	if (fse->index)
++		return -EINVAL;
++
++	fse->min_width = priv->min_output_width;
++	fse->min_height = priv->min_output_height;
++
++	if (fse->pad == PAD_SINK) {
++		/* sink pad */
++		fse->max_width = priv->pixarray.width;
++		fse->max_height = priv->pixarray.height;
++		fse->code = priv->pixel_format;
++	} else {
++		/* source pad */
++		struct v4l2_mbus_framefmt *mf;
++
++		mf = imx219_get_pad_fmt(sd, cfg, fse->which, PAD_SINK);
++
++		fse->max_width = min_t(u32, mf->width, priv->max_output_width);
++		fse->max_height = min_t(u32, mf->height, priv->max_output_height);
++		fse->code = imx219_lookup_format(fse->code,
++						 priv->pixel_order);
++	}
++
++	return 0;
++}
++
++static const struct v4l2_subdev_pad_ops imx219_root_pad_ops = {
++	.init_cfg = imx219_init_cfg,
++	.enum_mbus_code = imx219_root_enum_mbus_code,
++	.enum_frame_size = imx219_root_enum_frame_size,
++	.get_fmt = imx219_get_fmt,
++	.set_fmt = imx219_set_fmt,
++	.get_selection = imx219_get_selection,
++	.set_selection = imx219_set_selection,
++};
++
++/* Controls */
++
++static void imx219_ctrls_activate(struct imx219_private *priv, int s, int n,
++				  bool active)
++{
++	while (n--)
++		v4l2_ctrl_activate(priv->root.ctrls[s++], active);
++}
++
++static int imx219_pix_s_ctrl(struct v4l2_ctrl *c)
++{
++	struct imx219_private *priv = container_of(c->handler,
++						   struct imx219_private,
++						   pixel.ctrl_handler);
++
++	switch (c->id) {
++	case V4L2_CID_GAIN:
++		return imx219_writew_pm(priv, R_DIG_GAIN_GLOBAL_A, c->val);
++	case V4L2_CID_ANALOGUE_GAIN:
++		return imx219_writeb_pm(priv, R_ANA_GAIN_GLOBAL_A,
++					imx219_gain_to_reg(priv, c->val));
++	case V4L2_CID_EXPOSURE_ABSOLUTE:
++		return imx219_writew_pm(priv, R_COARSE_INTEGRATION_A,
++					imx219_exposure_to_reg(priv, c->val));
++	case V4L2_CID_PIXEL_RATE:
++	case V4L2_CID_HBLANK:
++	case V4L2_CID_VBLANK:
++		/* ignored, so we can set the read-only value */
++		return 0;
++	default:
++		return -EINVAL;
++	}
++}
++
++static const struct v4l2_ctrl_ops imx219_pix_ctrl_ops = {
++	.s_ctrl = imx219_pix_s_ctrl,
++};
++
++static int imx219_root_s_ctrl(struct v4l2_ctrl *c)
++{
++	struct imx219_private *priv = container_of(c->handler,
++						   struct imx219_private,
++						   root.ctrl_handler);
++
++	switch (c->id) {
++	case V4L2_CID_TEST_PATTERN_RED:
++		return imx219_writew_pm(priv, R_TD_R, c->val);
++	case V4L2_CID_TEST_PATTERN_GREENR:
++		return imx219_writew_pm(priv, R_TD_GR, c->val);
++	case V4L2_CID_TEST_PATTERN_BLUE:
++		return imx219_writew_pm(priv, R_TD_B, c->val);
++	case V4L2_CID_TEST_PATTERN_GREENB:
++		return imx219_writew_pm(priv, R_TD_GB, c->val);
++	case V4L2_CID_TEST_PATTERN:
++		imx219_ctrls_activate(priv, CTRL_R_R, CTRL_R_GB - CTRL_R_R + 1,
++				      c->val == 1);
++		return imx219_writew_pm(priv, R_TEST_PATTERN_MODE, c->val);
++	default:
++		return -EINVAL;
++	}
++}
++
++static const struct v4l2_ctrl_ops imx219_root_ctrl_ops = {
++	.s_ctrl = imx219_root_s_ctrl,
++};
++
++static int imx219_create_controls(struct imx219_private *priv)
++{
++	int i;
++	static const u32 test_ids[CTRL_R_GB - CTRL_R_R + 1] = {
++		V4L2_CID_TEST_PATTERN_RED,
++		V4L2_CID_TEST_PATTERN_GREENR,
++		V4L2_CID_TEST_PATTERN_BLUE,
++		V4L2_CID_TEST_PATTERN_GREENB,
++	};
++
++	v4l2_ctrl_handler_init(&priv->root.ctrl_handler, 5);
++
++	for (i = 0; i < ARRAY_SIZE(test_ids); i++)
++		priv->root.ctrls[CTRL_R_R + i] =
++			v4l2_ctrl_new_std(&priv->root.ctrl_handler,
++					  &imx219_root_ctrl_ops, test_ids[i],
++					  0, 0x3ff, 1, 0);
++
++	imx219_ctrls_activate(priv, CTRL_R_R, CTRL_R_GB - CTRL_R_R + 1, false);
++
++	v4l2_ctrl_new_std_menu_items(&priv->root.ctrl_handler,
++				     &imx219_root_ctrl_ops,
++				     V4L2_CID_TEST_PATTERN,
++				     ARRAY_SIZE(imx219_test_pattern_menu) - 1,
++				     0, 0, imx219_test_pattern_menu);
++
++	if (priv->root.ctrl_handler.error)
++		return priv->root.ctrl_handler.error;
++
++	priv->root.sd.ctrl_handler = &priv->root.ctrl_handler;
++
++	return 0;
++}
++
++static const struct v4l2_subdev_ops imx219_root_subdev_ops = {
++	.core = &imx219_root_core_ops,
++	.video = &imx219_root_video_ops,
++	.pad = &imx219_root_pad_ops,
++};
++
++static const struct v4l2_subdev_ops imx219_sub_sd_ops = {
++	.pad = &imx219_sub_pad_ops,
++};
++
++static const struct media_entity_operations imx219_entity_ops = {
++	.link_validate = v4l2_subdev_link_validate,
++};
++
++static int imx219_registered(struct v4l2_subdev *sd)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++	struct imx219_sub *parent = &priv->root;
++	struct imx219_sub *sub = &priv->pixel;
++	int ret;
++
++	ret = v4l2_device_register_subdev(parent->sd.v4l2_dev, &sub->sd);
++	if (ret)
++		return ret;
++
++	ret = media_create_pad_link(&sub->sd.entity, 0, &parent->sd.entity, 1,
++				    MEDIA_LNK_FL_ENABLED |
++				    MEDIA_LNK_FL_IMMUTABLE);
++	if (ret) {
++		v4l2_device_unregister_subdev(&sub->sd);
++		return ret;
++	}
++
++	return 0;
++}
++
++static void imx219_unregistered(struct v4l2_subdev *sd)
++{
++	struct imx219_private *priv = imx219_get_priv(sd);
++
++	v4l2_device_unregister_subdev(&priv->pixel.sd);
++}
++
++static const struct v4l2_subdev_internal_ops imx219_root_internal_ops = {
++	.registered = imx219_registered,
++	.unregistered = imx219_unregistered,
++};
++
++static int imx219_sub_init(struct imx219_private *priv, struct imx219_sub *sub,
++			   size_t n_pad, const char *name)
++{
++	struct device *dev = priv->root.sd.dev;
++	int ret;
++
++	v4l2_subdev_init(&sub->sd, &imx219_sub_sd_ops);
++	sub->sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
++	sub->sd.owner = THIS_MODULE;
++	sub->sd.entity.ops = &imx219_entity_ops;
++	sub->sd.dev = dev;
++
++	snprintf(sub->sd.name, sizeof(sub->sd.name), "%s %s %s",
++		 dev->driver->name, name, dev_name(dev));
++
++	sub->pad[0].flags = MEDIA_PAD_FL_SOURCE;
++	if (n_pad)
++		sub->pad[1].flags = MEDIA_PAD_FL_SINK;
++
++	ret = media_entity_pads_init(&sub->sd.entity, n_pad, sub->pad);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static void imx219_sub_remove(struct imx219_sub *sub)
++{
++	media_entity_cleanup(&sub->sd.entity);
++}
++
++static int imx219_read_caps(struct imx219_private *priv, struct device *dev)
++{
++	int val, fmt_type, fmt_subtype, i, n_cols, n_rows;
++	unsigned int n;
++	union {
++		struct imx219_limit_integration_time integ;
++		struct imx219_limit_pll pll;
++		struct imx219_limit_frame frame;
++		struct imx219_limit_image image;
++	} u;
++
++	priv->ana_gain_m0 = val = imx219_readw(priv, R_ANA_GAIN_M0);
++	if (val < 0)
++		return val;
++
++	priv->ana_gain_c0 = val = imx219_readw(priv, R_ANA_GAIN_C0);
++	if (val < 0)
++		return val;
++
++	priv->ana_gain_m1 = val = imx219_readw(priv, R_ANA_GAIN_M1);
++	if (val < 0)
++		return val;
++
++	priv->ana_gain_c1 = val = imx219_readw(priv, R_ANA_GAIN_C1);
++	if (val < 0)
++		return val;
++
++	fmt_type = imx219_readb(priv, R_FRM_FMT_TYPE);
++	if (fmt_type < 0)
++		return val;
++
++	if (fmt_type != FMT_TYPE_2BYTE) {
++		dev_err(dev, "unknown frame format type %u\n", fmt_type);
++		return -EINVAL;
++	}
++
++	fmt_subtype = imx219_readb(priv, R_FRM_FMT_SUBTYPE);
++	if (fmt_subtype < 0)
++		return val;
++
++	n_cols = FRM_FMT_COLS(fmt_subtype);
++	n_rows = FRM_FMT_ROWS(fmt_subtype);
++	for (i = n = 0; i < n_cols + n_rows; i++) {
++		const char *w = i < n_cols ? "columns" : "rows";
++		int val;
++
++		if (i == n_cols)
++			n = 0;
++
++		val = imx219_readw(priv, R_FRM_FMT_DESC(i));
++		if (val < 0)
++			return val;
++
++		switch (FRM_FMT_DESC_CODE(val)) {
++		case FRM_FMT_DESC_EMBEDDED:
++			dev_info(dev, "%u embedded %s at %u\n",
++				 FRM_FMT_DESC_VAL(val), w, n);
++			break;
++
++		case FRM_FMT_DESC_VISIBLE:
++			dev_info(dev, "%u visible %s at %u\n",
++				 FRM_FMT_DESC_VAL(val), w, n);
++			if (i < n_cols) {
++				priv->visible.left = n;
++				priv->visible.width = FRM_FMT_DESC_VAL(val);
++			} else {
++				priv->visible.top = n;
++				priv->visible.height = FRM_FMT_DESC_VAL(val);
++			}
++			break;
++		}
++
++		n += FRM_FMT_DESC_VAL(val);
++	}
++
++	if (priv->visible.width == 0 || priv->visible.height == 0) {
++		dev_err(dev, "unable to parse frame format\n");
++		return -EINVAL;
++	}
++
++	val = imx219_read(priv, R_LIMIT_INTEG, &u.integ, sizeof(u.integ));
++	if (val < 0)
++		return val;
++
++	priv->coarse_integration_time_min =
++		be16_to_cpu(u.integ.coarse_integration_time_min);
++	priv->coarse_integration_time_max_margin =
++		be16_to_cpu(u.integ.coarse_integration_time_max_margin);
++
++	val = imx219_read(priv, R_LIMIT_FRAME, &u.frame, sizeof(u.frame));
++	if (val < 0)
++		return val;
++
++	priv->min_frame_lines = be16_to_cpu(u.frame.min_frame_length_lines);
++	priv->max_frame_lines = be16_to_cpu(u.frame.max_frame_length_lines);
++	priv->min_line_length_pck = be16_to_cpu(u.frame.min_line_length_pck);
++	priv->max_line_length_pck = be16_to_cpu(u.frame.max_line_length_pck);
++	priv->min_line_blank_pck = be16_to_cpu(u.frame.min_link_blank_pck);
++	priv->min_frame_blank_lines =
++				be16_to_cpu(u.frame.min_frame_blank_lines);
++
++	val = imx219_read(priv, R_LIMIT_IMAGE, &u.image, sizeof(u.image));
++	if (val < 0)
++		return val;
++
++	priv->pixarray.left = be16_to_cpu(u.image.x_addr_min);
++	priv->pixarray.top = be16_to_cpu(u.image.y_addr_min);
++	priv->pixarray.width = be16_to_cpu(u.image.x_addr_max) -
++			       priv->pixarray.left + 1;
++	priv->pixarray.height = be16_to_cpu(u.image.y_addr_max) -
++			        priv->pixarray.top + 1;
++	priv->min_output_width = be16_to_cpu(u.image.min_x_output_size);
++	priv->min_output_height = be16_to_cpu(u.image.min_y_output_size);
++	priv->max_output_width = be16_to_cpu(u.image.max_x_output_size);
++	priv->max_output_height = be16_to_cpu(u.image.max_y_output_size);
++
++	/* Clamp the maximum output width/height to the pixel array */
++	priv->max_output_width = max_t(u32, priv->max_output_width,
++				       priv->pixarray.width);
++	priv->max_output_height = max_t(u32, priv->max_output_height,
++					priv->pixarray.height);
++
++	/* Some sanity checks - we make assumptions elsewhere */
++	if (priv->max_output_height + priv->min_frame_blank_lines >
++	    priv->max_frame_lines ||
++	    priv->max_output_height + priv->min_line_blank_pck >
++	    priv->max_line_length_pck)
++		dev_warn(dev, "max frame size exceeds limit\n");
++
++	priv->fine_integ_time = val = imx219_readw(priv, R_FINE_INTEG_TIME);
++	if (val < 0)
++		return val;
++
++	return 0;
++}
++
++static int imx219_init_pixarray(struct imx219_private *priv)
++{
++	struct imx219_sub *sub = &priv->pixel;
++	struct imx219_limit_dig_gain dig_gain;
++	int ana_min, ana_max, ana_step;
++	int err;
++
++	err = imx219_sub_init(priv, sub, 1, "pixel");
++	if (err)
++		return err;
++
++	sub->sd.entity.function = MEDIA_ENT_F_CAM_SENSOR;
++	sub->pad_ops = &imx219_pix_pad_ops;
++
++	/* Set the default sensor format and crop */
++	sub->pad_ops->init_pad(priv, PAD_SRC, &sub->format[PAD_SRC], NULL);
++
++	ana_min = imx219_readw(priv, R_ANA_GAIN_MIN);
++	if (ana_min < 0)
++		return ana_min;
++
++	ana_max = imx219_readw(priv, R_ANA_GAIN_MAX);
++	if (ana_max < 0)
++		return ana_max;
++
++	ana_step = imx219_readw(priv, R_ANA_GAIN_STEP);
++	if (ana_step < 0)
++		return ana_step;
++
++	err = imx219_read(priv, R_LIMIT_DIG_GAIN, &dig_gain, sizeof(dig_gain));
++	if (err < 0)
++		return err;
++
++	v4l2_ctrl_handler_init(&sub->ctrl_handler, 6);
++	v4l2_ctrl_new_std(&sub->ctrl_handler, &imx219_pix_ctrl_ops,
++			  V4L2_CID_GAIN,
++			  be16_to_cpu(dig_gain.digital_gain_min),
++			  be16_to_cpu(dig_gain.digital_gain_max),
++			  be16_to_cpu(dig_gain.digital_gain_step_size),
++			  be16_to_cpu(dig_gain.digital_gain_min));
++	sub->ctrls[CTRL_P_VBLANK] =
++		v4l2_ctrl_new_std(&sub->ctrl_handler, &imx219_pix_ctrl_ops,
++				  V4L2_CID_VBLANK,
++				  priv->min_frame_blank_lines,
++				  priv->max_frame_lines, 1,
++				  priv->min_frame_blank_lines);
++	sub->ctrls[CTRL_P_HBLANK] =
++		v4l2_ctrl_new_std(&sub->ctrl_handler, &imx219_pix_ctrl_ops,
++				  V4L2_CID_HBLANK,
++				  priv->min_line_blank_pck,
++				  priv->max_line_length_pck, 1,
++				  priv->min_line_blank_pck);
++	v4l2_ctrl_new_std(&sub->ctrl_handler, &imx219_pix_ctrl_ops,
++			  V4L2_CID_ANALOGUE_GAIN,
++			  imx219_reg_to_gain(priv, ana_min),
++			  imx219_reg_to_gain(priv, ana_max),
++			  1, imx219_reg_to_gain(priv, ana_min));
++	sub->ctrls[CTRL_P_PIXEL_RATE] =
++		v4l2_ctrl_new_std(&sub->ctrl_handler, &imx219_pix_ctrl_ops,
++				  V4L2_CID_PIXEL_RATE,
++				  2 * priv->pll[PLL_VT].clk[CLK_PIX].min_freq,
++				  2 * priv->pll[PLL_VT].clk[CLK_PIX].max_freq,
++				  1,
++				  2 * imx219_get_vt_pixclk(priv));
++	sub->ctrls[CTRL_P_EXPOSURE] =
++		v4l2_ctrl_new_std(&sub->ctrl_handler, &imx219_pix_ctrl_ops,
++				  V4L2_CID_EXPOSURE_ABSOLUTE, 0, 1, 1, 0);
++
++	if (sub->ctrl_handler.error)
++		return sub->ctrl_handler.error;
++
++	/* Read-only during implementation */
++	sub->ctrls[CTRL_P_HBLANK]->flags |= V4L2_CTRL_FLAG_READ_ONLY;
++	sub->ctrls[CTRL_P_VBLANK]->flags |= V4L2_CTRL_FLAG_READ_ONLY;
++
++	sub->sd.ctrl_handler = &sub->ctrl_handler;
++
++	return 0;
++}
++
++static int imx219_parse_dt(struct imx219_private *priv, struct device *dev)
++{
++	struct device_node *ep;
++	u32 val;
++	int err = 0;
++
++	val = priv->mipi_vc;
++	of_property_read_u32(dev->of_node, "virtual-channel", &val);
++	priv->mipi_vc = val;
++
++	for_each_endpoint_of_node(dev->of_node, ep) {
++		struct v4l2_fwnode_endpoint endpoint = { };
++		int i;
++
++		v4l2_fwnode_endpoint_parse(of_fwnode_handle(ep), &endpoint);
++		if (endpoint.base.port != 0) {
++			dev_err(dev, "imx219 only has one endpoint\n");
++			err = -EINVAL;
++			break;
++		}
++
++		if (endpoint.bus_type != V4L2_MBUS_CSI2) {
++			dev_err(dev, "imx219 requires a CSI2 endpoint\n");
++			err = -EINVAL;
++			break;
++		}
++
++		if (endpoint.bus.mipi_csi2.clock_lane ||
++		    endpoint.bus.mipi_csi2.lane_polarities[0]) {
++			dev_err(dev, "bad clock lane configuration\n");
++			err = -EINVAL;
++			break;
++		}
++
++		if (endpoint.bus.mipi_csi2.flags !=
++		    V4L2_MBUS_CSI2_NONCONTINUOUS_CLOCK) {
++			dev_err(dev, "clock must be non-continuous\n");
++			err = -EINVAL;
++			break;
++		}
++
++		priv->mipi_lanes = endpoint.bus.mipi_csi2.num_data_lanes;
++		for (i = 0; i < priv->mipi_lanes; i++)
++			if (endpoint.bus.mipi_csi2.data_lanes[i] != i + 1 ||
++			    endpoint.bus.mipi_csi2.lane_polarities[i + 1])
++				break;
++
++		if (i != priv->mipi_lanes) {
++			dev_err(dev, "bad data line configuration at index %d\n", i);
++			err = -EINVAL;
++			break;
++		}
++	}
++
++	if (err)
++		of_node_put(ep);
++
++	return err;
++}
++
++static int imx219_probe(struct i2c_client *client,
++			const struct i2c_device_id *id)
++{
++	struct imx219_private *priv;
++	int err, val;
++
++	priv = devm_kzalloc(&client->dev, sizeof(*priv), GFP_KERNEL);
++	if (!priv)
++		return -ENOMEM;
++
++	priv->inck = devm_clk_get(&client->dev, NULL);
++	if (IS_ERR(priv->inck))
++		return PTR_ERR(priv->inck);
++
++	priv->mipi_lanes = 4;
++
++	v4l2_i2c_subdev_init(&priv->root.sd, client, &imx219_root_subdev_ops);
++	priv->root.sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
++	priv->root.sd.internal_ops = &imx219_root_internal_ops;
++	priv->root.sd.entity.function = MEDIA_ENT_F_PROC_VIDEO_SCALER;
++	priv->root.sd.entity.ops = &imx219_entity_ops;
++	priv->root.pad[0].flags = MEDIA_PAD_FL_SOURCE;
++	priv->root.pad[1].flags = MEDIA_PAD_FL_SINK;
++	priv->root.pad_ops = &imx219_int_root_pad_ops;
++
++	if (client->dev.of_node) {
++		err = imx219_parse_dt(priv, &client->dev);
++		if (err)
++			return err;
++	}
++
++	if (priv->mipi_lanes != 2 && priv->mipi_lanes != 4) {
++		dev_err(&client->dev, "imx219 requires either 2 or 4 lanes\n");
++		return -EINVAL;
++	}
++
++	priv->xclr_gpio = devm_gpiod_get(&client->dev, "xclr", GPIOD_OUT_HIGH);
++	if (IS_ERR(priv->xclr_gpio))
++		return PTR_ERR(priv->xclr_gpio);
++
++	pm_runtime_set_autosuspend_delay(&client->dev, 100);
++	pm_runtime_use_autosuspend(&client->dev);
++	pm_runtime_enable(&client->dev);
++
++	err = pm_runtime_get_sync(&client->dev);
++	if (err)
++		goto rpm_cleanup;
++
++	val = imx219_readb(priv, R_PX_ORDER);
++	if (val < 0) {
++		err = val;
++		goto rpm_cleanup_put;
++	}
++
++	priv->pixel_order = val;
++	priv->pixel_format = imx219_formats[0][val];
++
++	val = imx219_readw(priv, R_MODEL_ID);
++	if (val < 0) {
++		err = val;
++		goto rpm_cleanup_put;
++	}
++
++	dev_info(&client->dev, "detected IMX%X sensor\n", val);
++
++	mutex_init(&priv->mutex);
++
++	err = imx219_read_caps(priv, &client->dev);
++	if (err)
++		goto mutex_cleanup;
++
++	err = imx219_create_controls(priv);
++	if (err)
++		goto mutex_cleanup;
++
++	err = media_entity_pads_init(&priv->root.sd.entity, 2, priv->root.pad);
++	if (err)
++		goto mutex_cleanup;
++
++	err = imx219_init_pixarray(priv);
++	if (err)
++		goto media_cleanup;
++
++	/* Copy the pixel source format to the root sink */
++	priv->root.format[PAD_SINK] = priv->pixel.format[PAD_SRC];
++	imx219_framefmt_to_rect(&priv->root.sink_crop,
++				&priv->root.format[PAD_SINK]);
++
++	/* Set the default output format */
++	priv->root.format[PAD_SRC] = priv->root.format[PAD_SINK];
++	priv->root.format[PAD_SRC].width = priv->max_output_width;
++	priv->root.format[PAD_SRC].height = priv->max_output_height;
++	imx219_framefmt_to_rect(&priv->root.sink_compose,
++				&priv->root.format[PAD_SRC]);
++
++	priv->frame_interval.numerator = 1;
++	priv->frame_interval.denominator = 60;
++
++	/* Set hardware settings */
++	priv->params.line_length = cpu_to_be16(3448);
++	imx219_update_output_bpp(priv, &priv->root.format[PAD_SRC]);
++	imx219_root_set_selection(priv, &priv->root, PAD_SINK,
++				  V4L2_SEL_TGT_CROP, &priv->root.sink_crop,
++				  NULL);
++	imx219_root_set_selection(priv, &priv->root, PAD_SRC,
++				  V4L2_SEL_TGT_COMPOSE,
++				  &priv->root.sink_compose,
++				  &priv->root.sink_crop);
++	priv->params.x_odd_inc = 1;
++	priv->params.y_odd_inc = 1;
++
++	err = v4l2_async_register_subdev(&priv->root.sd);
++	if (err)
++		goto pixel_cleanup;
++
++	pm_runtime_put_autosuspend(&client->dev);
++
++	return 0;
++
++pixel_cleanup:
++	imx219_sub_remove(&priv->pixel);
++media_cleanup:
++	media_entity_cleanup(&priv->root.sd.entity);
++mutex_cleanup:
++	v4l2_ctrl_handler_free(&priv->root.ctrl_handler);
++	mutex_destroy(&priv->mutex);
++rpm_cleanup_put:
++	pm_runtime_put_autosuspend(&client->dev);
++rpm_cleanup:
++	pm_runtime_disable(&client->dev);
++	return err;
++}
++
++static int imx219_remove(struct i2c_client *client)
++{
++	struct imx219_private *priv = imx219_get_clientdata(client);
++
++	v4l2_async_unregister_subdev(&priv->root.sd);
++	imx219_sub_remove(&priv->pixel);
++	media_entity_cleanup(&priv->root.sd.entity);
++	v4l2_ctrl_handler_free(&priv->root.ctrl_handler);
++	mutex_destroy(&priv->mutex);
++	pm_runtime_disable(&client->dev);
++	gpiod_set_value(priv->xclr_gpio, 1);
++
++	return 0;
++}
++
++static int imx219_rpm_suspend(struct device *dev)
++{
++	struct imx219_private *priv = imx219_get_root_priv(dev_get_drvdata(dev));
++
++	gpiod_set_value(priv->xclr_gpio, 1);
++
++	clk_disable_unprepare(priv->inck);
++
++	return 0;
++}
++
++static int imx219_rpm_resume(struct device *dev)
++{
++	struct imx219_private *priv = imx219_get_root_priv(dev_get_drvdata(dev));
++	unsigned long inck;
++	unsigned int t6_ms;
++	int ret;
++
++	ret = clk_prepare_enable(priv->inck);
++	if (ret)
++		return ret;
++
++	gpiod_set_value(priv->xclr_gpio, 0);
++
++	inck = clk_get_rate(priv->inck);
++
++	/*
++	 * Calculate initialisation delay
++	 *  Silicon initialisation time, t6 = 32000 clocks.
++	 */
++	t6_ms = DIV_ROUND_UP(32000 * 1000, inck);
++
++	msleep(t6_ms);
++
++	/* Reset the device */
++	imx219_writeb(priv, R_SW_RESET, 1);
++	msleep(2);
++	imx219_writeb(priv, R_SW_RESET, 0);
++	msleep(2);
++
++	/*
++	 * Obtain and calculate the PLL limits given the current input
++	 * clock.
++	 */
++	ret = imx219_calculate_pll_limits(priv, inck);
++	if (ret < 0) {
++		gpiod_set_value(priv->xclr_gpio, 1);
++		clk_disable_unprepare(priv->inck);
++		return ret;
++	}
++
++	/*
++	 * Select automatic DPHY control - the sensor will calculate
++	 * the DPHY settings in registers 0x0118 to 0x0126 inclusive
++	 * depending on clock rate, PLL parameters and format.
++	 */
++	imx219_writeb(priv, R_DPHY_CTRL, 0);
++	/* Set the clock frequency - in units of 1/256 MHz */
++	imx219_writew(priv, R_EXCK_FREQ, mult_frac(inck, 256, 1000000));
++
++	/*
++	 * Set the PLL pre-divider to our calculated setting.  According
++	 * to documentation, this should be set automatically, but doesn't
++	 * appear to happen.
++	 */
++	imx219_writeb(priv, R_PREPLLCK_VT_DIV, priv->pll_pre_div);
++	imx219_writeb(priv, R_PREPLLCK_OP_DIV, priv->pll_pre_div);
++
++	/*
++	 * Set the PLL divider to a sane setting as the default may
++	 * be in excess of the allowable limits given the input and
++	 * output clocks.
++	 */
++	imx219_writew(priv, R_PLL_VT_MPY, priv->pll[PLL_VT].max_mpy);
++	imx219_writew(priv, R_PLL_OP_MPY, priv->pll[PLL_OP].max_mpy);
++
++	/*
++	 * Wait for the remainder of the VRL charge time
++	 *  VRL charge time, t5 = 6ms
++	 * We have already waited t6_ms and 4ms
++	 */
++	if (t6_ms + 4 < 6)
++		msleep(2 - t6_ms);
++
++	return 0;
++}
++
++static const struct dev_pm_ops imx219_pm_ops = {
++	SET_RUNTIME_PM_OPS(imx219_rpm_suspend, imx219_rpm_resume, NULL)
++};
++
++static const struct of_device_id imx219_of_id[] = {
++	{ .compatible = "sony,imx219" },
++	{ },
++};
++MODULE_DEVICE_TABLE(of, imx219_of_id);
++
++static const struct i2c_device_id imx219_i2c_id[] = {
++	{ "imx219", 0 },
++	{ },
++};
++MODULE_DEVICE_TABLE(i2c, imx219_i2c_id);
++
++static struct i2c_driver imx219_i2c_driver = {
++	.driver = {
++		.name = "imx219",
++		.of_match_table = imx219_of_id,
++		.pm = &imx219_pm_ops,
++	},
++	.probe	= imx219_probe,
++	.remove	= imx219_remove,
++	.id_table = imx219_i2c_id,
++};
++
++module_i2c_driver(imx219_i2c_driver);
++
++MODULE_LICENSE("GPL");
+-- 
+cgit v1.1
+
