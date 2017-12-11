@@ -22,7 +22,7 @@ index 9415389..0ed865c 100644
 @@ -547,6 +547,16 @@ config VIDEO_APTINA_PLL
  config VIDEO_SMIAPP_PLL
  	tristate
- 
+
 +config VIDEO_IMX219
 +	tristate "Sony IMX219 sensor support"
 +	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
@@ -47,7 +47,7 @@ index c843c18..c99e716 100644
 +obj-$(CONFIG_VIDEO_IMX219)	+= imx219.o
  obj-$(CONFIG_VIDEO_OV2659)	+= ov2659.o
  obj-$(CONFIG_VIDEO_TC358743)	+= tc358743.o
- 
+
 diff --git a/drivers/media/i2c/imx219.c b/drivers/media/i2c/imx219.c
 new file mode 100644
 index 0000000..26c3704
@@ -3103,6 +3103,5 @@ index 0000000..26c3704
 +module_i2c_driver(imx219_i2c_driver);
 +
 +MODULE_LICENSE("GPL");
--- 
+--
 cgit v1.1
-
