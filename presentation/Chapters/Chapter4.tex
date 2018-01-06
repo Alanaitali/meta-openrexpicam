@@ -1,0 +1,72 @@
+% Chapter 4
+
+\chapter{Solution n° 3} % Main chapter title
+
+\label{Chapter4} % For referencing the chapter elsewhere, use \ref{Chapter4} 
+
+%----------------------------------------------------------------------------------------
+
+\section{Avancement}
+
+Nous avons récemment trouvé un driver imx219.c qui ne contient aucune libraires
+associées et qui fonctionne sur une plateforme hummingboard (SOC i.MX6).
+
+Les sources étant sous forme de patch nous allons cette fois directement l’intégrer à notre système.
+
+Le driver est composé de deux patchs, le premier patch comporte tous les éléments proches du kernel on retrouve :
+
+Kconfig : permet d’ajouter l’imx219 au menuconfig, cela va nous permettre de demander la
+compilation du driver. Lorsque l’on modifie le menuconfig on récupère un defconfig
+que l’on ajoute en a notre recette.
+
+Makefile : permet d’ajouter la compilation de driver (elle sera activée ou non par le defconfig)
+
+imx219.c : driver qui contient l’ensemble des configurations spécifiques à la caméra.
+
+Le deuxième patch permet d’ajouter les configurations utiles pour faire l’interface entre
+le driver et l’utilisateur soit le device-tree.
+
+Problèmes rencontrés :
+
+\begin{itemize}
+    \item[-] Des libraires système sont inexistantes, nous les avons donc identifiées et ajoutées au système.
+    \item[-] Les versions des librairies existantes ne sont pas compatibles avec notre fichier imx219.c.
+    Nous utilisons une version de kernel 3.14 ou bien la version nécessaire est bien plus ressente nous
+    l’estimons a 4.12. Pour s’approcher de la versions 4.12 nous sommes actuellement entrain d’appliquer
+    les patchs sur une version plus ressente soit 4.1.36 (Krogoth sous Yocto).
+\end{itemize}
+
+Vous trouverez ici un lien qui contient l’ensemble des patchs appliqués sur la version 3.14 du kernel :
+
+\href{https://github.com/Alanaitali/meta-openrexpicam/tree/develop/gladwistor/recipes-kernel/linux}{https://github.com/Alanaitali/meta-openrexpicam/tree/develop/gladwistor/recipes-kernel/linux}
+
+\section{Source des patchs}
+
+\href{http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h=csi-v6&id=e3f847cd37b007d55b76282414bfcf13abb8fc9a}{http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h=csi-v6\&id=e3f847cd37b007d55b76282414bfcf13abb8fc9a}
+
+\href{http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h=csi-v6&id=4bd8e1231a2e6eca6a65b565176ea9722611c8dd}{http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h=csi-v6\&id=4bd8e1231a2e6eca6a65b565176ea9722611c8dd}
+
+\section{Ajout de paquets}
+
+Sachant que nous allions avoir besoin d’une couche v4l-utils et gstreamer comme applicatif (user-space),
+nous avons commencé par essayer de le compiler. Cette compilation n’a abouti ni par compilation in-tree
+et out-of-tree, ni par une recette Yocto.
+
+\clearpage
+
+Par la suite nous avons ajouté certains paquets à notre image via la variable IMAGE\_INSTALL.
+
+\begin{lstlisting}
+DESCRIPTION = "Basic image openrexpicam"
+LICENSE = "MIT"
+    
+inherit core-image
+    
+IMAGE_INSTALL += " \
+    gstreamer \
+    i2c-tools \
+    gstreamer1.0-plugins-imx \
+    gst1.0-fsl-plugin \
+    v4l-utils \
+"
+\end{lstlisting}

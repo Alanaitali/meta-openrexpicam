@@ -1,0 +1,18 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {french}
+\contentsline {chapter}{\numberline {1}Organisation de l'\IeC {\'e}quipe et planning}{1}{chapter.2}
+\contentsline {section}{\numberline {1.1}Organisation de l'\IeC {\'e}quipe}{1}{section.3}
+\contentsline {section}{\numberline {1.2}Planning}{1}{section.4}
+\contentsline {chapter}{\numberline {2}Solution n\IeC {\textdegree } 1}{2}{chapter.6}
+\contentsline {chapter}{\numberline {3}Solution n\IeC {\textdegree } 2}{4}{chapter.32}
+\contentsline {chapter}{\numberline {4}Solution n\IeC {\textdegree } 3}{6}{chapter.54}
+\contentsline {section}{\numberline {4.1}Avancement}{6}{section.55}
+\contentsline {section}{\numberline {4.2}Source des patchs}{6}{section.56}
+\contentsline {section}{\numberline {4.3}Ajout de paquets}{6}{section.57}
+\contentsline {chapter}{\numberline {5}\IeC {\'E}tat de l'art de la r\IeC {\'e}cup\IeC {\'e}ration du flux vid\IeC {\'e}o}{8}{chapter.71}
+\contentsline {section}{\numberline {5.1}Webcam USB}{8}{section.72}
+\contentsline {section}{\numberline {5.2}Probl\IeC {\`e}mes}{9}{section.78}
+\contentsline {section}{\numberline {5.3}Point d'am\IeC {\'e}lioration}{9}{section.79}
+\contentsline {section}{\numberline {5.4}Sources}{9}{section.80}
+\contentsline {chapter}{\numberline {6}Conclusion}{10}{chapter.81}

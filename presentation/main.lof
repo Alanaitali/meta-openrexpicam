@@ -1,0 +1,19 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {french}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Avancement du projet actuel\relax }}{1}{figure.caption.5}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Arborescnce des fichiers\relax }}{4}{figure.caption.33}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces V\IeC {\'e}rification de la pr\IeC {\'e}sence du driver\relax }}{4}{figure.caption.34}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Chargement du module\relax }}{5}{figure.caption.52}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Chargement du module avec l'adresse I2C\relax }}{5}{figure.caption.53}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Port USB de la webcam USB\relax }}{8}{figure.caption.73}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces V\IeC {\'e}rification du port et identifiant de la webcam USB\relax }}{8}{figure.caption.74}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Liaison entre la webcam USB et son driver\relax }}{8}{figure.caption.75}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Capture du flux vid\IeC {\'e}o de la webcam USB\relax }}{9}{figure.caption.76}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces LED verte allum\IeC {\'e}e lors de l'envoi de la commande\relax }}{9}{figure.caption.77}
+\addvspace {10\p@ }

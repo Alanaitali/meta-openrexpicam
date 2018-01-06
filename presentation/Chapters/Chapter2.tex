@@ -1,0 +1,64 @@
+% Chapter 2
+
+\chapter{Solution n° 1} % Main chapter title
+
+\label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter2} 
+
+%----------------------------------------------------------------------------------------
+
+Nous avons récupéré le code du driver à exploiter dans les premiers mails. Les deux
+fichiers imx219.c et camera.h sont indiqués comme « Linux V4L2 Driver » et sont
+téléchargeables à l'adresse suivante : \\ \\
+\href{https://www.raspberrypi.org/forums/viewtopic.php?f=43&t=162722}{https://www.raspberrypi.org/forums/viewtopic.php?f=43\&t=162722} \\
+
+Ce driver lie un processeur Allwinner A80 (ARM Cortex-A15/A7) à un composant pilote vidéo
+imx219. Dans un premier temps nous nous doutions qu’il y aurait des erreurs de compilation
+donc nous avons préféré décorréler les erreurs de compilation des erreurs  Yocto. Nous
+avons donc essayé de compiler ce fichier depuis une cross-toolchain générée par Yocto en
+utilisant la variable CC qui configure le cross compilateur. Cette variable est affectée
+lors du sourçage du sdk généré par :
+
+\begin{lstlisting}
+#génération du sdk
+bitbake openrexpicam-base-image -c populate_sdk
+# environement du sdk
+source /opt/poky/2.0.3/environment-setup-cortexa9hf-vfp-neon-poky-linux-gnueabi
+# apercu de CC
+$CC imx219.c
+\end{lstlisting}
+
+Cette compilation fait appel à des librairies contenues dans l’arborescence de
+compilation de différentes recettes.
+
+\begin{lstlisting}
+BUILDDIR=/home/diag/workspaceThales/Yocto/fsl-community-bsp/build-imx6rex.com
+IMX6S_DIR=$BUILDDIR/tmp/work/imx6s_openrex-poky-linux-gnueabi
+#libs linux/*.h
+DIRLINUX=$IMX6S_DIR/linux-openrex/3.14-r0/git/include
+DIRLINUX2=$IMX6S_DIR/u-boot-openrex/v2015.10+gitAUTOINC+7d8ddd7de7-r0/git
+/include
+DIRLINUX3=$IMX6S_DIR/core-image-minimal/1.0-r0/sdk/image/opt/poky/2.0.3
+/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi/usr/include
+#libs asm/*.h
+DIRASM=$BUILDDIR/tmp/work/x86_64-nativesdk-pokysdk-linux
+/nativesdk-linux-libc-headers/4.1-r0/linux-4.1/arch/arm/include/
+DIRASM2=$IMX6S_DIR/linux-openrex/3.14-r0/build/arch/arm/include/generated
+DIRASM3=$IMX6S_DIR/u-boot-openrex/v2015.10+gitAUTOINC+7d8ddd7de7-r0/git
+/arch/arm/include/
+#nouvelle commande de compilation "out of tree"
+$CC imx219.c -I$DIRLINUX -I$DIRASM -I$DIRASM2 -I$DIRLINUX2
+-I$DIRLINUX3 -I$DIRASM3
+\end{lstlisting}
+
+Nous avons inclus 6 dossiers de librairies en option puis les nouvelles dépendances
+étaient inexistantes dans le dossier contenant l’arborescence de compilation donc nous
+nous sommes mis à chercher cherché une autre solution. \\
+
+Après avoir parlé à notre professeur de Linux embarqué des soucis de compilation que
+nous rencontrions nous avons compiler le driver en ajoutant ses sources dans l’arborescence
+(in-tree). \\
+
+Cependant certains fichiers n’existent pas dans le kernel 3.14 nous sommes
+actuellement entrain de d’ajouter le patch au kernel 4.1.38.
+
+%----------------------------------------------------------------------------------------
