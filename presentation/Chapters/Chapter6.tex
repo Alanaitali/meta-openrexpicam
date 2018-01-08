@@ -2,16 +2,30 @@
 
 \chapter{Conclusion} % Main chapter title
 
-\label{Chapter6} % For referencing the chapter elsewhere, use \ref{Chapter6} 
+\label{Chapter6} % For referencing the chapter elsewhere, use \ref{Chapter6}
 
 %----------------------------------------------------------------------------------------
+\begin{description}
+\item[Solution 1 :] la compilation out-of-tree est abandonnée, les sources sont
+en revanche toujours susceptible d’être utilisées.
 
-De part l’avancée que nous avons actuellement et l’expérience accumulée au cours du projet
-ils nous restent plusieurs pistes à explorer. Sans contre indication particulière nous
-devrons être capables d’avoir des résultats peu de temps après la rentrée des vacances de
-Noël. Nous ne sommes pas en capacité de dire avec précision à quelle date, il sera
-possible de vous fournir un driver fonctionnel.
+\item[Solution 2 :]Cette solution est notre piste la plus concrète. En effet la
+compilation a réussi, nous cherchons à comprendre comment utiliser le driver à
+travers v4l. Une fois cette tache effectuée nous travaillerons sur le portage
+des versions du kernel (3.14 fleche 4.1)
 
-Pour tout conseil, piste à suivre ou erreur de notre part n’hésitez pas à revenir vers nous.
-De plus nous tenons à nous excuser pour le dernier rapport envoyé il n’était manifestement
-pas du tout adapté à votre demande.
+\item[Solution 3 :]La compilation du driver n’a pas fonctionné car les librairies
+ kernel et celles requises par le driver ne sont pas compatibles. Une autre
+ solution serait d’essayer la même compilation sur un kernel 4.1.
+\end{description}
+
+De part l’avancée que nous avons actuellement et l’expérience accumulée au
+cours du projet il nous reste plusieurs pistes à explorer. Sans contre-
+indication particulière nous devrons être capables d’avoir des résultats peu de
+temps après la rentrée des vacances de Noël. Nous ne sommes pas en capacité de
+dire avec précision à quelle date il sera possible de vous fournir un driver
+fonctionnel.
+
+Pour tout conseil, piste à suivre ou erreur de notre part n’hésitez pas à
+revenir vers nous. De plus nous tenons à nous excuser pour le dernier rapport
+envoyé il n’était manifestement pas du tout adapté à votre demande.
