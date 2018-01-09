@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.21)  9 JAN 2018 10:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.21)  9 JAN 2018 10:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2166,25 +2166,26 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  )
 (\end occurred when \iftrue on line 152 was incomplete) 
 Here is how much of TeX's memory you used:
- 34724 strings out of 493029
- 677118 string characters out of 6136233
+ 34725 strings out of 493029
+ 677124 string characters out of 6136233
  805114 words of memory out of 5000000
  37725 multiletter control sequences out of 15000+600000
- 47482 words of font info for 85 fonts, out of 8000000 for 9000
+ 47739 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  54i,20n,76p,10450b,1827s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texm
 f-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvi
 ps/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/in
 consolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/
-uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (13 pages, 991005 bytes).
+c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
+atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (13 pages, 998019 bytes).
 PDF statistics:
- 368 PDF objects out of 1000 (max. 8388607)
- 315 compressed objects within 4 object streams
+ 372 PDF objects out of 1000 (max. 8388607)
+ 318 compressed objects within 4 object streams
  115 named destinations out of 1000 (max. 500000)
  285 words of extra memory for PDF output out of 10000 (max. 10000000)
 
