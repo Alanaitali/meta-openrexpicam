@@ -430,6 +430,8 @@ INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-
 OUTPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/Chapters/Chapter6.aux
 INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/Chapters/Chapter6.tex
 INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/Chapters/Chapter6.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/main.aux
 INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/Chapters/Chapter1.aux
 INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/Chapters/Chapter1.aux
@@ -451,6 +453,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb

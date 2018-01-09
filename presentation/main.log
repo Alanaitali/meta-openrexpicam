@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.4)  8 JAN 2018 15:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.4)  9 JAN 2018 10:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2008,18 +2008,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  )
 (\end occurred when \iftrue on line 152 was incomplete) 
 Here is how much of TeX's memory you used:
- 34724 strings out of 493029
- 682647 string characters out of 6136234
+ 34725 strings out of 493029
+ 682653 string characters out of 6136234
  805113 words of memory out of 5000000
  37725 multiletter control sequences out of 15000+600000
- 47482 words of font info for 85 fonts, out of 8000000 for 9000
+ 47739 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  54i,20n,76p,10377b,1827s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/main.pdf (13 pages, 990772 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation/main.pdf (13 pages, 997794 bytes).
 PDF statistics:
- 365 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
+ 369 PDF objects out of 1000 (max. 8388607)
+ 315 compressed objects within 4 object streams
  114 named destinations out of 1000 (max. 500000)
  285 words of extra memory for PDF output out of 10000 (max. 10000000)
 
