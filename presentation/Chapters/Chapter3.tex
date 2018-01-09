@@ -21,11 +21,11 @@ lors du chargement du module. Elle s’appuie sur les trois couches de driver
 imx219>v4l>i2c. Le flux vidéo configuré peut ensuite être récupéré par Gstreamer.
 
 \section{Travail effectué}
-\begin{description}
-\item Gstreamer permettrait de streamer le flux sur le réseau à travers le protocole
+\begin{itemize}
+\item[-] Gstreamer permettrait de streamer le flux sur le réseau à travers le protocole
 UDP alors que v4l-utils permettrait plutôt d’enregistrer le flux vidéo.
-\item Création d’une recette
-\end{description}
+\item[-] Création d’une recette
+\end{itemize}
 
 \section{L’arborescence des fichiers in-tree}
 \begin{figure}[th]
@@ -79,6 +79,9 @@ Chargement du module imx219 :
 \end{figure}
 
 Comme nous pouvons le voir le driver n’est pas encore utilisé par v4l (Used by 0).
+
+\clearpage
+
 Chargement du module à l’adresse I2C de l’imx219 :
 
 \begin{figure}[th]
@@ -96,6 +99,12 @@ Récupération du flux vidéo en local via Gstreamer :
 X’ étant le numéro correspondant au numéro du driver vidéo du port CSI-2
 
 Actuellement nous cherchons l’utilisation des commandes gst-launch-1.0 et des
-fichiers de configurations v4l2src. Poursuite de cette piste dans le chapitre \ref{Chapter5}.
+fichiers de configurations v4l2src (cf. Chapitre \ref{Chapter5}).
+
+\section{Conclusion}
+
+Cette solution est notre piste la plus concrète. En effet la compilation a réussi,
+nous cherchons à comprendre comment utiliser le driver à travers v4l. Une fois cette
+tache effectuée nous travaillerons sur le portage des versions du kernel (3.14 $\rightarrow$ 4.1).
 
 %----------------------------------------------------------------------------------------

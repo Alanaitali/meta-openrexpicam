@@ -46,10 +46,17 @@ $CC imx219.c -I$DIRLINUX -I$DIRASM -I$DIRASM2 -I$DIRLINUX2
 -I$DIRLINUX3 -I$DIRASM3
 \end{lstlisting}
 
-Inclusion de 6 dossiers de librairies en option puis, nouvelles dépendances
+ \clearpage
+
+Inclusion des 6 dossiers de librairies en option puis nouvelles dépendances
 inexistantes dans le dossier contenant l’arborescence de compilation (builddir).
 Recherche d’une autre solution grâce au dialogue avec le professeur de Linux
 embarqué. Conseil retenu : Compilation dans l’arborescence Yocto (in-tree)
 directe. Certains fichiers restent inexistants dans le kernel 3.14 donc,
 patch depuis le kernel 4.1.38.
+
+\section{Conclusion}
+
+La compilation out-of-tree est abandonnée parce que les dépendances étaients
+inexistantes cependant les sources sont en revanche toujours susceptible d’être utilisées.
 %----------------------------------------------------------------------------------------

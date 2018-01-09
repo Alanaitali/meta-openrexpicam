@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.21)  9 JAN 2018 10:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.21)  9 JAN 2018 11:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1906,7 +1906,7 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 196.
 
-<Figures/Ynov.png, id=92, 655.44875pt x 325.215pt>
+<Figures/Ynov.png, id=104, 655.44875pt x 325.215pt>
 File: Figures/Ynov.png Graphic file (type png)
  <use Figures/Ynov.png>
 Package pdftex.def Info: Figures/Ynov.png used on input line 219.
@@ -1953,11 +1953,11 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 9.
-<Figures/planning.png, id=154, 1057.9525pt x 245.91875pt>
+<Figures/planning.png, id=169, 1057.9525pt x 245.91875pt>
 File: Figures/planning.png Graphic file (type png)
 
 <use Figures/planning.png>
-Package pdftex.def Info: Figures/planning.png used on input line 31.
+Package pdftex.def Info: Figures/planning.png used on input line 34.
 (pdftex.def)             Requested size: 469.4705pt x 109.12767pt.
 )
 1: section
@@ -1991,11 +1991,13 @@ LaTeX Font Info:    Font shape `T1/zi4/bx/n' in size <10> not available
 Package csquotes Info: Input encoding change on input line 29.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-))
+)
 1: section
 [2
 
 
+
+]) [3
 
 ]
 \openout2 = `Chapters/Chapter3.aux'.
@@ -2013,7 +2015,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
-<Figures/arborescence.png, id=195, 1371.1225pt x 770.88pt>
+<Figures/arborescence.png, id=215, 1371.1225pt x 770.88pt>
 File: Figures/arborescence.png Graphic file (type png)
 
 <use Figures/arborescence.png>
@@ -2021,7 +2023,7 @@ Package pdftex.def Info: Figures/arborescence.png used on input line 33.
 (pdftex.def)             Requested size: 469.4705pt x 116.79558pt.
 
 1: section
-[3
+[4
 
 
 
@@ -2031,28 +2033,30 @@ Package csquotes Info: Input encoding change on input line 42.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/presence.png, id=203, 963.6pt x 1035.87pt>
+<Figures/presence.png, id=224, 963.6pt x 1035.87pt>
 File: Figures/presence.png Graphic file (type png)
  <use Figures/presence.png>
 Package pdftex.def Info: Figures/presence.png used on input line 67.
 (pdftex.def)             Requested size: 469.4705pt x 31.97513pt.
 
-<Figures/module.png, id=205, 963.6pt x 1035.87pt>
+<Figures/module.png, id=226, 963.6pt x 1035.87pt>
 File: Figures/module.png Graphic file (type png)
  <use Figures/module.png>
 Package pdftex.def Info: Figures/module.png used on input line 76.
 (pdftex.def)             Requested size: 469.4705pt x 133.16843pt.
 
-<Figures/modadd.png, id=207, 696.6025pt x 73.27374pt>
+[5 <./Figures/presence.png> <./Figures/module.png>]
+<Figures/modadd.png, id=254, 696.6025pt x 73.27374pt>
 File: Figures/modadd.png Graphic file (type png)
  <use Figures/modadd.png>
-Package pdftex.def Info: Figures/modadd.png used on input line 86.
+Package pdftex.def Info: Figures/modadd.png used on input line 89.
 (pdftex.def)             Requested size: 469.4705pt x 49.3827pt.
+) [6
 
-[4 <./Figures/presence.png> <./Figures/module.png>]) [5 <./Figures/modadd.png>]
+ <./Figures/modadd.png>]
 \openout2 = `Chapters/Chapter4.aux'.
 
-(./Chapters/Chapter4.tex
+ (./Chapters/Chapter4.tex
 Chapitre 4.
 
 Overfull \hbox (136.78036pt too wide) in paragraph at lines 12--15
@@ -2066,49 +2070,66 @@ Overfull \hbox (125.85297pt too wide) in paragraph at lines 12--15
 si-v6&id=4bd8e1231a2e6eca6a65b565176ea9722611c8dd[][] 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+
+Overfull \hbox (119.14032pt too wide) in paragraph at lines 50--51
+[][][]\T1/ppl/m/n/10.95 http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h
+=csi-v6&id=e3f847cd37b007d55b76282414bfcf13abb8fc9a[][] 
+ []
+
+
+Overfull \hbox (125.85297pt too wide) in paragraph at lines 53--54
+[][][]\T1/ppl/m/n/10.95 http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h
+=csi-v6&id=4bd8e1231a2e6eca6a65b565176ea9722611c8dd[][] 
+ []
+
 1: section
-[6
+[7
 
 
 
 ]
-Package csquotes Info: Input encoding change on input line 63.
+Package csquotes Info: Input encoding change on input line 65.
  (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/packageclasse.png, id=255, 758.835pt x 218.8175pt>
+<Figures/packageclasse.png, id=278, 758.835pt x 218.8175pt>
 File: Figures/packageclasse.png Graphic file (type png)
 
 <use Figures/packageclasse.png>
-Package pdftex.def Info: Figures/packageclasse.png used on input line 80.
+Package pdftex.def Info: Figures/packageclasse.png used on input line 82.
 (pdftex.def)             Requested size: 469.4705pt x 135.3783pt.
-) [7 <./Figures/packageclasse.png (PNG copy)>]
+) [8 <./Figures/packageclasse.png (PNG copy)>]
 \openout2 = `Chapters/Chapter5.aux'.
 
 
 (./Chapters/Chapter5.tex
 Chapitre 5.
-<Figures/webcam1.png, id=274, 739.76375pt x 463.7325pt>
+<Figures/webcam1.png, id=296, 739.76375pt x 463.7325pt>
 File: Figures/webcam1.png Graphic file (type png)
 
 <use Figures/webcam1.png>
 Package pdftex.def Info: Figures/webcam1.png used on input line 25.
 (pdftex.def)             Requested size: 469.4705pt x 57.75182pt.
 
-<Figures/webcam2.png, id=276, 739.76375pt x 463.7325pt>
+<Figures/webcam2.png, id=298, 739.76375pt x 463.7325pt>
 File: Figures/webcam2.png Graphic file (type png)
 
 <use Figures/webcam2.png>
 Package pdftex.def Info: Figures/webcam2.png used on input line 33.
 (pdftex.def)             Requested size: 469.4705pt x 21.63805pt.
 
-<Figures/webcam3.png, id=278, 739.76375pt x 463.7325pt>
+<Figures/webcam3.png, id=300, 739.76375pt x 463.7325pt>
 File: Figures/webcam3.png Graphic file (type png)
 
 <use Figures/webcam3.png>
 Package pdftex.def Info: Figures/webcam3.png used on input line 44.
 (pdftex.def)             Requested size: 369.88097pt x 41.23277pt.
- <Figures/webcam4.png, id=281, 963.6pt x 1035.87pt>
+ <Figures/webcam4.png, id=303, 963.6pt x 1035.87pt>
 File: Figures/webcam4.png Graphic file (type png)
 
 <use Figures/webcam4.png>
@@ -2116,7 +2137,7 @@ Package pdftex.def Info: Figures/webcam4.png used on input line 58.
 (pdftex.def)             Requested size: 385.43317pt x 97.95158pt.
 
 1: section
-[8
+[9
 
 
 
@@ -2126,20 +2147,20 @@ Package csquotes Info: Input encoding change on input line 66.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/webcam5.png, id=298, 1188.44pt x 722.7pt>
+<Figures/webcam5.png, id=320, 1188.44pt x 722.7pt>
 File: Figures/webcam5.png Graphic file (type png)
  <use Figures/webcam5.png>
 Package pdftex.def Info: Figures/webcam5.png used on input line 75.
 (pdftex.def)             Requested size: 118.5101pt x 59.32143pt.
 )
-[9 <./Figures/webcam4.png> <./Figures/webcam5.png>]
+[10 <./Figures/webcam4.png> <./Figures/webcam5.png>]
 \openout2 = `Chapters/Chapter6.aux'.
 
  (./Chapters/Chapter6.tex
 Chapitre 6.
 )
 1: section
-[10
+[11
 
 
 
@@ -2152,7 +2173,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 316.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 316.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 316.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3A367865226EF09861E685769B88BCCA;3472.
+(rerunfilecheck)             Checksum: 878918FA92406615884EF10B009FBA79;3788.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2166,13 +2187,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  )
 (\end occurred when \iftrue on line 152 was incomplete) 
 Here is how much of TeX's memory you used:
- 34725 strings out of 493029
- 677124 string characters out of 6136233
+ 34732 strings out of 493029
+ 677195 string characters out of 6136233
  805114 words of memory out of 5000000
- 37725 multiletter control sequences out of 15000+600000
+ 37726 multiletter control sequences out of 15000+600000
  47739 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,20n,76p,10450b,1827s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,19n,76p,10450b,1829s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texm
 f-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvi
 ps/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/in
@@ -2182,10 +2203,10 @@ ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
 atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (13 pages, 998019 bytes).
+Output written on main.pdf (14 pages, 999415 bytes).
 PDF statistics:
- 372 PDF objects out of 1000 (max. 8388607)
- 318 compressed objects within 4 object streams
- 115 named destinations out of 1000 (max. 500000)
- 285 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 394 PDF objects out of 1000 (max. 8388607)
+ 339 compressed objects within 4 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 309 words of extra memory for PDF output out of 10000 (max. 10000000)
 
