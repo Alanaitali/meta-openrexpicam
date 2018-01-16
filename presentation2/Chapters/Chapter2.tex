@@ -1,62 +1,86 @@
 % Chapter 2
-\chapter{Solution n° 1} % Main chapter title
+\chapter{Piste n° 1} % Main chapter title
 \label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter2}
 %----------------------------------------------------------------------------------------
 
 \begin{description}
-  \item[Plateforme :] i.MX6
   \item[Version du Kernel :] 3.14
-  \item[Source :] \href{https://www.raspberrypi.org/forums/viewtopic.php?f=43&t=162722}
-  {https://www.raspberrypi.org/forums/viewtopic.php?f=43\&t=162722}
+  \item[Code de travail :] imx219.c (fichier de la solution 2 sur le rapport du
+  09/01/2017)
 \end{description}
 
-Pour décorréler les erreurs de compilation des erreurs de manipulation Yocto,
-nous  compilons les fichiers depuis la cross-toolchain du SDK généré par Yocto.
-Décrit dans \$CC.
+Suite à l'exploration de 3 pistes de solutions, nous avons choisi de nous
+concentrer sur la solutions n°2 dont le driver compile sans erreur mais ne
+réussit pas le chargement en module dans le kernel.
+
+\section{Erreur}
+Constat : chargé, le driver apparait à la commande lsmod mais inutilisé.
 
 \begin{lstlisting}
-#génération du sdk
-bitbake openrexpicam-base-image -c populate_sdk
-# environement du sdk
-source /opt/poky/2.0.3/environment-setup-cortexa9hf-vfp-neon-poky-linux-gnueabi
-# apercu de CC
-$CC imx219.c
+#écoute du kernel
+dmesg|tail
+#chargement
+modprobe imx219
+#écoute du kernel
+dmesg|tail
 \end{lstlisting}
+Après recherche d'indices pour le debug, on retient un message d'erreur dans ----.
+Signification incomprise correctement par recherche web, nous nous penchons donc
+sur le code C. Résultat de l'annalyse :
+l'erreur provient des premières lignes de la première fonction du driver. La
+sécurité testant le premier paramètre d'appel du driver s'est déclanchée. le
+paramètre est une structure identifiante du kernel donnée par le kernel au
+driver. Il y a donc problème de compatibilité entre driver et kernel. Selon
+l'avis de notre professeur de yocto qui a été appuyé par nos recherches,
+le driver en question utilise les interfaces de fonctionnement nommées
+platform\_data, technologie remplacée progressivement depuis 2011 par le
+device-tree et sa gestion des compatibilités.
 
-Appel à des librairies contenues dans l’arborescence de compilation de
-différentes recettes.
+\section{Solution}
+Aujourd'hui mardi 16 janvier nous avons encore cherché à porter le driver vers
+une compatibilité avec le device-tree.
+\begin{description}
+  \item[ajout de la structure type of\_device\_id dans le driver ] ilhbce
+  \begin{lstlisting}
+  static const struct of\_device\_id imx6s-openrex-dt-ids[]={
+    { .compatible = "imx6s , imx219-i2c",
+    .data = &imx219-i2c\_config /*, sentinel*/
+    },{
+      /*.compatible = "",
+      .data = "", sentinel*/
+      },
+    };
+    \end{lstlisting}
+    \item[Completion de la structure de manipulation du driver:] efzecr
+    \begin{lstlisting}
+    static const struct of_device_id imx6s-openrex-dt-ids[]={
+      static struct i2c_driver imx219_i2c_driver = {
+    .driver = {
+      .name = "imx219",
+      .of_mach_table = of_mach_ptr(imx6s-openrex-dt-ids),
+      },
+  	.probe = imx219_probe,
+    .remove = imx219_remove,
+    .id_table = imx219_id,
+  };
+      \end{lstlisting}
+    \end{description}
 
-\begin{lstlisting}
-BUILDDIR=/home/diag/workspaceThales/Yocto/fsl-community-bsp/build-imx6rex.com
-IMX6S_DIR=$BUILDDIR/tmp/work/imx6s_openrex-poky-linux-gnueabi
-#libs linux/*.h
-DIRLINUX=$IMX6S_DIR/linux-openrex/3.14-r0/git/include
-DIRLINUX2=$IMX6S_DIR/u-boot-openrex/v2015.10+gitAUTOINC+7d8ddd7de7-r0/git
-/include
-DIRLINUX3=$IMX6S_DIR/core-image-minimal/1.0-r0/sdk/image/opt/poky/2.0.3
-/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi/usr/include
-#libs asm/*.h
-DIRASM=$BUILDDIR/tmp/work/x86_64-nativesdk-pokysdk-linux
-/nativesdk-linux-libc-headers/4.1-r0/linux-4.1/arch/arm/include/
-DIRASM2=$IMX6S_DIR/linux-openrex/3.14-r0/build/arch/arm/include/generated
-DIRASM3=$IMX6S_DIR/u-boot-openrex/v2015.10+gitAUTOINC+7d8ddd7de7-r0/git
-/arch/arm/include/
-#nouvelle commande de compilation "out of tree"
-$CC imx219.c -I$DIRLINUX -I$DIRASM -I$DIRASM2 -I$DIRLINUX2
--I$DIRLINUX3 -I$DIRASM3
-\end{lstlisting}
+    \begin{lstlisting}
 
- \clearpage
+    \end{lstlisting}
 
-Inclusion des 6 dossiers de librairies en option puis nouvelles dépendances
-inexistantes dans le dossier contenant l’arborescence de compilation (builddir).
-Recherche d’une autre solution grâce au dialogue avec le professeur de Linux
-embarqué. Conseil retenu : Compilation dans l’arborescence Yocto (in-tree)
-directe. Certains fichiers restent inexistants dans le kernel 3.14 donc,
-patch depuis le kernel 4.1.38.
+    \clearpage
 
-\section{Conclusion}
+    Inclusion des 6 dossiers de librairies en option puis nouvelles dépendances
+    inexistantes dans le dossier contenant l’arborescence de compilation (builddir).
+    Recherche d’une autre solution grâce au dialogue avec le professeur de Linux
+    embarqué. Conseil retenu : Compilation dans l’arborescence Yocto (in-tree)
+    directe. Certains fichiers restent inexistants dans le kernel 3.14 donc,
+    patch depuis le kernel 4.1.38.
 
-La compilation out-of-tree est abandonnée parce que les dépendances étaients
-inexistantes cependant les sources sont en revanche toujours susceptible d’être utilisées.
-%----------------------------------------------------------------------------------------
+    \section{Conclusion}
+
+    La compilation out-of-tree est abandonnée parce que les dépendances étaients
+    inexistantes cependant les sources sont en revanche toujours susceptible d’être utilisées.
+    %----------------------------------------------------------------------------------------
