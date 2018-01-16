@@ -1,13 +1,12 @@
-From 08126696bccb8e6fbfb78dc72544cc182dd3d0b3 Mon Sep 17 00:00:00 2001
-From: alan <aitali.alan@gmail.com>
-Date: Tue, 26 Dec 2017 23:01:15 +0100
-Subject: [PATCH] solution 2
+From a3e63ab6781326cebd56d31c014c54cd775eda44 Mon Sep 17 00:00:00 2001
+From: Gladwistor <aitali.alan@gmail.com>
+Date: Tue, 16 Jan 2018 12:12:28 +0100
+Subject: [PATCH] add makefile et kconfig
 
 ---
- drivers/media/i2c/soc_camera/Kconfig  |   6 +
- drivers/media/i2c/soc_camera/Makefile |   1 +
- 2 files changed, 729 insertions(+)
- create mode 100644 drivers/media/i2c/soc_camera/imx219.c
+ drivers/media/i2c/soc_camera/Kconfig  | 6 ++++++
+ drivers/media/i2c/soc_camera/Makefile | 1 +
+ 2 files changed, 7 insertions(+)
 
 diff --git a/drivers/media/i2c/soc_camera/Kconfig b/drivers/media/i2c/soc_camera/Kconfig
 index 23d352f..be1b2b7 100644
