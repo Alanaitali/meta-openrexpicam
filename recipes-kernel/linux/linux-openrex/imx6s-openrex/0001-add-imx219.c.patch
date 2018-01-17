@@ -1,19 +1,19 @@
-From f983e1b3f79f2318547559b9d0599dd416924ea5 Mon Sep 17 00:00:00 2001
+From e2e79ca51ce971a8dffa1bf1368eaf598232abd0 Mon Sep 17 00:00:00 2001
 From: Gladwistor <aitali.alan@gmail.com>
-Date: Tue, 16 Jan 2018 14:16:47 +0100
+Date: Wed, 17 Jan 2018 12:31:22 +0100
 Subject: [PATCH] add imx219.c
 
 ---
- drivers/media/i2c/soc_camera/imx219.c | 878 ++++++++++++++++++++++++++++++++++
- 1 file changed, 878 insertions(+)
+ drivers/media/i2c/soc_camera/imx219.c | 866 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 866 insertions(+)
  create mode 100644 drivers/media/i2c/soc_camera/imx219.c
 
 diff --git a/drivers/media/i2c/soc_camera/imx219.c b/drivers/media/i2c/soc_camera/imx219.c
 new file mode 100644
-index 0000000..74a6ef7
+index 0000000..eb65d2b
 --- /dev/null
 +++ b/drivers/media/i2c/soc_camera/imx219.c
-@@ -0,0 +1,878 @@
+@@ -0,0 +1,866 @@
 +/*
 + * Driver for IMX219 CMOS Image Sensor from Sony
 + *
@@ -812,20 +812,8 @@ index 0000000..74a6ef7
 +	struct i2c_adapter *adapter = to_i2c_adapter(client->dev.parent);
 +	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 +
-+    did = of_match_device(of_match_ptr(imx219_of_match),
-+            &client->dev);
++    	int ret;
 +
-+     if (!did) {
-+        dev_err(&client->dev, "IMX219: CONFIG_OF is disable.\n");
-+        return -EINVAL;
-+     }
-+
-+    int ret;
-+
-+	if (!ssdd) {
-+		dev_err(&client->dev, "IMX219: missing platform data!\n");
-+		return -EINVAL;
-+	}
 +
 +	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA)) {
 +		dev_warn(&adapter->dev,
@@ -838,11 +826,11 @@ index 0000000..74a6ef7
 +		return -ENOMEM;
 +
 +	priv->clk = v4l2_clk_get(&client->dev, "mclk");
-+	if (IS_ERR(priv->clk)) {
++	/*if (IS_ERR(priv->clk)) {
 +		dev_info(&client->dev, "Error %ld getting clock\n",
 +			 PTR_ERR(priv->clk));
 +		return -EPROBE_DEFER;
-+	}
++	}*/
 +
 +	priv->fmt = &imx219_colour_fmts[0];
 +

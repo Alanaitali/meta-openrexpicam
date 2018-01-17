@@ -1,29 +1,60 @@
-From c45b7dde341b8b6191723576cea003dc29e38bb1 Mon Sep 17 00:00:00 2001
+From bf3d9a33e32e833e2804c7c238b8c377627b9bae Mon Sep 17 00:00:00 2001
 From: Gladwistor <aitali.alan@gmail.com>
-Date: Tue, 16 Jan 2018 14:30:30 +0100
+Date: Tue, 16 Jan 2018 15:17:00 +0100
 Subject: [PATCH] add dts
 
 ---
- arch/arm/boot/dts/imx6qdl-openrex.dtsi | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ arch/arm/boot/dts/imx6qdl-openrex.dtsi | 28 +++++++++++++++-------------
+ 1 file changed, 15 insertions(+), 13 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx6qdl-openrex.dtsi b/arch/arm/boot/dts/imx6qdl-openrex.dtsi
-index 98d61d2..7e440e1 100644
+index 98d61d2..9ed1634 100644
 --- a/arch/arm/boot/dts/imx6qdl-openrex.dtsi
 +++ b/arch/arm/boot/dts/imx6qdl-openrex.dtsi
-@@ -244,7 +244,11 @@
- 	pinctrl-names = "default";
+@@ -245,19 +245,6 @@
  	pinctrl-0 = <&pinctrl_i2c1>;
  	status = "okay";
+ 
+-};
 -
-+	
+-&i2c2 {
+-	clock-frequency = <100000>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_i2c2>;
+-	status = "okay";
+-
+-	hdmi: edid@50 {
+-		compatible = "fsl,imx6-hdmi-i2c";
+-		reg = <0x50>;
+-	};
+-
+ 	pmic: pfuze100@08 {
+ 		compatible = "fsl,pfuze100";
+ 		reg = <0x08>;
+@@ -358,8 +345,23 @@
+ 		};
+ 	};
+ 
++};
++
++&i2c2 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c2>;
++	status = "okay";
+ 
++	hdmi: edid@50 {
++		compatible = "fsl,imx6-hdmi-i2c";
++		reg = <0x50>;
++	};
+ 
 +	imx219: imx219@0x64 {
 +	compatible = "sony,imx219";
 +	reg = <0x64>;
 +	};
  };
  
- &i2c2 {
+ &i2c3 {
 -- 
 2.7.4
 
