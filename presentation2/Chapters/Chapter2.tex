@@ -11,59 +11,73 @@
 
 Suite à l'exploration de 3 pistes de solutions, nous avons choisi de nous
 concentrer sur la solutions n°2 dont le driver compile sans erreur mais ne
-réussit pas le chargement en module dans le kernel.
+réussit pas le chargement.
 
 \section{Erreur}
-Constat : chargé, le driver apparait à la commande lsmod mais inutilisé.
+Constat : Le driver apparait à la commande lsmod mais est inutilisé.
 
-\begin{lstlisting}
-#écoute du kernel
-dmesg|tail
-#chargement
-modprobe imx219
-#écoute du kernel
-dmesg|tail
-\end{lstlisting}
-Après recherche d'indices pour le debug, on retient un message d'erreur dans ----.
-Signification incomprise correctement par recherche web, nous nous penchons donc
-sur le code C. Résultat de l'annalyse :
-l'erreur provient des premières lignes de la première fonction du driver. La
+ \begin{figure}[th]
+   \centering
+   \includegraphics[width=1\linewidth]{chargement_driver.png}
+   \decoRule
+   \caption{Chargement du module}  \label{fig:planning}
+\end{figure}
+
+Après recherche d'indices pour le debug, on retient le message d'erreur suivant:
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=1\linewidth]{errorplatform_dta.png}
+  \decoRule
+  \caption{Debug probe}  \label{fig:planning}
+\end{figure}
+
+Résultat de l'annalyse :
+l'erreur provient des premières lignes de la première fonction probe du driver. La
 sécurité testant le premier paramètre d'appel du driver s'est déclanchée. le
-paramètre est une structure identifiante du kernel donnée par le kernel au
-driver. Il y a donc problème de compatibilité entre driver et kernel. Selon
+paramètre est une structure contenant des informations sur les périphériques i2c.
+Il y a donc problème de compatibilité entre le driver imx219 et le gestionnaire i2c. Selon
 l'avis de notre professeur de yocto qui a été appuyé par nos recherches,
 le driver en question utilise les interfaces de fonctionnement nommées
 platform\_data, technologie remplacée progressivement depuis 2011 par le
 device-tree et sa gestion des compatibilités.
 
 \section{Solution}
-Aujourd'hui mardi 16 janvier nous avons encore cherché à porter le driver vers
+Aujourd'hui mardi 16 janvier nous avons cherché à porter le driver vers
 une compatibilité avec le device-tree.
 \begin{description}
-  \item[ajout de la structure type of\_device\_id dans le driver ] ilhbce
+  \item[Ajout de la structure type of\_device\_id dans le driver]
   \begin{lstlisting}
-  static const struct of\_device\_id imx6s-openrex-dt-ids[]={
-    { .compatible = "imx6s , imx219-i2c",
-    .data = &imx219-i2c\_config /*, sentinel*/
-    },{
-      /*.compatible = "",
-      .data = "", sentinel*/
-      },
-    };
-    \end{lstlisting}
-    \item[Completion de la structure de manipulation du driver:] efzecr
-    \begin{lstlisting}
-    static const struct of_device_id imx6s-openrex-dt-ids[]={
-      static struct i2c_driver imx219_i2c_driver = {
+  static const struct of_device_id imx219_of_match[] = {
+    { .compatible = "sony,imx219", .data = 0 },
+    {}
+  };
+   
+  MODULE_DEVICE_TABLE(of, imx219_of_match);
+  \end{lstlisting}
+
+  \item[Completion de la structure de manipulation du driver]
+  \begin{lstlisting}
+  static struct i2c_driver imx219_i2c_driver = {
     .driver = {
       .name = "imx219",
-      .of_mach_table = of_mach_ptr(imx6s-openrex-dt-ids),
-      },
-  	.probe = imx219_probe,
-    .remove = imx219_remove,
-    .id_table = imx219_id,
+      .of_match_table = of_match_ptr(imx219_of_match),
+    },
+    .probe		= imx219_probe,
+    .remove	= imx219_remove,
+    .id_table	= imx219_id,
   };
-      \end{lstlisting}
+  \end{lstlisting}
+
+\section{Erreur}
+Au chargement de la nouvelle image nous obtenons les erreur suivantes:
+
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=1\linewidth]{errorclk.png}
+  \decoRule
+  \caption{Debug probe}  \label{fig:planning}
+\end{figure}
+
     \end{description}
 
     \begin{lstlisting}
@@ -72,15 +86,8 @@ une compatibilité avec le device-tree.
 
     \clearpage
 
-    Inclusion des 6 dossiers de librairies en option puis nouvelles dépendances
-    inexistantes dans le dossier contenant l’arborescence de compilation (builddir).
-    Recherche d’une autre solution grâce au dialogue avec le professeur de Linux
-    embarqué. Conseil retenu : Compilation dans l’arborescence Yocto (in-tree)
-    directe. Certains fichiers restent inexistants dans le kernel 3.14 donc,
-    patch depuis le kernel 4.1.38.
+   
 
     \section{Conclusion}
 
-    La compilation out-of-tree est abandonnée parce que les dépendances étaients
-    inexistantes cependant les sources sont en revanche toujours susceptible d’être utilisées.
     %----------------------------------------------------------------------------------------
