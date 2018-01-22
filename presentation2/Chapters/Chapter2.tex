@@ -11,7 +11,7 @@
 
 Suite à l'exploration de 3 pistes, nous avons choisi de nous
 concentrer sur la solution n°2 dont le driver compile sans erreur mais ne
-réussit pas le chargement.
+réussit pas le chargement au sein du kernel.
 
 \section{Erreur}
 Constat : Le driver apparait à la commande lsmod mais est inutilisé.
@@ -31,7 +31,7 @@ Après recherche d'indices pour le debug, on retient le message d'erreur suivant
   \caption{Debug probe}  \label{fig:planning}
 \end{figure}
 
-Résultat de l'annalyse :
+Résultat de l'analyse :
 l'erreur provient des premières lignes de la première fonction probe du driver. La
 sécurité testant le premier paramètre d'appel du driver s'est déclanchée. le
 paramètre est une structure contenant des informations sur les périphériques i2c.
@@ -51,7 +51,7 @@ une compatibilité avec le device-tree.
     { .compatible = "sony,imx219", .data = 0 },
     {}
   };
-   
+
   MODULE_DEVICE_TABLE(of, imx219_of_match);
   \end{lstlisting}
 
@@ -78,12 +78,12 @@ une compatibilité avec le device-tree.
 \end{description}
 
 \section{Conclusion}
-Une nouvelle erreur est apparue cependant les travaux qui concernant le 
+Une nouvelle erreur est apparue cependant les travaux qui concernent le
 device tree ont fonctionné correctement car on peut remarquer au démarage
 que le driver est chargé automatiquement.
 
 \section{Erreur}
-Au chargement de la nouvelle image nous obtenons les erreur suivantes:
+Au chargement de la nouvelle image nous obtenons les erreurs suivantes:
 
 \begin{figure}[th]
   \centering
@@ -92,14 +92,15 @@ Au chargement de la nouvelle image nous obtenons les erreur suivantes:
   \caption{Debug probe}  \label{fig:planning}
 \end{figure}
 
-L'erreur est relative à la fonction getclk du driver qui est une sécuritée tout comme la fonction suprimer précedement.
-Elle confimre que nous avons des dificultés à communiquer avec l'i2c.
+L'erreur est relative à la fonction getclk du driver qui est une sécurité
+ tout comme la fonction supprimer précedement.
+Elle confirme que nous avons des dificultés à communiquer avec l'i2c.
 
 \section{Solution}
-Notre strategie est de supprimer cette nouvelle fonction de securitée, pour avoir plus
+Notre strategie est de supprimer cette nouvelle fonction de securité, pour avoir plus
 d'informations sur la façon dont le driver fonctionne.
 \begin{description}
-  \item[Suppression de la securitée d'horloge]
+  \item[Suppression de la securité d'horloge]
     \begin{lstlisting}
 	  if (IS_ERR(priv->clk)) {
 		    dev_info(&client->dev, "Error %ld getting clock\n",
@@ -108,7 +109,7 @@ d'informations sur la façon dont le driver fonctionne.
 	  }
     \end{lstlisting}
 \section{Conclusion}
-Le driver est maintenant charger "correctement" par le kernel.
+Le driver est maintenant chargé "correctement" par le kernel.
 
 \begin{figure}[th]
   \centering
@@ -120,14 +121,18 @@ Le driver est maintenant charger "correctement" par le kernel.
     \clearpage
   \end{description}
 
+<<<<<<< HEAD
   On peut voir que l'i2c peut maintenant utiliser le driver imx219 et 
+=======
+  On peut voir que l'i2c peut maintenant utiliser le driver imx219 et
+>>>>>>> 417d1d91f570aa47784f8a3c853f8a5eacb9f335
   qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
-  d'utiliser le driver car les informations sur son utilisation nous manque.
-  Deplus de nouvelles erreurs apparaissent au chargement du driver.
+  d'utiliser le driver car les informations sur son utilisation nous manquent.
+  De plus de nouvelles erreurs apparaissent au chargement du driver.
 
   \section{Erreur}
-  Au chargement du driver nous obtenons le debug suivant:
-  
+  Au chargement du driver nous obtenons le message de debug kernel suivant:
+
   \begin{figure}[th]
     \centering
     \includegraphics[width=1\linewidth]{debugdmesg.png}

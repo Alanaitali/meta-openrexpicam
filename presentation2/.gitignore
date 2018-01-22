@@ -1,6 +1,4 @@
 Chapters/*.aux
 *.log
-main.[a-su-z]*
 main.toc
-main-blx.bib
-
+main[.\-][a-su-Z]* 
