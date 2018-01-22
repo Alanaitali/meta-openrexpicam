@@ -6,24 +6,26 @@
 \contentsline {chapter}{\numberline {2}Piste n\IeC {\textdegree } 1}{2}{chapter.4}
 \contentsline {section}{\numberline {2.1}Erreur}{2}{section.5}
 \contentsline {section}{\numberline {2.2}Solution}{3}{section.8}
-\contentsline {section}{\numberline {2.3}Erreur}{3}{section.26}
-\contentsline {section}{\numberline {2.4}Conclusion}{4}{section.30}
-\contentsline {chapter}{\numberline {3}Solution n\IeC {\textdegree } 2}{5}{chapter.31}
-\contentsline {section}{\numberline {3.1}Fichiers sources}{5}{section.32}
-\contentsline {section}{\numberline {3.2}Travail effectu\IeC {\'e}}{5}{section.33}
-\contentsline {section}{\numberline {3.3}Compilation de driver}{5}{section.34}
-\contentsline {section}{\numberline {3.4}Utilisation du driver sur la cible}{6}{section.53}
-\contentsline {section}{\numberline {3.5}Conclusion}{7}{section.54}
-\contentsline {chapter}{\numberline {4}Solution n\IeC {\textdegree } 3}{8}{chapter.55}
-\contentsline {section}{\numberline {4.1}Contenu des sources}{8}{section.56}
-\contentsline {section}{\numberline {4.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s}{8}{section.60}
-\contentsline {section}{\numberline {4.3}lien GIT}{8}{section.61}
-\contentsline {section}{\numberline {4.4}Source des patchs}{8}{section.62}
-\contentsline {section}{\numberline {4.5}Ajout de paquets}{9}{section.65}
-\contentsline {section}{\numberline {4.6}Conclusion}{9}{section.79}
-\contentsline {chapter}{\numberline {5}\IeC {\'E}tat de l'art de la r\IeC {\'e}cup\IeC {\'e}ration du flux vid\IeC {\'e}o}{10}{chapter.80}
-\contentsline {section}{\numberline {5.1}Methodologie par la Webcam USB}{10}{section.81}
-\contentsline {section}{\numberline {5.2}Probl\IeC {\`e}mes}{10}{section.90}
-\contentsline {section}{\numberline {5.3}Point d'am\IeC {\'e}lioration}{11}{section.91}
-\contentsline {section}{\numberline {5.4}Sources}{11}{section.92}
-\contentsline {chapter}{\numberline {6}Conclusion}{12}{chapter.93}
+\contentsline {section}{\numberline {2.3}Conclusion}{3}{section.31}
+\contentsline {section}{\numberline {2.4}Erreur}{3}{section.32}
+\contentsline {section}{\numberline {2.5}Solution}{4}{section.34}
+\contentsline {section}{\numberline {2.6}Conclusion}{4}{section.41}
+\contentsline {chapter}{\numberline {3}Solution n\IeC {\textdegree } 2}{6}{chapter.43}
+\contentsline {section}{\numberline {3.1}Fichiers sources}{6}{section.44}
+\contentsline {section}{\numberline {3.2}Travail effectu\IeC {\'e}}{6}{section.45}
+\contentsline {section}{\numberline {3.3}Compilation de driver}{6}{section.46}
+\contentsline {section}{\numberline {3.4}Utilisation du driver sur la cible}{7}{section.65}
+\contentsline {section}{\numberline {3.5}Conclusion}{8}{section.66}
+\contentsline {chapter}{\numberline {4}Solution n\IeC {\textdegree } 3}{9}{chapter.67}
+\contentsline {section}{\numberline {4.1}Contenu des sources}{9}{section.68}
+\contentsline {section}{\numberline {4.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s}{9}{section.72}
+\contentsline {section}{\numberline {4.3}lien GIT}{9}{section.73}
+\contentsline {section}{\numberline {4.4}Source des patchs}{9}{section.74}
+\contentsline {section}{\numberline {4.5}Ajout de paquets}{10}{section.77}
+\contentsline {section}{\numberline {4.6}Conclusion}{10}{section.91}
+\contentsline {chapter}{\numberline {5}\IeC {\'E}tat de l'art de la r\IeC {\'e}cup\IeC {\'e}ration du flux vid\IeC {\'e}o}{11}{chapter.92}
+\contentsline {section}{\numberline {5.1}Methodologie par la Webcam USB}{11}{section.93}
+\contentsline {section}{\numberline {5.2}Probl\IeC {\`e}mes}{11}{section.102}
+\contentsline {section}{\numberline {5.3}Point d'am\IeC {\'e}lioration}{12}{section.103}
+\contentsline {section}{\numberline {5.4}Sources}{12}{section.104}
+\contentsline {chapter}{\numberline {6}Conclusion}{13}{chapter.105}
