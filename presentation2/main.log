@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.22)  22 JAN 2018 12:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.22)  22 JAN 2018 14:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1706,6 +1706,9 @@ LaTeX Warning: Label `fig:planning' multiply defined.
 
 LaTeX Warning: Label `fig:planning' multiply defined.
 
+
+LaTeX Warning: Label `fig:planning' multiply defined.
+
 ) (./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux) (./Chapters/Chapter5.aux)
 (./Chapters/Chapter6.aux))
 \openout1 = `main.aux'.
@@ -1971,14 +1974,14 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 Chapitre 2.
 LaTeX Font Info:    Font shape `TS1/ppl/bx/n' in size <24.88> not available
 (Font)              Font shape `TS1/ppl/b/n' tried instead on input line 2.
-<Figures/chargement_driver.png, id=174, 724.7075pt x 238.8925pt>
+<Figures/chargement_driver.png, id=186, 724.7075pt x 238.8925pt>
 File: Figures/chargement_driver.png Graphic file (type png)
 
 <use Figures/chargement_driver.png>
 Package pdftex.def Info: Figures/chargement_driver.png used on input line 21.
 (pdftex.def)             Requested size: 469.4705pt x 154.757pt.
 
-<Figures/errorplatform_dta.png, id=175, 730.73pt x 17.06375pt>
+<Figures/errorplatform_dta.png, id=187, 730.73pt x 17.06375pt>
 File: Figures/errorplatform_dta.png Graphic file (type png)
 
 <use Figures/errorplatform_dta.png>
@@ -2014,7 +2017,7 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 LaTeX Font Info:    Font shape `T1/zi4/bx/n' in size <10> not available
 (Font)              Font shape `T1/zi4/b/n' tried instead on input line 73.
 
-<Figures/errorclk.png, id=180, 781.92125pt x 35.13126pt>
+<Figures/errorclk.png, id=192, 781.92125pt x 35.13126pt>
 File: Figures/errorclk.png Graphic file (type png)
 
 <use Figures/errorclk.png>
@@ -2026,19 +2029,26 @@ Package csquotes Info: Input encoding change on input line 103.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/lsmodeti2cdetect.png, id=210, 870.25125pt x 411.5375pt>
+<Figures/lsmodeti2cdetect.png, id=222, 870.25125pt x 411.5375pt>
 File: Figures/lsmodeti2cdetect.png Graphic file (type png)
 
 <use Figures/lsmodeti2cdetect.png>
 Package pdftex.def Info: Figures/lsmodeti2cdetect.png used on input line 115.
 (pdftex.def)             Requested size: 469.4705pt x 222.01343pt.
- [4 <./Figures/lsmodeti2cdetect.png>])
-[5
+ [4 <./Figures/lsmodeti2cdetect.png>]
+<Figures/debugdmesg.png, id=234, 1032.85875pt x 947.54pt>
+File: Figures/debugdmesg.png Graphic file (type png)
 
-]
+<use Figures/debugdmesg.png>
+Package pdftex.def Info: Figures/debugdmesg.png used on input line 133.
+(pdftex.def)             Requested size: 469.4705pt x 430.68317pt.
+) [5
+
+ <./Figures/debugdmesg.png>]
 \openout2 = `Chapters/Chapter3.aux'.
 
- (./Chapters/Chapter3.tex
+
+(./Chapters/Chapter3.tex
 Chapitre 3.
 Package csquotes Info: Input encoding change on input line 40.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
@@ -2132,7 +2142,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 317.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 317.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 317.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DE6496A0F92D03B26E82699AC0F42A8A;3896.
+(rerunfilecheck)             Checksum: FCCAE4AE7406F02A588D6452E95F2BDB;4108.
 
 
 LaTeX Warning: There were undefined references.
@@ -2146,10 +2156,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  )
 (\end occurred when \iftrue on line 153 was incomplete) 
 Here is how much of TeX's memory you used:
- 34683 strings out of 493029
- 676708 string characters out of 6136234
+ 34693 strings out of 493029
+ 676893 string characters out of 6136234
  802746 words of memory out of 5000000
- 37680 multiletter control sequences out of 15000+600000
+ 37686 multiletter control sequences out of 15000+600000
  47739 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,20n,77p,10447b,1971s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2162,10 +2172,10 @@ ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
 atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (16 pages, 259969 bytes).
+Output written on main.pdf (16 pages, 446119 bytes).
 PDF statistics:
- 368 PDF objects out of 1000 (max. 8388607)
- 335 compressed objects within 4 object streams
- 122 named destinations out of 1000 (max. 500000)
- 245 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 381 PDF objects out of 1000 (max. 8388607)
+ 347 compressed objects within 4 object streams
+ 125 named destinations out of 1000 (max. 500000)
+ 266 words of extra memory for PDF output out of 10000 (max. 10000000)
 

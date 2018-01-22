@@ -391,6 +391,9 @@ INPUT ./Figures/lsmodeti2cdetect.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplro8c.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplro8c.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmri.tfm
+INPUT Figures/debugdmesg.png
+INPUT ./Figures/debugdmesg.png
+INPUT ./Figures/debugdmesg.png
 OUTPUT Chapters/Chapter3.aux
 INPUT Chapters/Chapter3.tex
 INPUT Chapters/Chapter3.tex

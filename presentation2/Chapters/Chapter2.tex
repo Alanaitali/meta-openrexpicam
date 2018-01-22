@@ -9,8 +9,8 @@
   09/01/2017)
 \end{description}
 
-Suite à l'exploration de 3 pistes de solutions, nous avons choisi de nous
-concentrer sur la solutions n°2 dont le driver compile sans erreur mais ne
+Suite à l'exploration de 3 pistes, nous avons choisi de nous
+concentrer sur la solution n°2 dont le driver compile sans erreur mais ne
 réussit pas le chargement.
 
 \section{Erreur}
@@ -122,8 +122,23 @@ Le driver est maintenant charger "correctement" par le kernel.
 
   On peut voir que l'i2c peut maintenant utiliser le dirver imx219 et 
   qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
-  d'utiliser le driver car les informations sur l'utilisation du driver nous manque.
+  d'utiliser le driver car les informations sur son utilisation nous manque.
   Deplus de nouvelles erreurs apparaissent au chargement du driver.
 
+  \section{Erreur}
+  Au chargement du driver nous obtenons le debug suivant:
+  
+  \begin{figure}[th]
+    \centering
+    \includegraphics[width=1\linewidth]{debugdmesg.png}
+    \decoRule
+    \caption{Debug probe}  \label{fig:planning}
+  \end{figure}
 
+  \section{Reste à faire}
+
+   Determiner la cause du segmentation fault.
+
+   Savoir comment recuperer le flux video.
+  
     %----------------------------------------------------------------------------------------
