@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.22)  22 JAN 2018 11:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.22)  22 JAN 2018 12:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1703,6 +1703,9 @@ LaTeX Warning: Label `fig:planning' multiply defined.
 
 LaTeX Warning: Label `fig:planning' multiply defined.
 
+
+LaTeX Warning: Label `fig:planning' multiply defined.
+
 ) (./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux) (./Chapters/Chapter5.aux)
 (./Chapters/Chapter6.aux))
 \openout1 = `main.aux'.
@@ -1968,14 +1971,14 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 Chapitre 2.
 LaTeX Font Info:    Font shape `TS1/ppl/bx/n' in size <24.88> not available
 (Font)              Font shape `TS1/ppl/b/n' tried instead on input line 2.
-<Figures/chargement_driver.png, id=161, 724.7075pt x 238.8925pt>
+<Figures/chargement_driver.png, id=179, 724.7075pt x 238.8925pt>
 File: Figures/chargement_driver.png Graphic file (type png)
 
 <use Figures/chargement_driver.png>
 Package pdftex.def Info: Figures/chargement_driver.png used on input line 21.
 (pdftex.def)             Requested size: 469.4705pt x 154.757pt.
 
-<Figures/errorplatform_dta.png, id=162, 730.73pt x 17.06375pt>
+<Figures/errorplatform_dta.png, id=180, 730.73pt x 17.06375pt>
 File: Figures/errorplatform_dta.png Graphic file (type png)
 
 <use Figures/errorplatform_dta.png>
@@ -2003,17 +2006,34 @@ Package csquotes Info: Input encoding change on input line 59.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/errorclk.png, id=168, 781.92125pt x 35.13126pt>
-File: Figures/errorclk.png Graphic file (type png)
-
-<use Figures/errorclk.png>
-Package pdftex.def Info: Figures/errorclk.png used on input line 76.
-(pdftex.def)             Requested size: 469.4705pt x 21.09283pt.
-Package csquotes Info: Input encoding change on input line 83.
+Package csquotes Info: Input encoding change on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-) [3 <./Figures/errorclk.png (PNG copy)>]) [4
+)
+LaTeX Font Info:    Font shape `T1/zi4/bx/n' in size <10> not available
+(Font)              Font shape `T1/zi4/b/n' tried instead on input line 73.
+
+<Figures/errorclk.png, id=185, 781.92125pt x 35.13126pt>
+File: Figures/errorclk.png Graphic file (type png)
+
+<use Figures/errorclk.png>
+Package pdftex.def Info: Figures/errorclk.png used on input line 90.
+(pdftex.def)             Requested size: 469.4705pt x 21.09283pt.
+ [3 <./Figures/errorclk.png (PNG copy)>]
+Package csquotes Info: Input encoding change on input line 103.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+<Figures/lsmodeti2cdetect.png, id=215, 870.25125pt x 411.5375pt>
+File: Figures/lsmodeti2cdetect.png Graphic file (type png)
+
+<use Figures/lsmodeti2cdetect.png>
+Package pdftex.def Info: Figures/lsmodeti2cdetect.png used on input line 115.
+(pdftex.def)             Requested size: 469.4705pt x 222.01343pt.
+ [4 <./Figures/lsmodeti2cdetect.png>])
+[5
 
 ]
 \openout2 = `Chapters/Chapter3.aux'.
@@ -2025,11 +2045,11 @@ Package csquotes Info: Input encoding change on input line 40.
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 1: section
-[5
+[6
 
 
 
-] [6]) [7
+] [7]) [8
 
 ]
 \openout2 = `Chapters/Chapter4.aux'.
@@ -2066,7 +2086,7 @@ Overfull \hbox (125.85297pt too wide) in paragraph at lines 53--54
  []
 
 1: section
-[8
+[9
 
 
 
@@ -2074,7 +2094,7 @@ Overfull \hbox (125.85297pt too wide) in paragraph at lines 53--54
 Package csquotes Info: Input encoding change on input line 65.
  (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)) [9]
+)) [10]
 \openout2 = `Chapters/Chapter5.aux'.
 
 
@@ -2085,21 +2105,21 @@ Package csquotes Info: Input encoding change on input line 66.
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 
-LaTeX Warning: Reference `fig:webcam5' on page 10 undefined on input line 72.
+LaTeX Warning: Reference `fig:webcam5' on page 11 undefined on input line 72.
 
 1: section
-[10
+[11
 
 
 
-]) [11]
+]) [12]
 \openout2 = `Chapters/Chapter6.aux'.
 
  (./Chapters/Chapter6.tex
 Chapitre 6.
 )
 1: section
-[12
+[13
 
 
 
@@ -2112,7 +2132,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 317.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 317.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 317.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D54212A87A44EA82FB4CE76A7770A90F;3694.
+(rerunfilecheck)             Checksum: AFC93066F82EF34A2F478D242728B9E3;4000.
 
 
 LaTeX Warning: There were undefined references.
@@ -2126,25 +2146,26 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  )
 (\end occurred when \iftrue on line 153 was incomplete) 
 Here is how much of TeX's memory you used:
- 34646 strings out of 493029
- 676095 string characters out of 6136234
- 796746 words of memory out of 5000000
- 37661 multiletter control sequences out of 15000+600000
- 47435 words of font info for 85 fonts, out of 8000000 for 9000
+ 34685 strings out of 493029
+ 676731 string characters out of 6136234
+ 802746 words of memory out of 5000000
+ 37681 multiletter control sequences out of 15000+600000
+ 47739 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,20n,76p,10447b,1827s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,20n,77p,10447b,1971s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texm
 f-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-dist/f
 onts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/in
-consolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatin
-o/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (15 pages, 196385 bytes).
+consolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
+atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (16 pages, 260384 bytes).
 PDF statistics:
- 333 PDF objects out of 1000 (max. 8388607)
- 303 compressed objects within 4 object streams
- 108 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 373 PDF objects out of 1000 (max. 8388607)
+ 340 compressed objects within 4 object streams
+ 123 named destinations out of 1000 (max. 500000)
+ 253 words of extra memory for PDF output out of 10000 (max. 10000000)
 
