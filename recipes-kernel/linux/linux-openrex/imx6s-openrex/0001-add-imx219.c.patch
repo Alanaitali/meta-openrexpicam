@@ -1,19 +1,19 @@
-From db5150518edade533bd6f1df14311c598c808270 Mon Sep 17 00:00:00 2001
+From 44d70ad62f68f57a05b99e72de6ad29962a6eef9 Mon Sep 17 00:00:00 2001
 From: Gladwistor <aitali.alan@gmail.com>
-Date: Fri, 19 Jan 2018 14:47:59 +0100
+Date: Mon, 22 Jan 2018 10:08:01 +0100
 Subject: [PATCH] add imx219.c
 
 ---
- drivers/media/i2c/soc_camera/imx219.c | 870 ++++++++++++++++++++++++++++++++++
- 1 file changed, 870 insertions(+)
+ drivers/media/i2c/soc_camera/imx219.c | 865 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 865 insertions(+)
  create mode 100644 drivers/media/i2c/soc_camera/imx219.c
 
 diff --git a/drivers/media/i2c/soc_camera/imx219.c b/drivers/media/i2c/soc_camera/imx219.c
 new file mode 100644
-index 0000000..5f7c3de
+index 0000000..35df0c9
 --- /dev/null
 +++ b/drivers/media/i2c/soc_camera/imx219.c
-@@ -0,0 +1,870 @@
+@@ -0,0 +1,865 @@
 +/*
 + * Driver for IMX219 CMOS Image Sensor from Sony
 + *
@@ -813,11 +813,6 @@ index 0000000..5f7c3de
 +	struct soc_camera_subdev_desc *ssdd = soc_camera_i2c_to_desc(client);
 +
 +    	int ret;
-+
-+	if (!ssdd) {
-+		dev_err(&client->dev, "IMX219: missing platform data!\n");
-+		return -EINVAL;
-+	}
 +
 +	if (!i2c_check_functionality(adapter, I2C_FUNC_SMBUS_BYTE_DATA)) {
 +		dev_warn(&adapter->dev,
