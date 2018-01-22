@@ -1,19 +1,19 @@
-From 44d70ad62f68f57a05b99e72de6ad29962a6eef9 Mon Sep 17 00:00:00 2001
+From a681afc2f0f4e84f0b6e3203f41a3688f860cd7f Mon Sep 17 00:00:00 2001
 From: Gladwistor <aitali.alan@gmail.com>
-Date: Mon, 22 Jan 2018 10:08:01 +0100
-Subject: [PATCH] add imx219.c
+Date: Mon, 22 Jan 2018 11:22:13 +0100
+Subject: [PATCH] add imx219
 
 ---
- drivers/media/i2c/soc_camera/imx219.c | 865 ++++++++++++++++++++++++++++++++++
- 1 file changed, 865 insertions(+)
+ drivers/media/i2c/soc_camera/imx219.c | 861 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 861 insertions(+)
  create mode 100644 drivers/media/i2c/soc_camera/imx219.c
 
 diff --git a/drivers/media/i2c/soc_camera/imx219.c b/drivers/media/i2c/soc_camera/imx219.c
 new file mode 100644
-index 0000000..35df0c9
+index 0000000..300a6c3
 --- /dev/null
 +++ b/drivers/media/i2c/soc_camera/imx219.c
-@@ -0,0 +1,865 @@
+@@ -0,0 +1,861 @@
 +/*
 + * Driver for IMX219 CMOS Image Sensor from Sony
 + *
@@ -825,11 +825,7 @@ index 0000000..35df0c9
 +		return -ENOMEM;
 +
 +	priv->clk = v4l2_clk_get(&client->dev, "mclk");
-+	if (IS_ERR(priv->clk)) {
-+		dev_info(&client->dev, "Error %ld getting clock\n",
-+			 PTR_ERR(priv->clk));
-+		return -EPROBE_DEFER;
-+	}
++
 +
 +	priv->fmt = &imx219_colour_fmts[0];
 +
