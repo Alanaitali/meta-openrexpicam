@@ -9,17 +9,17 @@
 \end{description}
 
 \section{Kernel 4.14}
-La version 4.14 (une des plus recente chez fslc) du kernel contient un driver imx219
-main line operationel. Notre idée était de porter le suport de la meta-voipac compatible
+La version 4.14 (une des plus recentes chez fslc) du kernel contient un driver imx219
+main-line operationel. Notre idée était de porter le support de la meta-voipac compatible
 avec un kernel 4.1 sur le nouveau kernel 4.14 pour pouvoir utiliser le driver.
 
 \section{Travail effectué}
 \textbf{Modifier les sources du Kernel}
 
- Dans les recettes kernel chaque version du kernel est architecturé de la meme façon :
+ Dans les recettes kernel chaque version du kernel est architecturée de la meme façon :
   \begin{itemize}
-  \item[-] Créer un fichier linux-voipac\_4.14.bb.
-  \item[-] Créer un document linux-voipac-4.14 content un defconfig et un patch du device tree Openrex.
+  \item[-] un fichier linux-voipac\_4.14.bb.
+  \item[-] un document linux-voipac-4.14 content un defconfig et un patch du device tree Openrex.
   \end{itemize}
 
 \begin{figure}[th]
