@@ -1,8 +1,9 @@
 DESCRIPTION = "Basic image openrexpicam"
 LICENSE = "MIT"
 
-
 inherit core-image
+
+IMAGE_FEATURES += " package-management"
 
 IMAGE_INSTALL += " \
 	gstreamer \
@@ -10,4 +11,8 @@ IMAGE_INSTALL += " \
 	gstreamer1.0-plugins-imx \
 	gst1.0-fsl-plugin \
 	v4l-utils \
+  psplash \
 "
+
+
+

@@ -1,0 +1,4 @@
+Chapters/*.aux
+*.log
+main.toc
+main[.\-][a-su-Z]* 
