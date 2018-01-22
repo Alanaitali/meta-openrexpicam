@@ -6,7 +6,13 @@ inherit core-image
 IMAGE_FEATURES += " package-management"
 
 IMAGE_INSTALL += " \
-    psplash \
+	gstreamer \
+	i2c-tools \
+	gstreamer1.0-plugins-imx \
+	gst1.0-fsl-plugin \
+	v4l-utils \
+  psplash \
 "
 
-export IMAGE_BASENAME = "openrexpicam-base-image"
+
+
