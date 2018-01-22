@@ -1,0 +1,33 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {french}
+\contentsline {chapter}{\numberline {1}Organisation de l'\IeC {\'e}quipe et planning}{1}{chapter.2}
+\contentsline {section}{\numberline {1.1}Organisation de l'\IeC {\'e}quipe}{1}{section.3}
+\contentsline {chapter}{\numberline {2}Piste n\IeC {\textdegree } 1}{2}{chapter.4}
+\contentsline {section}{\numberline {2.1}Erreur}{2}{section.5}
+\contentsline {section}{\numberline {2.2}Solution}{3}{section.8}
+\contentsline {section}{\numberline {2.3}Conclusion}{3}{section.31}
+\contentsline {section}{\numberline {2.4}Erreur}{3}{section.32}
+\contentsline {section}{\numberline {2.5}Solution}{4}{section.34}
+\contentsline {section}{\numberline {2.6}Conclusion}{4}{section.41}
+\contentsline {section}{\numberline {2.7}Erreur}{5}{section.43}
+\contentsline {section}{\numberline {2.8}Reste \IeC {\`a} faire}{5}{section.45}
+\contentsline {chapter}{\numberline {3}Solution n\IeC {\textdegree } 2}{6}{chapter.46}
+\contentsline {section}{\numberline {3.1}Fichiers sources}{6}{section.47}
+\contentsline {section}{\numberline {3.2}Travail effectu\IeC {\'e}}{6}{section.48}
+\contentsline {section}{\numberline {3.3}Compilation de driver}{6}{section.49}
+\contentsline {section}{\numberline {3.4}Utilisation du driver sur la cible}{7}{section.68}
+\contentsline {section}{\numberline {3.5}Conclusion}{8}{section.69}
+\contentsline {chapter}{\numberline {4}Solution n\IeC {\textdegree } 3}{9}{chapter.70}
+\contentsline {section}{\numberline {4.1}Contenu des sources}{9}{section.71}
+\contentsline {section}{\numberline {4.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s}{9}{section.75}
+\contentsline {section}{\numberline {4.3}lien GIT}{9}{section.76}
+\contentsline {section}{\numberline {4.4}Source des patchs}{9}{section.77}
+\contentsline {section}{\numberline {4.5}Ajout de paquets}{10}{section.80}
+\contentsline {section}{\numberline {4.6}Conclusion}{10}{section.94}
+\contentsline {chapter}{\numberline {5}\IeC {\'E}tat de l'art de la r\IeC {\'e}cup\IeC {\'e}ration du flux vid\IeC {\'e}o}{11}{chapter.95}
+\contentsline {section}{\numberline {5.1}Methodologie par la Webcam USB}{11}{section.96}
+\contentsline {section}{\numberline {5.2}Probl\IeC {\`e}mes}{11}{section.105}
+\contentsline {section}{\numberline {5.3}Point d'am\IeC {\'e}lioration}{12}{section.106}
+\contentsline {section}{\numberline {5.4}Sources}{12}{section.107}
+\contentsline {chapter}{\numberline {6}Conclusion}{13}{chapter.108}

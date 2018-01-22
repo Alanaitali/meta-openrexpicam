@@ -9,11 +9,7 @@
   09/01/2017)
 \end{description}
 
-<<<<<<< HEAD
-Suite à l'exploration de 3 pistes de solutions, nous avons choisi de nous
-=======
 Suite à l'exploration de 3 pistes, nous avons choisi de nous
->>>>>>> 2c1cc9bc73236cbcd3a3eaba49c464b06fc4bf7a
 concentrer sur la solution n°2 dont le driver compile sans erreur mais ne
 réussit pas le chargement.
 
@@ -85,7 +81,7 @@ une compatibilité avec le device-tree.
 \end{description}
 
 \section{Conclusion}
-Une nouvelle erreur est apparue cependant les travaux qui concernant le 
+Une nouvelle erreur est apparue cependant les travaux qui concernant le
 device tree ont fonctionné correctement car on peut remarquer au démarage
 que le driver est chargé automatiquement.
 
@@ -127,17 +123,15 @@ Le driver est maintenant charger "correctement" par le kernel.
     \clearpage
   \end{description}
 
-<<<<<<< HEAD
     \section{Conclusion}
-=======
-  On peut voir que l'i2c peut maintenant utiliser le dirver imx219 et 
+  On peut voir que l'i2c peut maintenant utiliser le dirver imx219 et
   qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
   d'utiliser le driver car les informations sur son utilisation nous manque.
   Deplus de nouvelles erreurs apparaissent au chargement du driver.
 
   \section{Erreur}
   Au chargement du driver nous obtenons le debug suivant:
-  
+
   \begin{figure}[th]
     \centering
     \includegraphics[width=1\linewidth]{debugdmesg.png}
@@ -148,8 +142,36 @@ Le driver est maintenant charger "correctement" par le kernel.
   \section{Reste à faire}
 
    Determiner la cause du segmentation fault.
->>>>>>> 2c1cc9bc73236cbcd3a3eaba49c464b06fc4bf7a
+
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=1\linewidth]{lsmodeti2cdetect.png}
+  \decoRule
+  \caption{Debug probe}  \label{fig:planning}
+\end{figure}
+
+    \clearpage
+  \end{description}
+
+  On peut voir que l'i2c peut maintenant utiliser le dirver imx219 et
+  qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
+  d'utiliser le driver car les informations sur son utilisation nous manque.
+  Deplus de nouvelles erreurs apparaissent au chargement du driver.
+
+  \section{Erreur}
+  Au chargement du driver nous obtenons le debug suivant:
+
+  \begin{figure}[th]
+    \centering
+    \includegraphics[width=1\linewidth]{debugdmesg.png}
+    \decoRule
+    \caption{Debug probe}  \label{fig:planning}
+  \end{figure}
+
+  \section{Reste à faire}
+
+   Determiner la cause du segmentation fault.
 
    Savoir comment recuperer le flux video.
-  
+
     %----------------------------------------------------------------------------------------
