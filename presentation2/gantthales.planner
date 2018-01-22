@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
 <project name="" company="" manager="" phase="" project-start="20171023T000000Z" mrproject-version="2" calendar="1">
   <properties/>
   <phases/>
@@ -94,15 +94,42 @@
         <constraint type="must-start-on" time="20180123T000000Z"/>
       </task>
     </task>
+    <task id="27" name="Flux vid&#xE9;o avec gstreamer" note="&#10;" work="172800" start="20180108T000000Z" end="20180122T180000Z" work-start="20180108T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="28" name="R&#xE9;cup&#xE9;ration du flux sur nos ordinateurs" note="" work="28800" start="20180108T000000Z" end="20180108T180000Z" work-start="20180108T090000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20180108T000000Z"/>
+      </task>
+      <task id="29" name="Webcam USB sur la carte en local" note="" work="28800" start="20180109T000000Z" end="20180109T180000Z" work-start="20180109T090000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20180109T000000Z"/>
+      </task>
+      <task id="30" name="Webcam UBS la carte vers nos ordinateurs en UDP" note="" work="115200" start="20180109T000000Z" end="20180122T180000Z" work-start="20180109T090000Z" percent-complete="10" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20180109T000000Z"/>
+      </task>
+    </task>
+    <task id="31" name="Compr&#xE9;hension de Yocto" note="" work="115200" start="20171030T000000Z" end="20171106T180000Z" work-start="20171030T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="32" name="Compilation d'un OS" note="" work="57600" start="20171030T000000Z" end="20171030T180000Z" work-start="20171030T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20171030T000000Z"/>
+      </task>
+      <task id="33" name="Driver kernel" note="" work="57600" start="20171106T000000Z" end="20171106T180000Z" work-start="20171106T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <constraint type="must-start-on" time="20171106T000000Z"/>
+      </task>
+    </task>
+    <task id="34" name="R&#xE9;daction des rapports" note="" work="144000" start="20180108T000000Z" end="20180109T110000Z" work-start="20180108T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="must-start-on" time="20180108T000000Z"/>
+    </task>
+    <task id="35" name="Cr&#xE9;ation du git" note="" work="28800" start="20171106T000000Z" end="20171106T140000Z" work-start="20171106T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="must-start-on" time="20171106T000000Z"/>
+    </task>
   </tasks>
   <resource-groups/>
   <resources>
     <resource id="1" name="Alan" short-name="AL" type="1" units="0" email="alan.ait-ali@ynov.com" note="" std-rate="0"/>
     <resource id="2" name="Martin" short-name="MA" type="1" units="0" email="martin.laporte@ynov.com" note="" std-rate="0"/>
     <resource id="3" name="Cl&#xE9;ment" short-name="CL" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="4" name="Romain" short-name="RO" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="4" name="Romain" short-name="RO" type="1" units="0" email="romain.petit@ynov.com" note="" std-rate="0"/>
   </resources>
   <allocations>
+    <allocation task-id="35" resource-id="1" units="100"/>
+    <allocation task-id="34" resource-id="1" units="100"/>
     <allocation task-id="11" resource-id="1" units="100"/>
     <allocation task-id="10" resource-id="1" units="100"/>
     <allocation task-id="13" resource-id="1" units="100"/>
@@ -115,34 +142,54 @@
     <allocation task-id="23" resource-id="1" units="100"/>
     <allocation task-id="22" resource-id="1" units="100"/>
     <allocation task-id="21" resource-id="1" units="100"/>
+    <allocation task-id="20" resource-id="1" units="100"/>
     <allocation task-id="19" resource-id="1" units="100"/>
     <allocation task-id="7" resource-id="1" units="100"/>
+    <allocation task-id="17" resource-id="1" units="100"/>
     <allocation task-id="18" resource-id="1" units="100"/>
     <allocation task-id="6" resource-id="1" units="100"/>
     <allocation task-id="2" resource-id="1" units="20"/>
     <allocation task-id="13" resource-id="2" units="100"/>
     <allocation task-id="21" resource-id="2" units="100"/>
     <allocation task-id="16" resource-id="2" units="100"/>
+    <allocation task-id="34" resource-id="2" units="100"/>
+    <allocation task-id="14" resource-id="2" units="100"/>
     <allocation task-id="15" resource-id="2" units="100"/>
     <allocation task-id="9" resource-id="2" units="100"/>
     <allocation task-id="7" resource-id="2" units="50"/>
+    <allocation task-id="17" resource-id="2" units="100"/>
     <allocation task-id="18" resource-id="2" units="100"/>
     <allocation task-id="6" resource-id="2" units="100"/>
     <allocation task-id="4" resource-id="2" units="100"/>
     <allocation task-id="3" resource-id="2" units="100"/>
     <allocation task-id="2" resource-id="2" units="10"/>
+
+    <allocation task-id="34" resource-id="3" units="100"/>
+    <allocation task-id="33" resource-id="3" units="100"/>
+    <allocation task-id="32" resource-id="3" units="100"/>
     <allocation task-id="11" resource-id="3" units="100"/>
     <allocation task-id="21" resource-id="3" units="100"/>
     <allocation task-id="16" resource-id="3" units="100"/>
     <allocation task-id="15" resource-id="3" units="100"/>
     <allocation task-id="14" resource-id="3" units="100"/>
+    <allocation task-id="13" resource-id="3" units="100"/>
+    <allocation task-id="17" resource-id="3" units="100"/>
     <allocation task-id="18" resource-id="3" units="100"/>
     <allocation task-id="6" resource-id="3" units="100"/>
     <allocation task-id="4" resource-id="3" units="100"/>
     <allocation task-id="3" resource-id="3" units="100"/>
     <allocation task-id="2" resource-id="3" units="100"/>
+    <allocation task-id="35" resource-id="4" units="100"/>
+    <allocation task-id="34" resource-id="4" units="100"/>
+    <allocation task-id="33" resource-id="4" units="100"/>
+    <allocation task-id="32" resource-id="4" units="100"/>
+    <allocation task-id="30" resource-id="4" units="100"/>
+    <allocation task-id="29" resource-id="4" units="100"/>
+    <allocation task-id="28" resource-id="4" units="100"/>
+    <allocation task-id="27" resource-id="4" units="100"/>
     <allocation task-id="19" resource-id="4" units="100"/>
     <allocation task-id="18" resource-id="4" units="100"/>
+    <allocation task-id="17" resource-id="4" units="100"/>
     <allocation task-id="6" resource-id="4" units="100"/>
     <allocation task-id="2" resource-id="4" units="100"/>
   </allocations>
