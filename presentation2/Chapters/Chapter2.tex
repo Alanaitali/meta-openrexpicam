@@ -10,13 +10,13 @@
 \end{description}
 
 Suite à l'exploration de 3 pistes de solutions, nous avons choisi de nous
-concentrer sur la solutions n°2 dont le driver compile sans erreur mais ne
+concentrer sur la solution n°2 dont le driver compile sans erreur mais ne
 réussit pas le chargement.
 
 \section{Erreur}
 Constat : Le driver apparait à la commande lsmod mais est inutilisé.
 
- \begin{figure}[th]
+\begin{figure}[th]
    \centering
    \includegraphics[width=1\linewidth]{chargement_driver.png}
    \decoRule
@@ -45,17 +45,20 @@ device-tree et sa gestion des compatibilités.
 Aujourd'hui mardi 16 janvier nous avons cherché à porter le driver vers
 une compatibilité avec le device-tree.
 \begin{description}
+
   \item[Ajout de la structure type of\_device\_id dans le driver]
+
   \begin{lstlisting}
   static const struct of_device_id imx219_of_match[] = {
     { .compatible = "sony,imx219", .data = 0 },
     {}
   };
-   
+
   MODULE_DEVICE_TABLE(of, imx219_of_match);
   \end{lstlisting}
 
   \item[Completion de la structure de manipulation du driver]
+
   \begin{lstlisting}
   static struct i2c_driver imx219_i2c_driver = {
     .driver = {
@@ -87,8 +90,6 @@ La driver nous indique qu'il n'arrive pas a utiliser ca fonction getclk
     \end{lstlisting}
 
     \clearpage
-
-   
 
     \section{Conclusion}
 
