@@ -3,106 +3,54 @@
 \chapter{Solution n° 2} % Main chapter title
 
 \label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter3}
-
 %----------------------------------------------------------------------------------------
 \begin{description}
   \item[Version du Kernel :] 4.14
-  \item[Code de travail :] recette yocto des paquets à inclure.
 \end{description}
 
-
-
-\section{Fichiers sources}
-Ce driver contient les fonctions de configuration de l’imx219 : on, off, gain,
-couleurs, taille de l’affichage. Il repose sur les couches de driver i2c et v4l.
-La configuration du périphérique imx219 effectuée par v4l-utils est automatique
-lors du chargement du module. Elle s’appuie sur les trois couches de driver
-imx219>v4l>i2c. Le flux vidéo configuré peut ensuite être récupéré par Gstreamer.
+\section{Kernel 4.14}
+La version 4.14 (une des plus recente chez fslc) du kernel contient un driver imx219
+main line operationel. Notre idée était de porter le suport de la meta-voipac compatible
+avec un kernel 4.1 sur le nouveau kernel 4.14 pour pouvoir utiliser le driver.
 
 \section{Travail effectué}
-\begin{itemize}
-\item[-] Gstreamer permettrait de streamer le flux sur le réseau à travers le protocole
-UDP alors que v4l-utils permettrait plutôt d’enregistrer le flux vidéo.
-\item[-] Création d’une recette
-\end{itemize}
+\textbf{Modifier les sources du Kernel}
 
-%\section{L’arborescence des fichiers in-tree}
-%\begin{figure}[th]
-%    \centering
-%    \decoRule
-%    \caption{Arborescnce des fichiers}  \label{fig:arbor}
-%end{figure}
+ Dans les recettes kernel chaque version du kernel est architecturé de la meme façon :
+  \begin{itemize}
+  \item[-] Créer un fichier linux-voipac\_4.14.bb.
+  \item[-] Créer un document linux-voipac-4.14 content un defconfig et un patch du device tree Openrex.
+  \end{itemize}
 
-\section{Compilation de driver}
-Extrait de la recette : récupère le fichier imx219.c, le compile par la cross
-tool-chain et l’installe
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=1\linewidth]{tre.png}
+  \decoRule
+  \caption{arborescence des fichiers}  \label{fig:planning}
+\end{figure}
 
-\begin{lstlisting}
-SUMMARY = "driver imx219"
-SECTION = "examples"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=c2b5f7071fdde268bf46ace1546f3c4b"
+Le principe de cette méthode et de copier la version 4.1 et de remplacer les sources du kernel. 
 
-SRC_URI = "file://imx219.c"
+\begin{description}
+  \item[Modification du fichier]
+    \begin{lstlisting}
+      SRCBRANCH = "4.14.x+fslc"
+      LOCALVERSION = "-yocto"
+      SRCREV = "${AUTOREV}"
+      KERNEL_SRC ?= "git://github.com/Freescale/linux-fslc.git;protocol=git"
+    \end{lstlisting}
+\end{description}
 
-S = "${WORKDIR}"
+\section{Erreur}
 
-do_compile() {
-         ${CC} imx219.c -o imx219
-}
-
-do_install() {
-         install -d ${D}${bindir}
-         install -m 0755 imx219 ${D}${bindir}
-}
-\end{lstlisting}
-
-\section{Utilisation du driver sur la cible}
-Vérification de la présence du driver dans l’arborescence :
-
-%\begin{figure}[th]
-%    \centering
-%    \includegraphics[width=1\linewidth,trim={0cm 1cm 0cm 33,1cm},clip]{presence.png}
-%    \decoRule
-%    \caption{Vérification de la présence du driver}  \label{fig:pres}
-%\end{figure}
-
-Chargement du module imx219 :
-
-%\begin{figure}[th]
-%    \centering
-%    \includegraphics[width=1\linewidth,trim={0cm 25cm 0cm 1,8cm},clip]{module.png}
-%    \decoRule
-%    \caption{Chargement du module}  \label{fig:mod}
-%\end{figure}
-
-Comme nous pouvons le voir le driver n’est pas encore utilisé par v4l (Used by 0).
-
-\clearpage
-
-Chargement du module à l’adresse I2C de l’imx219 :
-
-%\begin{figure}[th]
-%    \centering
-%    \includegraphics[width=1\linewidth]{modadd.png}
-%    \decoRule
-%    \caption{Chargement du module avec l'adresse I2C}  \label{fig:modadd}
-%\end{figure}
-
-Erreur sur le bus i2c sur laquelle nous travaillons actuellement.
-Récupération du flux vidéo en local via Gstreamer :
-
-\textbf{\# gst-launch-1.0 v4l2src device="/dev/videoX" ! video/x-raw,width=640,height=480 ! autovideosink}
-
-X’ étant le numéro correspondant au numéro du driver vidéo du port CSI-2
-
-Actuellement nous cherchons l’utilisation des commandes gst-launch-1.0 et des
-fichiers de configurations v4l2src (cf. Chapitre \ref{Chapter5}).
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=1\linewidth]{4-14boot.png}
+  \decoRule
+  \caption{phase de boot}  \label{fig:planning}
+\end{figure}
 
 \section{Conclusion}
 
-Cette solution est notre piste la plus concrète. En effet la compilation a réussi,
-nous cherchons à comprendre comment utiliser le driver à travers v4l. Une fois cette
-tache effectuée nous travaillerons sur le portage des versions du kernel (3.14 $\rightarrow$ 4.1).
 
 %----------------------------------------------------------------------------------------
