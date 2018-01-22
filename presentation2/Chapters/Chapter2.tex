@@ -9,7 +9,11 @@
   09/01/2017)
 \end{description}
 
+<<<<<<< HEAD
 Suite à l'exploration de 3 pistes de solutions, nous avons choisi de nous
+=======
+Suite à l'exploration de 3 pistes, nous avons choisi de nous
+>>>>>>> 2c1cc9bc73236cbcd3a3eaba49c464b06fc4bf7a
 concentrer sur la solution n°2 dont le driver compile sans erreur mais ne
 réussit pas le chargement.
 
@@ -71,6 +75,20 @@ une compatibilité avec le device-tree.
   };
   \end{lstlisting}
 
+  \item[Suppression de la sécuritée platform data]
+  \begin{lstlisting}
+    if (!ssdd) {
+      dev_err(&client->dev, "IMX219: missing platform data!\n");
+      return -EINVAL;
+    }
+    \end{lstlisting}
+\end{description}
+
+\section{Conclusion}
+Une nouvelle erreur est apparue cependant les travaux qui concernant le 
+device tree ont fonctionné correctement car on peut remarquer au démarage
+que le driver est chargé automatiquement.
+
 \section{Erreur}
 Au chargement de la nouvelle image nous obtenons les erreur suivantes:
 
@@ -81,16 +99,57 @@ Au chargement de la nouvelle image nous obtenons les erreur suivantes:
   \caption{Debug probe}  \label{fig:planning}
 \end{figure}
 
-La driver nous indique qu'il n'arrive pas a utiliser ca fonction getclk
+L'erreur est relative à la fonction getclk du driver qui est une sécuritée tout comme la fonction suprimer précedement.
+Elle confimre que nous avons des dificultés à communiquer avec l'i2c.
 
-    \end{description}
-
+\section{Solution}
+Notre strategie est de supprimer cette nouvelle fonction de securitée, pour avoir plus
+d'informations sur la façon dont le driver fonctionne.
+\begin{description}
+  \item[Suppression de la securitée d'horloge]
     \begin{lstlisting}
-
+	  if (IS_ERR(priv->clk)) {
+		    dev_info(&client->dev, "Error %ld getting clock\n",
+			  PTR_ERR(priv->clk));
+		    return -EPROBE_DEFER;
+	  }
     \end{lstlisting}
+\section{Conclusion}
+Le driver est maintenant charger "correctement" par le kernel.
+
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=1\linewidth]{lsmodeti2cdetect.png}
+  \decoRule
+  \caption{Debug probe}  \label{fig:planning}
+\end{figure}
 
     \clearpage
+  \end{description}
 
+<<<<<<< HEAD
     \section{Conclusion}
+=======
+  On peut voir que l'i2c peut maintenant utiliser le dirver imx219 et 
+  qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
+  d'utiliser le driver car les informations sur son utilisation nous manque.
+  Deplus de nouvelles erreurs apparaissent au chargement du driver.
 
+  \section{Erreur}
+  Au chargement du driver nous obtenons le debug suivant:
+  
+  \begin{figure}[th]
+    \centering
+    \includegraphics[width=1\linewidth]{debugdmesg.png}
+    \decoRule
+    \caption{Debug probe}  \label{fig:planning}
+  \end{figure}
+
+  \section{Reste à faire}
+
+   Determiner la cause du segmentation fault.
+>>>>>>> 2c1cc9bc73236cbcd3a3eaba49c464b06fc4bf7a
+
+   Savoir comment recuperer le flux video.
+  
     %----------------------------------------------------------------------------------------
