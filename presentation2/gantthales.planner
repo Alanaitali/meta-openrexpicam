@@ -4,9 +4,9 @@
   <phases/>
   <calendars>
     <day-types>
-      <day-type id="0" name="Travaill&#xE9;" description="Un jour de travail normal"/>
-      <day-type id="1" name="Ch&#xF4;m&#xE9;" description="Un jour ch&#xF4;m&#xE9; normal"/>
-      <day-type id="2" name="Utiliser la base" description="Utilise un jour du calendrier de base"/>
+      <day-type id="0" name="Working" description="A default working day"/>
+      <day-type id="1" name="Nonworking" description="A default non working day"/>
+      <day-type id="2" name="Use base" description="Use day from base calendar"/>
     </day-types>
     <calendar id="1" name="D&#xE9;faut">
       <default-week mon="0" tue="0" wed="1" thu="1" fri="1" sat="1" sun="1"/>
@@ -30,21 +30,21 @@
         <constraint type="must-start-on" time="20171113T000000Z"/>
       </task>
     </task>
-    <task id="5" name="Kernel 3.14" note="&#10;" work="1468800" start="20171127T000000Z" end="20180123T180000Z" work-start="20171127T090000Z" percent-complete="70" priority="3" type="normal" scheduling="fixed-work">
+    <task id="5" name="Kernel 3.14" note="&#10;" work="1382400" start="20171127T000000Z" end="20180123T180000Z" work-start="20171127T090000Z" percent-complete="70" priority="3" type="normal" scheduling="fixed-work">
       <task id="6" name="Recherche des sources Yocto" note="" work="115200" start="20171127T000000Z" end="20171127T180000Z" work-start="20171127T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20171127T000000Z"/>
       </task>
       <task id="7" name="Compilation de l'OS " note="" work="57600" start="20171128T000000Z" end="20171204T114000Z" work-start="20171128T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20171128T000000Z"/>
       </task>
-      <task id="8" name="Test de compilation des solutions" note="" work="316800" start="20171205T000000Z" end="20171225T180000Z" work-start="20171205T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="9" name="Solution 1" note="" work="115200" start="20171205T000000Z" end="20171218T180000Z" work-start="20171205T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
-          <constraint type="must-start-on" time="20171205T000000Z"/>
-        </task>
-        <task id="10" name="Solution 2" note="" work="86400" start="20171212T000000Z" end="20171219T180000Z" work-start="20171212T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
+      <task id="8" name="Test de compilation des solutions" note="" work="230400" start="20171212T000000Z" end="20180101T180000Z" work-start="20171212T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="9" name="Solution 1" note="" work="57600" start="20171212T000000Z" end="20171218T180000Z" work-start="20171212T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20171212T000000Z"/>
         </task>
-        <task id="11" name="Solution 3" note="" work="115200" start="20171219T000000Z" end="20171225T180000Z" work-start="20171219T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
+        <task id="10" name="Solution 2" note="" work="57600" start="20171218T000000Z" end="20171218T180000Z" work-start="20171218T090000Z" percent-complete="65" priority="2" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20171218T000000Z"/>
+        </task>
+        <task id="11" name="Solution 3" note="" work="115200" start="20171219T000000Z" end="20180101T180000Z" work-start="20171219T090000Z" percent-complete="100" priority="2" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20171219T000000Z"/>
         </task>
       </task>
@@ -72,19 +72,19 @@
         <constraint type="must-start-on" time="20171128T000000Z"/>
       </task>
       <task id="20" name="Test de compilation des solutions" note="" work="115200" start="20171204T000000Z" end="20171211T180000Z" work-start="20171204T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="21" name="Solution 1" note="" work="57600" start="20171204T000000Z" end="20171204T152000Z" work-start="20171204T090000Z" percent-complete="100" priority="3" type="normal" scheduling="fixed-work">
+        <task id="21" name="Solution 1" note="" work="57600" start="20171204T000000Z" end="20171204T180000Z" work-start="20171204T090000Z" percent-complete="100" priority="3" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20171204T000000Z"/>
         </task>
         <task id="22" name="Solution 2" note="" work="28800" start="20171205T000000Z" end="20171205T180000Z" work-start="20171205T090000Z" percent-complete="100" priority="3" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20171205T000000Z"/>
         </task>
-        <task id="23" name="Solution 3" note="" work="28800" start="20171211T000000Z" end="20171211T180000Z" work-start="20171211T090000Z" percent-complete="100" priority="3" type="normal" scheduling="fixed-work">
+        <task id="23" name="Solution 3 - Modification du driver" note="" work="28800" start="20171211T000000Z" end="20171211T180000Z" work-start="20171211T090000Z" percent-complete="100" priority="3" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20171211T000000Z"/>
         </task>
       </task>
     </task>
-    <task id="24" name="Kernel 4.14" note="" work="144000" start="20180109T000000Z" end="20180129T180000Z" work-start="20180109T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="25" name="Recherche des sources Yocto" note="" work="28800" start="20180109T000000Z" end="20180109T180000Z" work-start="20180109T090000Z" percent-complete="22" priority="1" type="normal" scheduling="fixed-work">
+    <task id="24" name="Kernel 4.14" note="" work="140400" start="20180109T000000Z" end="20180129T180000Z" work-start="20180109T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="25" name="Recherche des sources Yocto" note="" work="25200" start="20180109T000000Z" end="20180109T170000Z" work-start="20180109T090000Z" percent-complete="38" priority="1" type="normal" scheduling="fixed-work">
         <constraint type="must-start-on" time="20180109T000000Z"/>
       </task>
       <task id="26" name="Compilation de l'OS " note="" work="57600" start="20180115T000000Z" end="20180116T180000Z" work-start="20180115T090000Z" percent-complete="100" priority="1" type="normal" scheduling="fixed-work">
@@ -138,8 +138,7 @@
     <allocation task-id="14" resource-id="1" units="100"/>
     <allocation task-id="27" resource-id="1" units="100"/>
     <allocation task-id="26" resource-id="1" units="100"/>
-    <allocation task-id="25" resource-id="1" units="100"/>
-    <allocation task-id="23" resource-id="1" units="100"/>
+    <allocation task-id="24" resource-id="1" units="100"/>
     <allocation task-id="22" resource-id="1" units="100"/>
     <allocation task-id="21" resource-id="1" units="100"/>
     <allocation task-id="20" resource-id="1" units="100"/>
@@ -163,13 +162,13 @@
     <allocation task-id="4" resource-id="2" units="100"/>
     <allocation task-id="3" resource-id="2" units="100"/>
     <allocation task-id="2" resource-id="2" units="10"/>
-
     <allocation task-id="34" resource-id="3" units="100"/>
     <allocation task-id="33" resource-id="3" units="100"/>
     <allocation task-id="32" resource-id="3" units="100"/>
     <allocation task-id="11" resource-id="3" units="100"/>
     <allocation task-id="21" resource-id="3" units="100"/>
     <allocation task-id="16" resource-id="3" units="100"/>
+    <allocation task-id="10" resource-id="3" units="100"/>
     <allocation task-id="15" resource-id="3" units="100"/>
     <allocation task-id="14" resource-id="3" units="100"/>
     <allocation task-id="13" resource-id="3" units="100"/>
