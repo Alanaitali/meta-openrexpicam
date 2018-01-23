@@ -31,9 +31,9 @@ Then create our work directory
 $: mkdir fsl-community-bsp && cd fsl-community-bsp
 ```
 
-## 1) Get YOCTO project from Freescale
+## 1) Get our YOCTO project 
 
-Download Yocto project using this command
+Download Yocto project using this command :
 
 ```
 $: repo init -u git@github.com:petit-romain/fsl-community-bsp-platform.git
@@ -45,7 +45,7 @@ $: repo init -u git@github.com:petit-romain/fsl-community-bsp-platform.git
 $: repo sync
 ```
 
-## 3) Setup and build console image
+## 3) Source and build our custom image
 
 ```
 $: DISTRO=poky MACHINE=imx6-openrexbasic source setup-environment build-dir
@@ -63,15 +63,15 @@ $: umount /dev/YourSDCard
 
 ## 5) Set Bootmmc
 
-You will get an error like : Error "bootmmc" not defined, to fix this issue stop the card boot and use the command below :
+If you have an error like : Error "bootmmc" not defined, fix this issue by typing the command below after having stopped the card boot :
 
 ```
 setenv bootmmc "run findfdt; mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi;\0"; saveenv; reset;
 ```
 
-## Boot the OpenRex
+## 6) Boot on the OpenRex
 
-Now plug your SD card in the OpenRex and it will boot on your Yocto image.
+Now plug your SD card in the OpenRex and it will boot on our Yocto image.
 
 ## Built with
 
