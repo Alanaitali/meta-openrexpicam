@@ -19,16 +19,15 @@
 \contentsline {section}{\numberline {3.3}Erreur}{8}{section.58}
 \contentsline {section}{\numberline {3.4}Conclusion}{8}{section.60}
 \contentsline {section}{\numberline {3.5}Reste \IeC {\`a} faire}{8}{section.61}
-\contentsline {chapter}{\numberline {4}Solution n\IeC {\textdegree } 3}{9}{chapter.62}
-\contentsline {section}{\numberline {4.1}Contenu des sources}{9}{section.63}
-\contentsline {section}{\numberline {4.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s}{9}{section.67}
-\contentsline {section}{\numberline {4.3}lien GIT}{9}{section.68}
-\contentsline {section}{\numberline {4.4}Source des patchs}{9}{section.69}
-\contentsline {section}{\numberline {4.5}Ajout de paquets}{10}{section.72}
-\contentsline {section}{\numberline {4.6}Conclusion}{10}{section.86}
-\contentsline {chapter}{\numberline {5}\IeC {\'E}tat de l'art de la r\IeC {\'e}cup\IeC {\'e}ration du flux vid\IeC {\'e}o}{11}{chapter.87}
-\contentsline {section}{\numberline {5.1}Methodologie par la Webcam USB}{11}{section.88}
-\contentsline {section}{\numberline {5.2}Probl\IeC {\`e}mes}{11}{section.97}
-\contentsline {section}{\numberline {5.3}Point d'am\IeC {\'e}lioration}{12}{section.98}
-\contentsline {section}{\numberline {5.4}Sources}{12}{section.99}
-\contentsline {chapter}{\numberline {6}Conclusion}{13}{chapter.100}
+\contentsline {chapter}{\numberline {4}Compilation d'un OS avec un kernel 3.14}{9}{chapter.62}
+\contentsline {section}{\numberline {4.1}Commande repo}{9}{section.63}
+\contentsline {subsection}{\numberline {4.1.1}Gestionnaire de paquet}{9}{subsection.64}
+\contentsline {subsection}{\numberline {4.1.2}T\IeC {\'e}l\IeC {\'e}chargement}{9}{subsection.65}
+\contentsline {section}{\numberline {4.2}Pr\IeC {\'e}paration du d\IeC {\'e}p\IeC {\^o}t}{9}{section.66}
+\contentsline {subsection}{\numberline {4.2.1}Cr\IeC {\'e}ation du d\IeC {\'e}p\IeC {\^o}t}{9}{subsection.67}
+\contentsline {subsection}{\numberline {4.2.2}R\IeC {\'e}cup\IeC {\'e}ration des sources}{9}{subsection.68}
+\contentsline {section}{\numberline {4.3}Utilisation de notre meta}{10}{section.69}
+\contentsline {subsection}{\numberline {4.3.1}T\IeC {\'e}l\IeC {\'e}chargement}{10}{subsection.70}
+\contentsline {subsection}{\numberline {4.3.2}Impl\IeC {\'e}mentation}{10}{subsection.71}
+\contentsline {section}{\numberline {4.4}Compilation}{10}{section.72}
+\contentsline {chapter}{\numberline {5}Conclusion}{11}{chapter.73}

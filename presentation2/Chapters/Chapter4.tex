@@ -1,0 +1,78 @@
+% Chapter 4
+
+\chapter{Compilation d'un OS avec un kernel 3.14} % Main chapter title
+
+\label{Chapter4} % For referencing the chapter elsewhere, use \ref{Chapter4}
+%----------------------------------------------------------------------------------------
+
+\section{Commande repo}
+
+\subsection{Gestionnaire de paquet}
+
+\begin{itemize}
+    \item[\$ :] sudo aptitude install repo
+    \item[\$ :] sudo aptitude update
+    \item[\$ :] sudo aptitude upgrade
+\end{itemize}
+
+\subsection{Téléchargement}
+
+\begin{itemize}
+    \item[\$ :] mkdir bin
+    \item[\$ :] curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
+    \item[\$ :] chmod a+x bin/repo
+    \item[\$ :] PATH=\${PATH}:bin
+\end{itemize}
+        
+\section{Préparation du dépôt}
+
+\subsection{Création du dépôt}
+
+\begin{itemize}
+    \item[\$ :] mkdir fsl-community-bsp \&\& cd fsl-community-bsp
+    \item[\$ :] repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b jethro
+\end{itemize}
+
+\subsection{Récupération des sources}
+
+\begin{itemize}
+    \item[\$ : ] mkdir -p .repo/local\_manifests
+    \item[\$ : ] cat > .repo/local\_manifests/imx6-openrexbasic.xml << EOF \\
+    <?xml version="1.0" encoding="UTF-8"?> \\
+    <manifest> \\
+    <remote fetch="git://github.com/FEDEVEL" name="fedevel"/> \\
+    <project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex"> \\
+    <copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/> \\
+    </project> \\
+    </manifest> \\
+    EOF
+    \item[\$ : ] repo sync
+    \item[\$ : ] source openrex-setup.sh
+\end{itemize}
+
+\section{Utilisation de notre meta}
+
+La meta que nous avons créée doit se placer dans le dossier source.
+
+\subsection{Téléchargement}
+
+\begin{itemize}
+    \item[\$ :] cd sources
+    \item[\$ :] git clone git@github.com:Alanaitali/meta-openrexpicam.git
+\end{itemize}
+
+\subsection{Implémentation}
+
+\begin{itemize}
+    \item[\$ :] cd ..
+    \item[\$ :] MACHINE=imx6s-openrex source setup-environment build-dir
+    \item[\$ :] bitbake-layers add-layer ../sources/meta-openrexpicam
+\end{itemize}
+
+\section{Compilation}
+
+\begin{itemize}
+    \item[\$ :] MACHINE=imx6s-openrex bitbake openrexpicam-base-image
+\end{itemize}
+        
+%----------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.22)  23 JAN 2018 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.22)  23 JAN 2018 12:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1550,6 +1550,202 @@ Package tocloft Info: The document has chapter divisions on input line 44.
 \cfttabindent=\skip108
 \cfttabnumwidth=\skip109
 )
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package scrhack Info: loading lscape hack on input line 74.
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/lscape.hak
+File: lscape.hak 2015/10/03 v3.19a KOMA-Script package (hacking package lscape)
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/xpatch/xpatch.sty
+Package: xpatch 2012/10/02 v0.3 Extending etoolbox patching commands
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchcmd with sig. '' on line 125.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretocmd with sig. '' on line 126.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptocmd with sig. '' on line 127.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowcmd with sig. '' on line 128.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchbibmacro with sig. 'm' on line 131.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretobibmacro with sig. 'm' on line 133.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptobibmacro with sig. 'm' on line 135.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowbibmacro with sig. 'm' on line 137.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchfieldformat with sig. 'O{*}m' on line 139.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretofieldformat with sig. 'O{*}m' on line 141.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptofieldformat with sig. 'O{*}m' on line 143.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowfieldformat with sig. 'O{*}m' on line 145.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchnameformat with sig. 'O{*}m' on line 147.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretonameformat with sig. 'O{*}m' on line 149.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptonameformat with sig. 'O{*}m' on line 151.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshownameformat with sig. 'O{*}m' on line 153.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchlistformat with sig. 'O{*}m' on line 155.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretolistformat with sig. 'O{*}m' on line 157.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptolistformat with sig. 'O{*}m' on line 159.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowlistformat with sig. 'O{*}m' on line 161.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchindexfieldformat with sig. 'O{*}m' on line 163.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretoindexfieldformat with sig. 'O{*}m' on line 165.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptoindexfieldformat with sig. 'O{*}m' on line 167.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowindexfieldformat with sig. 'O{*}m' on line 169.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchindexnameformat with sig. 'O{*}m' on line 171.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretoindexnameformat with sig. 'O{*}m' on line 173.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptoindexnameformat with sig. 'O{*}m' on line 175.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowindexnameformat with sig. 'O{*}m' on line 177.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchindexlistformat with sig. 'O{*}m' on line 179.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretoindexlistformat with sig. 'O{*}m' on line 181.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xappindextolistformat with sig. 'O{*}m' on line 183.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowindexlistformat with sig. 'O{*}m' on line 185.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpatchbibdriver with sig. 'm' on line 187.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xpretobibdriver with sig. 'm' on line 189.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xapptobibdriver with sig. 'm' on line 191.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \xshowbibdriver with sig. 'm' on line 193.
+.................................................
+)
+Package scrhack Info: \landscape patched to make \textheight change optional on
+ input line 91.
+\scrh@LT@textheight=\skip110
+)
 (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
 \@xs@message=\write4
@@ -1559,12 +1755,12 @@ Package tocloft Info: The document has chapter divisions on input line 44.
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
 \c@myequations=\count353
-\cftbeforemyequationsskip=\skip110
-\cftmyequationsindent=\skip111
-\cftmyequationsnumwidth=\skip112
+\cftbeforemyequationsskip=\skip111
+\cftmyequationsindent=\skip112
+\cftmyequationsnumwidth=\skip113
 \c@equdepth=\count354
-\cftbeforeequtitleskip=\skip113
-\cftafterequtitleskip=\skip114
+\cftbeforeequtitleskip=\skip114
+\cftafterequtitleskip=\skip115
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
@@ -1659,7 +1855,7 @@ LaTeX Info: Redefining \pageref on input line 6369.
 )
 Package scrhack Info: hyperref hack deactivated because of
 (scrhack)             detection of hyperref version, that doesn't
-(scrhack)             need that hack, on input line 153.
+(scrhack)             need that hack, on input line 156.
 
 
 Package hyperref Message: Driver (autodetected): hpdftex.
@@ -1674,19 +1870,19 @@ Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip115
+\Hy@SectionHShift=\skip116
 )
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 153.
-Package hyperref Info: Option `hypertexnames' set `false' on input line 153.
-Package hyperref Info: Option `colorlinks' set `true' on input line 153.
-Package hyperref Info: Option `unicode' set `true' on input line 153.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 156.
+Package hyperref Info: Option `hypertexnames' set `false' on input line 156.
+Package hyperref Info: Option `colorlinks' set `true' on input line 156.
+Package hyperref Info: Option `unicode' set `true' on input line 156.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 153.
+Package hyperref Info: Option `breaklinks' set `true' on input line 156.
 Package biblatex Info: Trying to load language 'french'...
 Package biblatex Info: ... file 'french.lbx' found.
 
@@ -1708,43 +1904,43 @@ LaTeX Warning: Label `fig:planning' multiply defined.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 153.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 153.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 156.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 156.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 153.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 156.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
-LaTeX Info: Redefining \degres on input line 153.
-LaTeX Info: Redefining \dots on input line 153.
+LaTeX Info: Redefining \degres on input line 156.
+LaTeX Info: Redefining \dots on input line 156.
 Package frenchb.ldf Info: Setting StandardItemizeEnv=true for
 (frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)              on input line 153.
+(frenchb.ldf)              on input line 156.
 Package frenchb.ldf Info: Setting StandardEnumerateEnv=true for
 (frenchb.ldf)             compatibility with enumitem package,
-(frenchb.ldf)              on input line 153.
-LaTeX Info: Redefining \up on input line 153.
+(frenchb.ldf)              on input line 156.
+LaTeX Info: Redefining \up on input line 156.
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
 ic-dictionary/translator-basic-dictionary-English.dict
@@ -1827,14 +2023,14 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package scrlayer Info: Setting magic \footheight to \baselineskip while
-(scrlayer)             \begin{document} on input line 153.
-Package scrbase Info: activating french \abbrevname on input line 153.
-Package scrbase Info: activating french \byname on input line 153.
-Package scrbase Info: activating french \acknowledgementname on input line 153.
+(scrlayer)             \begin{document} on input line 156.
+Package scrbase Info: activating french \abbrevname on input line 156.
+Package scrbase Info: activating french \byname on input line 156.
+Package scrbase Info: activating french \acknowledgementname on input line 156.
 
-Package scrbase Info: activating french \authorshipname on input line 153.
-Package scrbase Info: activating french \constantsname on input line 153.
-Package scrbase Info: activating french \symbolsname on input line 153.
+Package scrbase Info: activating french \authorshipname on input line 156.
+Package scrbase Info: activating french \constantsname on input line 156.
+Package scrbase Info: activating french \symbolsname on input line 156.
 \big@size=\dimen194
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Data encoding 'ascii' specified.
@@ -1844,16 +2040,16 @@ Package biblatex Info: Data encoding 'ascii' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' not found.
 No file main.bbl.
-Package biblatex Info: Reference section=0 on input line 153.
-Package biblatex Info: Reference segment=0 on input line 153.
+Package biblatex Info: Reference section=0 on input line 156.
+Package biblatex Info: Reference segment=0 on input line 156.
 (/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
 \c@lstlisting=\count371
-Package scrhack Info: undefining \float@addtolists on input line 153.
+Package scrhack Info: undefining \float@addtolists on input line 156.
 \AtBeginShipoutBox=\box58
-Package hyperref Info: Link coloring ON on input line 153.
+Package hyperref Info: Link coloring ON on input line 156.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1863,40 +2059,40 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count372
 )
-LaTeX Info: Redefining \ref on input line 153.
-LaTeX Info: Redefining \pageref on input line 153.
-LaTeX Info: Redefining \nameref on input line 153.
+LaTeX Info: Redefining \ref on input line 156.
+LaTeX Info: Redefining \pageref on input line 156.
+LaTeX Info: Redefining \nameref on input line 156.
 
 (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
 \c__siunitx_mathsf_int=\count373
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 153.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 156.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 153
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 156
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 153
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 156
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 153
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 156
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 153
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 156
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -1912,14 +2108,14 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 197.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 200.
  [1
 
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 233.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 236.
  (./main.toc
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 4.
@@ -1954,41 +2150,41 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 9.
-<Figures/planning_petit.png, id=195, 963.6pt x 265.99374pt>
+<Figures/planning_petit.png, id=190, 963.6pt x 265.99374pt>
 File: Figures/planning_petit.png Graphic file (type png)
 
 <use Figures/planning_petit.png>
 Package pdftex.def Info: Figures/planning_petit.png used on input line 30.
 (pdftex.def)             Requested size: 469.4705pt x 129.59126pt.
 
-<Figures/planning_grand.png, id=196, 1096.095pt x 666.49pt>
-File: Figures/planning_grand.png Graphic file (type png)
-
-<use Figures/planning_grand.png>
-Package pdftex.def Info: Figures/planning_grand.png used on input line 37.
-(pdftex.def)             Requested size: 469.4705pt x 285.46643pt.
-)
 1: section
 [1
 
 
 
 
- <./Figures/planning_petit.png>] [2 <./Figures/planning_grand.png (PNG copy)>]
+ <./Figures/planning_petit.png>]
+<Figures/planning_grand.png, id=195, 1096.095pt x 666.49pt>
+File: Figures/planning_grand.png Graphic file (type png)
+
+<use Figures/planning_grand.png>
+Package pdftex.def Info: Figures/planning_grand.png used on input line 50.
+(pdftex.def)             Requested size: 693.49821pt x 421.69098pt.
+ [2 <./Figures/planning_grand.png (PNG copy)>])
 \openout2 = `Chapters/Chapter2.aux'.
 
- (./Chapters/Chapter2.tex
+(./Chapters/Chapter2.tex
 Chapitre 2.
 LaTeX Font Info:    Font shape `TS1/ppl/bx/n' in size <24.88> not available
 (Font)              Font shape `TS1/ppl/b/n' tried instead on input line 2.
-<Figures/chargement_driver.png, id=206, 724.7075pt x 238.8925pt>
+<Figures/chargement_driver.png, id=201, 724.7075pt x 238.8925pt>
 File: Figures/chargement_driver.png Graphic file (type png)
 
 <use Figures/chargement_driver.png>
 Package pdftex.def Info: Figures/chargement_driver.png used on input line 21.
 (pdftex.def)             Requested size: 469.4705pt x 154.757pt.
 
-<Figures/errorplatform_dta.png, id=207, 730.73pt x 17.06375pt>
+<Figures/errorplatform_dta.png, id=202, 730.73pt x 17.06375pt>
 File: Figures/errorplatform_dta.png Graphic file (type png)
 
 <use Figures/errorplatform_dta.png>
@@ -1997,6 +2193,9 @@ Package pdftex.def Info: Figures/errorplatform_dta.png used on input line 29.
 
 1: section
 [3
+
+
+
 
 
 
@@ -2024,30 +2223,30 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 LaTeX Font Info:    Font shape `T1/zi4/bx/n' in size <10> not available
 (Font)              Font shape `T1/zi4/b/n' tried instead on input line 73.
 
-<Figures/errorclk.png, id=212, 781.92125pt x 35.13126pt>
+<Figures/errorclk.png, id=207, 781.92125pt x 35.13126pt>
 File: Figures/errorclk.png Graphic file (type png)
 
 <use Figures/errorclk.png>
 Package pdftex.def Info: Figures/errorclk.png used on input line 90.
 (pdftex.def)             Requested size: 469.4705pt x 21.09283pt.
  [4 <./Figures/errorclk.png (PNG copy)>]
-Package csquotes Info: Input encoding change on input line 104.
+Package csquotes Info: Input encoding change on input line 103.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/lsmodeti2cdetect.png, id=242, 870.25125pt x 411.5375pt>
+<Figures/lsmodeti2cdetect.png, id=237, 870.25125pt x 411.5375pt>
 File: Figures/lsmodeti2cdetect.png Graphic file (type png)
 
 <use Figures/lsmodeti2cdetect.png>
-Package pdftex.def Info: Figures/lsmodeti2cdetect.png used on input line 116.
+Package pdftex.def Info: Figures/lsmodeti2cdetect.png used on input line 115.
 (pdftex.def)             Requested size: 469.4705pt x 222.01343pt.
  [5 <./Figures/lsmodeti2cdetect.png>]
-<Figures/debugdmesg.png, id=253, 1032.85875pt x 947.54pt>
+<Figures/debugdmesg.png, id=248, 1032.85875pt x 947.54pt>
 File: Figures/debugdmesg.png Graphic file (type png)
 
 <use Figures/debugdmesg.png>
-Package pdftex.def Info: Figures/debugdmesg.png used on input line 134.
+Package pdftex.def Info: Figures/debugdmesg.png used on input line 133.
 (pdftex.def)             Requested size: 469.4705pt x 430.68317pt.
 ) [6
 
@@ -2057,7 +2256,7 @@ Package pdftex.def Info: Figures/debugdmesg.png used on input line 134.
 
 (./Chapters/Chapter3.tex
 Chapitre 3.
-<Figures/tre.png, id=258, 930.47626pt x 228.855pt>
+<Figures/tre.png, id=253, 930.47626pt x 228.855pt>
 File: Figures/tre.png Graphic file (type png)
  <use Figures/tre.png>
 Package pdftex.def Info: Figures/tre.png used on input line 27.
@@ -2072,7 +2271,7 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 
 
 
- <./Figures/tre.png>] <Figures/4-14boot.png, id=268, 730.73pt x 399.4925pt>
+ <./Figures/tre.png>] <Figures/4-14boot.png, id=263, 730.73pt x 399.4925pt>
 File: Figures/4-14boot.png Graphic file (type png)
 
 <use Figures/4-14boot.png>
@@ -2084,33 +2283,12 @@ Package pdftex.def Info: Figures/4-14boot.png used on input line 51.
 
 (./Chapters/Chapter4.tex
 Chapitre 4.
+LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 10.
 
-Overfull \hbox (136.78036pt too wide) in paragraph at lines 12--15
-[][][]\T1/ppl/m/n/10.95 http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h
-=csi-v6&id=e3f847cd37b007d55b76282414bfcf13abb8fc9a[][]
- []
-
-
-Overfull \hbox (125.85297pt too wide) in paragraph at lines 12--15
-[][]\T1/ppl/m/n/10.95 http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h=c
-si-v6&id=4bd8e1231a2e6eca6a65b565176ea9722611c8dd[][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 33--34
-
- []
-
-
-Overfull \hbox (119.14032pt too wide) in paragraph at lines 50--51
-[][][]\T1/ppl/m/n/10.95 http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h
-=csi-v6&id=e3f847cd37b007d55b76282414bfcf13abb8fc9a[][] 
- []
-
-
-Overfull \hbox (125.85297pt too wide) in paragraph at lines 53--54
-[][][]\T1/ppl/m/n/10.95 http://git.armlinux.org.uk/cgit/linux-arm.git/commit/?h
-=csi-v6&id=4bd8e1231a2e6eca6a65b565176ea9722611c8dd[][] 
+Overfull \hbox (32.63576pt too wide) in paragraph at lines 40--49
+\T1/ppl/m/n/10.95 <project re-mote="fedevel" re-vi-sion="jethro" name="meta-ope
+nrex" path="sources/meta-openrex"> 
  []
 
 1: section
@@ -2118,52 +2296,33 @@ Overfull \hbox (125.85297pt too wide) in paragraph at lines 53--54
 
 
 
-]
-Package csquotes Info: Input encoding change on input line 65.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)) [10]
+]) [10]
 \openout2 = `Chapters/Chapter5.aux'.
 
 
-(./Chapters/Chapter5.tex
+No file Chapters/Chapter5.tex.
+\openout2 = `Chapters/Chapter6.aux'.
+
+(./Chapters/Chapter6.tex
 Chapitre 5.
-Package csquotes Info: Input encoding change on input line 66.
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-
-LaTeX Warning: Reference `fig:webcam5' on page 11 undefined on input line 72.
-
 1: section
 [11
 
 
 
-]) [12]
-\openout2 = `Chapters/Chapter6.aux'.
-
- (./Chapters/Chapter6.tex
-Chapitre 6.
-)
-1: section
-[13
-
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 317.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 317.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 320.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 320.
  (./main.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
 (./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux) (./Chapters/Chapter5.aux)
 (./Chapters/Chapter6.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 317.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 317.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 320.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 320.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2F698DA2F6B9DE86BE9A835BBB412FB6;3982.
-
-
-LaTeX Warning: There were undefined references.
+(rerunfilecheck)             Checksum: 38C96050366E566FFE028AF8D311CF22;3941.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -2172,15 +2331,15 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  )
-(\end occurred when \iftrue on line 153 was incomplete) 
+(\end occurred when \iftrue on line 156 was incomplete) 
 Here is how much of TeX's memory you used:
- 34698 strings out of 493029
- 677302 string characters out of 6136234
- 802746 words of memory out of 5000000
- 37696 multiletter control sequences out of 15000+600000
- 47482 words of font info for 85 fonts, out of 8000000 for 9000
+ 34775 strings out of 493029
+ 679144 string characters out of 6136234
+ 805800 words of memory out of 5000000
+ 37798 multiletter control sequences out of 15000+600000
+ 48931 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,20n,78p,10447b,1929s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,19n,78p,10447b,1927s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texm
 f-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-dist/f
 onts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/in
@@ -2189,10 +2348,10 @@ c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/
 uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (16 pages, 624389 bytes).
+Output written on main.pdf (14 pages, 614803 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
- 343 compressed objects within 4 object streams
- 117 named destinations out of 1000 (max. 500000)
- 294 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 293 compressed objects within 3 object streams
+ 88 named destinations out of 1000 (max. 500000)
+ 286 words of extra memory for PDF output out of 10000 (max. 10000000)
 

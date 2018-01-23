@@ -9,9 +9,9 @@
   09/01/2017)
 \end{description}
 
-Suite à l'exploration de 3 pistes, nous avons choisi de nous
-concentrer sur la solution n°2 dont le driver compile sans erreur mais ne
-réussit pas le chargement au sein du kernel.
+Suite à l'exploration des 3 pistes, nous avons choisi de nous
+concentrer sur la solution n°2 puisque le driver se compile sans erreur. Cependant
+il ne se charge pas dans le kernel.
 
 \section{Erreur}
 Constat : Le driver apparait à la commande lsmod mais est inutilisé.
@@ -23,7 +23,7 @@ Constat : Le driver apparait à la commande lsmod mais est inutilisé.
    \caption{Chargement du module}  \label{fig:Chargement-du-module}
 \end{figure}
 
-Après recherche d'indices pour le debug, on retient le message d'erreur suivant:
+Après recherche d'indices pour le debug, on obtient le message d'erreur suivant:
 \begin{figure}[th]
   \centering
   \includegraphics[width=1\linewidth]{errorplatform_dta.png}
@@ -32,11 +32,11 @@ Après recherche d'indices pour le debug, on retient le message d'erreur suivant
 \end{figure}
 
 Résultat de l'analyse :
-l'erreur provient des premières lignes de la première fonction probe du driver. La
-sécurité testant le premier paramètre d'appel du driver s'est déclanchée. le
+l'erreur provient de la fonction probe du driver. La
+sécurité testant le premier paramètre d'appel du driver s'est déclanchée. Le
 paramètre est une structure contenant des informations sur les périphériques i2c.
-Il y a donc problème de compatibilité entre le driver imx219 et le gestionnaire i2c. Selon
-l'avis de notre professeur de yocto qui a été appuyé par nos recherches,
+Il y a donc un problème de compatibilité entre le driver imx219 et le gestionnaire i2c. Selon
+l'avis de notre professeur de linux embarqué qui a appuyé nos recherches,
 le driver en question utilise les interfaces de fonctionnement nommées
 platform\_data, technologie remplacée progressivement depuis 2011 par le
 device-tree et sa gestion des compatibilités.
@@ -83,7 +83,7 @@ device tree ont fonctionné correctement car on peut remarquer au démarage
 que le driver est chargé automatiquement.
 
 \section{Erreur}
-Au chargement de la nouvelle image nous obtenons les erreurs suivantes:
+Au chargement de la nouvelle image nous obtenons l'erreur suivante:
 
 \begin{figure}[th]
   \centering
@@ -92,8 +92,7 @@ Au chargement de la nouvelle image nous obtenons les erreurs suivantes:
   \caption{Debug probe clk}  \label{fig:Debug-probe-clk}
 \end{figure}
 
-L'erreur est relative à la fonction getclk du driver qui est une sécurité
- tout comme la fonction supprimer précedement.
+L'erreur est relative à la fonction getclk du driver qui est une sécurité comme la fonction supprimée précedement.
 Elle confirme que nous avons des dificultés à communiquer avec l'i2c.
 
 \section{Solution}
@@ -117,14 +116,14 @@ Le driver est maintenant chargé "correctement" par le kernel.
   \decoRule
   \caption{Chargement du module}  \label{fig:chargement}
 \end{figure}
+\end{description}
 
-    \clearpage
-  \end{description}
-
-  On peut voir que l'i2c peut maintenant utiliser le driver imx219 et
+  On peut voir que le driver imx219 est chargé par l'i2c et
   qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
-  d'utiliser le driver car les informations sur son utilisation nous manquent.
+  de nous en servir car il nous manque des informations sur son fonctinnement.
   De plus de nouvelles erreurs apparaissent au chargement du driver.
+
+\clearpage
 
   \section{Erreur}
   Au chargement du driver nous obtenons le message de debug kernel suivant:
