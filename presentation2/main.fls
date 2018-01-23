@@ -1,9 +1,9 @@
-PWD /home/walker/Documents/rapport-thales/meta-openrexpicam/presentation2
+PWD /home/romain/Desktop/Rapports_Thales/presentation2
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/walker/Documents/rapport-thales/meta-openrexpicam/presentation2/main.tex
+INPUT /home/romain/Desktop/Rapports_Thales/presentation2/main.tex
 OUTPUT main.log
 INPUT MastersDoctoralThesis.cls
 INPUT MastersDoctoralThesis.cls
@@ -424,9 +424,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
 OUTPUT Chapters/Chapter5.aux
+INPUT Chapters/Chapter5.tex
+INPUT Chapters/Chapter5.tex
 OUTPUT Chapters/Chapter6.aux
-INPUT Chapters/Chapter6.tex
-INPUT Chapters/Chapter6.tex
 INPUT main.aux
 INPUT Chapters/Chapter1.aux
 INPUT Chapters/Chapter1.aux
