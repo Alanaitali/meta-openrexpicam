@@ -1,7 +1,0 @@
-PWD /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation2/Chapters
-INPUT /etc/texmf/web2c/texmf.cnf
-INPUT /usr/share/texmf/web2c/texmf.cnf
-INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
-INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation2/Chapters/Chapter1.tex
-OUTPUT /home/diag/workspaceThales/YOCTO/fsl-community-bsp/build-imx6rex.com/meta-openrexpicam/presentation2/Chapters/Chapter1.log
