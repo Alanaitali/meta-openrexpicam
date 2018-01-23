@@ -26,7 +26,7 @@ avec un kernel 4.1 sur le nouveau kernel 4.14 pour pouvoir utiliser le driver.
   \centering
   \includegraphics[width=1\linewidth]{tre.png}
   \decoRule
-  \caption{arborescence des fichiers}  \label{fig:planning}
+  \caption{Arborescence des fichiers}  \label{fig:arborescence4.14}
 \end{figure}
 
 Le principe de cette méthode et de copier la version 4.1 et de remplacer les sources du kernel. 
@@ -42,15 +42,31 @@ Le principe de cette méthode et de copier la version 4.1 et de remplacer les so
 \end{description}
 
 \section{Erreur}
+Nous obtenons quelques erreurs relative à gstreamer et alsa pendant la compilation du nouveau kernel.
+Ces paquets n'étant pas essentiel à l'utilisation du driver nous les avons simplement enlevé les paquets.
 
+L'étape de compilation réussite nous obtenons une erreur lors du boot
 \begin{figure}[th]
   \centering
   \includegraphics[width=1\linewidth]{4-14boot.png}
   \decoRule
-  \caption{phase de boot}  \label{fig:planning}
+  \caption{Erreur du bootloader}  \label{fig:planning}
 \end{figure}
 
 \section{Conclusion}
 
+U-boot n'arrive pas à lancer notre image, il y a donc une imcompatibilitée entre 
+la version du kernel et celle du bootloader chargé dans la SPI flash. Pour parvenir
+à utiliser cette nouvelle image nous devons concevoir un nouveau bootlaoder en suivant
+la méthode présentée
+\href{http://www.imx6rex.com/open-rex/software/yocto-uboot-how-to-add-support-for-a-custom-board/}
+{ici}.
+ 
+\section{Reste à faire}
+\begin{itemize}
+\item[-] Créer un image 4.14 en se basant sur la meta-openrex.
+\item[-] Créer un nouveau bootlaoder.
+\item[-] Tester le nouveau bootlaoder.
+\end{itemize}
 
 %----------------------------------------------------------------------------------------

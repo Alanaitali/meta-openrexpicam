@@ -20,7 +20,7 @@ Constat : Le driver apparait à la commande lsmod mais est inutilisé.
    \centering
    \includegraphics[width=1\linewidth]{chargement_driver.png}
    \decoRule
-   \caption{Chargement du module}  \label{fig:planning}
+   \caption{Chargement du module}  \label{fig:Chargement-du-module}
 \end{figure}
 
 Après recherche d'indices pour le debug, on retient le message d'erreur suivant:
@@ -28,7 +28,7 @@ Après recherche d'indices pour le debug, on retient le message d'erreur suivant
   \centering
   \includegraphics[width=1\linewidth]{errorplatform_dta.png}
   \decoRule
-  \caption{Debug probe}  \label{fig:planning}
+  \caption{Debug probe platform data}  \label{fig:Debug-probe-platform-data}
 \end{figure}
 
 Résultat de l'analyse :
@@ -89,7 +89,7 @@ Au chargement de la nouvelle image nous obtenons les erreurs suivantes:
   \centering
   \includegraphics[width=1\linewidth]{errorclk.png}
   \decoRule
-  \caption{Debug probe}  \label{fig:planning}
+  \caption{Debug probe clk}  \label{fig:Debug-probe-clk}
 \end{figure}
 
 L'erreur est relative à la fonction getclk du driver qui est une sécurité
@@ -115,17 +115,13 @@ Le driver est maintenant chargé "correctement" par le kernel.
   \centering
   \includegraphics[width=1\linewidth]{lsmodeti2cdetect.png}
   \decoRule
-  \caption{Debug probe}  \label{fig:planning}
+  \caption{Chargement du module}  \label{fig:chargement}
 \end{figure}
 
     \clearpage
   \end{description}
 
-<<<<<<< HEAD
-  On peut voir que l'i2c peut maintenant utiliser le driver imx219 et 
-=======
   On peut voir que l'i2c peut maintenant utiliser le driver imx219 et
->>>>>>> 417d1d91f570aa47784f8a3c853f8a5eacb9f335
   qu'il est utilisé par un autre module. Nous ne sommes toujours pas en mesure
   d'utiliser le driver car les informations sur son utilisation nous manquent.
   De plus de nouvelles erreurs apparaissent au chargement du driver.
@@ -137,7 +133,7 @@ Le driver est maintenant chargé "correctement" par le kernel.
     \centering
     \includegraphics[width=1\linewidth]{debugdmesg.png}
     \decoRule
-    \caption{Debug probe}  \label{fig:planning}
+    \caption{Dmsg}  \label{fig:dmsg}
   \end{figure}
 
   \section{Reste à faire}
