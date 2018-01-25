@@ -1,0 +1,43 @@
+From 33df1044db745410edb78dd984581d2fff35ba49 Mon Sep 17 00:00:00 2001
+From: Gladwistor <aitali.alan@gmail.com>
+Date: Thu, 25 Jan 2018 09:23:58 +0100
+Subject: [PATCH] imx219 Kconfig
+
+---
+ drivers/media/platform/mxc/capture/Kconfig | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/drivers/media/platform/mxc/capture/Kconfig b/drivers/media/platform/mxc/capture/Kconfig
+index f3ce0ab..6cc2c9e 100644
+--- a/drivers/media/platform/mxc/capture/Kconfig
++++ b/drivers/media/platform/mxc/capture/Kconfig
+@@ -15,6 +15,13 @@ config MXC_CAMERA_OV5640
+         ---help---
+           If you plan to use the ov5640 Camera with your MXC system, say Y here.
+ 
++config MXC_CAMERA_IMX219
++	tristate "Sony imx219 camera support"
++	depends on !VIDEO_MXC_EMMA_CAMERA && I2C
++	---help---
++	If you plan to use the IPUv3 CSI0 in test mode with your MXC
++	system, say Y here.
++
+ config MXC_CAMERA_OV5642
+ 	tristate "OmniVision ov5642 camera support"
+ 	depends on !VIDEO_MXC_EMMA_CAMERA && I2C
+@@ -27,6 +34,12 @@ config MXC_CAMERA_OV5640_MIPI
+ 	---help---
+ 	  If you plan to use the ov5640 Camera with mipi interface in your MXC system, say Y here.
+ 
++config MXC_CAMERA_IMX219_MIPI
++	tristate "Sony imx219 camera support using mipi"
++	depends on !VIDEO_MXC_EMMA_CAMERA && I2C
++	---help---
++	If you plan to use the imx219 Camera with mipi interface in your MXC system, say Y here.
++
+ config MXC_CAMERA_OV5647_MIPI_INT
+ 	tristate "OmniVision ov5647 camera support using mipi"
+ 	depends on !VIDEO_MXC_EMMA_CAMERA && I2C
+-- 
+2.7.4
+
