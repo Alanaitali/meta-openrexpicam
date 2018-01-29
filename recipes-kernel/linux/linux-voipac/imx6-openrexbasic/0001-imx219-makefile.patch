@@ -1,0 +1,26 @@
+From c215f79f5e776d337031a1d001a398bdb2b26e5d Mon Sep 17 00:00:00 2001
+From: Gladwistor <aitali.alan@gmail.com>
+Date: Fri, 26 Jan 2018 13:54:47 +0100
+Subject: [PATCH] imx219 makefile
+
+---
+ drivers/media/platform/mxc/capture/Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/media/platform/mxc/capture/Makefile b/drivers/media/platform/mxc/capture/Makefile
+index 2868791..79a63f5 100644
+--- a/drivers/media/platform/mxc/capture/Makefile
++++ b/drivers/media/platform/mxc/capture/Makefile
+@@ -12,6 +12,9 @@ obj-$(CONFIG_MXC_CAMERA_OV5640) += ov5640_camera_int.o
+ ov5642_camera-objs := ov5642.o
+ obj-$(CONFIG_MXC_CAMERA_OV5642) += ov5642_camera.o
+ 
++imx219_camera-objs := imx219.o
++obj-$(CONFIG_MXC_CAMERA_IMX219) += imx219_camera.o
++
+ ov5640_camera_mipi_int-objs := ov5640_mipi.o
+ obj-$(CONFIG_MXC_CAMERA_OV5640_MIPI) += ov5640_camera_mipi_int.o
+ 
+-- 
+2.7.4
+
