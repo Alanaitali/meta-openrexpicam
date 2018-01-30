@@ -5,7 +5,7 @@ Subject: [PATCH] add imx219
 
 ---
  drivers/media/platform/mxc/capture/imx219.c | 1418 +++++++++++++++++++++++++++
- 1 file changed, 1419 insertions(+)
+ 1 file changed, 1418 insertions(+)
  create mode 100644 drivers/media/platform/mxc/capture/imx219.c
 
 diff --git a/drivers/media/platform/mxc/capture/imx219.c b/drivers/media/platform/mxc/capture/imx219.c
@@ -13,7 +13,7 @@ new file mode 100644
 index 0000000..111f22f
 --- /dev/null
 +++ b/drivers/media/platform/mxc/capture/imx219.c
-@@ -0,0 +1,1419 @@
+@@ -0,0 +1,1418 @@
 +
 +#include <linux/module.h>
 +#include <linux/init.h>
@@ -45,7 +45,7 @@ index 0000000..111f22f
 +#define IMX219_XCLK_MAX 27000000
 +
 +#define IMX219_CHIP_ID_HIGH_BYTE	0x0000
-+#define IMX219_CHIP_ID_LOW_BYTE	 0x0001
++#define IMX219_CHIP_ID_LOW_BYTE		0x0001
 +
 +enum imx219_mode {				
 +	imx219_mode_MIN = 0,
@@ -327,6 +327,12 @@ index 0000000..111f22f
 +err:
 +	return retval;
 +}
++
++
++
++
++
++
 +
 +
 +
@@ -1274,7 +1280,7 @@ index 0000000..111f22f
 +	int retval;
 +	u8 chip_id_high, chip_id_low;
 +
-+	/*pinctrl control*/
++	dev_err(dev, "bonsoir");
 +	pinctrl = devm_pinctrl_get_select_default(dev);
 +	if (IS_ERR(pinctrl)) {
 +		dev_err(dev, "imx219 setup pinctrl failed!");
@@ -1339,26 +1345,19 @@ index 0000000..111f22f
 +	imx219_power_on(&client->dev);
 +
 +	
-+	retval = imx219_read_reg(0x012a, &chip_id_high);
-+	dev_err(dev, "csi %i\n",retval);
-+	/*if (retval < 0 || chip_id_high != 0x04) {
-+		pr_warning("camera1 imx219 is not found\n");
++	retval = imx219_read_reg(IMX219_CHIP_ID_HIGH_BYTE, &chip_id_high);
++	if (retval < 0 || chip_id_high != 0x02) {
++		pr_warning("camera imx219 is not found\n");
 +		clk_disable_unprepare(imx219_data.sensor_clk);
 +		return -ENODEV;
-+	}*/
-+	retval = imx219_read_reg(0x012b, &chip_id_low);
-+	dev_err(dev, "csi %i\n",retval);
-+	/*if (retval < 0 || chip_id_low != 0x19) {
-+		pr_warning("camera2 imx219 is not found\n");
++	}
++	retval = imx219_read_reg(IMX219_CHIP_ID_LOW_BYTE, &chip_id_low);
++	if (retval < 0 || chip_id_low != 0x19) {
++		pr_warning("camera imx219 is not found\n");
 +		clk_disable_unprepare(imx219_data.sensor_clk);
 +		return -ENODEV;
-+	}*/
-+	imx219_write_reg(0x0087,0xAA);
-+	retval = imx219_read_reg(0x0087, &chip_id_low);
-+	dev_err(dev, "csi %i\n",chip_id_low);
-+	//msleep(100);
-+	retval = imx219_read_reg(0x1000, &chip_id_low);
-+	dev_err(dev, "csi %i\n",chip_id_low);
++	}
++
 +	//ov5642_standby(1);
 +
 +	imx219_int_device.priv = &imx219_data;

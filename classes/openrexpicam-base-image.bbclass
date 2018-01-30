@@ -11,7 +11,8 @@ IMAGE_INSTALL += " \
 	gstreamer1.0-plugins-imx \
 	gst1.0-fsl-plugin \
 	v4l-utils \
-  psplash \
+  	psplash \
+	imx-test \
 "
 
 

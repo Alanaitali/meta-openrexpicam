@@ -1,0 +1,165 @@
+From 487a2fbef9fa3473f495291281c541a59dd38edc Mon Sep 17 00:00:00 2001
+From: Gladwistor <aitali.alan@gmail.com>
+Date: Sat, 27 Jan 2018 19:08:45 +0100
+Subject: [PATCH] imx219 device tree
+
+---
+ arch/arm/boot/dts/imx6-openrexbasic.dts | 23 +++++++++++++++++--
+ arch/arm/boot/dts/imx6qdl-openrex.dtsi  | 39 +++++++++++++++++++++++++++------
+ arch/arm/boot/dts/imx6qdl.dtsi          |  4 ++--
+ 3 files changed, 55 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx6-openrexbasic.dts b/arch/arm/boot/dts/imx6-openrexbasic.dts
+index 88099b8..a36e335 100644
+--- a/arch/arm/boot/dts/imx6-openrexbasic.dts
++++ b/arch/arm/boot/dts/imx6-openrexbasic.dts
+@@ -39,11 +39,11 @@
+ };
+ 
+ &i2c2 {
+-	/* Raspberry Pi camera rev 1.3 */
++	/* Raspberry Pi camera rev 1.3 
+ 	ov5647_mipi: ov5647_mipi@36 {
+ 		compatible = "ovti,ov5647_mipi_int";
+ 		reg = <0x36>;
+-		/* Pi camera has its own 25MHz clock. */
++		// Pi camera has its own 25MHz clock. 
+ 		clocks = <&clks IMX6QDL_CLK_DUMMY>;
+ 		clock-names = "csi_mclk";
+ 		DOVDD-supply = <&reg_1p8v>;
+@@ -56,7 +56,25 @@
+ 		mclk_source = <0>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_ov5647_mipi>;
+-	};
++	};*/
++	/* Primary parallel camera */
++        imx219: imx219@64 {
++                compatible = "sony,imx219";
++                reg = <0x64>;
++                pinctrl-names = "default";
++                pinctrl-0 = <&pinctrl_ipu1_1>;
++                clocks = <&clks IMX6QDL_CLK_DUMMY>;
++                clock-names = "csi_mclk";
++		 VANA-supply = <&reg_2p8v>;
++		 VDDL-supply = <&reg_1p2v>;
++		 VDIG-supply = <&reg_1p8v>;
++                pwn-gpios = <&gpio7 6 GPIO_ACTIVE_HIGH>;
++                csi_id = <0>;
++                ipu_id = <0>;
++                mclk = <24000000>;
++                mclk_source = <0>;
++                digi,defer-probe;
++		};
+ };
+ 
+ &ldb {
+diff --git a/arch/arm/boot/dts/imx6qdl-openrex.dtsi b/arch/arm/boot/dts/imx6qdl-openrex.dtsi
+index 130b9d9..acc2355 100644
+--- a/arch/arm/boot/dts/imx6qdl-openrex.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-openrex.dtsi
+@@ -155,9 +155,18 @@
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+ 
+-		reg_1p5v: 1p5v {
++		reg_1p2v: 1p2v {
+ 			compatible = "regulator-fixed";
+ 			reg = <0>;
++			regulator-name = "1P2V";
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++			regulator-always-on;
++		};
++
++		reg_1p5v: 1p5v {
++			compatible = "regulator-fixed";
++			reg = <1>;
+ 			regulator-name = "1P5V";
+ 			regulator-min-microvolt = <1500000>;
+ 			regulator-max-microvolt = <1500000>;
+@@ -166,7 +175,7 @@
+ 
+ 		reg_1p8v: 1p8v {
+ 			compatible = "regulator-fixed";
+-			reg = <1>;
++			reg = <2>;
+ 			regulator-name = "1P8V";
+ 			regulator-min-microvolt = <1800000>;
+ 			regulator-max-microvolt = <1800000>;
+@@ -175,7 +184,7 @@
+ 
+ 		reg_2p8v: 2p8v {
+ 			compatible = "regulator-fixed";
+-			reg = <2>;
++			reg = <3>;
+ 			regulator-name = "2P8V";
+ 			regulator-min-microvolt = <2800000>;
+ 			regulator-max-microvolt = <2800000>;
+@@ -184,7 +193,7 @@
+ 
+ 		reg_3p3v: 3p3v {
+ 			compatible = "regulator-fixed";
+-			reg = <3>;
++			reg = <4>;
+ 			regulator-name = "3P3V";
+ 			regulator-min-microvolt = <3300000>;
+ 			regulator-max-microvolt = <3300000>;
+@@ -226,10 +235,8 @@
+ 	v4l2_cap_1 {
+ 		compatible = "fsl,imx6q-v4l2-capture";
+ 		ipu_id = <0>;
+-		csi_id = <1>;
++		csi_id = <0>;
+ 		mclk_source = <0>;
+-		mipi_camera = <1>;
+-		default_input = <1>;
+ 		status = "okay";
+ 	};
+ 
+@@ -641,6 +648,24 @@
+ 			>;
+ 		};
+ 
++        	pinctrl_ipu1_1: ipu1grp-1 { /* parallel camera */
++            		fsl,pins = <
++                		MX6QDL_PAD_CSI0_DAT12__IPU1_CSI0_DATA12    0x80000000
++                		MX6QDL_PAD_CSI0_DAT13__IPU1_CSI0_DATA13    0x80000000
++                		MX6QDL_PAD_CSI0_DAT14__IPU1_CSI0_DATA14    0x80000000
++                		MX6QDL_PAD_CSI0_DAT15__IPU1_CSI0_DATA15    0x80000000
++                		MX6QDL_PAD_CSI0_DAT16__IPU1_CSI0_DATA16    0x80000000
++                		MX6QDL_PAD_CSI0_DAT17__IPU1_CSI0_DATA17    0x80000000
++                		MX6QDL_PAD_CSI0_DAT18__IPU1_CSI0_DATA18    0x80000000
++                		MX6QDL_PAD_CSI0_DAT19__IPU1_CSI0_DATA19    0x80000000
++                		MX6QDL_PAD_CSI0_PIXCLK__IPU1_CSI0_PIXCLK   0x0000a0b0
++                		MX6QDL_PAD_CSI0_MCLK__IPU1_CSI0_HSYNC      0x80000000
++                		MX6QDL_PAD_CSI0_VSYNC__IPU1_CSI0_VSYNC     0x80000000
++                		MX6QDL_PAD_EIM_WAIT__GPIO5_IO00            0x80000000
++                		MX6QDL_PAD_CSI0_DATA_EN__GPIO5_IO20    0x80000000
++            		>;
++		};
++
+ 		pinctrl_ipu2_csi1: ipu2_csi1grp { /* parallel camera */
+ 			fsl,pins = <
+ /*
+diff --git a/arch/arm/boot/dts/imx6qdl.dtsi b/arch/arm/boot/dts/imx6qdl.dtsi
+index 522d017..bb4ede9 100644
+--- a/arch/arm/boot/dts/imx6qdl.dtsi
++++ b/arch/arm/boot/dts/imx6qdl.dtsi
+@@ -1263,11 +1263,11 @@
+ 			clocks = <&clks IMX6QDL_CLK_IPU1>,
+ 				 <&clks IMX6QDL_CLK_IPU1_DI0>, <&clks IMX6QDL_CLK_IPU1_DI1>,
+ 				 <&clks IMX6QDL_CLK_IPU1_DI0_SEL>, <&clks IMX6QDL_CLK_IPU1_DI1_SEL>,
+-				 <&clks IMX6QDL_CLK_LDB_DI0>, <&clks IMX6QDL_CLK_LDB_DI1>;
++				 <&clks IMX6QDL_CLK_LDB_DI0>, <&clks IMX6QDL_CLK_LDB_DI1>, <&clks MX6QDL_PAD_CSI0_PIXCLK__IPU1_CSI0_PIXCLK>;
+ 			clock-names = "bus",
+ 				      "di0", "di1",
+ 				      "di0_sel", "di1_sel",
+-				      "ldb_di0", "ldb_di1";
++				      "ldb_di0", "ldb_di1", "ipu1_csi0";
+ 			resets = <&src 2>;
+ 			bypass_reset = <0>;
+ 		};
+-- 
+2.7.4
+
