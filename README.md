@@ -76,8 +76,8 @@ Now plug your SD card in the OpenRex and it will boot on our Yocto image.
 ## Built with
 
 * [Yocto 2.1 Krogoth](https://www.yoctoproject.org/downloads/core/krogoth21) - Tool used to create our image
-* [fsl-community-bsp-base](https://github.com/petit-romain/fsl-community-bsp-base) - Out bsp-base repository
-* [fsl-community-bsp-platform](https://github.com/petit-romain/fsl-community-bsp-platform) - Out bsp-platform repository
+* [fsl-community-bsp-base](https://github.com/petit-romain/fsl-community-bsp-base) - Our bsp-base repository
+* [fsl-community-bsp-platform](https://github.com/petit-romain/fsl-community-bsp-platform) - Our bsp-platform repository
 * [Ubuntu 16.04](https://www.ubuntu.com/) - Host and build machine OS
 
 ## Built for
