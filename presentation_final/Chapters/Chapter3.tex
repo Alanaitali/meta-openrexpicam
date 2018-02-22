@@ -6,7 +6,7 @@
 
 %----------------------------------------------------------------------------------------
 
-\section{Génération d'une méta-donnée}
+\section{Génération d'une méta-donnée (RP,AA)}
 
 Pour réaliser une métadonnée nous avons lancé la commande suivante :
 
@@ -56,7 +56,7 @@ Le second dépôt fsl-community-bsp-data créera notre fichier “bblayers.conf�
 avec toutes les métadonnées nécessaires à la compilation ainsi que le fichier
 “setup-environment” qui concevra notre fichier local.conf.
 
-\subsection{fsl-community-bsp-platform}
+\subsection{fsl-community-bsp-platform (RP)}
 
 Nous avons repris le “default.xml” utilisé par Frescale incluant un kernel 4.1
 \href{http://git.freescale.com/git/cgit.cgi/imx/fsl-arm-yocto-bsp.git/tree/default.xml?h=imx-4.1-krogoth}
@@ -87,7 +87,7 @@ emplacement dans notre dossier de travail (sources/meta-openrexpicam) :
     <project remote="equipe" revision="develop/porting" path="sources/meta-openrexpicam"/>
 \end{lstlisting}
 
-\subsection{fsl-community-bsp-data}
+\subsection{fsl-community-bsp-data (RP)}
 
 Ce dépôt recopiera automatiquement notre fichier “bblayers.conf” puisqu’il
 contient le contenu du fichier : 
@@ -120,9 +120,9 @@ ajouté une signature ainsi que les images compilables de notre méta-donnée :
     Signed-off-by: Alan Ait-Ali, Romain Petit, Clément Ailloud & Martin Laporte
 \end{lstlisting}
 
-\section{Génération d'un OS}
+\section{Génération d'un OS (RP,ML,AA)}
 
-\subsection{Préparation de l'environnement}
+\subsection{Préparation de l'environnement (RP,AA)}
 
 Grâce à l’environnement de travail Yocto nous avons pu rapidement mettre en place un
 système d’exploitation fonctionnel sur la cible Openrex. En effet les équipes de Voipac et
@@ -136,7 +136,7 @@ ordonnées, de compiler une image par la commande :
     MACHINE=imx6s-openrex bitbake core-image-base
 \end{tcolorbox}
 
-\subsection{Préparation de notre meta-donnée}
+\subsection{Préparation de notre meta-donnée (RP,AA)}
 
 Le projet Yocto permet aussi d’améliorer l’image générée. Cette amélioration suit le principe des
 codes ouverts à l’amélioration et fermés aux modifications. En effet comme représenté sur la
@@ -163,7 +163,7 @@ freescale.
     \caption{Architecture d'une recette} \label{fig:recette}
 \end{figure} 
 
-\section{Implémentation de code dans le BSP}
+\section{Implémentation de code dans le BSP (AA)}
 
 Le coeur du projet vise à ajouter du code dans le bsp déjà existant, notamment au sein du
 kernel. Pour ce faire nous modifions le dossier de compilation (18Gb ci-dessus). Comme
@@ -211,7 +211,7 @@ des meta nécessaires pour atteindre l’état laissé par freescale. Nous somme
 que le patch généré est cohérent avec l’arborescence de compilation sur laquelle bitbake
 l’appliquera.
 
-\section{Implémentation des supports de compilation}
+\section{Implémentation des supports de compilation (AA)}
 
 Ajouter une nouvelle caméra a notre BSP, demande la création d’un driver. Pour qu’il soit
 utilisable il nous faut signaler au compilateur que nous voulons ajouter à notre kernel le
@@ -297,9 +297,9 @@ utilisée pour les kernels v3 et “linux-voipac” pour les kernels v4.
 
 Au lancement de bitbake le driver pourra alors être compilé et chargé par le kernel.
 
-\section{Utilsation de drivers existants}
+\section{Utilsation de drivers existants (ML,CA,RP,AA)}
 
-\subsection{Présentation d'un driver}
+\subsection{Présentation d'un driver (ML)}
 
 Un driver Linux est un programme binaire qui s’exécute dans le kernel-space. Un driver
 utilise les ABI kernel pour interagir avec son environnement. Le code d’un driver s’appuie
@@ -312,7 +312,7 @@ kernel. Si le driver est compilé en statique, il est chargé (linked and locked
 et exit() est exécuté lors de l’extinction du système. Si le driver est compilé en module ce
 sont les fonctions insmod et rmmod qui appelleront les init et exit du fichier “.ko”
 
-\subsection{Utilisation de l'existant}
+\subsection{Utilisation de l'existant (RP,AA)}
 
 Dans un premier temps, n’étant pas habitués à manipuler des drivers, nous avons
 cherché à utiliser des sources en croisant les architectures requises. Pour agir dans notre meta,
@@ -325,7 +325,7 @@ nous avons eu recours à une série de patchs comme montrés ci-dessous.
     \caption{Patchs du kernel 3.14} \label{fig:patchs}
 \end{figure} 
 
-\subsubsection{Compilation par SDK}
+\subsubsection{Compilation par SDK (ML,CA)}
 
 Dans un premier temps, nous nous doutions qu’il y aurait des erreurs de compilation.
 Nous avons préféré décorréler les erreurs de compilation de nos propres erreurs. Nous
@@ -371,7 +371,7 @@ nous sommes mis à chercher une autre solution. Après avoir parlé à notre pro
 Linux embarqué des soucis de compilation que nous rencontrions nous nous sommes mis
 à compiler le driver en ajoutant ses sources dans l’arborescence (in-tree).
 
-\subsubsection{Compatilation out-of-tree}
+\subsubsection{Compatilation out-of-tree (ML,CA)}
 
 Pour cette première compilation de code source dans Yocto nous avons tout d'abord
 rédigé une recette comme on aurait rédigé un makefile. Un intérêt est de pouvoir compiler
@@ -389,14 +389,14 @@ leurs bibliothèques kernel (linux/example.h).
     \caption{Arborescence de la compilation out-of-tree} \label{fig:outtree}
 \end{figure} 
 
-\subsubsection{Compatilation in-tree}
+\subsubsection{Compatilation in-tree (ML,AA)}
 
 La compilation de ces sources a été effectuée in-tree sur la version v3.14 du kernel
 linux-openrex (branche develop/Smart). La compilation ayant fonctionné, elle a été testée
 et déclarée image non bootable. Comme à ce moment là les sources de type chromium os
 étaient plus avancées, cette piste fut abandonnée.
 
-\subsection{imx219 - Hummingboard}
+\subsection{imx219 - Hummingboard (AA)}
 
 \subsubsection{Origine des sources}
 
@@ -418,13 +418,13 @@ au driver pour la configuration en question (
 Lors des rapports intermédiaires présentés à l’équipe de Thales nous parlions de ces
 sources sous le nom de “solution 3”
 
-\subsubsection{Compilation in-tree}
+\subsubsection{Compilation in-tree (RP)}
 
 Sur les conseils de M Texier, nous n’avons pas cherché à réaliser de compilation
 out-of-tree. Nous avons donc directement porté le driver sur notre carte ainsi que les
 structures device-tree.
 
-\subsection{imx219 - Nvidia-Tegra Chromium-Os}
+\subsection{imx219 - Nvidia-Tegra Chromium-Os (CA,AA)}
 
 Chromium OS est “un système d’exploitation visant à renforcer la sécurité des utilisateurs qui
 passent une majorité de leur temps sur le web”. Concrètement cet os est un système GNU/Linux et
@@ -556,7 +556,7 @@ Par manque de temps et de connaissances sur l’environnement v4l2, nous nous so
 tous concentré sur la nouvelle solution proposé par Thalès qui leur semblait plus
 pertinente.
 
-\subsection{imx219 - Raspberry Pi v2}
+\subsection{imx219 - Raspberry Pi v2 (AA)}
 
 \subsubsection{Origine des sources}
 En premier lieu nous sommes partis des sources reçues dans les premiers
@@ -575,7 +575,7 @@ une compilation out-of-tree, externe à la recette du kernel et nous sommes pres
 parvenus à nos fins avec une compilation in-tree. Ci-dessous, la description des pratiques
 à éviter pour le projet d’un driver.
 
-\subsubsection{Portage du BSP Voipac sur un kernel 4.14}
+\subsubsection{Portage du BSP Voipac sur un kernel 4.14 (AA,RP)}
 
 Lors de nos recherches pour les compilations ci-dessous, nous avons trouvé un driver
 imx219 fonctionnel sur un kernel 4.14 donc l’idée était de porter notre méta-donnée vers
@@ -619,14 +619,14 @@ Nous pouvons conclure qu’il y a une incompatibilité entre le bootloader et le
 nous avons modifié. Pour que notre image puisse se lancer correctement, il est nécessaire
 de modifier le bootloader.
 
-\section{Développement d'un driver}
+\section{Développement d'un driver (AA,RP,CA,ML)}
 
 Des caméras utilisant le MIPI CSI sont implémentées de base dans le kernel, l’OV5640 en
 est un bon exemple. Il s’agit d’un capteur vidéo développé par Omnivision qui se trouve
 être ressemblant à l’imx219 au niveau du protocole de communication avec la carte mère.
 Le pilote déjà implémenté servira alors de base pour la création d’un driver imx219.
 
-\subsection{Organisation d'un driver MIPI/CSI}
+\subsection{Organisation d'un driver MIPI/CSI (AA)}
 
 On dénombre 3 sections principale dans ce genre de pilote :
 La première contient en majeure partie du code lié au fonctionnement du composant. On y
@@ -643,7 +643,7 @@ classiques d’un périphérique i2c sont présentes tel que ov5640\_probe, ov56
 ov5640\_init et ov5640\_clean sans oublier la structure reliant les fonctions au système
 ov5640\_i2c\_driver.
 
-\subsubsection{Intégration au device tree}
+\subsubsection{Intégration au device tree (AA,CA)}
 
 Le device tree est un sous-ensemble composé de plusieurs fichiers configurant toutes les
 liaisons entre le matériel et le logiciel. Il permet d’utiliser des drivers conçus pour linux. On
@@ -708,7 +708,7 @@ device tree.
     \item[-] pinctrl-0 = <\&pinctrl\_imx219> : lien vers la déclaration des gpios
 \end{itemize}
 
-\subsection{Validation du driver}
+\subsection{Validation du driver (AA,RP,ML,CA)}
 
 Au démarrage du driver, la première fonction exécutée est imx219\_probe. 
 Comme son nom l’indique, elle a pour rôle de sonder certaines parties du composant comme la broche

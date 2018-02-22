@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 13:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 14:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2575,9 +2575,9 @@ Chapitre 1.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 19.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 26.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 46.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 53.
 1: section
 [1
 
@@ -2594,20 +2594,20 @@ Chapitre 2.
 
 
 
-] <Figures/fleche.png, id=410, 1099.10625pt x 518.93875pt>
+] <Figures/fleche.png, id=411, 1099.10625pt x 518.93875pt>
 File: Figures/fleche.png Graphic file (type png)
 
 <use Figures/fleche.png>
 Package pdftex.def Info: Figures/fleche.png used on input line 58.
 (pdftex.def)             Requested size: 384.69295pt x 181.63129pt.
  [4 <./Figures/fleche.png (PNG copy)>]
-<Figures/gantt.png, id=415, 1606.0pt x 903.375pt>
+<Figures/gantt.png, id=416, 1606.0pt x 903.375pt>
 File: Figures/gantt.png Graphic file (type png)
  <use Figures/gantt.png>
 Package pdftex.def Info: Figures/gantt.png used on input line 102.
 (pdftex.def)             Requested size: 1534.86441pt x 746.88307pt.
 
-[5 <./Figures/gantt.png>] <Figures/git.png, id=423, 231.86626pt x 218.8175pt>
+[5 <./Figures/gantt.png>] <Figures/git.png, id=424, 231.86626pt x 218.8175pt>
 File: Figures/git.png Graphic file (type png)
 
 <use Figures/git.png>
@@ -2630,21 +2630,21 @@ Missing character: There is no e in font nullfont!
  [8
 
 ]
-<Figures/camrpi.png, id=441, 270.00874pt x 187.70125pt>
+<Figures/camrpi.png, id=442, 270.00874pt x 187.70125pt>
 File: Figures/camrpi.png Graphic file (type png)
 
 <use Figures/camrpi.png>
 Package pdftex.def Info: Figures/camrpi.png used on input line 289.
 (pdftex.def)             Requested size: 108.00157pt x 75.07916pt.
  [9 <./Figures/camrpi.png>]
-<Figures/blockMIPI.png, id=449, 357.335pt x 221.82875pt>
+<Figures/blockMIPI.png, id=450, 357.335pt x 221.82875pt>
 File: Figures/blockMIPI.png Graphic file (type png)
 
 <use Figures/blockMIPI.png>
 Package pdftex.def Info: Figures/blockMIPI.png used on input line 337.
 (pdftex.def)             Requested size: 142.93146pt x 88.72992pt.
 
-<Figures/openrex.png, id=451, 259.97125pt x 194.7275pt>
+<Figures/openrex.png, id=452, 259.97125pt x 194.7275pt>
 File: Figures/openrex.png Graphic file (type png)
 
 <use Figures/openrex.png>
@@ -2662,7 +2662,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
- [11 <./Figures/openrex.png>] <Figures/v4l2.png, id=467, 1006.76125pt x 748.797
+ [11 <./Figures/openrex.png>] <Figures/v4l2.png, id=468, 1006.76125pt x 748.797
 5pt>
 File: Figures/v4l2.png Graphic file (type png)
 
@@ -2733,7 +2733,7 @@ Package csquotes Info: Input encoding change on input line 565.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [14]
-<Figures/gstreamer.png, id=562, 963.6pt x 542.025pt>
+<Figures/gstreamer.png, id=563, 963.6pt x 542.025pt>
 File: Figures/gstreamer.png Graphic file (type png)
 
 <use Figures/gstreamer.png>
@@ -2811,7 +2811,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<Figures/architecture.png, id=575, 778.91pt x 713.66624pt>
+<Figures/architecture.png, id=576, 778.91pt x 713.66624pt>
 File: Figures/architecture.png Graphic file (type png)
 
 <use Figures/architecture.png>
@@ -2875,7 +2875,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [19]
-<Figures/recette.png, id=626, 1583.9175pt x 1606.0pt>
+<Figures/recette.png, id=627, 1583.9175pt x 1606.0pt>
 File: Figures/recette.png Graphic file (type png)
 
 <use Figures/recette.png>
@@ -2895,7 +2895,7 @@ Package csquotes Info: Input encoding change on input line 232.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/menuconfig.png, id=640, 724.7075pt x 408.52625pt>
+<Figures/menuconfig.png, id=641, 724.7075pt x 408.52625pt>
 File: Figures/menuconfig.png Graphic file (type png)
 
 <use Figures/menuconfig.png>
@@ -2921,7 +2921,7 @@ Overfull \hbox (0.48819pt too wide) in paragraph at lines 317--320
 er des dri-vers, nous avons
  []
 
-<Figures/patchs.png, id=678, 1110.1475pt x 586.19pt>
+<Figures/patchs.png, id=679, 1110.1475pt x 586.19pt>
 File: Figures/patchs.png Graphic file (type png)
  <use Figures/patchs.png>
 Package pdftex.def Info: Figures/patchs.png used on input line 323.
@@ -2981,7 +2981,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<Figures/outtree.png, id=686, 925.4575pt x 380.42125pt>
+<Figures/outtree.png, id=687, 925.4575pt x 380.42125pt>
 File: Figures/outtree.png Graphic file (type png)
 
 <use Figures/outtree.png>
@@ -3097,7 +3097,7 @@ Overfull \hbox (3.2508pt too wide) in paragraph at lines 713--721
 e est imx219_probe. Comme
  []
 
-[30] <Figures/trame.png, id=801, 1116.17pt x 85.31876pt>
+[30] <Figures/trame.png, id=802, 1116.17pt x 85.31876pt>
 File: Figures/trame.png Graphic file (type png)
 
 <use Figures/trame.png>
@@ -3127,13 +3127,10 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 438.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 438.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 438.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2AE1D969F4B30497F12D919F341203DC;10899.
+(rerunfilecheck)             Checksum: 3D1B9248FD677461857DC7194245201B;12693.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
@@ -3145,25 +3142,26 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 ### bottom level
 (\end occurred when \iftrue on line 184 was incomplete) 
 Here is how much of TeX's memory you used:
- 49293 strings out of 493029
- 1011352 string characters out of 6136234
+ 49295 strings out of 493029
+ 1011363 string characters out of 6136234
  1149045 words of memory out of 5000000
  51755 multiletter control sequences out of 15000+600000
- 48915 words of font info for 82 fonts, out of 8000000 for 9000
+ 49413 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,20n,105p,10433b,3817s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texm
 f-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-dist/f
 onts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/in
 consolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/
-uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (40 pages, 3353241 bytes).
+c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
+atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (40 pages, 3362118 bytes).
 PDF statistics:
- 915 PDF objects out of 1000 (max. 8388607)
- 816 compressed objects within 9 object streams
+ 919 PDF objects out of 1000 (max. 8388607)
+ 819 compressed objects within 9 object streams
  333 named destinations out of 1000 (max. 500000)
  678 words of extra memory for PDF output out of 10000 (max. 10000000)
 
