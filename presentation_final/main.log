@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.13)  22 FEB 2018 19:39
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 14:44
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2338,9 +2342,9 @@ Chapitre 1.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 19.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 26.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 46.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 53.
 1: section
 [1
 
@@ -2357,17 +2361,31 @@ Chapitre 2.
 
 
 
+<<<<<<< HEAD
 ] <Figures/fleche.png, id=485, 1099.10625pt x 518.93875pt>
+=======
+] <Figures/fleche.png, id=411, 1099.10625pt x 518.93875pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/fleche.png Graphic file (type png)
  <use Figures/fleche.png>
 Package pdftex.def Info: Figures/fleche.png used on input line 58.
 (pdftex.def)             Requested size: 384.69295pt x 181.63129pt.
+<<<<<<< HEAD
  [4 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/fleche.png (PNG copy)>] <Figures/gantt.png, id=491, 1606.0pt x 903.375pt>
+=======
+ [4 <./Figures/fleche.png (PNG copy)>]
+<Figures/gantt.png, id=416, 1606.0pt x 903.375pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/gantt.png Graphic file (type png)
  <use Figures/gantt.png>
 Package pdftex.def Info: Figures/gantt.png used on input line 102.
 (pdftex.def)             Requested size: 1534.86441pt x 746.88307pt.
+<<<<<<< HEAD
  [5 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/gantt.png>] <Figures/git.png, id=499, 231.86626pt x 218.8175pt>
+=======
+
+[5 <./Figures/gantt.png>] <Figures/git.png, id=424, 231.86626pt x 218.8175pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/git.png Graphic file (type png)
  <use Figures/git.png>
 Package pdftex.def Info: Figures/git.png used on input line 149.
@@ -2388,17 +2406,32 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [8
 
+<<<<<<< HEAD
 ] <Figures/camrpi.png, id=517, 270.00874pt x 187.70125pt>
+=======
+]
+<Figures/camrpi.png, id=442, 270.00874pt x 187.70125pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/camrpi.png Graphic file (type png)
  <use Figures/camrpi.png>
 Package pdftex.def Info: Figures/camrpi.png used on input line 289.
 (pdftex.def)             Requested size: 108.00157pt x 75.07916pt.
+<<<<<<< HEAD
  [9 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/camrpi.png>] <Figures/blockMIPI.png, id=525, 357.335pt x 221.82875pt>
+=======
+ [9 <./Figures/camrpi.png>]
+<Figures/blockMIPI.png, id=450, 357.335pt x 221.82875pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/blockMIPI.png Graphic file (type png)
  <use Figures/blockMIPI.png>
 Package pdftex.def Info: Figures/blockMIPI.png used on input line 337.
 (pdftex.def)             Requested size: 142.93146pt x 88.72992pt.
+<<<<<<< HEAD
  <Figures/openrex.png, id=527, 259.97125pt x 194.7275pt>
+=======
+
+<Figures/openrex.png, id=452, 259.97125pt x 194.7275pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/openrex.png Graphic file (type png)
  <use Figures/openrex.png>
 Package pdftex.def Info: Figures/openrex.png used on input line 350.
@@ -2415,7 +2448,12 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
+<<<<<<< HEAD
  [11 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/openrex.png>] <Figures/v4l2.png, id=542, 1006.76125pt x 748.7975pt>
+=======
+ [11 <./Figures/openrex.png>] <Figures/v4l2.png, id=468, 1006.76125pt x 748.797
+5pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/v4l2.png Graphic file (type png)
  <use Figures/v4l2.png>
 Package pdftex.def Info: Figures/v4l2.png used on input line 416.
@@ -2472,7 +2510,12 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 Package csquotes Info: Input encoding change on input line 565.
  (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+<<<<<<< HEAD
 ) [14] <Figures/gstreamer.png, id=638, 963.6pt x 542.025pt>
+=======
+) [14]
+<Figures/gstreamer.png, id=563, 963.6pt x 542.025pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/gstreamer.png Graphic file (type png)
  <use Figures/gstreamer.png>
 Package pdftex.def Info: Figures/gstreamer.png used on input line 593.
@@ -2548,7 +2591,11 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
+<<<<<<< HEAD
 <Figures/architecture.png, id=650, 778.91pt x 713.66624pt>
+=======
+<Figures/architecture.png, id=576, 778.91pt x 713.66624pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/architecture.png Graphic file (type png)
  <use Figures/architecture.png>
 Package pdftex.def Info: Figures/architecture.png used on input line 40.
@@ -2604,7 +2651,12 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
+<<<<<<< HEAD
  [19] <Figures/recette.png, id=702, 1583.9175pt x 1606.0pt>
+=======
+ [19]
+<Figures/recette.png, id=627, 1583.9175pt x 1606.0pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/recette.png Graphic file (type png)
  <use Figures/recette.png>
 Package pdftex.def Info: Figures/recette.png used on input line 161.
@@ -2620,7 +2672,12 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 Package csquotes Info: Input encoding change on input line 232.
  (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+<<<<<<< HEAD
 ) <Figures/menuconfig.png, id=716, 724.7075pt x 408.52625pt>
+=======
+)
+<Figures/menuconfig.png, id=641, 724.7075pt x 408.52625pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/menuconfig.png Graphic file (type png)
  <use Figures/menuconfig.png>
 Package pdftex.def Info: Figures/menuconfig.png used on input line 246.
@@ -2642,7 +2699,11 @@ Overfull \hbox (0.48819pt too wide) in paragraph at lines 317--320
 []\T1/ppl/m/n/10.95 Dans un pre-mier temps, n'étant pas ha-bi-tués à ma-ni-pu-ler des dri-vers, nous avons
  []
 
+<<<<<<< HEAD
 <Figures/patchs.png, id=753, 1110.1475pt x 586.19pt>
+=======
+<Figures/patchs.png, id=679, 1110.1475pt x 586.19pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/patchs.png Graphic file (type png)
  <use Figures/patchs.png>
 Package pdftex.def Info: Figures/patchs.png used on input line 323.
@@ -2699,7 +2760,11 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
+<<<<<<< HEAD
 <Figures/outtree.png, id=761, 925.4575pt x 380.42125pt>
+=======
+<Figures/outtree.png, id=687, 925.4575pt x 380.42125pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/outtree.png Graphic file (type png)
  <use Figures/outtree.png>
 Package pdftex.def Info: Figures/outtree.png used on input line 387.
@@ -2805,7 +2870,11 @@ Overfull \hbox (3.2508pt too wide) in paragraph at lines 713--721
 []\T1/ppl/m/n/10.95 Au dé-mar-rage du dri-ver, la pre-mière fonc-tion exé-cu-tée est imx219_probe. Comme
  []
 
+<<<<<<< HEAD
 [30] <Figures/trame.png, id=876, 1116.17pt x 85.31876pt>
+=======
+[30] <Figures/trame.png, id=802, 1116.17pt x 85.31876pt>
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/trame.png Graphic file (type png)
  <use Figures/trame.png>
 Package pdftex.def Info: Figures/trame.png used on input line 736.
@@ -2826,6 +2895,7 @@ Overfull \hbox (4.61508pt too wide) in paragraph at lines 44--48
 
 
 ]) [33]
+<<<<<<< HEAD
 \openout2 = `Appendices/AppendixA.aux'.
 
  (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Appendices/AppendixA.tex
@@ -2835,9 +2905,20 @@ File: Figures/Logo_Ynov.png Graphic file (type png)
 Package pdftex.def Info: Figures/Logo_Ynov.png used on input line 49.
 (pdftex.def)             Requested size: 168.62883pt x 59.02008pt.
  [1
+=======
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 438.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 438.
+ (./main.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
+(./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 438.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 438.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 3D1B9248FD677461857DC7194245201B;12693.
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 
 
 
+<<<<<<< HEAD
 
 ] (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.toc)
 \tf@toc=\write12
@@ -3160,6 +3241,8 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+=======
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
@@ -3170,6 +3253,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 ### bottom level
 (\end occurred when \iftrue on line 184 was incomplete) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  49475 strings out of 493029
  1018061 string characters out of 6136234
  1158049 words of memory out of 5000000
@@ -3184,4 +3268,28 @@ PDF statistics:
  982 compressed objects within 10 object streams
  408 named destinations out of 1000 (max. 500000)
  798 words of extra memory for PDF output out of 10000 (max. 10000000)
+=======
+ 49295 strings out of 493029
+ 1011363 string characters out of 6136234
+ 1149045 words of memory out of 5000000
+ 51755 multiletter control sequences out of 15000+600000
+ 49413 words of font info for 84 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 65i,20n,105p,10433b,3817s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texm
+f-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-dist/f
+onts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/in
+consolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
+atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (40 pages, 3362118 bytes).
+PDF statistics:
+ 919 PDF objects out of 1000 (max. 8388607)
+ 819 compressed objects within 9 object streams
+ 333 named destinations out of 1000 (max. 500000)
+ 678 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 

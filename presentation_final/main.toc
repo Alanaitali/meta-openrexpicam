@@ -6,62 +6,63 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.3}
 \contentsline {section}{\numberline {1.1}Projet professionnel}{1}{section.4}
 \contentsline {section}{\numberline {1.2}Projet \IeC {\'e}tudiant}{1}{section.5}
-\contentsline {subsection}{\numberline {1.2.1}Cadre du projet \IeC {\'e}tudiant}{1}{subsection.6}
+\contentsline {subsection}{\numberline {1.2.1}Cadre du projet \IeC {\'e}tudiant}{2}{subsection.6}
 \contentsline {chapter}{\numberline {2}Gestion de projet}{3}{chapter.7}
 \contentsline {section}{\numberline {2.1}Organisation de l'\IeC {\'e}quipe}{3}{section.8}
-\contentsline {subsection}{\numberline {2.1.1}Membres du projet}{3}{subsection.9}
-\contentsline {subsection}{\numberline {2.1.2}Organisation externe}{3}{subsection.11}
-\contentsline {subsection}{\numberline {2.1.3}Organisation interne}{4}{subsection.13}
-\contentsline {section}{\numberline {2.2}Diagramme de Gantt}{5}{section.14}
+\contentsline {subsection}{\numberline {2.1.1}Membres du projet (RP,ML)}{3}{subsection.9}
+\contentsline {subsection}{\numberline {2.1.2}Organisation externe (AA,ML)}{3}{subsection.11}
+\contentsline {subsection}{\numberline {2.1.3}Organisation interne (AA,ML)}{4}{subsection.13}
+\contentsline {section}{\numberline {2.2}Diagramme de Gantt (AA,RP)}{5}{section.14}
 \contentsline {section}{\numberline {2.3}Outils utilis\IeC {\'e}s}{6}{section.16}
-\contentsline {subsection}{\numberline {2.3.1}Versionning des codes}{6}{subsection.17}
+\contentsline {subsection}{\numberline {2.3.1}Versionning des codes (AA,RP)}{6}{subsection.17}
 \contentsline {subsubsection}{Commandes}{6}{section*.18}
-\contentsline {subsection}{\numberline {2.3.2}Communication}{6}{subsection.20}
+\contentsline {subsection}{\numberline {2.3.2}Communication (CA,ML)}{6}{subsection.20}
 \contentsline {subsubsection}{Avantages de Slack}{7}{section*.21}
 \contentsline {subsubsection}{Inconv\IeC {\'e}nients de Slack}{7}{section*.22}
-\contentsline {subsection}{\numberline {2.3.3}Yocto}{7}{subsection.23}
+\contentsline {subsection}{\numberline {2.3.3}Yocto (CA,ML,AA)}{7}{subsection.23}
 \contentsline {subsubsection}{Poky}{8}{section*.24}
 \contentsline {subsubsection}{Bitbake}{8}{section*.25}
-\contentsline {section}{\numberline {2.4}Cam\IeC {\'e}ra Raspberry Pi v2}{9}{section.26}
-\contentsline {section}{\numberline {2.5}Interface cam\IeC {\'e}ra MIPI CSI-2}{10}{section.28}
-\contentsline {section}{\numberline {2.6}Carte de d\IeC {\'e}veloppement OpenRex}{10}{section.30}
-\contentsline {section}{\numberline {2.7}Video for Linux 2 (V4L2)}{11}{section.32}
+\contentsline {section}{\numberline {2.4}Cam\IeC {\'e}ra Raspberry Pi v2 (CA,ML)}{9}{section.26}
+\contentsline {section}{\numberline {2.5}Interface cam\IeC {\'e}ra MIPI CSI-2 (ML)}{10}{section.28}
+\contentsline {section}{\numberline {2.6}Carte de d\IeC {\'e}veloppement OpenRex (ML)}{10}{section.30}
+\contentsline {section}{\numberline {2.7}Video for Linux 2 (V4L2) CA)}{11}{section.32}
 \contentsline {subsection}{\numberline {2.7.1}Package V4L-utils}{11}{subsection.33}
 \contentsline {subsection}{\numberline {2.7.2}Principales commandes de contr\IeC {\^o}le}{11}{subsection.34}
 \contentsline {subsubsection}{Structures V4L2}{12}{section*.36}
-\contentsline {section}{\numberline {2.8}GStreamer}{15}{section.113}
+\contentsline {section}{\numberline {2.8}GStreamer (RP,CA)}{15}{section.113}
 \contentsline {chapter}{\numberline {3}Travail r\IeC {\'e}alis\IeC {\'e}}{17}{chapter.115}
-\contentsline {section}{\numberline {3.1}G\IeC {\'e}n\IeC {\'e}ration d'une m\IeC {\'e}ta-donn\IeC {\'e}e}{17}{section.116}
-\contentsline {subsection}{\numberline {3.1.1}fsl-community-bsp-platform}{18}{subsection.118}
-\contentsline {subsection}{\numberline {3.1.2}fsl-community-bsp-data}{18}{subsection.128}
-\contentsline {section}{\numberline {3.2}G\IeC {\'e}n\IeC {\'e}ration d'un OS}{19}{section.150}
-\contentsline {subsection}{\numberline {3.2.1}Pr\IeC {\'e}paration de l'environnement}{19}{subsection.151}
-\contentsline {subsection}{\numberline {3.2.2}Pr\IeC {\'e}paration de notre meta-donn\IeC {\'e}e}{19}{subsection.152}
-\contentsline {section}{\numberline {3.3}Impl\IeC {\'e}mentation de code dans le BSP}{20}{section.154}
+\contentsline {section}{\numberline {3.1}G\IeC {\'e}n\IeC {\'e}ration d'une m\IeC {\'e}ta-donn\IeC {\'e}e (RP,AA)}{17}{section.116}
+\contentsline {subsection}{\numberline {3.1.1}fsl-community-bsp-platform (RP)}{18}{subsection.118}
+\contentsline {subsection}{\numberline {3.1.2}fsl-community-bsp-data (RP)}{18}{subsection.128}
+\contentsline {section}{\numberline {3.2}G\IeC {\'e}n\IeC {\'e}ration d'un OS (RP,ML,AA)}{19}{section.150}
+\contentsline {subsection}{\numberline {3.2.1}Pr\IeC {\'e}paration de l'environnement (RP,AA)}{19}{subsection.151}
+\contentsline {subsection}{\numberline {3.2.2}Pr\IeC {\'e}paration de notre meta-donn\IeC {\'e}e (RP,AA)}{19}{subsection.152}
+\contentsline {section}{\numberline {3.3}Impl\IeC {\'e}mentation de code dans le BSP (AA)}{20}{section.154}
 \contentsline {subsection}{\numberline {3.3.1}Extrait de linux-voipac-4.1.bb}{20}{subsection.155}
 \contentsline {subsection}{\numberline {3.3.2}Extrait de linux-voipac\_ \%.bbappend}{21}{subsection.162}
-\contentsline {section}{\numberline {3.4}Impl\IeC {\'e}mentation des supports de compilation}{21}{section.169}
-\contentsline {section}{\numberline {3.5}Utilsation de drivers existants}{23}{section.190}
-\contentsline {subsection}{\numberline {3.5.1}Pr\IeC {\'e}sentation d'un driver}{23}{subsection.191}
-\contentsline {subsection}{\numberline {3.5.2}Utilisation de l'existant}{23}{subsection.192}
-\contentsline {subsubsection}{Compilation par SDK}{23}{section*.194}
-\contentsline {subsubsection}{Compatilation out-of-tree}{24}{section*.195}
-\contentsline {subsubsection}{Compatilation in-tree}{24}{section*.197}
-\contentsline {subsection}{\numberline {3.5.3}imx219 - Hummingboard}{25}{subsection.198}
+\contentsline {section}{\numberline {3.4}Impl\IeC {\'e}mentation des supports de compilation (AA)}{21}{section.169}
+\contentsline {section}{\numberline {3.5}Utilsation de drivers existants (ML,CA,RP,AA)}{23}{section.190}
+\contentsline {subsection}{\numberline {3.5.1}Pr\IeC {\'e}sentation d'un driver (ML)}{23}{subsection.191}
+\contentsline {subsection}{\numberline {3.5.2}Utilisation de l'existant (RP,AA)}{23}{subsection.192}
+\contentsline {subsubsection}{Compilation par SDK (ML,CA)}{23}{section*.194}
+\contentsline {subsubsection}{Compatilation out-of-tree (ML,CA)}{24}{section*.195}
+\contentsline {subsubsection}{Compatilation in-tree (ML,AA)}{24}{section*.197}
+\contentsline {subsection}{\numberline {3.5.3}imx219 - Hummingboard (AA)}{25}{subsection.198}
 \contentsline {subsubsection}{Origine des sources}{25}{section*.199}
-\contentsline {subsubsection}{Compilation in-tree}{25}{section*.200}
-\contentsline {subsection}{\numberline {3.5.4}imx219 - Nvidia-Tegra Chromium-Os}{25}{subsection.201}
+\contentsline {subsubsection}{Compilation in-tree (RP)}{25}{section*.200}
+\contentsline {subsection}{\numberline {3.5.4}imx219 - Nvidia-Tegra Chromium-Os (CA,AA)}{25}{subsection.201}
 \contentsline {subsubsection}{Origine des sources}{26}{section*.202}
 \contentsline {subsubsection}{Compatibilit\IeC {\'e} avec le device tree}{26}{section*.203}
-\contentsline {subsection}{\numberline {3.5.5}imx219 - Raspberry Pi v2}{28}{subsection.242}
+\contentsline {subsection}{\numberline {3.5.5}imx219 - Raspberry Pi v2 (AA)}{28}{subsection.242}
 \contentsline {subsubsection}{Origine des sources}{28}{section*.243}
-\contentsline {subsubsection}{Portage du BSP Voipac sur un kernel 4.14}{28}{section*.244}
-\contentsline {section}{\numberline {3.6}D\IeC {\'e}veloppement d'un driver}{29}{section.250}
-\contentsline {subsection}{\numberline {3.6.1}Organisation d'un driver MIPI/CSI}{29}{subsection.251}
-\contentsline {subsubsection}{Int\IeC {\'e}gration au device tree}{29}{section*.252}
-\contentsline {subsection}{\numberline {3.6.2}Validation du driver}{30}{subsection.285}
+\contentsline {subsubsection}{Portage du BSP Voipac sur un kernel 4.14 (AA,RP)}{28}{section*.244}
+\contentsline {section}{\numberline {3.6}D\IeC {\'e}veloppement d'un driver (AA,RP,CA,ML)}{29}{section.250}
+\contentsline {subsection}{\numberline {3.6.1}Organisation d'un driver MIPI/CSI (AA)}{29}{subsection.251}
+\contentsline {subsubsection}{Int\IeC {\'e}gration au device tree (AA,CA)}{29}{section*.252}
+\contentsline {subsection}{\numberline {3.6.2}Validation du driver (AA,RP,ML,CA)}{30}{subsection.285}
 \contentsline {subsubsection}{Lecture du bus I2C}{31}{section*.286}
 \contentsline {chapter}{\numberline {4}Conclusion}{32}{chapter.288}
+<<<<<<< HEAD
 \contentsline {section}{\numberline {4.1}Bilan technique}{32}{section.289}
 \contentsline {section}{\numberline {4.2}Bilan de suivi de projet}{32}{section.291}
 \contentsline {section}{\numberline {4.3}Conclusion}{33}{section.292}
@@ -80,3 +81,8 @@
 \contentsline {section}{\numberline {4.5}Usage courant}{4}{section.308}
 \contentsline {subsection}{\numberline {4.5.1}V\IeC {\'e}rification de l\IeC {\textquoteright }image demand\IeC {\'e}e}{5}{subsection.311}
 \contentsline {subsection}{\numberline {4.5.2}Compilation}{6}{subsection.359}
+=======
+\contentsline {section}{\numberline {4.1}Bilan technique (AA,ML)}{32}{section.289}
+\contentsline {section}{\numberline {4.2}Bilan de suivi de projet (AA,ML)}{32}{section.291}
+\contentsline {section}{\numberline {4.3}Conclusion (AA,ML)}{33}{section.292}
+>>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
