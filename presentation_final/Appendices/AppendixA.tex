@@ -1,363 +1,299 @@
 
-%----------------------------------------------------------------------------------------
-%	THESIS INFORMATION
-%----------------------------------------------------------------------------------------
+\section{Procédure initiale}
+Cette partie sera une explication des différentes commandes ainsi qu’une description de la
+méthodologie choisie pour travailler avec Yocto.
+\subsection{Gérer son espace mémoire}
 
-\thesistitle{Guide d’utilisation et de développement de distribution GNU/Linux avec Yocto} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+Tout d’abord sachons que le manuel Yocto conseille de réserver 50 Go afin
+de pouvoir travailler dans de bonnes conditions. Dans notre cas nous avons une
+partition de 100 Go incluant Ubuntu14 (5 Go), à terme notre répertoire de
+travail sera suffisamment agrandi pour combler les 40 Go.
+Pour ne pas trop encombrer son espace de stockage on peut définir dans build/local.conf la variable
 
-\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+\begin{lstlisting}
+INHERIT += "rm_work" //effacera les fichiers intermédiaires au fur et a mesure
+RM_OLD_IMAGE = "1" //remplacera les images par la plus récente.
+\end{lstlisting}
 
-\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+Attention ces variables vous feront perdre des données, rm\_work par exemple
+libérera de l'espace (16Go) mais rendra impossible le débogage de la compilation.
+La suppression des images précédentes est conseillée quand on est amené à en
+générer beaucoup. Une image pèse quelques centaines de Mo.
+\subsection{Préparation de l’environnement}
+Packages requis pour une compilation Yocto :
 
-%----------------------------------------------------------------------------------------
-%	TITLE PAGE
-%----------------------------------------------------------------------------------------
+\begin{itemize}
+	\item[-] Git 1.8.3.1 ou plus
+	\item[-] Tar 1.27 ou plus
+	\item[-] Python 3.4.0 ou plus
+\end{itemize}
 
-\begin{titlepage}
-	\begin{center}
+\begin{tcolorbox}
+	user@poky:~\$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+	build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
+	xz-utils debianutils iputils-ping libsdl1.2-dev xterm repo
+\end{tcolorbox}
 
-		\vspace*{.06\textheight}
-		{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
-		\textsc{\Large Projet de Master en partenariat avec Thales}\\[0.5cm] % Thesis type
+\subsection{Téléchargement des sources Freescale}
+La première étape consiste à télécharger tous les exécutables et métadonnées nécessaires pour créer l’image de base de l’OpenRex. En premier lieu il est nécessaire de récupérer la commande repo via les dépots officiels ou téléchargement :
 
-		\HRule \\[0.4cm] % Horizontal line
-		{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-		\HRule \\[1.5cm] % Horizontal line
+\begin{tcolorbox}
+	sudo aptitude install repo
+	sudo aptitude update
+	sudo aptitude upgrade
+\end{tcolorbox}
 
-		\begin{minipage}[t]{0.4\textwidth}
-			\begin{flushleft} \large
-				\emph{Auteur :}\\
-				Alan \textsc{Ait-Ali} \\
-				Martin \textsc{Laporte} \\
-				Clément \textsc{Ailloud} \\
-				Romain \textsc{Petit}
-				%\authorname % Author name - remove the \href bracket to remove the link
-			\end{flushleft}
-		\end{minipage}
-		\begin{minipage}[t]{0.4\textwidth}
-			\begin{flushright} \large
-				\emph{Superviseurs :} \\
-				\supname % Supervisor name - remove the \href bracket to remove the link
-			\end{flushright}
-			\end{minipage}\\[3cm]
+ou
 
-			\large \textit{Rapport final présentant le travail effectué sur \\
-			l'intégration du driver IMX219 sur une OpenRex Basic}\\[0.3cm] % University requirement text
-			\textit{au sein du}\\[0.4cm]
-			\deptname\\[2cm] % Research group name and department name
+\begin{tcolorbox}
+	mkdir bin
+	curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
+	chmod a+x bin/repo
+	PATH=\${PATH}:bin
+\end{tcolorbox}
 
-			\includegraphics[scale=0.7]{Figures/Logo_Ynov.png}\\[1cm] % University/department logo - uncomment to place it
+Ensuite il faut créer le répertoire de travail :
 
-			{\large \today}\\[4cm] % Date
+\begin{tcolorbox}
+	mkdir fsl-community-bsp \&\& cd fsl-community-bsp
+	\subsubsection{Yocto version 2.0}
+	Création du répertoire du fichier manifest :
+\end{tcolorbox}
+
+\begin{tcolorbox}
+	mkdir -p ./repo/local\_manifests/
+\end{tcolorbox}
+
+Télécharger l’ensemble des sources externes de ce projet par la commande
+
+\begin{tcolorbox}
+	repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b jethro
+\end{tcolorbox}
+
+De plus il Noter le manifest pour pouvoir télécharger/installer/décompresser les sources produites par Fedevel.
+
+\begin{tcolorbox}
+	cat > .repo/local\_manifests/imx6openrex.xml << EOF
+	<?xml version="1.0" encoding="UTF-8"?>
+	<manifest>
+	\hspace{3cm}<remote fetch="git://github.com/FEDEVEL" name="fedevel"/>
+	\hspace{3cm}<project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex\">
+	\hspace{6cm}<copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/>
+	\hspace{3cm}</project>
+	</manifest>
+	EOF
+\end{tcolorbox}
+
+Enfin, il est nécessaire de télécharger/installer/décompresser ces fichiers :
+
+\begin{tcolorbox}
+	repo sync
+\end{tcolorbox}
+
+\subsubsection{Yocto version 2.1}
+\begin{tcolorbox}
+	repo init -u git@github.com/petit-romain/fsl-community-bsp-platform.git
+\end{tcolorbox}
+
+Enfin, il est nécessaire de télécharger/installer/décompresser ces fichiers :
+
+\begin{tcolorbox}
+	repo sync
+\end{tcolorbox}
+
+\subsection{Compilation ( Yocto 2.0 )}
+Créer et sourcer l'environnement pour que la compilation inclut la métadonnée Openrex.
+
+\begin{tcolorbox}
+	source openrex-setup.sh
+\end{tcolorbox}
+
+Préparer l’environnement et construire l’image. Toutes Les commandes ci-dessous seront à effectuer pendant l’usage courant, elles ne font plus vraiment partie de l’initialisation du projet.
 
 
-			\vfill
-		\end{center}
-	\end{titlepage}
+\begin{tcolorbox}
+	MACHINE=imx6s-openrex source setup-environment build-dir
+	bitbake core-image-base
+\end{tcolorbox}
 
-	%----------------------------------------------------------------------------------------
-	%	LIST OF CONTENTS/FIGURES/TABLES PAGES
-	%----------------------------------------------------------------------------------------
+\subsection{Compilation ( Yocto 2.1 )}
 
-	\tableofcontents % Prints the main table of contents
-	\clearpage
-	\mainmatter % Begin numeric (1,2,3...) page numbering
+\begin{tcolorbox}DISTRO=poky MACHINE=imx6-openrexbasic source setup-environment build-dir
+	bitbake openrexpicam-base-image
+\end{tcolorbox}
 
-	\section{Procédure initiale}
-	Cette partie sera une explication des différentes commandes ainsi qu’une description de la
-	méthodologie choisie pour travailler avec Yocto.
-	\subsection{Gérer son espace mémoire}
+\subsection{Déploiement de l’image ( Yocto 2.0 )}
 
-	Tout d’abord sachons que le manuel Yocto conseille de réserver 50 Go afin
-	de pouvoir travailler dans de bonnes conditions. Dans notre cas nous avons une
-	partition de 100 Go incluant Ubuntu14 (5 Go), à terme notre répertoire de
-	travail sera suffisamment agrandi pour combler les 40 Go.
-	Pour ne pas trop encombrer son espace de stockage on peut définir dans build/local.conf la variable
+Installer l’image sur la carte-sd
 
-	\begin{lstlisting}
-	INHERIT += "rm_work" //effacera les fichiers intermédiaires au fur et a mesure
-	RM_OLD_IMAGE = "1" //remplacera les images par la plus récente.
-	\end{lstlisting}
+\begin{tcolorbox}
+	umount /dev/YourSDCard
 
-	Attention ces variables vous feront perdre des données, rm\_work par exemple
-	libérera de l'espace (16Go) mais rendra impossible le débogage de la compilation.
-	La suppression des images précédentes est conseillée quand on est amené à en
-	générer beaucoup. Une image pèse quelques centaines de Mo.
-	\subsection{Préparation de l’environnement}
-	Packages requis pour une compilation Yocto :
+	gunzip -c tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard.gz > tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard
+	sudo dd if=tmp/deploy/images/imx6s-openrex/core-image-base-imx6q-openrex.sdcard of=/dev/YourSDCard
+	umount /dev/YourSDCard
+\end{tcolorbox}
 
-	\begin{itemize}
-		\item[-] Git 1.8.3.1 ou plus
-		\item[-] Tar 1.27 ou plus
-		\item[-] Python 3.4.0 ou plus
-	\end{itemize}
+A présent insérez la carte sd dans l’OpenRex et démarrez, vous devriez voir l’autoboot apparaître grâce à la communication série.
 
+\subsection{Déploiement de l’image ( Yocto 2.1 )}
+
+\begin{tcolorbox}
+	umount /dev/YourSDCard
+	gunzip -c tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard.gz > build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard
+	sudo dd if=tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard of=/dev/YourSDCard
+	umount /dev/YourSDCard
+\end{tcolorbox}
+
+Si vous obtenez l’erreur "Error : bootmmc not defined " , redémarrez l’OpenRex et interrompez le boot de celle-ci afin de lancer la commande ci dessous :
+
+\begin{tcolorbox}
+	setenv bootmmc "run findfdt; mmc dev \${mmcdev}; if mmc rescan; then if run loadbootscript;
+	then run bootscript; else if run loadimage; then run mmcboot; else run netboot;
+	fi; fi; else run netboot; fi;\textbackslash0"; saveenv; reset;
+\end{tcolorbox}
+
+\subsection{Etat initial}
+Une fois la procédure faite, on doit retrouver les fichiers suivant dans le
+dossier fsl-community-bsp :
+\begin{itemize}
+	\item[fsl-setup-release.sh :] script déjà utilisé à la premère préparation
+	de l’environnement.
+	\item[setup-environment :] est utilisé pour sourcer les variables d'environnement
+	utiles lors de la création de l'image.
+	\item[Build-dir :] contient tous les fichiers générés lors des compilations.
+	On y trouve :
+	\item[bitbake.lock :] sémaphore temporaire assurant qu’une seule instance de bitbake
+	accède aux fichiers
+	\item[cache :]
+	\item[conf :]
+	\item[sstate-cache :] avantage majeur de Yocto sur des compilation standard, dans ce répertoire sont stockées les états de compilation intermédiaire de Yocto. Pour vider la shared state cache on lance :]
 	\begin{tcolorbox}
-		user@poky:~\$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
-		build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
-		xz-utils debianutils iputils-ping libsdl1.2-dev xterm repo
+		bitbake <recette> -c cleansstate.
 	\end{tcolorbox}
 
-	\subsection{Téléchargement des sources Freescale}
-	La première étape consiste à télécharger tous les exécutables et métadonnées nécessaires pour créer l’image de base de l’OpenRex. En premier lieu il est nécessaire de récupérer la commande repo via les dépots officiels ou téléchargement :
+	\item[tmp :] dossier principal de compilation, tmp/work contient les sources des recettes et tmp/deploy les images
+	\item[sources :] contient l'ensemble des     métas nécessaires à la création de l'image. On y trouve :]
+	\item[meta-freescale :] configure l’image pour un processeur Freescale.
+	\item[meta-fsl-arm :] configure l'image pour un cortex arm Freescale.
+	\item[meta-fsl-arm-extra :] configure plus encore l'image pour un cortex arm Freescale.
+	\item[meta-fsl-bsp-release :] configure l’image pour une carte officielle à processeur Freescale.
+	\item[meta-fsl-arm-voipac :] surcouche des metas précédentes pour l’Openrex.
+	\item[meta-openembedded :] contient les meta des drivers materiel tel que le bluetooth et les bibliothèques utiles a l'utilisation d’un driver par exemple le python.
+	\item[meta-fsl-demos :] des démonstrations Freescale.
+	\item[meta-browser :] permet d’avoir mozilla ou bien chrome sur l’image.
+	\item[poky :] contient la base du build system et les metadata de base relatif a la distribution.
+	\item[base :] une base pour configurer son dossier build pour les meta Freescale.
+	\item[meta-qt5 :] elle nous permet d'utiliser du code Qt par l’OpenRex en utilisant un SDK. (adresse pour le clonage :https://github.com/meta-qt5/meta-qt5.git)
 
-	\begin{tcolorbox}
-		sudo aptitude install repo
-		sudo aptitude update
-		sudo aptitude upgrade
-	\end{tcolorbox}
+	\subsection{Ajout de notre méta (Yocto 2.0)}
+	\item[meta-openrexpicam:] la méta qui va définir notre distribution.        (https://github.com/Alanaitali/meta-openrexpicam.git)
+	Si vous utilisez Yocto 2.0, notre meta doit simplement être copiée dans le dossier sources puis indiquée dans le bblayers.conf comme expliqué dans « Usage courant » ci-dessous. (follow me)
+\end{itemize}
 
-	ou
+\begin{tcolorbox}
+	cd \$BUILDDIR/../sources/.
+	git clone https://github.com/Alanaitali/meta-openrexpicam.git
+\end{tcolorbox}
 
-	\begin{tcolorbox}
-		mkdir bin
-		curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
-		chmod a+x bin/repo
-		PATH=\${PATH}:bin
-	\end{tcolorbox}
+\section{Usage courant}
+Préparation de l’environnement
+L’environnement de développement a été créé avec fsl-setup-release.sh, mais pour chaque terminal de travail, il faudra sourcer l’environnement à nouveau. C’est-à-dire ajouter des variables d’environnement qui seront nécessaire lors de la compilation. La commande suivante source l’environnement et dans le même temps nous lui indiquons le nom de la machine dans notre cas « imx6s-Openrex » que l’on retrouve dans les sources téléchargées. De cette manière nous donnons des paramètres qui seront pris en compte lors de la compilation avec le « bitbake ». Cette assignation de machine sera inscrite dans le local.conf de manière plus pérenne.
 
-	Ensuite il faut créer le répertoire de travail :
-
-	\begin{tcolorbox}
-		mkdir fsl-community-bsp \&\& cd fsl-community-bsp
-		\subsubsection{Yocto version 2.0}
-		Création du répertoire du fichier manifest :
-	\end{tcolorbox}
-
-	\begin{tcolorbox}
-		mkdir -p ./repo/local\_manifests/
-	\end{tcolorbox}
-
-	Télécharger l’ensemble des sources externes de ce projet par la commande
-
-	\begin{tcolorbox}
-		repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b jethro
-	\end{tcolorbox}
-
-	De plus il Noter le manifest pour pouvoir télécharger/installer/décompresser les sources produites par Fedevel.
-
-	\begin{tcolorbox}
-		cat > .repo/local\_manifests/imx6openrex.xml << EOF
-		<?xml version="1.0" encoding="UTF-8"?>
-		<manifest>
-		<remote fetch="git://github.com/FEDEVEL" name="fedevel"/>
-		<project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex">
-		<copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/>
-		</project>
-		</manifest>
-		EOF
-	\end{tcolorbox}
-
-	Enfin, il est nécessaire de télécharger/installer/décompresser ces fichiers :
-
-	\begin{tcolorbox}
-		repo sync
-	\end{tcolorbox}
-
-	\subsubsection{Yocto version 2.1}
-	\begin{tcolorbox}
-		repo init -u git@github.com/petit-romain/fsl-community-bsp-platform.git
-	\end{tcolorbox}
-
-	Enfin, il est nécessaire de télécharger/installer/décompresser ces fichiers :
-
-	\begin{tcolorbox}
-		repo sync
-	\end{tcolorbox}
-
-	\subsection{Compilation ( Yocto 2.0 )}
-	Créer et sourcer l'environnement pour que la compilation inclut la métadonnée Openrex.
-
-	\begin{tcolorbox}
-		source openrex-setup.sh
-	\end{tcolorbox}
-
-	Préparer l’environnement et construire l’image. Toutes Les commandes ci-dessous seront à effectuer pendant l’usage courant, elles ne font plus vraiment partie de l’initialisation du projet.
+\subsubsection*{Yocto 2.0 :}
 
 
-	\begin{tcolorbox}
-		MACHINE=imx6s-openrex source setup-environment build-dir
-		bitbake core-image-base
-	\end{tcolorbox}
+\begin{tcolorbox}
+	MACHINE=imx6s-openrex source setup-environment build-dir
+	bitbake core-image-base
+\end{tcolorbox}
 
-	\subsection{Compilation ( Yocto 2.1 )}
+\subsubsection*{Yocto 2.1 :}
 
-	\begin{tcolorbox}DISTRO=poky MACHINE=imx6-openrexbasic source setup-environment build-dir
-		bitbake openrexpicam-base-image
-	\end{tcolorbox}
+\begin{tcolorbox}
+	DISTRO=poky MACHINE=imx6-openrexbasic source setup-environment build-dir
+\end{tcolorbox}
 
-	\subsection{Déploiement de l’image ( Yocto 2.0 )}
+\subsection{Vérification de l’image demandée}
+Avant de lancer la compilation nous devons indiquer le chemin d’accès et
+le nom des métadonnées à prendre en compte pour la compilation. Ces paquets
+sont aussi appelés couches (layers), ils sont référencés dans le fichier
+bblayer.conf dans le dossier /build-dir/conf. Pour inclure une nouvelle meta
+à la compilation il faut écrire son chemin sur bblayers.conf.
 
-	Installer l’image sur la carte-sd
+\begin{lstlisting}
+POKY_BBLAYERS_CONF_VERSION = "2"
 
-	\begin{tcolorbox}
-		umount /dev/YourSDCard
+BBPATH = "\${TOPDIR}"
+BSPDIR := "\${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..')}"
+BBFILES ?= ""
 
-		gunzip -c tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard.gz > tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard
-		sudo dd if=tmp/deploy/images/imx6s-openrex/core-image-base-imx6q-openrex.sdcard of=/dev/YourSDCard
-		umount /dev/YourSDCard
-	\end{tcolorbox}
+BBLAYERS = " \
+\${BSPDIR}/sources/poky/meta \
+\${BSPDIR}/sources/poky/meta-poky \
+\
+\${BSPDIR}/sources/meta-openembedded/meta-oe \
+\${BSPDIR}/sources/meta-openembedded/meta-multimedia \
+\
+\${BSPDIR}/sources/meta-fsl-arm \
+\${BSPDIR}/sources/meta-fsl-arm-extra \
+\${BSPDIR}/sources/meta-fsl-demos \
+\
+\${BSPDIR}/sources/meta-openrexpicam \
+"
+BBLAYERS += "\${BSPDIR}/sources/meta-fsl-arm-voipac"
+\end{lstlisting}
 
-	A présent insérez la carte sd dans l’OpenRex et démarrez, vous devriez voir l’autoboot apparaître grâce à la communication série.
+Afin de configurer l’environnement de travail de bitbake on rédige un fichier local.conf. Attention à ce que le nom de machine (imx6-openrexbasic pour Yocto 2.1 et imx6s-openrex) soit en accord avec la recette utilisée.
 
-	\subsection{Déploiement de l’image ( Yocto 2.1 )}
+\begin{lstlisting}
+MACHINE ??= 'imx6-openrexbasic'
+DISTRO ?= 'poky'
+PACKAGE_CLASSES ?= "package_rpm"
+EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+USER_CLASSES ?= "buildstats image-mklibs"
+PATCHRESOLVE = "noop"
+BB_DISKMON_DIRS = "\
+STOPTASKS,\${TMPDIR},1G,100K \
+STOPTASKS,\${DL_DIR},1G,100K \
+STOPTASKS,\${SSTATE_DIR},1G,100K \
+STOPTASKS,/tmp,100M,100K \
+ABORT,\${TMPDIR},100M,1K \
+ABORT,\${DL_DIR},100M,1K \
+ABORT,\${SSTATE_DIR},100M,1K \
+ABORT,/tmp,10M,1K"
+PACKAGECONFIG_append_pn-qemu-native = " sdl"
+PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
+CONF_VERSION = "1"
 
-	\begin{tcolorbox}
-		umount /dev/YourSDCard
-		gunzip -c tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard.gz > build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard
-		sudo dd if=tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard of=/dev/YourSDCard
-		umount /dev/YourSDCard
-	\end{tcolorbox}
+DL_DIR ?= "\${BSPDIR}/downloads/"
+ACCEPT_FSL_EULA = "1"
+\end{lstlisting}
 
-	Si vous obtenez l’erreur "Error : bootmmc not defined " , redémarrez l’OpenRex et interrompez le boot de celle-ci afin de lancer la commande ci dessous :
+Par soucis de personnalisation la distribution du projet peut être renommée et le nombre de threads configurés en ajoutant :
 
-	\begin{tcolorbox}
-		setenv bootmmc "run findfdt; mmc dev \${mmcdev}; if mmc rescan; then if run loadbootscript;
-		then run bootscript; else if run loadimage; then run mmcboot; else run netboot;
-		fi; fi; else run netboot; fi;\textbackslash0"; saveenv; reset;
-	\end{tcolorbox}
+\begin{lstlisting}
+DISTRO ?= 'name'
+BB_NUMBER_THREADS?="4"
+PARALLEL_MAKE?="-j4"
+\end{lstlisting}
+\subsection{Compilation}
 
-	\subsection{Etat initial}
-	Une fois la procédure faite, on doit retrouver les fichiers suivant dans le
-	dossier fsl-community-bsp :
-	\begin{itemize}
-		\item[fsl-setup-release.sh :] script déjà utilisé à la premère préparation
-		de l’environnement.
-		\item[setup-environment :] est utilisé pour sourcer les variables d'environnement
-		utiles lors de la création de l'image.
-		\item[Build-dir :] contient tous les fichiers générés lors des compilations.
-		On y trouve :
-		\item[bitbake.lock :] sémaphore temporaire assurant qu’une seule instance de bitbake
-		accède aux fichiers
-		\item[cache :]
-		\item[conf :]
-		\item[sstate-cache :] avantage majeur de Yocto sur des compilation standard, dans ce répertoire sont stockées les états de compilation intermédiaire de Yocto. Pour vider la shared state cache on lance :]
-		\begin{tcolorbox}
-			bitbake <recette> -c cleansstate.
-		\end{tcolorbox}
+L’étape compilation prend bien moins de temps lors de l’usage régulier (près
+de 24 fois plus rapide). Pendant cette étape nous avons un grand nombre
+d’informations qui s’affichent sur le terminal, les plus importantes sont les
+warnings et les erreurs de compilation qu’il est nécessaire de comprendre puis
+interpréter pour résoudre.
 
-		\item[tmp :] dossier principal de compilation, tmp/work contient les sources des recettes et tmp/deploy les images
-		\item[sources :] contient l'ensemble des     métas nécessaires à la création de l'image. On y trouve :]
-		\item[meta-freescale :] configure l’image pour un processeur Freescale.
-		\item[meta-fsl-arm :] configure l'image pour un cortex arm Freescale.
-		\item[meta-fsl-arm-extra :] configure plus encore l'image pour un cortex arm Freescale.
-		\item[meta-fsl-bsp-release :] configure l’image pour une carte officielle à processeur Freescale.
-		\item[meta-fsl-arm-voipac :] surcouche des metas précédentes pour l’Openrex.
-		\item[meta-openembedded :] contient les meta des drivers materiel tel que le bluetooth et les bibliothèques utiles a l'utilisation d’un driver par exemple le python.
-		\item[meta-fsl-demos :] des démonstrations Freescale.
-		\item[meta-browser :] permet d’avoir mozilla ou bien chrome sur l’image.
-		\item[poky :] contient la base du build system et les metadata de base relatif a la distribution.
-		\item[base :] une base pour configurer son dossier build pour les meta Freescale.
-		\item[meta-qt5 :] elle nous permet d'utiliser du code Qt par l’OpenRex en utilisant un SDK. (adresse pour le clonage :https://github.com/meta-qt5/meta-qt5.git)
+\begin{tcolorbox}
+	bitbake openrexpicam-base-image
+\end{tcolorbox}
 
-		\subsection{Ajout de notre méta (Yocto 2.0)}
-		\item[meta-openrexpicam:] la méta qui va définir notre distribution.        (https://github.com/Alanaitali/meta-openrexpicam.git)
-		Si vous utilisez Yocto 2.0, notre meta doit simplement être copiée dans le dossier sources puis indiquée dans le bblayers.conf comme expliqué dans « Usage courant » ci-dessous. (follow me)
-	\end{itemize}
+Une fois cette étape terminée on peut retrouver toutes une arborescence de dossier et de fichiers dans le dossier de construction (/build-dir), ces derniers seront au cœur du fonctionnement de notre appareils. ils sont spécifiques à notre carte, les modules, les capteurs qu’elle comporte. Le fruit de la compilation de l’image contient le root-filesystem le kernel le bootloader et le device-tree en un seul fichier compressé. /build-dir/tmp/deploy/images/imx6-openrexbasic doit contenir :
 
-	\begin{tcolorbox}
-		cd \$BUILDDIR/../sources/.
-		git clone https://github.com/Alanaitali/meta-openrexpicam.git
-	\end{tcolorbox}
-
-	\section{Usage courant}
-	Préparation de l’environnement
-	L’environnement de développement a été créé avec fsl-setup-release.sh, mais pour chaque terminal de travail, il faudra sourcer l’environnement à nouveau. C’est-à-dire ajouter des variables d’environnement qui seront nécessaire lors de la compilation. La commande suivante source l’environnement et dans le même temps nous lui indiquons le nom de la machine dans notre cas « imx6s-Openrex » que l’on retrouve dans les sources téléchargées. De cette manière nous donnons des paramètres qui seront pris en compte lors de la compilation avec le « bitbake ». Cette assignation de machine sera inscrite dans le local.conf de manière plus pérenne.
-
-	\subsubsection*{Yocto 2.0 :}
-
-
-	\begin{tcolorbox}
-		MACHINE=imx6s-openrex source setup-environment build-dir
-		bitbake core-image-base
-	\end{tcolorbox}
-
-	\subsubsection*{Yocto 2.1 :}
-
-	\begin{tcolorbox}
-		DISTRO=poky MACHINE=imx6-openrexbasic source setup-environment build-dir
-	\end{tcolorbox}
-
-	\subsection{Vérification de l’image demandée}
-	Avant de lancer la compilation nous devons indiquer le chemin d’accès et
-	le nom des métadonnées à prendre en compte pour la compilation. Ces paquets
-	sont aussi appelés couches (layers), ils sont référencés dans le fichier
-	bblayer.conf dans le dossier /build-dir/conf. Pour inclure une nouvelle meta
-	à la compilation il faut écrire son chemin sur bblayers.conf.
-
-	\begin{lstlisting}
-	POKY_BBLAYERS_CONF_VERSION = "2"
-
-	BBPATH = "\${TOPDIR}"
-	BSPDIR := "\${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..')}"
-	BBFILES ?= ""
-
-	BBLAYERS = " \
-	\${BSPDIR}/sources/poky/meta \
-	\${BSPDIR}/sources/poky/meta-poky \
-	\
-	\${BSPDIR}/sources/meta-openembedded/meta-oe \
-	\${BSPDIR}/sources/meta-openembedded/meta-multimedia \
-	\
-	\${BSPDIR}/sources/meta-fsl-arm \
-	\${BSPDIR}/sources/meta-fsl-arm-extra \
-	\${BSPDIR}/sources/meta-fsl-demos \
-	\
-	\${BSPDIR}/sources/meta-openrexpicam \
-	"
-	BBLAYERS += "\${BSPDIR}/sources/meta-fsl-arm-voipac"
-	\end{lstlisting}
-
-	Afin de configurer l’environnement de travail de bitbake on rédige un fichier local.conf. Attention à ce que le nom de machine (imx6-openrexbasic pour Yocto 2.1 et imx6s-openrex) soit en accord avec la recette utilisée.
-
-	\begin{lstlisting}
-	MACHINE ??= 'imx6-openrexbasic'
-	DISTRO ?= 'poky'
-	PACKAGE_CLASSES ?= "package_rpm"
-	EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
-	USER_CLASSES ?= "buildstats image-mklibs"
-	PATCHRESOLVE = "noop"
-	BB_DISKMON_DIRS = "\
-	STOPTASKS,\${TMPDIR},1G,100K \
-	STOPTASKS,\${DL_DIR},1G,100K \
-	STOPTASKS,\${SSTATE_DIR},1G,100K \
-	STOPTASKS,/tmp,100M,100K \
-	ABORT,\${TMPDIR},100M,1K \
-	ABORT,\${DL_DIR},100M,1K \
-	ABORT,\${SSTATE_DIR},100M,1K \
-	ABORT,/tmp,10M,1K"
-	PACKAGECONFIG_append_pn-qemu-native = " sdl"
-	PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
-	CONF_VERSION = "1"
-
-	DL_DIR ?= "\${BSPDIR}/downloads/"
-	ACCEPT_FSL_EULA = "1"
-	\end{lstlisting}
-
-	Par soucis de personnalisation la distribution du projet peut être renommée et le nombre de threads configurés en ajoutant :
-
-	\begin{lstlisting}
-	DISTRO ?= 'name'
-	BB_NUMBER_THREADS?="4"
-	PARALLEL_MAKE?="-j4"
-	\end{lstlisting}
-	\subsection{Compilation}
-
-	L’étape compilation prend bien moins de temps lors de l’usage régulier (près
-	de 24 fois plus rapide). Pendant cette étape nous avons un grand nombre
-	d’informations qui s’affichent sur le terminal, les plus importantes sont les
-	warnings et les erreurs de compilation qu’il est nécessaire de comprendre puis
-	interpréter pour résoudre.
-
-	\begin{tcolorbox}
-		bitbake openrexpicam-base-image
-	\end{tcolorbox}
-
-	Une fois cette étape terminée on peut retrouver toutes une arborescence de dossier et de fichiers dans le dossier de construction (/build-dir), ces derniers seront au cœur du fonctionnement de notre appareils. ils sont spécifiques à notre carte, les modules, les capteurs qu’elle comporte. Le fruit de la compilation de l’image contient le root-filesystem le kernel le bootloader et le device-tree en un seul fichier compressé. /build-dir/tmp/deploy/images/imx6-openrexbasic doit contenir :
-
-	\begin{itemize}
-		\item[1 image sous format] .sdcard.gz
-		\item[1 image sous format] .rootfs.ext4
-		\item[1 image sous format] .rootfs.manifest
-		\item[1 image sous format] .rootfs.sdcard
-	\end{itemize}
+\begin{itemize}
+	\item[1 image sous format] .sdcard.gz
+	\item[1 image sous format] .rootfs.ext4
+	\item[1 image sous format] .rootfs.manifest
+	\item[1 image sous format] .rootfs.sdcard
+\end{itemize}

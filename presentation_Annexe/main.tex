@@ -159,7 +159,7 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Guide d’utilisation et de développement de distribution GNU/Linux avec Yocto} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Intégration du driver IMX219 sur une OpenRex Basic} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \supervisor{Patrick \textsc{Piquart} \\
 			David \textsc{Coué}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
@@ -204,7 +204,7 @@ Clément \textsc{Ailloud} \& Romain \textsc{Petit} \\ } % Your name, this is us
 
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushleft} \large
-\emph{Auteur :}\\
+\emph{Auteurs :}\\
 Alan \textsc{Ait-Ali} \\
 Martin \textsc{Laporte} \\
 Clément \textsc{Ailloud} \\
@@ -234,17 +234,72 @@ Romain \textsc{Petit}
 \end{titlepage}
 
 %----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%----------------------------------------------------------------------------------------
+
+%\begin{declaration}
+%\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+%\noindent Je, \authorname, declare que ce mémoire intitulé, \enquote{\ttitle} et le travail qui y est présenté, est le mien. Je confirme que :
+
+%\begin{itemize}[label=$\bullet$]
+%\item Ce travail a été réalisé entièrement ou principalement pour l'obtention de mon diplôme au sein de l'école E.S.T.E.I.
+%\item Si une partie quelconque de cette thèse a déjà été soumise pour obtenir un diplôme ou toute autre qualification dans cette école ou dans une autre institution, cela est clairement indiqué.
+%\item Lorsque je consulte le travail publié d'autrui, cela est toujours clairement attribué.
+%\item Lorsque je cite le travail des autres, la source est toujours donnée. À l'exception de ces citations, cette thèse est entièrement mon propre travail.
+%\item J'ai pris connaissances de toutes les principales sources d'aide.
+%\item Lorsque la thèse est basée sur le travail effectué par moi-même conjointement avec d'autres, j'ai précisé exactement ma contribution et ce qui a été fait par les autres.\\
+%\end{itemize}
+
+%\noindent Signature:\\
+%\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
+
+%\noindent Date:\\
+%\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+%\end{declaration}
+
+%\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+
+%\vspace*{0.2\textheight}
+
+%\noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
+
+%\hfill Dave Barry
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+%\begin{abstract}
+%\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+
+%\ldots
+%\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+%\begin{acknowledgements}
+%\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+
+%\end{acknowledgements}
+
+%----------------------------------------------------------------------------------------
 %	LIST OF CONTENTS/FIGURES/TABLES PAGES
 %----------------------------------------------------------------------------------------
 
 \tableofcontents % Prints the main table of contents
 \clearpage
 
-\listoffigures % Prints the list of figures
-\clearpage
+%\listoffigures % Prints the list of figures
+%\clearpage
 
-\listoftables % Prints the list of tables
-\clearpage
+%\listoftables % Prints the list of tables
+%\clearpage
 
 %\listofmyequations
 
@@ -306,31 +361,11 @@ Romain \textsc{Petit}
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-%\include{Chapters/Chapter1}
+\include{Chapters/Chapter1}
 %\include{Chapters/Chapter2}
 %\include{Chapters/Chapter3}
 %\include{Chapters/Chapter4}
-%\include{Chapters/Chapter5}
-
-%----------------------------------------------------------------------------------------
-%	THESIS CONTENT - APPENDICES
-%----------------------------------------------------------------------------------------
-
-%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
-
-% Include the appendices of the thesis as separate files from the Appendices folder
-% Uncomment the lines as you write the Appendices
 
 %\include{Appendices/AppendixA}
-%\include{Appendices/AppendixB}
-%\include{Appendices/AppendixC}
-
-%----------------------------------------------------------------------------------------
-%	BIBLIOGRAPHY
-%----------------------------------------------------------------------------------------
-
-%\printbibliography[heading=bibintoc]
-
-%----------------------------------------------------------------------------------------
 
 \end{document}

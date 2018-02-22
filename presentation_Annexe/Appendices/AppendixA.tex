@@ -1,9 +1,3 @@
-% Chapter 1
-
-\chapter{Introduction} % Main chapter title
-
-\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
-
 
 \section{Procédure initiale}
 Cette partie sera une explication des différentes commandes ainsi qu’une description de la
@@ -44,29 +38,27 @@ Packages requis pour une compilation Yocto :
 La première étape consiste à télécharger tous les exécutables et métadonnées nécessaires pour créer l’image de base de l’OpenRex. En premier lieu il est nécessaire de récupérer la commande repo via les dépots officiels ou téléchargement :
 
 \begin{tcolorbox}
-	sudo aptitude install repo \\
-	sudo aptitude update \\
-	sudo aptitude upgrade \\
+	sudo aptitude install repo
+	sudo aptitude update
+	sudo aptitude upgrade
 \end{tcolorbox}
 
 ou
 
 \begin{tcolorbox}
-	mkdir bin \\
-	curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo \\
-	chmod a+x bin/repo \\
-	PATH=\${PATH}:bin \\
+	mkdir bin
+	curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > bin/repo
+	chmod a+x bin/repo
+	PATH=\${PATH}:bin
 \end{tcolorbox}
 
 Ensuite il faut créer le répertoire de travail :
 
 \begin{tcolorbox}
 	mkdir fsl-community-bsp \&\& cd fsl-community-bsp
+	\subsubsection{Yocto version 2.0}
+	Création du répertoire du fichier manifest :
 \end{tcolorbox}
-
-\subsubsection{Yocto version 2.0}
-
-Création du répertoire du fichier manifest :
 
 \begin{tcolorbox}
 	mkdir -p ./repo/local\_manifests/
@@ -78,17 +70,17 @@ Télécharger l’ensemble des sources externes de ce projet par la commande
 	repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b jethro
 \end{tcolorbox}
 
-De plus il céer le manifest pour pouvoir télécharger/installer/décompresser les sources produites par Fedevel.
+De plus il Noter le manifest pour pouvoir télécharger/installer/décompresser les sources produites par Fedevel.
 
 \begin{tcolorbox}
-	cat > .repo/local\_manifests/imx6openrex.xml << EOF \\
-	<?xml version="1.0" encoding="UTF-8"?> \\
-	<manifest> \\
-	<remote fetch="git://github.com/FEDEVEL" name="fedevel"/> \\
-	<project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex\"> \\
-	<copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/> \\
-	</project> \\
-	</manifest> \\
+	cat > .repo/local\_manifests/imx6openrex.xml << EOF
+	<?xml version="1.0" encoding="UTF-8"?>
+	<manifest>
+	<remote fetch="git://github.com/FEDEVEL" name="fedevel"/>
+	<project remote="fedevel" revision="jethro" name="meta-openrex" path="sources/meta-openrex\">
+	<copyfile src="openrex-setup.sh" dest="openrex-setup.sh"/>
+	</project>
+	</manifest>
 	EOF
 \end{tcolorbox}
 
@@ -110,7 +102,6 @@ Enfin, il est nécessaire de télécharger/installer/décompresser ces fichiers 
 \end{tcolorbox}
 
 \subsection{Compilation ( Yocto 2.0 )}
-
 Créer et sourcer l'environnement pour que la compilation inclut la métadonnée Openrex.
 
 \begin{tcolorbox}
@@ -121,7 +112,7 @@ Préparer l’environnement et construire l’image. Toutes Les commandes ci-des
 
 
 \begin{tcolorbox}
-	MACHINE=imx6s-openrex source setup-environment build-dir \\
+	MACHINE=imx6s-openrex source setup-environment build-dir
 	bitbake core-image-base
 \end{tcolorbox}
 
@@ -136,10 +127,11 @@ Préparer l’environnement et construire l’image. Toutes Les commandes ci-des
 Installer l’image sur la carte-sd
 
 \begin{tcolorbox}
-	umount /dev/YourSDCard \\
-	gunzip -c tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard.gz > tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard \\
-	sudo dd if=tmp/deploy/images/imx6s-openrex/core-image-base-imx6q-openrex.sdcard of=/dev/YourSDCard \\
-	umount /dev/YourSDCard \\
+	umount /dev/YourSDCard
+
+	gunzip -c tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard.gz > tmp/deploy/images/imx6s-openrex/core-image-base-imx6s-openrex.sdcard
+	sudo dd if=tmp/deploy/images/imx6s-openrex/core-image-base-imx6q-openrex.sdcard of=/dev/YourSDCard
+	umount /dev/YourSDCard
 \end{tcolorbox}
 
 A présent insérez la carte sd dans l’OpenRex et démarrez, vous devriez voir l’autoboot apparaître grâce à la communication série.
@@ -147,10 +139,10 @@ A présent insérez la carte sd dans l’OpenRex et démarrez, vous devriez voir
 \subsection{Déploiement de l’image ( Yocto 2.1 )}
 
 \begin{tcolorbox}
-	umount /dev/YourSDCard \\
-	gunzip -c tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard.gz > build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard \\
-	sudo dd if=tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard of=/dev/YourSDCard \\
-	umount /dev/YourSDCard \\
+	umount /dev/YourSDCard
+	gunzip -c tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard.gz > build-openrex/tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard
+	sudo dd if=tmp/deploy/images/imx6-openrexbasic/core-image-base-imx6-openrexbasic.sdcard of=/dev/YourSDCard
+	umount /dev/YourSDCard
 \end{tcolorbox}
 
 Si vous obtenez l’erreur "Error : bootmmc not defined " , redémarrez l’OpenRex et interrompez le boot de celle-ci afin de lancer la commande ci dessous :
@@ -162,7 +154,6 @@ Si vous obtenez l’erreur "Error : bootmmc not defined " , redémarrez l’Open
 \end{tcolorbox}
 
 \subsection{Etat initial}
-
 Une fois la procédure faite, on doit retrouver les fichiers suivant dans le
 dossier fsl-community-bsp :
 \begin{itemize}
@@ -174,6 +165,8 @@ dossier fsl-community-bsp :
 	On y trouve :
 	\item[bitbake.lock :] sémaphore temporaire assurant qu’une seule instance de bitbake
 	accède aux fichiers
+	\item[cache :]
+	\item[conf :]
 	\item[sstate-cache :] avantage majeur de Yocto sur des compilation standard, dans ce répertoire sont stockées les états de compilation intermédiaire de Yocto. Pour vider la shared state cache on lance :]
 	\begin{tcolorbox}
 		bitbake <recette> -c cleansstate.
@@ -299,8 +292,8 @@ interpréter pour résoudre.
 Une fois cette étape terminée on peut retrouver toutes une arborescence de dossier et de fichiers dans le dossier de construction (/build-dir), ces derniers seront au cœur du fonctionnement de notre appareils. ils sont spécifiques à notre carte, les modules, les capteurs qu’elle comporte. Le fruit de la compilation de l’image contient le root-filesystem le kernel le bootloader et le device-tree en un seul fichier compressé. /build-dir/tmp/deploy/images/imx6-openrexbasic doit contenir :
 
 \begin{itemize}
-	\item[-]1 image sous format .sdcard.gz
-	\item[-]1 image sous format .rootfs.ext4
-	\item[-]1 image sous format .rootfs.manifest
-	\item[-]1 image sous format .rootfs.sdcard
+	\item[1 image sous format] .sdcard.gz
+	\item[1 image sous format] .rootfs.ext4
+	\item[1 image sous format] .rootfs.manifest
+	\item[1 image sous format] .rootfs.sdcard
 \end{itemize}

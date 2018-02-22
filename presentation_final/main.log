@@ -1,24 +1,23 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.13)  22 FEB 2018 19:39
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 14:44
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 21:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**main.tex
-(/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.tex
+**/home/romain/Desktop/Rapports_Thales/presentation_final/main.tex
+(/home/romain/Desktop/Rapports_Thales/presentation_final/main.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
-(/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/MastersDoctoralThesis.cls
+(./MastersDoctoralThesis.cls
 Document Class: MastersDoctoralThesis 2016/11/22 v1.5 LaTeXTemplates.com
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count79
-) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2016/01/19 v6377 L3 programming layer (loader) 
- (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2016/01/19 v6377 L3 programming layer (code)
 L3 Module: l3bootstrap 2016/01/01 v6339 L3 Bootstrap code
 L3 Module: l3names 2015/12/21 v6328 L3 Namespace for primitives
@@ -124,7 +123,8 @@ L3 Module: l3candidates 2016/01/14 v6376 L3 Experimental additions to l3kernel
 \l__coffin_scaled_total_height_dim=\dimen131
 \l__coffin_scaled_width_dim=\dimen132
 L3 Module: l3luatex 2015/11/11 v6250 L3 Experimental LuaTeX-specific functions
-) (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
 File: l3pdfmode.def 2015/11/11 v6250 L3 Experimental driver: PDF mode
 \l__driver_color_stack_int=\count102
 ))
@@ -134,7 +134,8 @@ Package: xparse 2016/01/19 v6377 L3 Experimental document command parser
 \l__xparse_mandatory_args_int=\count105
 \l__xparse_processor_int=\count106
 \l__xparse_v_nesting_int=\count107
-) (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/bk11.clo
 File: bk11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
@@ -207,11 +208,14 @@ File: bk11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 . 
 . Defining command \addsec with sig. ' s o m ' on line 128.
 .................................................
- (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2016/02/24 3.9q The Babel package
- (/usr/share/texlive/texmf-dist/tex/generic/babel-french/frenchb.ldf
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-french/frenchb.ldf
 Language: frenchb 2016/02/13 v3.1l French support from the babel system
- (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2016/02/24 3.9q Babel common definitions
 \babel@savecnt=\count117
 \U@D=\dimen134
@@ -234,12 +238,17 @@ Package babel Info: Making ? an active character on input line 345.
 \labelwidthFB=\skip53
 \leftmarginFB=\skip54
 \parindentFFN=\dimen136
-)) (/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty) (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks15
-) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2015/10/03 v3.19a KOMA-Script package (KOMA-Script-independent basics and keyval usage)
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2015/10/03 v3.19a KOMA-Script package (KOMA-Script-independent
+ basics and keyval usage)
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
 Package: scrlfile 2015/10/03 v3.19a KOMA-Script package (loading files)
 
 Package scrlfile, 2015/10/03 v3.19a KOMA-Script package (loading files)
@@ -247,15 +256,21 @@ Package scrlfile, 2015/10/03 v3.19a KOMA-Script package (loading files)
 
 )) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrhack.sty
 Package: scrhack 2015/10/03 v3.19a KOMA-Script package 
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2015/10/03 v3.19a KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
-)) (/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2015/10/03 v3.19a KOMA-Script package (KOMA-Script-dependent 
+basics and keyval usage)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
 Package scrhack Info: loading setspace hack on input line 204.
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/setspace.hak
-File: setspace.hak 2015/10/03 v3.19a KOMA-Script package (hacking package setspace)
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/setspace.hak
+File: setspace.hak 2015/10/03 v3.19a KOMA-Script package (hacking package setsp
+ace)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip55
 \LTright=\skip56
@@ -272,22 +287,27 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \c@LT@tables=\count124
 \c@LT@chunks=\count125
 \LT@p@ftn=\toks16
-) (/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx.sty
 Package: siunitx 2016/03/01 v2.6q A comprehensive (SI) units package
- (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
- (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen138
-)) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen139
 \extrarowheight=\dimen140
 \NC@list=\toks18
 \extratabsurround=\skip59
 \backup@length=\skip60
-) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2016/01/19 v6377 LaTeX2e option processing using LaTeX3 keys
 )
 \l__siunitx_tmp_box=\box45
@@ -448,30 +468,40 @@ Package: l3keys2e 2016/01/19 v6377 LaTeX2e option processing using LaTeX3 keys
 . Defining command \__siunitx_bookmark_si:w with sig. 'om' on line 7400.
 .................................................
 \g__file_internal_ior=\read1
- (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/translator.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/translator.sty
 Package: translator 2010/06/12 ver 1.10
- (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/translator-language-mappings.tex))) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/translator-language-
+mappings.tex))) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 95.
- (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count143
 ))
 \Gin@req@height=\dimen153
 \Gin@req@width=\dimen154
-) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \heavyrulewidth=\dimen155
 \lightrulewidth=\dimen156
@@ -490,9 +520,11 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@thisruleclass=\count146
 \@lastruleclass=\count147
 \@thisrulewidth=\dimen167
-) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
- (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
 \captionmargin=\dimen168
@@ -505,7 +537,8 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 )
 \c@ContinuedFloat=\count148
 Package caption Info: longtable package is loaded.
- (/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
 ))
 .................................................
@@ -583,9 +616,11 @@ Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
 . 
 . Defining command \addchaptertocentry with sig. ' m ' on line 252.
 .................................................
- (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
- (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -598,15 +633,19 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
-) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
-) (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count149
@@ -621,13 +660,17 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen181
 \Gm@layoutvoffset=\dimen182
 \Gm@dimlist=\toks19
-) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlayer-scrpage.sty
-Package: scrlayer-scrpage 2015/10/03 v3.19a KOMA-Script package (end user interface for scrlayer)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlayer-scrpage.sty
+Package: scrlayer-scrpage 2015/10/03 v3.19a KOMA-Script package (end user inter
+face for scrlayer)
 
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlayer.sty
-Package: scrlayer 2015/10/03 v3.19a KOMA-Script package (defining layers and page styles)
+Package: scrlayer 2015/10/03 v3.19a KOMA-Script package (defining layers and pa
+ge styles)
 \footheight=\skip65
-Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 1975.
+Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 197
+5.
 )
 Package scrbase Info: Unknown processing state.
 (scrbase)             Processing option `markcase=used'
@@ -711,13 +754,15 @@ Package scrlayer-scrpage Info: auto-selection of `pagestyleset=standard'.
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks20
 \inpenc@posthook=\toks21
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
@@ -949,7 +994,8 @@ File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
- (/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
@@ -989,7 +1035,8 @@ File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
- (/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -1012,26 +1059,36 @@ Now handling font encoding U ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-)) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathpazo.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathpazo.sty
 Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
 \symupright=\mathgroup4
-) (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2016/03/03 v3.3 programmable bibliographies (PK/JW/AB)
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_legacy.sty
-Package: biblatex_legacy 2016/03/03 v3.3 programmable bibliographies (bibtex) (PK/JW/AB)
- (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_legacy.sty
+Package: biblatex_legacy 2016/03/03 v3.3 programmable bibliographies (bibtex) (
+PK/JW/AB)
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
 \lrq@indent=\count152
- (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
-)) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -1152,12 +1209,14 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \c@savedlistf=\count322
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
 File: blx-compat.def 2016/03/03 v3.3 biblatex compatibility (PK/JW/AB)
 )
 Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex_legacy.def' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_legacy.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex_legacy.def
 File: biblatex_legacy.def 
 \c@textcitecount=\count323
 \c@textcitetotal=\count324
@@ -1175,18 +1234,21 @@ File: blx-natbib.def 2016/03/03 v3.3 biblatex compatibility (PK/JW/AB)
 )
 Package biblatex Info: Trying to load bibliography style 'authoryear'...
 Package biblatex Info: ... file 'authoryear.bbx' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
 File: authoryear.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2016/03/03 v3.3 biblatex bibliography style (PK/JW/AB)
 \c@bbx:relatedcount=\count330
 \c@bbx:relatedtotal=\count331
 ))
 Package biblatex Info: Trying to load citation style 'authoryear'...
 Package biblatex Info: ... file 'authoryear.cbx' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
 File: authoryear.cbx 2016/03/03 v3.3 biblatex citation style (PK/JW/AB)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
@@ -1198,9 +1260,11 @@ Package biblatex Info: Redefining '\textcites'.
 )
 Package biblatex Info: Trying to load configuration file...
 Package biblatex Info: ... file 'biblatex.cfg' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
-))) (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2016/01/31 v5.1g context-sensitive quotations (JAW)
 \csq@reset=\count332
 \csq@gtype=\count333
@@ -1209,23 +1273,27 @@ Package: csquotes 2016/01/31 v5.1g context-sensitive quotations (JAW)
 \csq@maxlvl=\count336
 \csq@tshold=\count337
 \csq@ltx@everypar=\toks22
- (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2016/01/31 v5.1g csquotes generic definitions (JAW)
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
- (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 )
 Package csquotes Info: Enabling multilingual quotes.
-) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip75
 \enit@outerparindent=\dimen183
 \enit@toks=\toks23
 \enit@inbox=\box52
 \enitdp@description=\count338
-) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count339
 \float@exts=\toks24
@@ -1234,21 +1302,27 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@floatcapt=\box54
 )
 Package scrhack Info: loading float hack on input line 53.
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/float.hak
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/float.hak
 File: float.hak 2015/10/03 v3.19a KOMA-Script package (hacking package float)
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
 Package: tocbasic 2015/10/03 v3.19a KOMA-Script package (handling toc-files)
 )
 Package scrhack Info: redefining \newfloat on input line 161.
 Package scrhack Info: redefining \listof on input line 161.
 Package scrhack Info: undefining \float@addtolists on input line 161.
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package scrhack Info: loading lscape hack on input line 55.
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/lscape.hak
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/lscape.hak
 File: lscape.hak 2015/10/03 v3.19a KOMA-Script package (hacking package lscape)
- (/usr/share/texlive/texmf-dist/tex/latex/xpatch/xpatch.sty
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/xpatch/xpatch.sty
 Package: xpatch 2012/10/02 v0.3 Extending etoolbox patching commands
 .................................................
 . LaTeX info: "xparse/define-command"
@@ -1431,29 +1505,42 @@ Package: xpatch 2012/10/02 v0.3 Extending etoolbox patching commands
 . Defining command \xshowbibdriver with sig. 'm' on line 193.
 .................................................
 )
-Package scrhack Info: \landscape patched to make \textheight change optional on input line 91.
+Package scrhack Info: \landscape patched to make \textheight change optional on
+ input line 91.
 \scrh@LT@textheight=\skip76
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
 Package: tcolorbox 2016/02/29 version 3.90 text color boxes
- (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks26
 \pgfutil@tempdima=\dimen184
 \pgfutil@tempdimb=\dimen185
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
 \pgfutil@abb=\box55
- (/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
-)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
 Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
 ))
 Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
- (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
 \pgfkeys@pathtoks=\toks27
 \pgfkeys@temptoks=\toks28
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
 \pgfkeys@tmptoks=\toks29
 ))
 \pgf@x=\dimen186
@@ -1477,29 +1564,60 @@ Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
 )
 Driver file for pgf: pgfsys-pdftex.def
+
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
 File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
 File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
-))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
 \pgfsyssoftpath@smallbuffer@items=\count344
 \pgfsyssoftpath@bigbuffer@items=\count345
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
 File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
-)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
 Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen194
 \pgfmath@count=\count346
 \pgfmath@box=\box56
 \pgfmath@toks=\toks33
 \pgfmath@stack@operand=\toks34
 \pgfmath@stack@operation=\toks35
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
 \c@pgfmathroundto@lastzeros=\count347
-)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
 File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
 \pgf@picminx=\dimen195
 \pgf@picmaxx=\dimen196
@@ -1515,73 +1633,105 @@ File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
 \pgf@yy=\dimen262
 \pgf@zx=\dimen263
 \pgf@zy=\dimen264
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
 File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
 \pgf@path@lastx=\dimen265
 \pgf@path@lasty=\dimen266
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
 File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
 \pgf@shorten@end@additional=\dimen267
 \pgf@shorten@start@additional=\dimen268
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
 File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
 \pgfpic=\box57
 \pgf@hbox=\box58
 \pgf@layerbox@main=\box59
 \pgf@picture@serial@count=\count348
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
 File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
 \pgflinewidth=\dimen269
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
 File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
 \pgf@pt@x=\dimen270
 \pgf@pt@y=\dimen271
 \pgf@pt@temp=\dimen272
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
 File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
 File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
 File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
 \pgfarrowsep=\dimen273
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
 \pgf@max=\dimen274
 \pgf@sys@shading@range@num=\count349
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
 File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
 \pgfexternal@startupbox=\box60
-)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
 File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
 File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
 File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
-))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
 \pgfnodeparttextbox=\box61
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
-) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
 \pgf@nodesepstart=\dimen275
 \pgf@nodesepend=\dimen276
-) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
 Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
 )) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks36
 \verbatim@line=\toks37
 \verbatim@in@stream=\read4
-) (/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
- (/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )
 \@envbody=\toks38
@@ -1599,23 +1749,34 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \tcb@temp=\box69
 \tcb@out=\write5
 \tcb@record@out=\write6
- (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
 Library (tcolorbox): 'tcbraster.code.tex' version '3.90'
 \c@tcbrastercolumn=\count353
 \c@tcbrasterrow=\count354
 \c@tcbraster=\count355
 ) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
 Library (tcolorbox): 'tcbskins.code.tex' version '3.90'
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen277
 \pgffor@skip=\dimen278
 \pgffor@stack=\toks39
 \pgffor@toks=\toks40
-)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \pgf@plot@mark@count=\count356
 \pgfplotmarksize=\dimen279
@@ -1634,18 +1795,22 @@ File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \tikznumberofchildren=\count358
 \tikznumberofcurrentchild=\count359
 \tikz@fig@count=\count360
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
 \pgfmatrixcurrentrow=\count361
 \pgfmatrixcurrentcolumn=\count362
 \pgf@matrix@numberofcolumns=\count363
 )
 \tikz@expandcount=\count364
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 )))
 \tcb@waterbox=\box74
- (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
 Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '3.90'
 )) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
 Library (tcolorbox): 'tcbbreakable.code.tex' version '3.90'
@@ -1664,7 +1829,8 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen286
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count365
@@ -1704,7 +1870,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \mathdisplay@stack=\toks44
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
-)) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbfitting.code.tex
+))
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbfitting.code.tex
 Library (tcolorbox): 'tcbfitting.code.tex' version '3.90'
 \tcbfitdim=\dimen294
 \tcb@lowerfitdim=\dimen295
@@ -1726,7 +1893,8 @@ Library (tcolorbox): 'tcbxparse.code.tex' version '3.90'
 Library (tcolorbox): 'tcblistingsutf8.code.tex' version '3.90'
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/listingsutf8.sty
 Package: listingsutf8 2011/11/10 v1.2 Allow UTF-8 in listings input (HO)
- (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count378
 \lst@gtempboxa=\box80
 \lst@token=\toks45
@@ -1739,24 +1907,31 @@ Package: listingsutf8 2011/11/10 v1.2 Allow UTF-8 in listings input (HO)
 \lst@newlines=\count382
 \lst@lineno=\count383
 \lst@maxwidth=\dimen300
- (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count384
 \lst@skipnumbers=\count385
 \lst@framebox=\box81
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package scrhack Info: loading listings hack on input line 101.
- (/usr/share/texlive/texmf-dist/tex/latex/koma-script/listings.hak
-File: listings.hak 2015/10/03 v3.19a KOMA-Script package (hacking package listings)
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/listings.hak
+File: listings.hak 2015/10/03 v3.19a KOMA-Script package (hacking package listi
+ngs)
 Package tocbasic Info: setting babel extension for `lol' on input line 137.
 Package scrhack Info: redefining \lstlistoflistings on input line 137.
 )
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -1764,11 +1939,15 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/stringenc.sty
-Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdfescape.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/stringenc.sty
+Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdfescape.sty
 Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
-))) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
 Library (tcolorbox): 'tcblistings.code.tex' version '3.90'
 (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
 Library (tcolorbox): 'tcblistingscore.code.tex' version '3.90'
@@ -1785,7 +1964,9 @@ Library (tcolorbox): 'tcbmagazine.code.tex' version '3.90'
 .................................................
  (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/inconsolata.sty
 Package: inconsolata 2016/02/22 v1.10
- `inconsolata-zi4' v1.10, 2016/02/22 Text macros for Inconsolata (msharpe) (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+
+`inconsolata-zi4' v1.10, 2016/02/22 Text macros for Inconsolata (msharpe)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -1799,11 +1980,13 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             Family '?' is the default used for unknown fonts.
 (textcomp)             See the documentation for details.
 Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu
 File: ts1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
@@ -1900,6 +2083,7 @@ Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
 Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
 Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
 Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
+
 Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
 Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
 Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
@@ -1939,7 +2123,8 @@ Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 )
 \zifour@ocount=\count387
-) (/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty
 Package: tocloft 2013/05/02 v2.3f parameterised ToC, etc., typesetting
 Package tocloft Info: The document has chapter divisions on input line 44.
 \cftparskip=\skip80
@@ -1978,21 +2163,29 @@ Package tocloft Info: The document has chapter divisions on input line 44.
 \cftbeforetabskip=\skip111
 \cfttabindent=\skip112
 \cfttabnumwidth=\skip113
-) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
 \@xs@message=\write7
 \integerpart=\count390
 \decimalpart=\count391
 )
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
 Package hobsub Info: Skipping package `infwarerr' (already loaded).
@@ -2010,7 +2203,8 @@ Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 Package hobsub Info: Skipping package `pdftexcmds' (already loaded).
 Package hobsub Info: Skipping package `pdfescape' (already loaded).
-Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
 Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
 Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
 )
@@ -2022,9 +2216,11 @@ Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
 Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
 Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
-) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
-) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
 \@linkdim=\dimen301
@@ -2037,7 +2233,8 @@ Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
 \Hy@SavedSpaceFactor=\count394
- (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Hyper figures OFF on input line 4443.
@@ -2077,9 +2274,11 @@ Package hyperref Message: Driver (autodetected): hpdftex.
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
 \Fld@listcount=\count400
 \c@bookmark@seq@number=\count401
- (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 282.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
 )
 \Hy@SectionHShift=\skip114
 )
@@ -2087,7 +2286,8 @@ Package hyperref Info: Option `bookmarksopen' set `true' on input line 184.
 Package hyperref Info: Option `hypertexnames' set `false' on input line 184.
 Package hyperref Info: Option `colorlinks' set `true' on input line 184.
 Package hyperref Info: Option `unicode' set `true' on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -2095,12 +2295,15 @@ Now handling font encoding PU ...
 Package hyperref Info: Option `breaklinks' set `true' on input line 184.
 Package biblatex Info: Trying to load language 'french'...
 Package biblatex Info: ... file 'french.lbx' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/french.lbx
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/french.lbx
 File: french.lbx 2016/03/03 v3.3 biblatex localization (PK/JW/AB)
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.aux (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter1.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter2.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter3.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter4.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Appendices/AppendixA.aux))
+ (./main.aux
+(./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux) (./Chapters/Chapter3.aux)
+(./Chapters/Chapter4.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 184.
@@ -2117,7 +2320,9 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 184.
 LaTeX Font Info:    ... okay on input line 184.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 184.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 184.
@@ -2126,7 +2331,8 @@ LaTeX Font Info:    ... okay on input line 184.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 184.
 LaTeX Font Info:    ... okay on input line 184.
 LaTeX Font Info:    Try loading font information for T1+ppl on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
 LaTeX Info: Redefining \degres on input line 184.
@@ -2139,13 +2345,18 @@ Package frenchb.ldf Info: Setting StandardEnumerateEnv=true for
 (frenchb.ldf)              on input line 184.
 LaTeX Info: Redefining \up on input line 184.
 
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-basic-dictionary/translator-basic-dictionary-English.dict
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
+ic-dictionary/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
-) (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-basic-dictionary/translator-basic-dictionary-French.dict
+)
+(/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
+ic-dictionary/translator-basic-dictionary-French.dict
 Dictionary: translator-basic-dictionary, Language: French 
-) (/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
+)
+(/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
-) (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+)
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count402
 \scratchdimen=\dimen305
@@ -2160,14 +2371,18 @@ File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
 \everyMPtoPDFconversion=\toks47
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
- (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 )
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
- (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
@@ -2215,6 +2430,7 @@ Package scrlayer Info: Setting magic \footheight to \baselineskip while
 Package scrbase Info: activating french \abbrevname on input line 184.
 Package scrbase Info: activating french \byname on input line 184.
 Package scrbase Info: activating french \acknowledgementname on input line 184.
+
 Package scrbase Info: activating french \authorshipname on input line 184.
 Package scrbase Info: activating french \constantsname on input line 184.
 Package scrbase Info: activating french \symbolsname on input line 184.
@@ -2229,20 +2445,24 @@ Package biblatex Warning: Data encoding is 'utf8'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
-(/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.bbl)
+(./main.bbl)
 Package biblatex Info: Reference section=0 on input line 184.
 Package biblatex Info: Reference segment=0 on input line 184.
  ABD: EveryShipout initializing macros
 \c@lstlisting=\count408
 Package scrhack Info: undefining \float@addtolists on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
+
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
 )
 \AtBeginShipoutBox=\box83
 Package hyperref Info: Link coloring ON on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
- (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count409
@@ -2250,29 +2470,40 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 184.
 LaTeX Info: Redefining \pageref on input line 184.
 LaTeX Info: Redefining \nameref on input line 184.
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.out) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.out)
+
+(./main.out) (./main.out)
 \@outlinefile=\write8
 \openout8 = `main.out'.
 
 \c__siunitx_mathsf_int=\count410
 LaTeX Font Info:    Try loading font information for OT1+ppl on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 184
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 184
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 184
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 184.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 184
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 \c__siunitx_mathtt_int=\count411
@@ -2280,16 +2511,17 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 1: section
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 202.
-<Figures/Logo_Ynov.png, id=324, 240.9pt x 84.315pt>
+<Figures/Logo_Ynov.png, id=264, 240.9pt x 84.315pt>
 File: Figures/Logo_Ynov.png Graphic file (type png)
- <use Figures/Logo_Ynov.png>
+
+<use Figures/Logo_Ynov.png>
 Package pdftex.def Info: Figures/Logo_Ynov.png used on input line 227.
 (pdftex.def)             Requested size: 168.62883pt x 59.02008pt.
  [1
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/Logo_Ynov.png>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Figures/Logo_Ynov.png>]
 --------------------
  R\'esum\'e
 --------------------
@@ -2297,7 +2529,8 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 276.
 
 Overfull \hbox (2.44109pt too wide) in paragraph at lines 284--288
-\T1/ppl/m/n/10.95 IMX6-Quad car pour des rai-sons in-ternes à l'équipe de dé-ve-lop-pe-ment Thales-LUCY. 
+\T1/ppl/m/n/10.95 IMX6-Quad car pour des rai-sons in-ternes à l'équipe de dé-ve
+-lop-pe-ment Thales-LUCY. 
  []
 
 1: section
@@ -2309,7 +2542,7 @@ Overfull \hbox (2.44109pt too wide) in paragraph at lines 284--288
 --------------------
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 342.
-(/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.toc
+(./main.toc
 1: section
 [3
 
@@ -2317,7 +2550,7 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
 \tf@toc=\write9
 \openout9 = `main.toc'.
 
- [5] (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.lof)
+ [5] (./main.lof)
 \tf@lof=\write10
 \openout10 = `main.lof'.
 
@@ -2325,7 +2558,7 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
 1: section
 [6
 
-] (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.lot)
+] (./main.lot)
 \tf@lot=\write11
 \openout11 = `main.lot'.
 
@@ -2337,14 +2570,14 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
 1: section
 \openout2 = `Chapters/Chapter1.aux'.
 
-(/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter1.tex
+(./Chapters/Chapter1.tex
 Chapitre 1.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 26.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 51.
 1: section
 [1
 
@@ -2354,45 +2587,35 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
 ]) [2]
 \openout2 = `Chapters/Chapter2.aux'.
 
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter2.tex
+ (./Chapters/Chapter2.tex
 Chapitre 2.
 1: section
 [3
 
 
 
-<<<<<<< HEAD
-] <Figures/fleche.png, id=485, 1099.10625pt x 518.93875pt>
-=======
 ] <Figures/fleche.png, id=411, 1099.10625pt x 518.93875pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/fleche.png Graphic file (type png)
- <use Figures/fleche.png>
+
+<use Figures/fleche.png>
 Package pdftex.def Info: Figures/fleche.png used on input line 58.
 (pdftex.def)             Requested size: 384.69295pt x 181.63129pt.
-<<<<<<< HEAD
- [4 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/fleche.png (PNG copy)>] <Figures/gantt.png, id=491, 1606.0pt x 903.375pt>
-=======
  [4 <./Figures/fleche.png (PNG copy)>]
 <Figures/gantt.png, id=416, 1606.0pt x 903.375pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/gantt.png Graphic file (type png)
  <use Figures/gantt.png>
 Package pdftex.def Info: Figures/gantt.png used on input line 102.
 (pdftex.def)             Requested size: 1534.86441pt x 746.88307pt.
-<<<<<<< HEAD
- [5 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/gantt.png>] <Figures/git.png, id=499, 231.86626pt x 218.8175pt>
-=======
 
 [5 <./Figures/gantt.png>] <Figures/git.png, id=424, 231.86626pt x 218.8175pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/git.png Graphic file (type png)
- <use Figures/git.png>
+
+<use Figures/git.png>
 Package pdftex.def Info: Figures/git.png used on input line 149.
 (pdftex.def)             Requested size: 185.49324pt x 175.05423pt.
  [6
 
-] [7 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/git.png>]
+] [7 <./Figures/git.png>]
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -2406,37 +2629,28 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [8
 
-<<<<<<< HEAD
-] <Figures/camrpi.png, id=517, 270.00874pt x 187.70125pt>
-=======
 ]
 <Figures/camrpi.png, id=442, 270.00874pt x 187.70125pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/camrpi.png Graphic file (type png)
- <use Figures/camrpi.png>
+
+<use Figures/camrpi.png>
 Package pdftex.def Info: Figures/camrpi.png used on input line 289.
 (pdftex.def)             Requested size: 108.00157pt x 75.07916pt.
-<<<<<<< HEAD
- [9 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/camrpi.png>] <Figures/blockMIPI.png, id=525, 357.335pt x 221.82875pt>
-=======
  [9 <./Figures/camrpi.png>]
 <Figures/blockMIPI.png, id=450, 357.335pt x 221.82875pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/blockMIPI.png Graphic file (type png)
- <use Figures/blockMIPI.png>
+
+<use Figures/blockMIPI.png>
 Package pdftex.def Info: Figures/blockMIPI.png used on input line 337.
 (pdftex.def)             Requested size: 142.93146pt x 88.72992pt.
-<<<<<<< HEAD
- <Figures/openrex.png, id=527, 259.97125pt x 194.7275pt>
-=======
 
 <Figures/openrex.png, id=452, 259.97125pt x 194.7275pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/openrex.png Graphic file (type png)
- <use Figures/openrex.png>
+
+<use Figures/openrex.png>
 Package pdftex.def Info: Figures/openrex.png used on input line 350.
 (pdftex.def)             Requested size: 142.98462pt x 107.10043pt.
- [10 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/blockMIPI.png>]
+ [10 <./Figures/blockMIPI.png>]
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -2448,31 +2662,31 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<<<<<<< HEAD
- [11 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/openrex.png>] <Figures/v4l2.png, id=542, 1006.76125pt x 748.7975pt>
-=======
  [11 <./Figures/openrex.png>] <Figures/v4l2.png, id=468, 1006.76125pt x 748.797
 5pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/v4l2.png Graphic file (type png)
- <use Figures/v4l2.png>
+
+<use Figures/v4l2.png>
 Package pdftex.def Info: Figures/v4l2.png used on input line 416.
 (pdftex.def)             Requested size: 352.37172pt x 262.08305pt.
 LaTeX Font Info:    Try loading font information for T1+zi4 on input line 442.
- (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
 Package csquotes Info: Input encoding change on input line 442.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 
 LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 (Font)              using `T1/zi4/m/n' instead on input line 445.
 
-[12 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/v4l2.png>]
+[12 <./Figures/v4l2.png>]
 Overfull \hbox (17.57852pt too wide) in paragraph at lines 470--472
-[]\T1/ppl/m/n/10.95 Cette struc-ture per-met de gé-rer le mul-ti-plexage au-dio et vi-déo de sous-périphériques
+[]\T1/ppl/m/n/10.95 Cette struc-ture per-met de gé-rer le mul-ti-plexage au-dio
+ et vi-déo de sous-périphériques
  []
 
 Package csquotes Info: Input encoding change on input line 475.
@@ -2480,44 +2694,49 @@ Package csquotes Info: Input encoding change on input line 475.
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 500.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 509.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [13]
 Package csquotes Info: Input encoding change on input line 526.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 538.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 544.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 551.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 559.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 565.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-<<<<<<< HEAD
-) [14] <Figures/gstreamer.png, id=638, 963.6pt x 542.025pt>
-=======
 ) [14]
 <Figures/gstreamer.png, id=563, 963.6pt x 542.025pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/gstreamer.png Graphic file (type png)
- <use Figures/gstreamer.png>
+
+<use Figures/gstreamer.png>
 Package pdftex.def Info: Figures/gstreamer.png used on input line 593.
 (pdftex.def)             Requested size: 337.26506pt x 80.16684pt.
 Missing character: There is no c in font nullfont!
@@ -2553,10 +2772,11 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
- [15 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/gstreamer.png>]) [16]
+ [15 <./Figures/gstreamer.png>]) [16]
 \openout2 = `Chapters/Chapter3.aux'.
 
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter3.tex
+
+(./Chapters/Chapter3.tex
 Chapitre 3.
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -2591,13 +2811,10 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<<<<<<< HEAD
-<Figures/architecture.png, id=650, 778.91pt x 713.66624pt>
-=======
 <Figures/architecture.png, id=576, 778.91pt x 713.66624pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/architecture.png Graphic file (type png)
- <use Figures/architecture.png>
+
+<use Figures/architecture.png>
 Package pdftex.def Info: Figures/architecture.png used on input line 40.
 (pdftex.def)             Requested size: 241.45961pt x 221.23424pt.
 
@@ -2606,14 +2823,16 @@ Package pdftex.def Info: Figures/architecture.png used on input line 40.
 
 
 
- </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/architecture.png>]
+ <./Figures/architecture.png>]
 Overfull \hbox (3.0818pt too wide) in paragraph at lines 55--58
-[]\T1/ppl/m/n/10.95 Le se-cond dé-pôt fsl-community-bsp-data créera notre fi-chier ^^Pbblayers.conf^^Q avec
+[]\T1/ppl/m/n/10.95 Le se-cond dé-pôt fsl-community-bsp-data créera notre fi-ch
+ier ^^Pbblayers.conf^^Q avec
  []
 
 
 Overfull \hbox (35.36682pt too wide) in paragraph at lines 55--58
-\T1/ppl/m/n/10.95 toutes les mé-ta-don-nées né-ces-saires à la com-pi-la-tion ainsi que le fi-chier ^^Psetup-environment^^Q
+\T1/ppl/m/n/10.95 toutes les mé-ta-don-nées né-ces-saires à la com-pi-la-tion a
+insi que le fi-chier ^^Psetup-environment^^Q
  []
 
 Package csquotes Info: Input encoding change on input line 69.
@@ -2621,15 +2840,18 @@ Package csquotes Info: Input encoding change on input line 69.
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 77.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 86.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Overfull \hbox (15.92526pt too wide) in paragraph at lines 92--94
-[]\T1/ppl/m/n/10.95 Ce dé-pôt re-co-piera au-to-ma-ti-que-ment notre fi-chier ^^Pbblayers.conf^^Q puis-qu'il contient
+[]\T1/ppl/m/n/10.95 Ce dé-pôt re-co-piera au-to-ma-ti-que-ment notre fi-chier ^
+^Pbblayers.conf^^Q puis-qu'il contient
  []
 
 Package csquotes Info: Input encoding change on input line 95.
@@ -2637,7 +2859,8 @@ Package csquotes Info: Input encoding change on input line 95.
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [18]
 Package csquotes Info: Input encoding change on input line 115.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Missing character: There is no c in font nullfont!
@@ -2651,40 +2874,37 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<<<<<<< HEAD
- [19] <Figures/recette.png, id=702, 1583.9175pt x 1606.0pt>
-=======
  [19]
 <Figures/recette.png, id=627, 1583.9175pt x 1606.0pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/recette.png Graphic file (type png)
- <use Figures/recette.png>
+
+<use Figures/recette.png>
 Package pdftex.def Info: Figures/recette.png used on input line 161.
 (pdftex.def)             Requested size: 158.40103pt x 160.6094pt.
 Package csquotes Info: Input encoding change on input line 186.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-) [20 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/recette.png>]
+) [20 <./Figures/recette.png>]
 Package csquotes Info: Input encoding change on input line 199.
  (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 232.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-<<<<<<< HEAD
-) <Figures/menuconfig.png, id=716, 724.7075pt x 408.52625pt>
-=======
 )
 <Figures/menuconfig.png, id=641, 724.7075pt x 408.52625pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/menuconfig.png Graphic file (type png)
- <use Figures/menuconfig.png>
+
+<use Figures/menuconfig.png>
 Package pdftex.def Info: Figures/menuconfig.png used on input line 246.
 (pdftex.def)             Requested size: 289.87787pt x 163.4076pt.
 
 Overfull \hbox (91.41249pt too wide) in paragraph at lines 251--258
-\T1/ppl/m/n/10.95 nel. Le ré-sul-tat du me-nu-con-fig est un fi-chier texte .config ($BUILDDIR/tmp/work/imx6_openrexbasic-
+\T1/ppl/m/n/10.95 nel. Le ré-sul-tat du me-nu-con-fig est un fi-chier texte .co
+nfig ($BUILDDIR/tmp/work/imx6_openrexbasic-
  []
 
 Package csquotes Info: Input encoding change on input line 259.
@@ -2692,18 +2912,16 @@ Package csquotes Info: Input encoding change on input line 259.
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [21]
 Package csquotes Info: Input encoding change on input line 287.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-) [22 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/menuconfig.png>]
+) [22 <./Figures/menuconfig.png>]
 Overfull \hbox (0.48819pt too wide) in paragraph at lines 317--320
-[]\T1/ppl/m/n/10.95 Dans un pre-mier temps, n'étant pas ha-bi-tués à ma-ni-pu-ler des dri-vers, nous avons
+[]\T1/ppl/m/n/10.95 Dans un pre-mier temps, n'étant pas ha-bi-tués à ma-ni-pu-l
+er des dri-vers, nous avons
  []
 
-<<<<<<< HEAD
-<Figures/patchs.png, id=753, 1110.1475pt x 586.19pt>
-=======
 <Figures/patchs.png, id=679, 1110.1475pt x 586.19pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/patchs.png Graphic file (type png)
  <use Figures/patchs.png>
 Package pdftex.def Info: Figures/patchs.png used on input line 323.
@@ -2719,14 +2937,16 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
- [23 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/patchs.png>]
+
+[23 <./Figures/patchs.png>]
 Underfull \hbox (badness 2478) in paragraph at lines 352--366
 \T1/ppl/m/n/10.95 imx6rex.com IMX6S_DIR=$BUILDDIR/tmp/work/imx6s_openrex- 
  []
 
 
 Underfull \hbox (badness 2150) in paragraph at lines 352--366
-\T1/ppl/m/n/10.95 poky-linux-gnueabi #libs li-nux/*.h DIRLINUX=$IMX6S_DIR/linux- 
+\T1/ppl/m/n/10.95 poky-linux-gnueabi #libs li-nux/*.h DIRLINUX=$IMX6S_DIR/linux
+- 
  []
 
 
@@ -2747,6 +2967,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 352--366
 
 Underfull \hbox (badness 2653) in paragraph at lines 352--366
 \T1/ppl/m/n/10.95 /ar-ch/arm/in-clu-de/ DIRASM2=$IMX6S_DIR/linux-openrex/3.14- 
+
  []
 
 Missing character: There is no c in font nullfont!
@@ -2760,16 +2981,13 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<<<<<<< HEAD
-<Figures/outtree.png, id=761, 925.4575pt x 380.42125pt>
-=======
 <Figures/outtree.png, id=687, 925.4575pt x 380.42125pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/outtree.png Graphic file (type png)
- <use Figures/outtree.png>
+
+<use Figures/outtree.png>
 Package pdftex.def Info: Figures/outtree.png used on input line 387.
 (pdftex.def)             Requested size: 323.91498pt x 133.14941pt.
- [24] [25 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/outtree.png>]
+ [24] [25 <./Figures/outtree.png>]
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -2782,15 +3000,18 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Package csquotes Info: Input encoding change on input line 456.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 468.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 485.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 LaTeX Font Info:    Font shape `T1/zi4/bx/n' in size <10> not available
@@ -2808,11 +3029,13 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [26]
 Package csquotes Info: Input encoding change on input line 500.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Package csquotes Info: Input encoding change on input line 511.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Missing character: There is no c in font nullfont!
@@ -2828,7 +3051,8 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [27]
 Overfull \hbox (6.16814pt too wide) in paragraph at lines 562--567
-\T1/ppl/m/n/10.95 Pi à un com-po-sant pi-lote vi-déo imx219. Ces deux fi-chiers Li-nux V4L2 Dri-ver (imx219.c
+\T1/ppl/m/n/10.95 Pi à un com-po-sant pi-lote vi-déo imx219. Ces deux fi-chiers
+ Li-nux V4L2 Dri-ver (imx219.c
  []
 
 Missing character: There is no c in font nullfont!
@@ -2859,34 +3083,35 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [28]
 Package csquotes Info: Input encoding change on input line 657.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [29]
 Package csquotes Info: Input encoding change on input line 678.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Overfull \hbox (3.2508pt too wide) in paragraph at lines 713--721
-[]\T1/ppl/m/n/10.95 Au dé-mar-rage du dri-ver, la pre-mière fonc-tion exé-cu-tée est imx219_probe. Comme
+[]\T1/ppl/m/n/10.95 Au dé-mar-rage du dri-ver, la pre-mière fonc-tion exé-cu-té
+e est imx219_probe. Comme
  []
 
-<<<<<<< HEAD
-[30] <Figures/trame.png, id=876, 1116.17pt x 85.31876pt>
-=======
 [30] <Figures/trame.png, id=802, 1116.17pt x 85.31876pt>
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 File: Figures/trame.png Graphic file (type png)
- <use Figures/trame.png>
+
+<use Figures/trame.png>
 Package pdftex.def Info: Figures/trame.png used on input line 736.
 (pdftex.def)             Requested size: 390.66536pt x 29.862pt.
-) [31 </home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Figures/trame.png>]
+) [31 <./Figures/trame.png>]
 \openout2 = `Chapters/Chapter4.aux'.
 
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter4.tex
+ (./Chapters/Chapter4.tex
 Chapitre 4.
 
 Overfull \hbox (4.61508pt too wide) in paragraph at lines 44--48
-[]\T1/ppl/m/n/10.95 Techniquement nous avons ac-quis un ba-gage de connais-sances concer-nant l'usage
+[]\T1/ppl/m/n/10.95 Techniquement nous avons ac-quis un ba-gage de connais-sanc
+es concer-nant l'usage
  []
 
 1: section
@@ -2895,354 +3120,18 @@ Overfull \hbox (4.61508pt too wide) in paragraph at lines 44--48
 
 
 ]) [33]
-<<<<<<< HEAD
-\openout2 = `Appendices/AppendixA.aux'.
-
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Appendices/AppendixA.tex
-1: section
-File: Figures/Logo_Ynov.png Graphic file (type png)
-<use Figures/Logo_Ynov.png>
-Package pdftex.def Info: Figures/Logo_Ynov.png used on input line 49.
-(pdftex.def)             Requested size: 168.62883pt x 59.02008pt.
- [1
-=======
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 438.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 438.
- (./main.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
-(./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 438.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 438.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3D1B9248FD677461857DC7194245201B;12693.
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
-
-
-
-<<<<<<< HEAD
-
-] (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.toc)
-\tf@toc=\write12
-\openout12 = `main.toc'.
-
-
-1: section
-[2]
-Package csquotes Info: Input encoding change on input line 77.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-
-Underfull \hbox (badness 1472) in paragraph at lines 113--117
-[]\T1/ppl/m/n/10.95 mkdir bin curl http ://commondatastorage.googleapis.com/git-repo- 
- []
-
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-[1
-
-
-]
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-
-Overfull \hbox (5.06757pt too wide) in paragraph at lines 175--176
-[]\T1/ppl/m/n/10.95 Préparer l'en-vi-ron-ne-ment et construire l'image. Toutes Les com-mandes ci-dessous
- []
-
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-
-Underfull \hbox (badness 1147) in paragraph at lines 196--199
-\T1/ppl/m/n/10.95 openrex.sdcard.gz > tmp/deploy/images/imx6s-openrex/core-image- 
- []
-
-
-Underfull \hbox (badness 2221) in paragraph at lines 196--199
-\T1/ppl/m/n/10.95 base-imx6s-openrex.sdcard sudo dd if=tmp/deploy/images/imx6s- 
- []
-
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-[2]
-Underfull \hbox (badness 3354) in paragraph at lines 206--210
-[]\T1/ppl/m/n/10.95 umount /dev/YourSD-Card gun-zip -c tmp/deploy/images/imx6- 
- []
-
-
-Underfull \hbox (badness 1953) in paragraph at lines 206--210
-\T1/ppl/m/n/10.95 openrexbasic/core-image-base-imx6-openrexbasic.sdcard.gz > build- 
- []
-
-
-Underfull \hbox (badness 1609) in paragraph at lines 206--210
-\T1/ppl/m/n/10.95 image-base-imx6-openrexbasic.sdcard of=/dev/YourSDCard umount 
- []
-
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-
-Overfull \hbox (27.37506pt too wide) in paragraph at lines 237--237
-[][] 
- []
-
-
-Overfull \hbox (3.18974pt too wide) in paragraph at lines 240--241
-[]\T1/ppl/m/n/10.95 contient l'en-semble des mé-tas né-ces-saires à la créa-tion de l'image. On y trouve :] 
- []
-
-[3]
-Overfull \hbox (6.05792pt too wide) in paragraph at lines 254--256
-[]\T1/ppl/m/n/10.95 la méta qui va dé-fi-nir notre dis-tri-bu-tion. (https ://github.com/Alanaitali/meta-
- []
-
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-[4]
-Package csquotes Info: Input encoding change on input line 288.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-Package csquotes Info: Input encoding change on input line 313.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-) [5]
-Package csquotes Info: Input encoding change on input line 339.
- (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
-) [6]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 418.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 418.
- (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.aux (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter1.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter2.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter3.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Chapters/Chapter4.aux) (/home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/Appendices/AppendixA.aux))
+ (./main.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
+(./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 418.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 418.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 91BFE55B34B45CD1357FF26595A96EE3;13814.
+(rerunfilecheck)             Checksum: 3D1B9248FD677461857DC7194245201B;12693.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-=======
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
@@ -3253,22 +3142,6 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 ### bottom level
 (\end occurred when \iftrue on line 184 was incomplete) 
 Here is how much of TeX's memory you used:
-<<<<<<< HEAD
- 49475 strings out of 493029
- 1018061 string characters out of 6136234
- 1158049 words of memory out of 5000000
- 51842 multiletter control sequences out of 15000+600000
- 48915 words of font info for 82 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 65i,20n,105p,10377b,3817s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /home/diag/workspaceThales/YOCTO/meta-openrexpicam/presentation_final/main.pdf (48 pages, 3367309 bytes).
-PDF statistics:
- 1090 PDF objects out of 1200 (max. 8388607)
- 982 compressed objects within 10 object streams
- 408 named destinations out of 1000 (max. 500000)
- 798 words of extra memory for PDF output out of 10000 (max. 10000000)
-=======
  49295 strings out of 493029
  1011363 string characters out of 6136234
  1149045 words of memory out of 5000000
@@ -3285,11 +3158,10 @@ ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
 atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (40 pages, 3362118 bytes).
+Output written on main.pdf (40 pages, 3361167 bytes).
 PDF statistics:
  919 PDF objects out of 1000 (max. 8388607)
  819 compressed objects within 9 object streams
  333 named destinations out of 1000 (max. 500000)
  678 words of extra memory for PDF output out of 10000 (max. 10000000)
->>>>>>> ac9e2e599cfcfad4f2c1cd7c75c2bb646552f35b
 
