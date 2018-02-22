@@ -41,8 +41,8 @@
 \contentsline {subsection}{\numberline {3.3.1}Extrait de linux-voipac-4.1.bb}{20}{subsection.155}
 \contentsline {subsection}{\numberline {3.3.2}Extrait de linux-voipac\_ \%.bbappend}{21}{subsection.162}
 \contentsline {section}{\numberline {3.4}Impl\IeC {\'e}mentation des supports de compilation}{21}{section.169}
-\contentsline {section}{\numberline {3.5}Utilsation de drivers existants}{22}{section.190}
-\contentsline {subsection}{\numberline {3.5.1}Pr\IeC {\'e}sentation d'un driver}{22}{subsection.191}
+\contentsline {section}{\numberline {3.5}Utilsation de drivers existants}{23}{section.190}
+\contentsline {subsection}{\numberline {3.5.1}Pr\IeC {\'e}sentation d'un driver}{23}{subsection.191}
 \contentsline {subsection}{\numberline {3.5.2}Utilisation de l'existant}{23}{subsection.192}
 \contentsline {subsubsection}{Compilation par SDK}{23}{section*.194}
 \contentsline {subsubsection}{Compatilation out-of-tree}{24}{section*.195}
@@ -51,16 +51,16 @@
 \contentsline {subsubsection}{Origine des sources}{25}{section*.199}
 \contentsline {subsubsection}{Compilation in-tree}{25}{section*.200}
 \contentsline {subsection}{\numberline {3.5.4}imx219 - Nvidia-Tegra Chromium-Os}{25}{subsection.201}
-\contentsline {subsubsection}{Origine des sources}{25}{section*.202}
-\contentsline {subsubsection}{Compatibilit\IeC {\'e} avec le device tree}{25}{section*.203}
-\contentsline {subsection}{\numberline {3.5.5}imx219 - Raspberry Pi v2}{27}{subsection.242}
-\contentsline {subsubsection}{Origine des sources}{27}{section*.243}
+\contentsline {subsubsection}{Origine des sources}{26}{section*.202}
+\contentsline {subsubsection}{Compatibilit\IeC {\'e} avec le device tree}{26}{section*.203}
+\contentsline {subsection}{\numberline {3.5.5}imx219 - Raspberry Pi v2}{28}{subsection.242}
+\contentsline {subsubsection}{Origine des sources}{28}{section*.243}
 \contentsline {subsubsection}{Portage du BSP Voipac sur un kernel 4.14}{28}{section*.244}
-\contentsline {section}{\numberline {3.6}D\IeC {\'e}veloppement d'un driver}{28}{section.250}
+\contentsline {section}{\numberline {3.6}D\IeC {\'e}veloppement d'un driver}{29}{section.250}
 \contentsline {subsection}{\numberline {3.6.1}Organisation d'un driver MIPI/CSI}{29}{subsection.251}
 \contentsline {subsubsection}{Int\IeC {\'e}gration au device tree}{29}{section*.252}
 \contentsline {subsection}{\numberline {3.6.2}Validation du driver}{30}{subsection.285}
-\contentsline {subsubsection}{Lecture du bus I2C}{30}{section*.286}
+\contentsline {subsubsection}{Lecture du bus I2C}{31}{section*.286}
 \contentsline {chapter}{\numberline {4}Conclusion}{32}{chapter.288}
 \contentsline {section}{\numberline {4.1}Bilan technique}{32}{section.289}
 \contentsline {section}{\numberline {4.2}Bilan de suivi de projet}{32}{section.291}

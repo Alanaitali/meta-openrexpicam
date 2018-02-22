@@ -52,8 +52,8 @@ Le dépôt fsl-community-bsp-platform contient un fichier “default.xml” que 
 fichier manifest, celui-ci permet de définir tous les dépôts contenant les fichiers et dossiers
 nécessaires à la création de notre image Yocto. \medskip 
 
-Le second dépôt fsl-community-bsp-data créera notre fichier “bblayers.conf” \\
-avec toutes les métadonnées nécessaires à la compilation ainsi que le fichier \\
+Le second dépôt fsl-community-bsp-data créera notre fichier “bblayers.conf”
+avec toutes les métadonnées nécessaires à la compilation ainsi que le fichier
 “setup-environment” qui concevra notre fichier local.conf.
 
 \subsection{fsl-community-bsp-platform}
@@ -89,7 +89,7 @@ emplacement dans notre dossier de travail (sources/meta-openrexpicam) :
 
 \subsection{fsl-community-bsp-data}
 
-Ce dépôt recopiera automatiquement notre fichier “bblayers.conf” puisqu’il \\ 
+Ce dépôt recopiera automatiquement notre fichier “bblayers.conf” puisqu’il
 contient le contenu du fichier : 
 
 \begin{lstlisting}
@@ -243,7 +243,7 @@ L’ajout de notre caméra dans menuconfig se fait par le code suivant :
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,scale=0.1]{Figures/menuconfig.png}
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,scale=0.4]{Figures/menuconfig.png}
     \decoRule
     \caption{Driver dans le menuconfig} \label{fig:menucfg}
 \end{figure}
@@ -271,8 +271,8 @@ observer que l’ajout et le chargement en module du pilote a été pris en comp
 \end{lstlisting}
 
 \begin{itemize}
-    \item[CONFIG\_MXC\_CAMERA\_IMX219\_MIPI : ] Objet du kernel
-    \item[m] Ordre de compilation et d'installation en module
+    \item[-] CONFIG\_MXC\_CAMERA\_IMX219\_MIPI : Objet du kernel
+    \item[-] m : Ordre de compilation et d'installation en module
 \end{itemize}
 
 Le menuconfig permet de configurer la compilation, mais il n’est pas directement lié à
@@ -314,7 +314,7 @@ sont les fonctions insmod et rmmod qui appelleront les init et exit du fichier �
 
 \subsection{Utilisation de l'existant}
 
-Dans un premier temps, n’étant pas habitués à manipuler des drivers, nous \\ avons
+Dans un premier temps, n’étant pas habitués à manipuler des drivers, nous avons
 cherché à utiliser des sources en croisant les architectures requises. Pour agir dans notre meta,
 nous avons eu recours à une série de patchs comme montrés ci-dessous.
 
@@ -559,7 +559,7 @@ pertinente.
 \subsection{imx219 - Raspberry Pi v2}
 
 \subsubsection{Origine des sources}
-En premier lieu nous sommes partis des sources reçues dans les premiers \\
+En premier lieu nous sommes partis des sources reçues dans les premiers
 mails. Ce driver lie le processeur Allwinner A80 (ARM Cortex-A15/A7) du sbc Raspberry Pi à un
 composant pilote vidéo imx219. Ces deux fichiers Linux V4L2 Driver (imx219.c et
 camera.h) onts été rédigés par “Chomoly“ et sont téléchargeables à cette 
@@ -692,7 +692,7 @@ pinctrl-0 = <&pinctrl_imx219>;
     };
 \end{lstlisting}
 
-l’extrait ci-dessus représente la déclaration du driver imx219 dans le \\
+l’extrait ci-dessus représente la déclaration du driver imx219 dans le
 device tree.
 
 \begin{itemize}
@@ -710,7 +710,7 @@ device tree.
 
 \subsection{Validation du driver}
 
-Au démarrage du driver, la première fonction exécutée est imx219\_probe. \\
+Au démarrage du driver, la première fonction exécutée est imx219\_probe. 
 Comme son nom l’indique, elle a pour rôle de sonder certaines parties du composant comme la broche
 de démarrage (pwn-gpio) , l’horloge (mclk), le csi\_id etc... En d’autres termes, elle vérifie
 si les paramètres donnés par le device tree sont cohérents. Pour s’assurer de la bonne

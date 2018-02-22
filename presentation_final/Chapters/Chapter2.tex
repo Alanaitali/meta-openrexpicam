@@ -355,7 +355,7 @@ port CSI-2.
 L’Openrex est une carte de développement conçue par Fedevel et produite par Voipac.
 Elle intègre un « système on chip » IMX6 disposant de un ou quatre coeurs suivant les
 versions. La schématique ainsi que le routage de ces deux cartes sont opensources et
-disponible sur le site de \href{http://www.imx6rex.com/open-rex/} {http://www.imx6rex.com/open-rex/}.
+disponible sur le site de \href{http://www.imx6rex.com/open-rex/}{http://www.imx6rex.com/open-rex/}.
 
 
 Notre objectif est de porter le driver imx219 de la Raspberry sur l’IMX6S Openrex. Cette
@@ -421,7 +421,7 @@ Aujourd'hui le package v4l-utils implémente V4L2 dans une distribution , V4L de
 L’API V4L2 met à disposition le package “v4l-utils”. Ce package fournit une interface
 graphique et des commandes de contrôle permettant la configuration d’un périphérique. \medskip
 
-Comme il est illustré sur la figure \ref{fig:v4l2}, cette interface permet la configuration \\
+Comme il est illustré sur la figure \ref{fig:v4l2}, cette interface permet la configuration
 de  plusieurs paramètres disponibles sur une majorité des périphériques vidéo. \medskip
 
 Paramètres généraux : sélection du périphérique d'entrée, configuration du format des données et
@@ -467,7 +467,7 @@ Pour manipuler l'ensemble de ces paramètres, les différentes structures de v4l
     };
 \end{lstlisting}
 
-Cette structure permet de gérer le multiplexage audio et vidéo de \\
+Cette structure permet de gérer le multiplexage audio et vidéo de
 sous-périphériques (capteurs et contrôleurs de caméra).
 
 \textbf{i2c\_client}
@@ -602,7 +602,7 @@ Nous nous intéresserons plus sur la partie vidéo qu’audio puisque l’object
 capture du flux vidéo, pour cela nous allons expliquer les commandes que nous utilisions :
 
 \begin{tcolorbox}
-    user@poky:~\$ gst-launch-1.0 v4l2src ! 'image/jpeg,width=1280,height=720, \\ 
+    user@poky:~\$ gst-launch-1.0 v4l2src ! 'image/jpeg,width=1280,height=720,
     framerate=30/1' ! imxvpudec ! imxipuvideotransform ! imxeglvivsink sync=false
 \end{tcolorbox}
 
@@ -612,7 +612,7 @@ JPEG, cette commande est adaptée. De plus celle-ci utilise une synchronisation 
 qu’un décodage V4L2.
 
 \begin{tcolorbox}
-user@poky:~\$ gst-launch-1.0 v4l2src ! 'image/jpeg,width=1280,height=720, \\ 
+user@poky:~\$ gst-launch-1.0 v4l2src ! 'image/jpeg,width=1280,height=720,
 framerate=30/1' ! v4l2sink sync=false
 \end{tcolorbox}
 
@@ -622,7 +622,7 @@ JPEG. V4L2sink est utilisé pour afficher le flux vidéo de l’appareil V4L2 en
 synchronisation.
 
 \begin{tcolorbox}
-user@poky:~\$ gst-launch-1.0 v4l2src device=/dev/video0 ! 'image/jpeg, \\
+user@poky:~\$ gst-launch-1.0 v4l2src device=/dev/video0 ! 'image/jpeg,
 width=1280,height=720, framerate=30/1' ! v4l2sink sync=false
 \end{tcolorbox}
 
