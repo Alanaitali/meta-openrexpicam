@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Masters/Doctoral Thesis 
+% Masters/Doctoral Thesis
 % LaTeX Template
 % Version 2.5 (27/8/17)
 %
@@ -201,7 +201,7 @@ Clément \textsc{Ailloud} \& Romain \textsc{Petit} \\ } % Your name, this is us
 \HRule \\[0.4cm] % Horizontal line
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
 \HRule \\[1.5cm] % Horizontal line
- 
+
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushleft} \large
 \emph{Auteur :}\\
@@ -215,7 +215,7 @@ Romain \textsc{Petit}
 \begin{minipage}[t]{0.4\textwidth}
 \begin{flushright} \large
 \emph{Superviseurs :} \\
-\supname % Supervisor name - remove the \href bracket to remove the link  
+\supname % Supervisor name - remove the \href bracket to remove the link
 \end{flushright}
 \end{minipage}\\[3cm]
 
@@ -228,7 +228,7 @@ Romain \textsc{Petit}
 
 {\large \today}\\[4cm] % Date
 
- 
+
 \vfill
 \end{center}
 \end{titlepage}
@@ -241,7 +241,7 @@ Romain \textsc{Petit}
 %\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
 %\noindent Je, \authorname, declare que ce mémoire intitulé, \enquote{\ttitle} et le travail qui y est présenté, est le mien. Je confirme que :
 
-%\begin{itemize}[label=$\bullet$] 
+%\begin{itemize}[label=$\bullet$]
 %\item Ce travail a été réalisé entièrement ou principalement pour l'obtention de mon diplôme au sein de l'école E.S.T.E.I.
 %\item Si une partie quelconque de cette thèse a déjà été soumise pour obtenir un diplôme ou toute autre qualification dans cette école ou dans une autre institution, cela est clairement indiqué.
 %\item Lorsque je consulte le travail publié d'autrui, cela est toujours clairement attribué.
@@ -249,10 +249,10 @@ Romain \textsc{Petit}
 %\item J'ai pris connaissances de toutes les principales sources d'aide.
 %\item Lorsque la thèse est basée sur le travail effectué par moi-même conjointement avec d'autres, j'ai précisé exactement ma contribution et ce qui a été fait par les autres.\\
 %\end{itemize}
- 
+
 %\noindent Signature:\\
 %\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
- 
+
 %\noindent Date:\\
 %\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
 %\end{declaration}
@@ -277,41 +277,41 @@ Romain \textsc{Petit}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 
 Actuellement, les casques de réalité augmentée pour pilote migrent vers le domaine civil. Thales a
-réalisé un prototype fonctionnant avec une Raspberry Pi et la Raspberry Pi Camera pour 
-l’acquisition d’images ou de flux vidéo. Thales a fait appel aux étudiants du campus Ynov pour 
-participer à l’amélioration de ce prototype. 
+réalisé un prototype fonctionnant avec une Raspberry Pi et la Raspberry Pi Camera pour
+l’acquisition d’images ou de flux vidéo. Thales a fait appel aux étudiants du campus Ynov pour
+participer à l’amélioration de ce prototype.
 
-L’objectif du projet est de réaliser le portage du driver de la caméra sur un autre système 
+L’objectif du projet est de réaliser le portage du driver de la caméra sur un autre système
 d’exploitation que Raspberry Pi. Ce système devra donc être capable faire des captures d’image et un
-flux vidéo de la caméra depuis une autre carte, l’Openrex-IMX6-Quad car pour des raisons internes à 
+flux vidéo de la caméra depuis une autre carte, l’Openrex-IMX6-Quad car pour des raisons internes à
 l’équipe de développement Thales-LUCY.
 
-Avec Yocto, nous avons généré dans un premier temps, un système d’exploitation fonctionnel sur la 
+Avec Yocto, nous avons généré dans un premier temps, un système d’exploitation fonctionnel sur la
 carte cible (kernel Linux 3.14 puis 4.1). Par la suite, nous avons essayé de faire fonctionner des
 codes existants en les adaptant à la carte Openrex. N’y arrivant pas, nous avons alors entrepris la
 rédaction d’un driver de la caméra. Actuellement, nous avons réussi à établir une connexion I2C entre
 la caméra et l’IMX6 Openrex en utilisant le port CSI-2.
 
-Notre travail étant inachevé, ce rapport permet de partager nos connaissances acquises lors du 
-déroulement du projet. Il est nécessaire pour une bonne compréhension d’être introduit à l’usage de 
+Notre travail étant inachevé, ce rapport permet de partager nos connaissances acquises lors du
+déroulement du projet. Il est nécessaire pour une bonne compréhension d’être introduit à l’usage de
 Yocto. \bigskip
 
-Nowadays augmented reality pilot’s helmet move to the civil domain. At the moment Thales group 
+Nowadays augmented reality pilot’s helmet move to the civil domain. At the moment Thales group
 prototyped one working with a Raspberry Pi and it’s associated raspberry camera v2 for picture and
 video capture. Thales called ynov campus students for applications at being part of the prototype
-improvement. 
+improvement.
 
-Our aim is to build an Raspberry Pi camera, picture and video capture compatible, operating system 
-on l’Openrex-IMX6-Quad. Indeed for Thales-LUCY team internal reasons the initial Raspberry Pi board 
+Our aim is to build an Raspberry Pi camera, picture and video capture compatible, operating system
+on l’Openrex-IMX6-Quad. Indeed for Thales-LUCY team internal reasons the initial Raspberry Pi board
 won’t be used in the MVP project state.
 
-In a first hand we built a Yocto-project generated target board operating system (kernel Linux 3.14 
-then 4.1). In a second hand we tried to port existing source codes to the Openrex board. Unable to 
-succeed, we undertook the camera driver redaction from scratch. We already connected the camera 
-module with both CSI and I2C communication protocols as the mobile industry processor interface 
+In a first hand we built a Yocto-project generated target board operating system (kernel Linux 3.14
+then 4.1). In a second hand we tried to port existing source codes to the Openrex board. Unable to
+succeed, we undertook the camera driver redaction from scratch. We already connected the camera
+module with both CSI and I2C communication protocols as the mobile industry processor interface
 (MIPI) standard describes.
 
-As our work in unfinished, the present report hand our state of knowledge and achievement over. 
+As our work in unfinished, the present report hand our state of knowledge and achievement over.
 Linux operating system Yocto generation usage knowledge is needed for it’s good understanding.
 
 %\ldots
@@ -395,7 +395,7 @@ de participer au projet au sein du groupe Ynov, ainsi que de leurs appuis en ter
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-%\dedicatory{For/Dedicated to/To my\ldots} 
+%\dedicatory{For/Dedicated to/To my\ldots}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -409,30 +409,10 @@ de participer au projet au sein du groupe Ynov, ainsi que de leurs appuis en ter
 % Uncomment the lines as you write the chapters
 
 \include{Chapters/Chapter1}
-\include{Chapters/Chapter2} 
+\include{Chapters/Chapter2}
 \include{Chapters/Chapter3}
-\include{Chapters/Chapter4} 
-%\include{Chapters/Chapter5} 
+\include{Chapters/Chapter4}
 
-%----------------------------------------------------------------------------------------
-%	THESIS CONTENT - APPENDICES
-%----------------------------------------------------------------------------------------
+\include{Appendices/AppendixA}
 
-%\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
-
-% Include the appendices of the thesis as separate files from the Appendices folder
-% Uncomment the lines as you write the Appendices
-
-%\include{Appendices/AppendixA}
-%\include{Appendices/AppendixB}
-%\include{Appendices/AppendixC}
-
-%----------------------------------------------------------------------------------------
-%	BIBLIOGRAPHY
-%----------------------------------------------------------------------------------------
-
-%\printbibliography[heading=bibintoc]
-
-%----------------------------------------------------------------------------------------
-
-\end{document}  
+\end{document}
