@@ -65,5 +65,3 @@
 \contentsline {section}{\numberline {4.1}Bilan technique}{32}{section.289}
 \contentsline {section}{\numberline {4.2}Bilan de suivi de projet}{32}{section.291}
 \contentsline {section}{\numberline {4.3}Conclusion}{33}{section.292}
-\contentsline {chapter}{\numberline {A}Frequently Asked Questions}{34}{appendix.293}
-\contentsline {section}{\numberline {A.1}How do I change the colors of links?}{34}{section.294}

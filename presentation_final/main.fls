@@ -347,8 +347,6 @@ INPUT Chapters/Chapter3.aux
 INPUT Chapters/Chapter3.aux
 INPUT Chapters/Chapter4.aux
 INPUT Chapters/Chapter4.aux
-INPUT Appendices/AppendixA.aux
-INPUT Appendices/AppendixA.aux
 OUTPUT main.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
@@ -606,9 +604,6 @@ INPUT ./Figures/trame.png
 OUTPUT Chapters/Chapter4.aux
 INPUT Chapters/Chapter4.tex
 INPUT Chapters/Chapter4.tex
-OUTPUT Appendices/AppendixA.aux
-INPUT Appendices/AppendixA.tex
-INPUT Appendices/AppendixA.tex
 INPUT main.aux
 INPUT Chapters/Chapter1.aux
 INPUT Chapters/Chapter1.aux
@@ -618,8 +613,6 @@ INPUT Chapters/Chapter3.aux
 INPUT Chapters/Chapter3.aux
 INPUT Chapters/Chapter4.aux
 INPUT Chapters/Chapter4.aux
-INPUT Appendices/AppendixA.aux
-INPUT Appendices/AppendixA.aux
 INPUT ./main.out
 INPUT ./main.out
 INPUT main.run.xml

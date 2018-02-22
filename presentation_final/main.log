@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 11:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.14)  22 FEB 2018 11:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2303,7 +2303,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
  (./main.aux
 (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux) (./Chapters/Chapter3.aux)
-(./Chapters/Chapter4.aux) (./Appendices/AppendixA.aux))
+(./Chapters/Chapter4.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 184.
@@ -2511,7 +2511,7 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 1: section
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 202.
-</home/romain/Pictures/Logo_Ynov.png, id=272, 240.9pt x 84.315pt>
+</home/romain/Pictures/Logo_Ynov.png, id=264, 240.9pt x 84.315pt>
 File: /home/romain/Pictures/Logo_Ynov.png Graphic file (type png)
 
 <use /home/romain/Pictures/Logo_Ynov.png>
@@ -2597,14 +2597,14 @@ Chapitre 2.
 
 
 
-] <Figures/fleche.png, id=415, 1099.10625pt x 518.93875pt>
+] <Figures/fleche.png, id=405, 1099.10625pt x 518.93875pt>
 File: Figures/fleche.png Graphic file (type png)
 
 <use Figures/fleche.png>
 Package pdftex.def Info: Figures/fleche.png used on input line 58.
 (pdftex.def)             Requested size: 384.69295pt x 181.63129pt.
  [3 <./Figures/fleche.png (PNG copy)>] [4]
-<Figures/gantt.png, id=425, 1606.0pt x 903.375pt>
+<Figures/gantt.png, id=415, 1606.0pt x 903.375pt>
 File: Figures/gantt.png Graphic file (type png)
  <use Figures/gantt.png>
 Package pdftex.def Info: Figures/gantt.png used on input line 103.
@@ -2612,7 +2612,7 @@ Package pdftex.def Info: Figures/gantt.png used on input line 103.
 
 [5
 
- <./Figures/gantt.png>] <Figures/git.png, id=433, 231.86626pt x 218.8175pt>
+ <./Figures/gantt.png>] <Figures/git.png, id=423, 231.86626pt x 218.8175pt>
 File: Figures/git.png Graphic file (type png)
 
 <use Figures/git.png>
@@ -2635,21 +2635,21 @@ Missing character: There is no e in font nullfont!
  [8
 
 ]
-<Figures/camrpi.png, id=451, 270.00874pt x 187.70125pt>
+<Figures/camrpi.png, id=441, 270.00874pt x 187.70125pt>
 File: Figures/camrpi.png Graphic file (type png)
 
 <use Figures/camrpi.png>
 Package pdftex.def Info: Figures/camrpi.png used on input line 289.
 (pdftex.def)             Requested size: 108.00157pt x 75.07916pt.
  [9 <./Figures/camrpi.png>]
-<Figures/blockMIPI.png, id=459, 357.335pt x 221.82875pt>
+<Figures/blockMIPI.png, id=449, 357.335pt x 221.82875pt>
 File: Figures/blockMIPI.png Graphic file (type png)
 
 <use Figures/blockMIPI.png>
 Package pdftex.def Info: Figures/blockMIPI.png used on input line 337.
 (pdftex.def)             Requested size: 142.93146pt x 88.72992pt.
 
-<Figures/openrex.png, id=461, 259.97125pt x 194.7275pt>
+<Figures/openrex.png, id=451, 259.97125pt x 194.7275pt>
 File: Figures/openrex.png Graphic file (type png)
 
 <use Figures/openrex.png>
@@ -2667,7 +2667,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
- [11 <./Figures/openrex.png>] <Figures/v4l2.png, id=477, 1006.76125pt x 748.797
+ [11 <./Figures/openrex.png>] <Figures/v4l2.png, id=467, 1006.76125pt x 748.797
 5pt>
 File: Figures/v4l2.png Graphic file (type png)
 
@@ -2734,7 +2734,7 @@ Package csquotes Info: Input encoding change on input line 565.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [14]
-<Figures/gstreamer.png, id=573, 963.6pt x 542.025pt>
+<Figures/gstreamer.png, id=562, 963.6pt x 542.025pt>
 File: Figures/gstreamer.png Graphic file (type png)
 
 <use Figures/gstreamer.png>
@@ -2812,7 +2812,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-<Figures/architecture.png, id=585, 778.91pt x 713.66624pt>
+<Figures/architecture.png, id=575, 778.91pt x 713.66624pt>
 File: Figures/architecture.png Graphic file (type png)
 
 <use Figures/architecture.png>
@@ -2862,7 +2862,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
  [19]
-<Figures/recette.png, id=636, 1583.9175pt x 1606.0pt>
+<Figures/recette.png, id=626, 1583.9175pt x 1606.0pt>
 File: Figures/recette.png Graphic file (type png)
 
 <use Figures/recette.png>
@@ -2882,7 +2882,7 @@ Package csquotes Info: Input encoding change on input line 232.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-<Figures/menuconfig.png, id=650, 724.7075pt x 408.52625pt>
+<Figures/menuconfig.png, id=640, 724.7075pt x 408.52625pt>
 File: Figures/menuconfig.png Graphic file (type png)
 
 <use Figures/menuconfig.png>
@@ -2905,7 +2905,7 @@ Package csquotes Info: Input encoding change on input line 287.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [22]
-<Figures/patchs.png, id=688, 1110.1475pt x 586.19pt>
+<Figures/patchs.png, id=678, 1110.1475pt x 586.19pt>
 File: Figures/patchs.png Graphic file (type png)
  <use Figures/patchs.png>
 Package pdftex.def Info: Figures/patchs.png used on input line 323.
@@ -2965,7 +2965,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 [23 <./Figures/patchs.png>]
-<Figures/outtree.png, id=696, 925.4575pt x 380.42125pt>
+<Figures/outtree.png, id=686, 925.4575pt x 380.42125pt>
 File: Figures/outtree.png Graphic file (type png)
 
 <use Figures/outtree.png>
@@ -3072,7 +3072,7 @@ Package csquotes Info: Input encoding change on input line 678.
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 ) [29]
-<Figures/trame.png, id=800, 1116.17pt x 85.31876pt>
+<Figures/trame.png, id=790, 1116.17pt x 85.31876pt>
 File: Figures/trame.png Graphic file (type png)
  <use Figures/trame.png>
 Package pdftex.def Info: Figures/trame.png used on input line 736.
@@ -3095,26 +3095,14 @@ es concer-nant l'usage
 
 
 ]) [33]
-\openout2 = `Appendices/AppendixA.aux'.
-
- (./Appendices/AppendixA.tex
-Annexe A.
-)
-1: section
-[34
-
-
-
-]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 429.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 429.
  (./main.aux (./Chapters/Chapter1.aux) (./Chapters/Chapter2.aux)
-(./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux) (./Appendices/AppendixA.aux
-))
+(./Chapters/Chapter3.aux) (./Chapters/Chapter4.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 429.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 429.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 4F9B5099F67B9D6872F68F46BFBEE0B6;11341.
+(rerunfilecheck)             Checksum: 2AE1D969F4B30497F12D919F341203DC;10899.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -3129,10 +3117,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 ### bottom level
 (\end occurred when \iftrue on line 184 was incomplete) 
 Here is how much of TeX's memory you used:
- 49312 strings out of 493029
- 1011785 string characters out of 6136234
+ 49294 strings out of 493029
+ 1011430 string characters out of 6136234
  1153045 words of memory out of 5000000
- 51762 multiletter control sequences out of 15000+600000
+ 51755 multiletter control sequences out of 15000+600000
  48915 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,20n,105p,10433b,3815s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3144,10 +3132,10 @@ c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/
 uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (41 pages, 3356651 bytes).
+Output written on main.pdf (40 pages, 3354763 bytes).
 PDF statistics:
- 929 PDF objects out of 1000 (max. 8388607)
- 829 compressed objects within 9 object streams
- 336 named destinations out of 1000 (max. 500000)
- 694 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 915 PDF objects out of 1000 (max. 8388607)
+ 816 compressed objects within 9 object streams
+ 333 named destinations out of 1000 (max. 500000)
+ 678 words of extra memory for PDF output out of 10000 (max. 10000000)
 
