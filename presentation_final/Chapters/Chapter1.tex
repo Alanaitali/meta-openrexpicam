@@ -1,0 +1,46 @@
+% Chapter 1
+
+\chapter{Introduction} % Main chapter title
+
+\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+%----------------------------------------------------------------------------------------
+
+\section{Projet professionnel}
+
+Les technologies d’affichage à tête haute ou HUD (head up display) apparaissent de plus en plus dans le
+commerce grand public (voitures, lunettes, chirurgies…). Il y a quelques années Thales a développé un
+casque à visée tête haute pour les pilotes militaires. Ce système permet de projeter des informations
+sur la vitre du casque du pilote sans gêner la vue réelle en arrière-plan. Cela évite aux avions de 
+faire un premier passage pour repérer visuellement la cible avant de passer à l’action. À présent, la
+cible est balisée à vue dès l’arrivée de l’avion. Récemment Thales s’est lancé en interne à adapter 
+ce produit pour des applications civiles. \medskip
+
+Ce projet, appelé LUCY, a passé l’étape du proof of concept (POC). Aujourd’hui les ingénieurs
+travaillent sur son amélioration en minimum viable product (MVP) pour commencer à équiper le système
+de potentiels clients et à déterminer plus précisément les besoins de ceux-ci. 
+
+\section{Projet étudiant}
+
+Notre travail au sein du projet professionnel consiste à améliorer la méthode permettant de détecter et suivre
+d’orientatier la tête du pilote par rapport au cockpit. En particulier lors de la phase de
+calibration, où il faut ajuster la ligne d’horizon sur la visière du pilote. Pour assurer la
+compatibilité des drivers, la preuve de faisabilité (proof of concept POC) était initialement
+constituée d’une caméra Raspberry-Pi (v2) contrôlée par une carte Raspberry Pi. Au passage au MVP
+les responsables du projet ont pris la décision de changer de carte tout en gardant la caméra
+Raspberry Pi. Notre rôle dans le projet est de préparer la carte Openrex pour l’acquisition d’images
+et de flux vidéo en mettant en place un driver compatible. 
+
+\subsection{Cadre du projet étudiant}
+
+Le projet étudiant a pour but de permettre à la carte mère (single board computer, SBC) Openrex-basic
+avec microcontrôleur (system on chip, SOC) IMX6S, de contrôler le module (system on module, SOM)
+“Raspberry Pi Camera v2”, de la fondation Raspberry Pi, pour réaliser des captures d’image et de flux
+vidéo. \medskip
+
+Afin que le code applicatif existant sur la raspberry puisse être porté sur l’Openrex, on proposera
+donc un système d’exploitation (operating system, OS) avec la même version de kernel (4.1) que celle
+mise en place sur le POC.\medskip
+
+Pour écourter la normalisation du produit, le système ne devra en aucun cas être en interaction avec
+les équipements avioniques, déjà présents sur l’appareil.

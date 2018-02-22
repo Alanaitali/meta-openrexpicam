@@ -1,0 +1,429 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 2.5 (27/8/17)
+%
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Version 2.x major modifications by:
+% Vel (vel@latextemplates.com)
+%
+% This template is based on a template by:
+% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+french, % ngerman for German
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{xparse}
+\usepackage{mathpazo} % Use the Palatino font by default
+
+\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\addbibresource{example.bib} % The filename of the bibliography
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage{enumitem} % package for enumeration with bullet in french
+\usepackage{float} % package for the float objects
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{xparse}
+
+\usepackage[most]{tcolorbox}
+
+\tcbset
+{
+    frame code={}
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+	bottom=0pt,
+	colupper=white,
+    colback=black,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=0mm,
+    boxsep=3pt,
+	arc=0pt,outer arc=0pt,
+	halign=left,
+}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\tabhead}{ O{\bfseries} m }
+ {
+  \seq_set_split:Nnn \l_tmpa_seq { & } { #2 }
+  #1 \seq_use:Nn \l_tmpa_seq { & #1 } \\
+ }
+\ExplSyntaxOff
+
+\let\cleardoublepage\clearpage
+
+\usepackage{inconsolata}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{textcomp}
+
+%----------------------------------------------------------------------------------------
+%	FOR THE LIST OF EQUATIONS
+%----------------------------------------------------------------------------------------
+\usepackage{tocloft}
+\usepackage{xstring}
+%\makeatletter
+
+% we use this for our refernces as well
+%\AtBeginDocument{\renewcommand{\ref}[1]{\mbox{\autoref{#1}}}}
+
+% redefinition of \equation for convenience
+%\let\oldequation = \equation
+%\let\endoldequation = \endequation
+%\AtBeginDocument{\let\oldlabel = \label}% \AtBeginDocument because hyperref redefines \label
+%\newcommand{\mynewlabel}[1]{%
+%  \StrBehind{#1}{eq:}[\Str]% remove "eq:" from labels
+%  \myequations{\Str}\oldlabel{#1}}
+ % \renewenvironment{equation}{%
+ % \oldequation
+ % \let\label\mynewlabel
+%}{\endoldequation}
+
+%\newcommand{\listequationsname}{Liste des équations}
+%\newlistof{myequations}{equ}{\listequationsname}
+%\newcommand{\myequations}[1]{%
+%      \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}}
+%	  \setlength{\cftmyequationsindent}{1.5em}
+%	  \setlength{\cftmyequationsnumwidth}{2.3em}
+
+%\makeatother
+
+\lstset
+{
+   	language=bash, %% Troque para PHP, C, Java, etc... bash é o padrão
+   	basicstyle=\ttfamily\small,
+   	numberstyle=\footnotesize,
+   	numbers=left,
+   	backgroundcolor=\color{gray!10},
+   	frame=single,
+   	tabsize=2,
+   	rulecolor=\color{black!30},
+   	title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    %framextopmargin=0pt,
+    %framexbottommargin=0pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+}
+
+%----------------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%----------------------------------------------------------------------------------------
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	THESIS INFORMATION
+%----------------------------------------------------------------------------------------
+
+\thesistitle{Intégration du driver IMX219 sur une OpenRex Basic} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\supervisor{Patrick \textsc{Piquart} \\
+			David \textsc{Coué}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
+\degree{Master Systèmes Embarqués} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\author{Alan \textsc{Ait-Ali}, Martin \textsc{Laporte}, \\
+Clément \textsc{Ailloud} \& Romain \textsc{Petit} \\ } % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
+
+\subject{Biological Sciences} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{YNOV} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\department{Département Aéronautique \& Systèmes Embarqués} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\group{Département Aéronautique \& Systèmes Embarqués} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\faculty{YNOV} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}
+
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\vspace*{.06\textheight}
+{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
+\textsc{\Large Projet de Master en partenariat avec Thales}\\[0.5cm] % Thesis type
+
+\HRule \\[0.4cm] % Horizontal line
+{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
+\HRule \\[1.5cm] % Horizontal line
+ 
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Auteur :}\\
+Alan \textsc{Ait-Ali} \\
+Martin \textsc{Laporte} \\
+Clément \textsc{Ailloud} \\
+Romain \textsc{Petit}
+%\authorname % Author name - remove the \href bracket to remove the link
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright} \large
+\emph{Superviseurs :} \\
+\supname % Supervisor name - remove the \href bracket to remove the link  
+\end{flushright}
+\end{minipage}\\[3cm]
+
+\large \textit{Rapport final présentant le travail effectué sur \\
+				l'intégration du driver IMX219 sur une OpenRex Basic}\\[0.3cm] % University requirement text
+\textit{au sein du}\\[0.4cm]
+\deptname\\[2cm] % Research group name and department name
+
+\includegraphics[scale=0.7]{/home/romain/Pictures/Logo_Ynov.png}\\[1cm] % University/department logo - uncomment to place it
+
+{\large \today}\\[4cm] % Date
+
+ 
+\vfill
+\end{center}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%----------------------------------------------------------------------------------------
+
+%\begin{declaration}
+%\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+%\noindent Je, \authorname, declare que ce mémoire intitulé, \enquote{\ttitle} et le travail qui y est présenté, est le mien. Je confirme que :
+
+%\begin{itemize}[label=$\bullet$] 
+%\item Ce travail a été réalisé entièrement ou principalement pour l'obtention de mon diplôme au sein de l'école E.S.T.E.I.
+%\item Si une partie quelconque de cette thèse a déjà été soumise pour obtenir un diplôme ou toute autre qualification dans cette école ou dans une autre institution, cela est clairement indiqué.
+%\item Lorsque je consulte le travail publié d'autrui, cela est toujours clairement attribué.
+%\item Lorsque je cite le travail des autres, la source est toujours donnée. À l'exception de ces citations, cette thèse est entièrement mon propre travail.
+%\item J'ai pris connaissances de toutes les principales sources d'aide.
+%\item Lorsque la thèse est basée sur le travail effectué par moi-même conjointement avec d'autres, j'ai précisé exactement ma contribution et ce qui a été fait par les autres.\\
+%\end{itemize}
+ 
+%\noindent Signature:\\
+%\rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
+ 
+%\noindent Date:\\
+%\rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+%\end{declaration}
+
+%\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+
+%\vspace*{0.2\textheight}
+
+%\noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
+
+%\hfill Dave Barry
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+
+Actuellement, les casques de réalité augmentée pour pilote migrent vers le domaine civil. Thales a
+réalisé un prototype fonctionnant avec une Raspberry Pi et la Raspberry Pi Camera pour 
+l’acquisition d’images ou de flux vidéo. Thales a fait appel aux étudiants du campus Ynov pour 
+participer à l’amélioration de ce prototype. 
+
+L’objectif du projet est de réaliser le portage du driver de la caméra sur un autre système 
+d’exploitation que Raspberry Pi. Ce système devra donc être capable faire des captures d’image et un
+flux vidéo de la caméra depuis une autre carte, l’Openrex-IMX6-Quad car pour des raisons internes à 
+l’équipe de développement Thales-LUCY.
+
+Avec Yocto, nous avons généré dans un premier temps, un système d’exploitation fonctionnel sur la 
+carte cible (kernel Linux 3.14 puis 4.1). Par la suite, nous avons essayé de faire fonctionner des
+codes existants en les adaptant à la carte Openrex. N’y arrivant pas, nous avons alors entrepris la
+rédaction d’un driver de la caméra. Actuellement, nous avons réussi à établir une connexion I2C entre
+la caméra et l’IMX6 Openrex en utilisant le port CSI-2.
+
+Notre travail étant inachevé, ce rapport permet de partager nos connaissances acquises lors du 
+déroulement du projet. Il est nécessaire pour une bonne compréhension d’être introduit à l’usage de 
+Yocto. \bigskip
+
+Nowadays augmented reality pilot’s helmet move to the civil domain. At the moment Thales group 
+prototyped one working with a Raspberry Pi and it’s associated raspberry camera v2 for picture and
+video capture. Thales called ynov campus students for applications at being part of the prototype
+improvement. 
+
+Our aim is to build an Raspberry Pi camera, picture and video capture compatible, operating system 
+on l’Openrex-IMX6-Quad. Indeed for Thales-LUCY team internal reasons the initial Raspberry Pi board 
+won’t be used in the MVP project state.
+
+In a first hand we built a Yocto-project generated target board operating system (kernel Linux 3.14 
+then 4.1). In a second hand we tried to port existing source codes to the Openrex board. Unable to 
+succeed, we undertook the camera driver redaction from scratch. We already connected the camera 
+module with both CSI and I2C communication protocols as the mobile industry processor interface 
+(MIPI) standard describes.
+
+As our work in unfinished, the present report hand our state of knowledge and achievement over. 
+Linux operating system Yocto generation usage knowledge is needed for it’s good understanding.
+
+%\ldots
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+Les remerciements et les personnes à remercier vont ici, n'oubliez pas d'inclure vos conseillers de projets et superviseurs\ldots
+\end{acknowledgements}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+\clearpage
+
+\listoffigures % Prints the list of figures
+\clearpage
+
+\listoftables % Prints the list of tables
+\clearpage
+
+%\listofmyequations
+
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
+%\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+
+%\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
+%\textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
+
+%\end{abbreviations}
+
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%\begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
+
+% The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
+
+%Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+%Constant Name & $Symbol$ & $Constant Value$ with units\\
+
+%\end{constants}
+
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+%\begin{symbols}{lll} % Include a list of Symbols (a three column table)
+
+%$a$ & distance & \si{\meter} \\
+%$P$ & power & \si{\watt} (\si{\joule\per\second}) \\
+%Symbol & Name & Unit \\
+
+%\addlinespace % Gap to separate the Roman symbols from the Greek
+
+%$\omega$ & angular frequency & \si{\radian} \\
+
+%\end{symbols}
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+%\dedicatory{For/Dedicated to/To my\ldots} 
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+
+\include{Chapters/Chapter1}
+\include{Chapters/Chapter2} 
+\include{Chapters/Chapter3}
+\include{Chapters/Chapter4} 
+%\include{Chapters/Chapter5} 
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+\include{Appendices/AppendixA}
+%\include{Appendices/AppendixB}
+%\include{Appendices/AppendixC}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+%\printbibliography[heading=bibintoc]
+
+%----------------------------------------------------------------------------------------
+
+\end{document}  

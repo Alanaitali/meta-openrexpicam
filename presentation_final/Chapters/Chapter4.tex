@@ -1,0 +1,73 @@
+% Chapter 4
+
+\chapter{Conclusion} % Main chapter title
+
+\label{Chapter4} % For referencing the chapter elsewhere, use \ref{Chapter4} 
+
+%----------------------------------------------------------------------------------------
+
+\section{Bilan technique}
+
+\begin{table}[htp]
+    \centering
+    \begin{tabular}{|p{0.6\textwidth}|p{0.15\textwidth}|}
+        \hline
+        Mise en place d'un environnement de compilation & Terminé \\ \hline
+        Développement d'un OS bootable sur l'OpenRex & Terminé \\ \hline
+        Driver imx219 & En cours \\ \hline
+    \end{tabular}
+    \caption{Conclusion du projet} \label{tab:conclusion} 
+\end{table}
+
+Au cours du projet, nous somme tombés sur plusieurs impasses qui nous ont permis
+d’apprendre les différentes façons de compiler un driver avec Yocto. \medskip
+
+De part notre faible connaissance en driver Linux, nous ne pensions pas avoir les
+capacités techniques requises pour développer nous-même un driver. Notre travail c’est
+donc orienté vers trois drivers imx219 existants. Le BSP Openrex étant compatible avec le
+kernel 3,14 et 4,1 nous étions limités en ressources. Deux des drivers n’était pas
+compatible avec notre kernel, nous avons alors cherché à déterminer quelles
+bibliothèques étaient responsable de cette incompatibilité. Malheureusement, les versions
+étaient trop éloignées pour imaginer patcher toutes les bibliothèques utiles au
+fonctionnement des drivers.\medskip
+
+Une dernière solution était de rendre compatible le driver avec notre kernel, après l’avoir
+rendu compatible avec notre device tree nous avions un segmentation fault lors du chargement
+du kernel. Simultanément nous portions le bsp de l’openrex sur un kernel 4.14 qui n’a pas pu être
+testé suite à une erreur survenue avec le bootloader.\medskip
+
+Face à ces multiples échecs et un échange avec le client, nous commencions à rédiger
+notre propre driver en se basant sur ceux déjà inclus dans le kernel. Le driver est
+maintenant compilé et configuré par le device tree cependant il nous est impossible de lire
+ou d’écrire dans un registre de la carte. Notre travaille s’achève donc sur ce point.\medskip
+
+Techniquement nous avons acquis un bagage de connaissances concernant l’usage des
+couches applicatives v4l2 nécessaire à la capture d’images de l’environnement Yocto. À
+l’issue de ce rapport, nous pouvons nous concentrer sur le développement du code en
+langage C.
+
+\section{Bilan de suivi de projet}
+
+Dès le commencement du projet, nous somme partis en méthode agile, notre groupe de
+travail a su s’auto-organiser et a perduré jusqu’à la fin du temps imparti. Nous avons
+rapidement et facilement réussi à répartir le travail en fonction des compétences de
+chacun, des obstacles matériels et logistiques rencontrés. \medskip
+
+Malgré les différences de niveaux initials dûes au passif technologique de chacun, chaque individu
+à apporter son utilité. En revanche, si le côté, communication et adaptabilité de la méthode agile
+est respecté, le lien avec le client quant à lui a été négligé. \medskip
+
+C’est en partie dû à la séparation physique du scrum-master et du groupe puis au manque d’outils
+mise en place pour faciliter ce rapprochement. Une communication plus efficace avec l’équipe de
+Thales nous aurait évité par exemple de prolonger trop longtemps la piste des drivers existants.
+
+\section{Conclusion}
+
+Nous n’avons pas pu répondre complètement à la demande de Thales, qui est
+actuellement entrain de développer le driver avec des résultats encouragent. Face au
+obstacle notre groupe a toujours cherché à progresser en allant de plus en plus loin dans
+le raisonnement technique. Bien quinachevé, cette expérience reste une des plus
+enrichissantes de notre année. Étant soucieux d’apporter notre pierre à l’édifice nous
+laissons avec ce rapport un environnement de développement Yocto optimisé pour
+compiler un OS compatible avec l’Openrex et un guide d’utilisation et de développement
+en annexe.
