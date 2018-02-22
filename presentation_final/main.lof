@@ -3,19 +3,19 @@
 \select@language {french}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Chronologie du projet\relax }}{3}{figure.caption.12}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Avancement d\IeC {\'e}taill\IeC {\'e} du projet\relax }}{5}{figure.caption.15}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces R\IeC {\'e}sum\IeC {\'e} des commandes git\relax }}{7}{figure.caption.19}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Raspi Cam v2\relax }}{9}{figure.caption.27}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Diff\IeC {\'e}rents signaux du MIPI\relax }}{10}{figure.caption.29}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Carte OpenRex Basic\relax }}{11}{figure.caption.31}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Application graphique de V4L2\relax }}{12}{figure.caption.35}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces \IeC {\'E}tapes de GStreamer\relax }}{15}{figure.caption.114}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Chronologie du projet\relax }}{4}{figure.caption.12}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Avancement d\IeC {\'e}taill\IeC {\'e} du projet\relax }}{6}{figure.caption.15}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces R\IeC {\'e}sum\IeC {\'e} des commandes git\relax }}{8}{figure.caption.19}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Raspi Cam v2\relax }}{10}{figure.caption.27}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Diff\IeC {\'e}rents signaux du MIPI\relax }}{11}{figure.caption.29}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Carte OpenRex Basic\relax }}{12}{figure.caption.31}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Application graphique de V4L2\relax }}{13}{figure.caption.35}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces \IeC {\'E}tapes de GStreamer\relax }}{16}{figure.caption.114}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architecture d'une m\IeC {\'e}ta-donn\IeC {\'e}e\relax }}{17}{figure.caption.117}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Architecture d'une recette\relax }}{20}{figure.caption.153}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Driver dans le menuconfig\relax }}{22}{figure.caption.174}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Patchs du kernel 3.14\relax }}{23}{figure.caption.193}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Arborescence de la compilation out-of-tree\relax }}{25}{figure.caption.196}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Trame I2C\relax }}{31}{figure.caption.287}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architecture d'une m\IeC {\'e}ta-donn\IeC {\'e}e\relax }}{18}{figure.caption.117}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architecture d'une recette\relax }}{21}{figure.caption.153}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Driver dans le menuconfig\relax }}{23}{figure.caption.174}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Patchs du kernel 3.14\relax }}{24}{figure.caption.193}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Arborescence de la compilation out-of-tree\relax }}{26}{figure.caption.196}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Trame I2C\relax }}{32}{figure.caption.287}
 \addvspace {10\p@ }
